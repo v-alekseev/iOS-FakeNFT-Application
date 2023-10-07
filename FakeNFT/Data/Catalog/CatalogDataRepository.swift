@@ -9,12 +9,15 @@ class CatalogDataRepository {
             self.client = client
         }
     
-    func giveMeAllCollections() -> [CollectionModel]? {
+    func giveMeAllCollections(
+         completion: @escaping ([CollectionModel]?)->Void = {_ in }
+    ) -> [CollectionModel]? {
         var c: [CollectionModel]?
         fetchCollections() {result in
             switch result {
             case .success(let collections):
                 c = collections
+                completion(c)
             case .failure(_):
                 c =  nil
             }
@@ -22,12 +25,16 @@ class CatalogDataRepository {
         return c
     }
     
-    func giveMeCollection(id: Int) -> CollectionModel? {
+    func giveMeCollection(
+        id: Int,
+        completion: @escaping (CollectionModel?)->Void = {_ in }
+    ) -> CollectionModel? {
         var c: CollectionModel?
         fetchCollection(id: id) {result in
             switch result {
             case .success(let collection):
                 c = collection
+                completion(c)
             case .failure(_):
                 c =  nil
             }
@@ -38,6 +45,7 @@ class CatalogDataRepository {
     private func fetchCollection(id: Int, completion: @escaping (Result<CollectionModel, Error>) -> Void) {
         cancelCurrentTask()
         let request = CollectionsRequest(id: id)
+
         currentTask = client.send(request: request, type: CollectionModel.self) { result in
             switch result {
             case .success(let collections):
@@ -52,9 +60,11 @@ class CatalogDataRepository {
     private func fetchCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void) {
         cancelCurrentTask()
         let request = CollectionsRequest()
+        print("после request")
         currentTask = client.send(request: request, type: [CollectionModel].self) { result in
             switch result {
             case .success(let collections):
+                print("успех")
                 completion(.success(collections))
                 
             case .failure(let error):
