@@ -29,7 +29,7 @@
 		AF3948DD2AD1B382003A7B70 /* NFTModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3948DA2AD1B382003A7B70 /* NFTModel.swift */; };
 		AF3948DE2AD1B382003A7B70 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3948DB2AD1B382003A7B70 /* UserModel.swift */; };
 		AF3948DF2AD1B382003A7B70 /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3948DC2AD1B382003A7B70 /* CollectionModel.swift */; };
-		AF3948E42AD1B4ED003A7B70 /* CatalogDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3948E32AD1B4ED003A7B70 /* CatalogDataRepository.swift */; };
+		AF3948E42AD1B4ED003A7B70 /* CatalogDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3948E32AD1B4ED003A7B70 /* CatalogDataProvider.swift */; };
 		AF3948F42AD1CC4F003A7B70 /* CollectionsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3948ED2AD1CC41003A7B70 /* CollectionsRepositoryTests.swift */; };
 		AF3948F62AD1CC98003A7B70 /* MockNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3948F52AD1CC98003A7B70 /* MockNetworkClient.swift */; };
 		AF3948FA2AD1D81E003A7B70 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3948F92AD1D81E003A7B70 /* Endpoint.swift */; };
@@ -92,7 +92,7 @@
 		AF3948DA2AD1B382003A7B70 /* NFTModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTModel.swift; sourceTree = "<group>"; };
 		AF3948DB2AD1B382003A7B70 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		AF3948DC2AD1B382003A7B70 /* CollectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
-		AF3948E32AD1B4ED003A7B70 /* CatalogDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDataRepository.swift; sourceTree = "<group>"; };
+		AF3948E32AD1B4ED003A7B70 /* CatalogDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDataProvider.swift; sourceTree = "<group>"; };
 		AF3948EB2AD1CC41003A7B70 /* CollectionsRepositoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectionsRepositoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF3948ED2AD1CC41003A7B70 /* CollectionsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsRepositoryTests.swift; sourceTree = "<group>"; };
 		AF3948F52AD1CC98003A7B70 /* MockNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkClient.swift; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 		AF3948E12AD1B416003A7B70 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				AF3948E32AD1B4ED003A7B70 /* CatalogDataRepository.swift */,
+				AF3948E32AD1B4ED003A7B70 /* CatalogDataProvider.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -525,7 +525,7 @@
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
-				AF3948E42AD1B4ED003A7B70 /* CatalogDataRepository.swift in Sources */,
+				AF3948E42AD1B4ED003A7B70 /* CatalogDataProvider.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				AF3948FA2AD1D81E003A7B70 /* Endpoint.swift in Sources */,
 				D827F56E2ACEDD0000F01BBE /* ProductDetailsTableViewController.swift in Sources */,

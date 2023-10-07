@@ -5,7 +5,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // MARK: - УДАЛИТЬ ПОСЛЕ РЕАЛИЗАЦИИ ИНТЕРФЕЙСА
-        let sut = CatalogDataRepository()
+        let sut = CatalogDataProvider()
         let ep  =  AllCollectionsEndpoint()
         sut.giveMeData(using: ep) { result in
             print(result ?? "nil")

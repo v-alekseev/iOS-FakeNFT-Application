@@ -2,13 +2,13 @@
 import XCTest
 
 final class CatalogDataRepositoryTests: XCTestCase {
-    var sut: CatalogDataRepository!
+    var sut: CatalogDataProvider!
     var mockClient: MockNetworkClient!
 
     override func setUp() {
         super.setUp()
         mockClient = MockNetworkClient()
-        sut = CatalogDataRepository(client: mockClient)
+        sut = CatalogDataProvider(client: mockClient)
     }
     
     func testFetchCollectionsReturnsCollections() {

@@ -1,6 +1,6 @@
 import Foundation
 
-class CatalogDataRepository {
+class CatalogDataProvider {
     
     private let client: NetworkClient
     private var currentTask: NetworkTask?
