@@ -4,7 +4,7 @@ struct UserModel: Codable {
     let avatar: String
     let description: String
     let website: String
-    let nfts: [NFTModel]
+    let nfts:  [String]
     let rating: String
     let id: String
 }

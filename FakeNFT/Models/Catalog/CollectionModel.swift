@@ -4,7 +4,7 @@ struct CollectionModel: Codable {
     let createdAt: String
     let name: String
     let cover: String
-    let nfts: [NFTModel]
+    let nfts: [String]
     let description: String
     let id: String
 }
