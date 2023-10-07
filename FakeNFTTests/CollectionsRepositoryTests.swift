@@ -20,8 +20,16 @@ final class CatalogDataRepositoryTests: XCTestCase {
 
         // When
         var resultCollection: [CollectionModel]?
-        resultCollection = sut.giveMeAllCollections()
-        
+        let ep = AllCollectionsEndpoint()
+        sut.giveMeData(using: ep) { result in
+            switch result {
+            case .success(let collections):
+                resultCollection = collections
+            case .failure(_):
+                resultCollection = nil
+            }
+        }
+                
         // Then
         XCTAssertNotNil(resultCollection)
         XCTAssertEqual(resultCollection?[0].name, "Test")
@@ -35,8 +43,18 @@ final class CatalogDataRepositoryTests: XCTestCase {
         mockClient.mockData = data
 
         // When
+        
+        // When
         var resultCollection: CollectionModel?
-        resultCollection = sut.giveMeCollection(id: 1)
+        let ep = SingleCollectionEndpoint(id: 1)
+        sut.giveMeData(using: ep) { result in
+            switch result {
+            case .success(let collection):
+                resultCollection = collection
+            case .failure(_):
+                resultCollection = nil
+            }
+        }
         
         // Then
         XCTAssertNotNil(resultCollection)

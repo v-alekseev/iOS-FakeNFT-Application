@@ -6,14 +6,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: - УДАЛИТЬ ПОСЛЕ РЕАЛИЗАЦИИ ИНТЕРФЕЙСА
         let sut = CatalogDataRepository()
-        sut.giveMeAllCollections() { result in
+        let ep  =  AllCollectionsEndpoint()
+        sut.giveMeData(using: ep) { result in
             print(result ?? "nil")
             print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
-            sut.giveMeCollection(id: 1) { result in
+            let ep = SingleCollectionEndpoint(id: 1)
+            sut.giveMeData(using: ep) { result in
                 print(result ?? "nil")
             }
         }
-
         return true
     }
 
