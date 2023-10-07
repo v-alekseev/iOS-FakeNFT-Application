@@ -1,7 +1,7 @@
 import Foundation
 
 struct SingleNFTEndpoint: Endpoint {
-    typealias ResponseType = [CollectionModel]
+    typealias ResponseType = NFTModel
     var path = "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/nft"
     
     init(id: Int) {
