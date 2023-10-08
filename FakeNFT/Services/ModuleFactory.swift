@@ -37,16 +37,16 @@ struct ModuleFactory {
         return vc
     }
     
-    static func createCartViewController() -> CartViewController {
+    static func createCartViewController() -> UIViewController {
         return CartViewController()
     }
-    static func createCatalogViewController() -> CatalogViewController {
+    static func createCatalogViewController() -> UIViewController {
         return CatalogViewController()
     }
-    static func createProfileViewController() -> ProfileViewController {
+    static func createProfileViewController() -> UIViewController {
         return ProfileViewController()
     }
-    static func createStatisticViewController() -> StatisticViewController {
+    static func createStatisticViewController() -> UIViewController {
         return StatisticViewController()
     }
 }
