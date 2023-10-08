@@ -24,7 +24,7 @@ extension UIColor {
     static let ypBlackWithDarkMode = UIColor(named: "blackWithDarkMode") ?? UIColor.black
     static let ypWhiteWithDarkMode = UIColor(named: "whiteWithDarkMode") ?? UIColor.white
     static let ypLightGreyWithDarkMode = UIColor(named: "lightGreyWithDarkMode") ?? UIColor.lightGray
-    
+
     // Universal colors
     static let ypGrayUniversal = UIColor(named: "greyUniversal") ?? UIColor.gray
     static let ypRed = UIColor(named: "redUniversal") ?? UIColor.red
