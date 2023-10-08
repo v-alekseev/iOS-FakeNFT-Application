@@ -9,7 +9,7 @@ struct SingleCollectionEndpoint: Endpoint {
         self.path = path + "/" + String(id)
     }
     
-    func asNetworkRequest() -> NetworkRequest {
+    func asNetworkRequest(dto: CollectionModel?) -> NetworkRequest {
         return DefaultNetworkRequest(endpoint: URL(string: path)!)
     }
 }

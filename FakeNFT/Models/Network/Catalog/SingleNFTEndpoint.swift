@@ -8,7 +8,7 @@ struct SingleNFTEndpoint: Endpoint {
         self.path = path + "/" + String(id)
     }
     
-    func asNetworkRequest() -> NetworkRequest {
+    func asNetworkRequest(dto: NFTModel?) -> NetworkRequest {
         return DefaultNetworkRequest(endpoint: URL(string: path)!)
     }
 }

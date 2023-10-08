@@ -6,15 +6,27 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: - УДАЛИТЬ ПОСЛЕ РЕАЛИЗАЦИИ ИНТЕРФЕЙСА
         let sut = CatalogDataProvider()
-        let ep  =  AllCollectionsEndpoint()
+//        let ep  =  AllCollectionsEndpoint()
+//        sut.giveMeData(using: ep) { result in
+//            print(result ?? "nil")
+//            print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
+//            let ep = SingleCollectionEndpoint(id: 1)
+//            sut.giveMeData(using: ep) { result in
+//                print(result ?? "nil")
+//            }
+//        }
+        let ep = AllLikesEndPoint()
         sut.giveMeData(using: ep) { result in
             print(result ?? "nil")
             print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
-            let ep = SingleCollectionEndpoint(id: 1)
-            sut.giveMeData(using: ep) { result in
-                print(result ?? "nil")
+            sut.interactWithLikeForNft(id: "1") {
+                let ep = AllLikesEndPoint()
+                sut.giveMeData(using: ep) { result in
+                    print(result ?? "nil")
+                }
             }
         }
+        
         return true
     }
 
