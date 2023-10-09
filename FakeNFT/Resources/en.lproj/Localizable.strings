@@ -9,3 +9,6 @@
 
 
 "application.title" = "Fake NFT";
+
+"cart.price_label_name" = "Price";
+"cart.payment_button_title" = "Pay";

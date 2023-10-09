@@ -33,6 +33,9 @@
 		D8307F162AD2CAB0006302F6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8307F152AD2CAB0006302F6 /* ProfileViewController.swift */; };
 		D8307F192AD2CB02006302F6 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8307F182AD2CB02006302F6 /* StatisticViewController.swift */; };
 		D8307F1B2AD2CE30006302F6 /* ModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8307F1A2AD2CE30006302F6 /* ModuleFactory.swift */; };
+		D8307F1D2AD3D941006302F6 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8307F1C2AD3D941006302F6 /* CartTableViewCell.swift */; };
+		D8307F1F2AD41CFE006302F6 /* CartViewController+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8307F1E2AD41CFE006302F6 /* CartViewController+UITableViewDelegate.swift */; };
+		D8307F212AD41D2E006302F6 /* CartViewController+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8307F202AD41D2E006302F6 /* CartViewController+UITableViewDataSource.swift */; };
 		D84751442AD0AC9100CEA0A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D84751462AD0AC9100CEA0A7 /* Localizable.strings */; };
 		D84751492AD0B01500CEA0A7 /* swiftgenconfig in Resources */ = {isa = PBXBuildFile; fileRef = D84751482AD0B01500CEA0A7 /* swiftgenconfig */; };
 		D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84751512AD0B84300CEA0A7 /* Strings.swift */; };
@@ -84,6 +87,9 @@
 		D8307F152AD2CAB0006302F6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D8307F182AD2CB02006302F6 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		D8307F1A2AD2CE30006302F6 /* ModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleFactory.swift; sourceTree = "<group>"; };
+		D8307F1C2AD3D941006302F6 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		D8307F1E2AD41CFE006302F6 /* CartViewController+UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartViewController+UITableViewDelegate.swift"; sourceTree = "<group>"; };
+		D8307F202AD41D2E006302F6 /* CartViewController+UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartViewController+UITableViewDataSource.swift"; sourceTree = "<group>"; };
 		D84751412AD0ABCF00CEA0A7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D84751432AD0AC6700CEA0A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D84751452AD0AC9100CEA0A7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -264,6 +270,9 @@
 			isa = PBXGroup;
 			children = (
 				D8307F0F2AD2BCD3006302F6 /* CartViewController.swift */,
+				D8307F1C2AD3D941006302F6 /* CartTableViewCell.swift */,
+				D8307F1E2AD41CFE006302F6 /* CartViewController+UITableViewDelegate.swift */,
+				D8307F202AD41D2E006302F6 /* CartViewController+UITableViewDataSource.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -472,12 +481,15 @@
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
+				D8307F1D2AD3D941006302F6 /* CartTableViewCell.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,
 				D8307F102AD2BCD3006302F6 /* CartViewController.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
+				D8307F1F2AD41CFE006302F6 /* CartViewController+UITableViewDelegate.swift in Sources */,
+				D8307F212AD41D2E006302F6 /* CartViewController+UITableViewDataSource.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				D827F56E2ACEDD0000F01BBE /* ProductDetailsTableViewController.swift in Sources */,

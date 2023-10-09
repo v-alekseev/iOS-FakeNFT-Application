@@ -9,3 +9,6 @@
 
 
 "application.title" = "Фейк NFT";
+
+"cart.price_label_name" = "Цена";
+"cart.payment_button_title" = "К оплате";
