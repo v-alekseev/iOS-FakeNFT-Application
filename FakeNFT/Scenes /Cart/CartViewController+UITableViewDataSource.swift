@@ -15,10 +15,8 @@ extension CartViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = CartTableViewCell()
-        if let reusedCell  = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.cellID, for: indexPath) as? CartTableViewCell {
-            cell = reusedCell
-        }
+        
+        let cell: CartTableViewCell = self.cartTable.dequeueReusableCell()
         
         cell.setup(image: UIImage(resource: .nfTcard), name: "April", rank: indexPath.row + 2, price: "1,78 ETH")
         

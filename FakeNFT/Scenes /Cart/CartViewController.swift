@@ -49,7 +49,7 @@ final class CartViewController: UIViewController {
         return button
     }()
     
-    private var cartTable: UITableView = {
+    private (set) var cartTable: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.separatorStyle = .none
@@ -68,7 +68,7 @@ final class CartViewController: UIViewController {
         countItemsLabel.text = "3 NFT"
         totalAmountLabel.text = "5,34 ETH"
         
-        cartTable.register(CartTableViewCell.self, forCellReuseIdentifier: CartTableViewCell.cellID)
+        cartTable.register(CartTableViewCell.self)
         cartTable.delegate = self
         cartTable.dataSource = self
     }

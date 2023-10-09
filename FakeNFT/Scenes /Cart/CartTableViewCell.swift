@@ -9,10 +9,11 @@ import Foundation
 import UIKit
 
 
-final class CartTableViewCell: UITableViewCell {
+final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     //NFTcard
     // MARK: - Consts
-    static let cellID = "cartCell"
+    //static let cellID = "cartCell"
+    //static var defaultReuseIdentifier = "cartCall"
     
     private var canvasView: UIView = {
         let view = UIView()
