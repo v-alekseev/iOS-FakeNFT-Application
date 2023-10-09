@@ -15,18 +15,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print(result ?? "nil")
 //            }
 //        }
-        let ep = AllLikesEndPoint()
-        sut.giveMeData(using: ep) { result in
-            print(result ?? "nil")
-            print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
-            sut.interactWithLikeForNft(id: "1") {
-                let ep = AllLikesEndPoint()
-                sut.giveMeData(using: ep) { result in
-                    print(result ?? "nil")
-                }
-            }
-        }
-        
+        print(sut.giveMeAllLikes() ?? "nil")
+        print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
+        sut.setLikes(likes: [])
+        print(sut.giveMeAllLikes() ?? "nil")
+        print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
         return true
     }
 

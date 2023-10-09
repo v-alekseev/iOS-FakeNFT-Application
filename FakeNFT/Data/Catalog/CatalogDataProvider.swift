@@ -3,53 +3,48 @@ import Foundation
 final class CatalogDataProvider {
     private let client: NetworkClient
     private var currentTask: NetworkTask?
-//    private var likes: [String]?
     
     init(client: NetworkClient = DefaultNetworkClient()) {
         self.client = client
-//        let endpoint = AllLikesEndPoint()
-//        self.fetchData(using: endpoint) { result in
-//            switch result {
-//            case .success(let data):
-//                self.likes = data.likes
-//            case .failure(let error):
-//                print(error)
-//                return
-//            }
-//        }
     }
     
-    func interactWithLikeForNft(id: String, completion: @escaping () -> Void) {
-        let likesEndpoint = AllLikesEndPoint()
-        self.fetchData(using: likesEndpoint) { result in
+    func giveMeAllLikes() -> ProfileLikesModel? {
+        let dispatchGroup = DispatchGroup()
+        let ep = AllLikesEndPoint()
+        var model: ProfileLikesModel? = nil
+        dispatchGroup.enter()
+        self .fetchData(using: ep) { result in
+            print("fetching...")
             switch result {
             case .success(let data):
-                var newLikes = data.likes
-                if newLikes.contains(id) {
-                    newLikes.removeAll(where: { $0 == id })
-                } else {
-                    newLikes.append(id)
-                }
-                let postpoint = PostLikesEndpoint()
-                print("НОВЫЙ НАБОР ЛАЙКОВ \(newLikes)")
-                print("dto: \(PostLikesEndpoint.ResponseType(likes: newLikes)))")
-  
-                self.fetchData(using: postpoint,
-                               dto: PostLikesEndpoint.ResponseType(likes: newLikes)) {result in
-                    switch result {
-                    case .success(let data):
-                        print("OK")
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                }
-                completion()
-            case .failure(let error):
-                print(error)
-                return
+                model = data
+            case .failure:
+                model = nil
             }
+            dispatchGroup.leave()
         }
+        dispatchGroup.wait()
+        return model
     }
+    
+    func setLikes(likes: [String]) {
+        let dispatchGroup = DispatchGroup()
+        let ep = PostLikesEndpoint()
+        var model: ProfileLikesModel? = ProfileLikesModel(likes: likes)
+        dispatchGroup.enter()
+        self.fetchData(using: ep, dto: model) { result in
+            switch result {
+            case .success(let data):
+                model = data
+            case .failure:
+                model = nil
+            }
+            dispatchGroup.leave()
+        }
+        dispatchGroup.wait()
+    }
+    
+
     
     func giveMeData<T: Endpoint>(
         using endpoint: T,
