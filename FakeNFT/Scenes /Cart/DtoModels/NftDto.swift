@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NFTModel: Codable {
+struct NftDto: Codable {
     var createdAt: String
     var name: String
     var images : [String]

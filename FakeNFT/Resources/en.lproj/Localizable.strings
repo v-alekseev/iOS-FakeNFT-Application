@@ -12,3 +12,8 @@
 
 "cart.price_label_name" = "Price";
 "cart.payment_button_title" = "Pay";
+"cart.getOrderError" = "Unfortunately, the data could not be loaded. Please try again later.";
+
+
+"alert.header" = "Message for you!";
+"alert.button" = "Ok";

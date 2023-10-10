@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 
 final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
@@ -14,6 +15,8 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - Consts
     //static let cellID = "cartCell"
     //static var defaultReuseIdentifier = "cartCall"
+    
+    private let placeholderImage = UIImage(resource: .nftNo)
     
     private var canvasView: UIView = {
         let view = UIView()
@@ -78,23 +81,32 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupUI()
-        setup(image: UIImage(resource: .nftNo), name: "-", rank: 0, price: "0 ETH")
+        setup(imageUrl: URL(string: ""), name: "-", rank: 0, price: "0 ETH")
     }
     
-    func setup(image: UIImage, name: String, rank: Int, price: String ) {
+    func setup(imageUrl: URL?, name: String, rank: Int, price: String ) {
         // заполняем данными ячейку
-        nftImage.image = image //UIImage(resource: .nfTcard)
+        nftImage.kf.setImage(with: imageUrl, placeholder: placeholderImage)
         nameLabel.text = name //"April"
         priceLabel.text = price //"1,78 ETH"
         
         var computedRank = rank
-        if rank < 1 &&  rank > 5  {
+        if rank < 1 ||  rank > 5  {
             computedRank = 0
         }
         
+        // сначала показываються заглушки. поэтому надо обязательно очистить stackView от старых subview
+        for view in stackView.subviews {
+            stackView.removeArrangedSubview(view)
+        }
+        // а теперь уже запольнить новыми звездами
         for index in 1...5 {
             stackView.addArrangedSubview(createStarView(index <= computedRank ? .star : .starGray))
         }
+    }
+    
+    func setup(nfs: NftModel) {
+        setup(imageUrl: nfs.imageUrl, name: nfs.name, rank: nfs.rating, price: String(nfs.price) )
     }
     
     /// Функция обрабатывает нажатие на кнопку фильтр

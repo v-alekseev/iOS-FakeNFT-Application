@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OrderModel: Codable {
+struct OrderDto: Codable {
     var nfts: [String]
     var id: String
 }

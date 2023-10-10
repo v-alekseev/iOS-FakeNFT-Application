@@ -12,3 +12,7 @@
 
 "cart.price_label_name" = "Цена";
 "cart.payment_button_title" = "К оплате";
+"cart.getOrderError" = "К сожалению, не получилось загрузить данные. Попробуйте еще раз попозже.";
+
+"alert.header" = "Сообщение для вас!";
+"alert.button" = "Понятно";

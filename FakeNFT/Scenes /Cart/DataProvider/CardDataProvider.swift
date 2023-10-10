@@ -8,8 +8,8 @@
 import Foundation
 
 protocol CardDataProviderProtocol {
-    func getOrder()
-    func getNFT(id: String, _ completion: @escaping (Result<NFTModel, Error>) -> Void)
+    func getOrder(_ completion: @escaping (Result<String, Error>) -> Void)
+    func getNFT(id: String, _ completion: @escaping (Result<NftDto, Error>) -> Void)
     func getCurrencies()
     func getCurrency(id: Int)
     func paymentOrder()
@@ -31,65 +31,74 @@ struct NFSRequest: NetworkRequest {
     }
 }
 
+protocol CardDataProviderDelegate {
+    func didUpdateCart()
+}
 
 final class CardDataProvider: CardDataProviderProtocol {
     
     private var networkClient = DefaultNetworkClient()
+    var delegate: CardDataProviderDelegate?
     var orderIDs: [String] = []
-    var order: [NFTModel] = [] {
+    var order: [NftDto] = [] {
         didSet {
+            // если колличество загруженных nft равняется колличеству nftid, значит все запросы отработали и можно перегрузить отображать корзину
             if orderIDs.count == order.count {
-                print("[download completed]")
+                delegate?.didUpdateCart()
             }
         }
     }
     
-    func getOrder() {
-        
+    func getOrder(_ completion: @escaping (Result<String, Error>) -> Void) {
         let orderRequest = OrderRequest()
         self.orderIDs.removeAll()
         
-        networkClient.send(request: orderRequest , type: OrderModel.self)  { [weak self] result in
+        networkClient.send(request: orderRequest , type: OrderDto.self)  { [weak self] result in
             guard let self = self else { return }
-            switch result {
-            case let .success(data):
-                print("nfts: \(data.nfts)")
-                print("id: \(data.id)")
-                self.orderIDs.append(contentsOf: data.nfts)
-                print("[result] orderIDs = \(self.orderIDs)")
-                
-                self.order.removeAll()
-                for nftID in data.nfts {
-                    getNFT(id: nftID) { [weak self] result in
-                        guard let self = self else { return }
-                        switch result {
-                        case let .success(ntf):
-                            print(ntf)
-                            self.order.append(ntf)
-                        case let .failure(error):
-                            print(error)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch result {
+                case let .success(data):
+                    self.orderIDs.append(contentsOf: data.nfts)
+                    self.order.removeAll()
+                    for nftID in data.nfts {
+                        getNFT(id: nftID) { [weak self] result in
+                            guard let self = self else { return }
+                            switch result {
+                            case let .success(ntf):
+                                self.order.append(ntf)
+                            case let .failure(error):
+                                print(error)
+                                completion(.failure(error))
+                            }
                         }
                     }
+                    
+                case let .failure(error):
+                    print(error)
+                    completion(.failure(error))
                 }
-
-            case let .failure(error):
-                print(error)
             }
         }
         return
     }
     
-    func getNFT(id: String, _ completion: @escaping (Result<NFTModel, Error>) -> Void) {
+    
+    //    DispatchQueue.main.async {
+    //        completion(Result.success(responce))
+    //    }
+    func getNFT(id: String, _ completion: @escaping (Result<NftDto, Error>) -> Void) {
         let ntfsRequest = NFSRequest(nfsID: id)
-        networkClient.send(request: ntfsRequest , type: NFTModel.self)  { [weak self] result in
+        networkClient.send(request: ntfsRequest , type: NftDto.self)  { [weak self] result in
             guard let self = self else { return }
-            switch result {
-            case let .success(data):
-                //print(data)
-                //self.order.append(data)
-                completion(.success(data))
-            case let .failure(error):
-                completion(.failure(error))
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch result {
+                case let .success(data):
+                    completion(.success(data))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
             }
         }
         return

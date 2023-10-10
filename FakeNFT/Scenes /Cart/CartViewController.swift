@@ -7,13 +7,13 @@
 
 import Foundation
 import UIKit
+import ProgressHUD
 
 final class CartViewController: UIViewController {
-    
-    
     // MARK: - Private Properties
     //
     let dataProvider = CardDataProvider()
+    let viewModel = CartViewModel()
     
     private var bottomView: UIView = {
         var view = UIView()
@@ -39,7 +39,7 @@ final class CartViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    //paymentButtonTap
+    
     private lazy var paymentButton: UIButton = {
         let button = UIButton()
         button.setTitle(L10n.Cart.paymentButtonTitle, for: .normal)
@@ -65,21 +65,66 @@ final class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.delegate = self
+        
         setupNavigationBar()
         setupUI()
         view.backgroundColor = .white
         
-        countItemsLabel.text = "3 NFT"
-        totalAmountLabel.text = "5,34 ETH"
-        
         cartTable.register(CartTableViewCell.self)
         cartTable.delegate = self
         cartTable.dataSource = self
+        configureRefreshControl()
+        updateTotal()
+
+
+        showLoader(true)
+        viewModel.getOrder()
     }
+
     // MARK: - Private Methods
     //
+    private func updateTotal() {
+        countItemsLabel.text = "\(viewModel.order.count) NFT"
+        totalAmountLabel.text = "\(String(format: "%.2f", viewModel.totalPrice)) ETH"
+    }
+    private func configureRefreshControl () {
+        cartTable.refreshControl = UIRefreshControl()
+        cartTable.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+     }
+    @objc private func handleRefreshControl() {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewModel.getOrder() //cartTable.reloadData()
+            self?.cartTable.refreshControl?.endRefreshing()
+        }
+    }
+    
+    private func showLoader(_ isShow: Bool) {
+        isShow ? ProgressHUD.show() : ProgressHUD.dismiss()
+        paymentButton.isEnabled = !isShow
+    }
+    
+    ///настройка NAvigationBar
+    private func setupNavigationBar() {
+        guard let navBar = navigationController?.navigationBar else  { return }
+        let rightButton = UIBarButtonItem(image: UIImage(resource: .sort), style: .plain, target: self, action: #selector(filterButtonTap))
+        rightButton.tintColor = .ypBlackWithDarkMode
+        navBar.topItem?.setRightBarButton(rightButton, animated: false)
+    }
+    
+    /// Функция обрабатывает нажатие на кнопку фильтр
+    @objc
+    private func filterButtonTap() {
+        print("filterButtonTap")
+    }
+    
+    /// Функция обрабатывает нажатие на кнопку оплаты
+    @objc
+    private func paymentButtonTap() {
+        print("paymentButtonTap")
+    }
+    
     private func setupUI() {
-        
         view.addSubview(bottomView)
         NSLayoutConstraint.activate([
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -121,30 +166,20 @@ final class CartViewController: UIViewController {
         ])
         
     }
-    
-    ///настройка NAvigationBar
-    private func setupNavigationBar() {
-        guard let navBar = navigationController?.navigationBar else  { return }
-        let rightButton = UIBarButtonItem(image: UIImage(resource: .sort), style: .plain, target: self, action: #selector(filterButtonTap))
-        rightButton.tintColor = .ypBlackWithDarkMode
-        navBar.topItem?.setRightBarButton(rightButton, animated: false)
-    }
-    
-    /// Функция обрабатывает нажатие на кнопку фильтр
-    @objc
-    private func filterButtonTap() {
-        print("filterButtonTap")
-    }
-    
-    //var networkClient = DefaultNetworkClient()
-    
-    /// Функция обрабатывает нажатие на кнопку оплаты
-    @objc
-    private func paymentButtonTap() {
-        print("paymentButtonTap")
-        
-        dataProvider.getOrder()        
-    }
 }
 
+
+extension CartViewController: CartViewModelDelegate {
+    /// Изменилась корзина
+    func didUpdateCart() {
+        updateTotal()
+        cartTable.reloadData()
+        showLoader(false)
+    }
+    
+    /// Нужно показать сообщение
+    func showAlert(message: String) {
+        Alert.alertInformation(viewController: self, text: viewModel.alertMessage)
+    }
+}
 

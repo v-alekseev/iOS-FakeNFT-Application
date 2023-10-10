@@ -11,15 +11,12 @@ import UIKit
 extension CartViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return viewModel.order.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell: CartTableViewCell = self.cartTable.dequeueReusableCell()
-        
-        cell.setup(image: UIImage(resource: .nfTcard), name: "April", rank: indexPath.row + 2, price: "1,78 ETH")
-        
+        cell.setup(nfs: viewModel.order[indexPath.row])
         return cell
     }
 }
