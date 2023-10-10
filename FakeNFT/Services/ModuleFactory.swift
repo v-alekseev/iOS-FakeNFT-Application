@@ -48,6 +48,8 @@ struct ModuleFactory {
         return ProfileViewController()
     }
     static func createStatisticViewController() -> UIViewController {
-        return StatisticViewController()
+        let vc = StatisticViewController()
+        let navigationVC = UINavigationController(rootViewController: vc)
+        return navigationVC
     }
 }
