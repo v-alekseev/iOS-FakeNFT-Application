@@ -1,10 +1,12 @@
 import Foundation
-struct PostLikesEndpoint: Endpoint {
-    typealias ResponseType = ProfileLikesModel
-    var path = "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/profile/1"
+struct PostLikesEndpoint: NetworkRequest {
+ 
+    let endpoint = URL(string: "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/profile/1")
+    let httpMethod: HttpMethod = .put
+    let dto: Encodable
     
-    func asNetworkRequest(dto: ProfileLikesModel?) -> NetworkRequest {
-        return DefaultNetworkRequest(endpoint: URL(string: path)!, httpMethod: .put, dto: dto)
+    init(dto: [String]) {
+        self.dto = dto
     }
 }
 

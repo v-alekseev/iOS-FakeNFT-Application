@@ -6,6 +6,6 @@ struct NFTModel: Codable {
     let rating: Int
     let description: String
     let price: Float
-    let author: UserModel
+    let author: String
     let id: String
 }

@@ -41,6 +41,8 @@
 		AF39490D2AD31B11003A7B70 /* ProfileLikesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF39490C2AD31B11003A7B70 /* ProfileLikesModel.swift */; };
 		AF39490F2AD31B42003A7B70 /* AllLikesEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF39490E2AD31B42003A7B70 /* AllLikesEndPoint.swift */; };
 		AF3949112AD31B59003A7B70 /* PostLikesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3949102AD31B59003A7B70 /* PostLikesEndpoint.swift */; };
+		AF9A240A2AD5C04F00C73AEC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A24092AD5C04F00C73AEC /* Constants.swift */; };
+		AF9A240E2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A240D2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift */; };
 		D827F5712ACF10C900F01BBE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D827F5702ACF10C900F01BBE /* .gitignore */; };
 		D84751442AD0AC9100CEA0A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D84751462AD0AC9100CEA0A7 /* Localizable.strings */; };
 		D84751492AD0B01500CEA0A7 /* swiftgenconfig in Resources */ = {isa = PBXBuildFile; fileRef = D84751482AD0B01500CEA0A7 /* swiftgenconfig */; };
@@ -109,6 +111,8 @@
 		AF39490C2AD31B11003A7B70 /* ProfileLikesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLikesModel.swift; sourceTree = "<group>"; };
 		AF39490E2AD31B42003A7B70 /* AllLikesEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLikesEndPoint.swift; sourceTree = "<group>"; };
 		AF3949102AD31B59003A7B70 /* PostLikesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikesEndpoint.swift; sourceTree = "<group>"; };
+		AF9A24092AD5C04F00C73AEC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AF9A240D2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDataProviderProtocol.swift; sourceTree = "<group>"; };
 		D827F5702ACF10C900F01BBE /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D84751402AD0ABCF00CEA0A7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		D84751412AD0ABCF00CEA0A7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 		3F68069529CBBAF100B4F915 /* FakeNFT */ = {
 			isa = PBXGroup;
 			children = (
+				AF9A240B2AD5C3E100C73AEC /* Domain */,
 				AF3948E02AD1B408003A7B70 /* Data */,
 				D84751512AD0B84300CEA0A7 /* Strings.swift */,
 				D84751482AD0B01500CEA0A7 /* swiftgenconfig */,
@@ -304,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				AF3948E32AD1B4ED003A7B70 /* CatalogDataProvider.swift */,
+				AF9A24092AD5C04F00C73AEC /* Constants.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -317,6 +323,22 @@
 				AF3949032AD1E1EE003A7B70 /* SingleNFTEndpoint.swift */,
 				AF39490E2AD31B42003A7B70 /* AllLikesEndPoint.swift */,
 				AF3949102AD31B59003A7B70 /* PostLikesEndpoint.swift */,
+			);
+			path = Catalog;
+			sourceTree = "<group>";
+		};
+		AF9A240B2AD5C3E100C73AEC /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				AF9A240C2AD5C3E800C73AEC /* Catalog */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		AF9A240C2AD5C3E800C73AEC /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				AF9A240D2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -526,12 +548,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
+				AF9A240E2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift in Sources */,
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				AF3949112AD31B59003A7B70 /* PostLikesEndpoint.swift in Sources */,
 				AF3949022AD1E13C003A7B70 /* SingleCollectionEndpoint.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				AF39490F2AD31B42003A7B70 /* AllLikesEndPoint.swift in Sources */,
+				AF9A240A2AD5C04F00C73AEC /* Constants.swift in Sources */,
 				AF3948FC2AD1D847003A7B70 /* AllCollectionsEndpoint.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,

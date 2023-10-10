@@ -11,7 +11,7 @@ final class CatalogDataRepositoryTests: XCTestCase {
         sut = CatalogDataProvider(client: mockClient)
     }
     
-    func testFetchCollectionsReturnsCollections() {
+    func testGiveMeAllCollectionsReturnsCollections() {
         
         // Given
         let mockCollection = [CollectionModel(createdAt: "Date", name: "Test", cover: "CoverURL", nfts: ["1", "2"], description: "TestDescription", id: "1")]
@@ -19,23 +19,14 @@ final class CatalogDataRepositoryTests: XCTestCase {
         mockClient.mockData = data
 
         // When
-        var resultCollection: [CollectionModel]?
-        let ep = AllCollectionsEndpoint()
-        sut.giveMeData(using: ep) { result in
-            switch result {
-            case .success(let collections):
-                resultCollection = collections
-            case .failure(_):
-                resultCollection = nil
-            }
-        }
+        let resultCollection = sut.giveMeAllCollections()
                 
         // Then
         XCTAssertNotNil(resultCollection)
-        XCTAssertEqual(resultCollection?[0].name, "Test")
+        XCTAssertEqual(resultCollection.first?.name, "Test")
     }
 
-    func testFetchCollectionReturnsCollection() {
+    func testGiveMeCollectionReturnsCollection() {
         
         // Given
         let mockCollection = CollectionModel(createdAt: "Date", name: "Test", cover: "CoverURL", nfts: ["1", "2"], description: "TestDescription", id: "1")
@@ -43,24 +34,12 @@ final class CatalogDataRepositoryTests: XCTestCase {
         mockClient.mockData = data
 
         // When
-        
-        // When
-        var resultCollection: CollectionModel?
-        let ep = SingleCollectionEndpoint(id: 1)
-        sut.giveMeData(using: ep) { result in
-            switch result {
-            case .success(let collection):
-                resultCollection = collection
-            case .failure(_):
-                resultCollection = nil
-            }
-        }
+        let resultCollection = sut.giveMeCollection(withID: "1")
         
         // Then
         XCTAssertNotNil(resultCollection)
         XCTAssertEqual(resultCollection?.name, "Test")
     }
-
 
     override func tearDown() {
         sut = nil
