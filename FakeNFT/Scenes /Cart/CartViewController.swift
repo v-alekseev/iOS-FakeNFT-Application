@@ -12,7 +12,6 @@ import ProgressHUD
 final class CartViewController: UIViewController {
     // MARK: - Private Properties
     //
-    let dataProvider = CardDataProvider()
     let viewModel = CartViewModel()
     
     private var bottomView: UIView = {

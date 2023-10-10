@@ -31,14 +31,15 @@ struct NFSRequest: NetworkRequest {
     }
 }
 
-protocol CardDataProviderDelegate {
+protocol CardDataProviderDelegate: AnyObject {
     func didUpdateCart()
 }
 
 final class CardDataProvider: CardDataProviderProtocol {
     
     private var networkClient = DefaultNetworkClient()
-    var delegate: CardDataProviderDelegate?
+    weak var delegate: CardDataProviderDelegate?
+    
     var orderIDs: [String] = []
     var order: [NftDto] = [] {
         didSet {
@@ -91,8 +92,7 @@ final class CardDataProvider: CardDataProviderProtocol {
         let ntfsRequest = NFSRequest(nfsID: id)
         networkClient.send(request: ntfsRequest , type: NftDto.self)  { [weak self] result in
             guard let self = self else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+            DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
                     completion(.success(data))
@@ -115,6 +115,4 @@ final class CardDataProvider: CardDataProviderProtocol {
     func paymentOrder() {
         return
     }
-    
-    
 }

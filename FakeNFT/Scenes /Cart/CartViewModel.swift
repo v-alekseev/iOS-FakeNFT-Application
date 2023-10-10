@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CartViewModelDelegate {
+protocol CartViewModelDelegate: AnyObject {
     func didUpdateCart()
     func showAlert(message: String)
 }
@@ -15,7 +15,7 @@ protocol CartViewModelDelegate {
 final class CartViewModel {
     
     let cartDataProvider = CardDataProvider()
-    var delegate: CartViewModelDelegate?
+    weak var delegate: CartViewModelDelegate?
     private (set) var alertMessage: String = "" {
         didSet {
             if !alertMessage.isEmpty {
