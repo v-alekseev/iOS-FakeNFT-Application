@@ -17,7 +17,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         print(sut.giveMeAllLikes() ?? "nil")
         print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
-        sut.setLikes(likes: [])
+        sut.setLikes(likes: ["666", "999"])
         print(sut.giveMeAllLikes() ?? "nil")
         print("⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️")
         return true
