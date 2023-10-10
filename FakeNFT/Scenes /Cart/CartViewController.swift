@@ -9,8 +9,12 @@ import Foundation
 import UIKit
 
 final class CartViewController: UIViewController {
+    
+    
     // MARK: - Private Properties
     //
+    let dataProvider = CardDataProvider()
+    
     private var bottomView: UIView = {
         var view = UIView()
         view.backgroundColor = .ypLightGreyWithDarkMode
@@ -132,12 +136,15 @@ final class CartViewController: UIViewController {
         print("filterButtonTap")
     }
     
+    //var networkClient = DefaultNetworkClient()
+    
     /// Функция обрабатывает нажатие на кнопку оплаты
     @objc
     private func paymentButtonTap() {
         print("paymentButtonTap")
+        
+        dataProvider.getOrder()        
     }
 }
-
 
 
