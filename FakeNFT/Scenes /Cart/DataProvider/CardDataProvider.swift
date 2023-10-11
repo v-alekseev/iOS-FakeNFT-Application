@@ -90,8 +90,7 @@ final class CardDataProvider: CardDataProviderProtocol {
     //    }
     func getNFT(id: String, _ completion: @escaping (Result<NftDto, Error>) -> Void) {
         let ntfsRequest = NFSRequest(nfsID: id)
-        networkClient.send(request: ntfsRequest , type: NftDto.self)  { [weak self] result in
-            guard let self = self else { return }
+        networkClient.send(request: ntfsRequest , type: NftDto.self)  { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):

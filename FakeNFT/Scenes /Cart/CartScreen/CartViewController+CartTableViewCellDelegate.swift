@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import UIKit
+
+extension CartViewController: CartTableViewCellDelegate {
+    func didDeleteButtonPressed(id: String, image: UIImage) {
+        // показать экран
+        self.present(CartDeleteViewController(), animated: true)
+    }
+
+}

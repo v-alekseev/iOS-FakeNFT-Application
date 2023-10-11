@@ -16,8 +16,10 @@ extension CartViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CartTableViewCell = self.cartTable.dequeueReusableCell()
+        cell.delegate = self
         cell.setup(nfs: viewModel.order[indexPath.row])
         return cell
     }
 }
+
 

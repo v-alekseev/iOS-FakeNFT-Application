@@ -76,9 +76,9 @@ final class CartViewController: UIViewController {
         configureRefreshControl()
         updateTotal()
 
-
         showLoader(true)
         viewModel.getOrder()
+        
     }
 
     // MARK: - Private Methods
