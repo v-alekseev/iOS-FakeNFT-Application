@@ -359,6 +359,7 @@
 		AF9A24102AD5CA2E00C73AEC /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
+				AF9A24162AD5CD9700C73AEC /* NFTs */,
 				AF9A24112AD5CA3600C73AEC /* Collections */,
 			);
 			path = Catalog;
@@ -371,6 +372,13 @@
 				AF9A24142AD5CB4D00C73AEC /* SortCases.swift */,
 			);
 			path = Collections;
+			sourceTree = "<group>";
+		};
+		AF9A24162AD5CD9700C73AEC /* NFTs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NFTs;
 			sourceTree = "<group>";
 		};
 		D847513D2AD0AB0400CEA0A7 /* Resources */ = {

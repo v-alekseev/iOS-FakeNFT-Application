@@ -29,5 +29,8 @@ class NFTCollectionsDataSource {
         }
     }
     
+    func reloadCollections(dataProvider: CatalogDataProviderProtocol) {
+        collections = dataProvider.giveMeAllCollections()
+    }
     
 }
