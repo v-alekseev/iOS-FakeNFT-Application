@@ -11,7 +11,7 @@ import Combine
 final class StatisticViewController: UIViewController {
 
     private lazy var tableView = createTableView()
-    private let viewModel = StatisticViewModel(userDataProvider: UserDataProviderImpl())
+    private let viewModel = StatisticViewModel(userDataProvider: StatisticDataProvider())
     private var subscribes = [AnyCancellable]()
 
     override func viewDidLoad() {

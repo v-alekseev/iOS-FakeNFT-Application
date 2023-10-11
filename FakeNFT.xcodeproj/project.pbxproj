@@ -38,7 +38,7 @@
 		D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84751512AD0B84300CEA0A7 /* Strings.swift */; };
 		F228EF932AD5D462001BA148 /* StatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF922AD5D462001BA148 /* StatisticViewModel.swift */; };
 		F228EF952AD5D49C001BA148 /* StatisticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF942AD5D49C001BA148 /* StatisticCell.swift */; };
-		F228EF982AD5D522001BA148 /* UserDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF972AD5D522001BA148 /* UserDataProvider.swift */; };
+		F228EF982AD5D522001BA148 /* StatisticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF972AD5D522001BA148 /* StatisticDataProvider.swift */; };
 		F228EF9A2AD5D57A001BA148 /* UserCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF992AD5D57A001BA148 /* UserCardViewController.swift */; };
 		F228EF9C2AD5D5D0001BA148 /* UsersCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF9B2AD5D5D0001BA148 /* UsersCollectionViewController.swift */; };
 		F228EF9F2AD5F6DE001BA148 /* NFTModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF9E2AD5F6DE001BA148 /* NFTModel.swift */; };
@@ -99,7 +99,7 @@
 		D84751512AD0B84300CEA0A7 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strings.swift; path = Generated/Strings.swift; sourceTree = "<group>"; };
 		F228EF922AD5D462001BA148 /* StatisticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
 		F228EF942AD5D49C001BA148 /* StatisticCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticCell.swift; sourceTree = "<group>"; };
-		F228EF972AD5D522001BA148 /* UserDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataProvider.swift; sourceTree = "<group>"; };
+		F228EF972AD5D522001BA148 /* StatisticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticDataProvider.swift; sourceTree = "<group>"; };
 		F228EF992AD5D57A001BA148 /* UserCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewController.swift; sourceTree = "<group>"; };
 		F228EF9B2AD5D5D0001BA148 /* UsersCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionViewController.swift; sourceTree = "<group>"; };
 		F228EF9E2AD5F6DE001BA148 /* NFTModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTModel.swift; sourceTree = "<group>"; };
@@ -323,7 +323,7 @@
 		F228EF962AD5D505001BA148 /* DataProvider */ = {
 			isa = PBXGroup;
 			children = (
-				F228EF972AD5D522001BA148 /* UserDataProvider.swift */,
+				F228EF972AD5D522001BA148 /* StatisticDataProvider.swift */,
 			);
 			path = DataProvider;
 			sourceTree = "<group>";
@@ -514,7 +514,7 @@
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,
 				D8307F102AD2BCD3006302F6 /* CartViewController.swift in Sources */,
 				F228EF9C2AD5D5D0001BA148 /* UsersCollectionViewController.swift in Sources */,
-				F228EF982AD5D522001BA148 /* UserDataProvider.swift in Sources */,
+				F228EF982AD5D522001BA148 /* StatisticDataProvider.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,

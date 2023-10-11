@@ -11,12 +11,14 @@ protocol UserDataProvider {
     func getActualUserData(completion: @escaping([UserModel]) -> Void)
 }
 
-final class UserDataProviderImpl: UserDataProvider {
+final class StatisticDataProvider: UserDataProvider {
+    
     func getActualUserData(completion: @escaping([UserModel]) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             completion(UserModel.mockUserData)
         }
     }
+    
 }
 
 private extension UserModel {
