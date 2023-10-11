@@ -29,6 +29,8 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     
     private var nftImage: UIImageView = {
         var image = UIImageView()
+        image.layer.masksToBounds = true
+        image.layer.cornerRadius = 12
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()

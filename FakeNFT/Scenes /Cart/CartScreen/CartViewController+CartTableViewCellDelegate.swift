@@ -11,7 +11,11 @@ import UIKit
 extension CartViewController: CartTableViewCellDelegate {
     func didDeleteButtonPressed(id: String, image: UIImage) {
         // показать экран
-        self.present(CartDeleteViewController(), animated: true)
+        let deleteVC = CartDeleteViewController()
+        deleteVC.modalPresentationStyle = .overCurrentContext // .fullScreen //.overCurrentContext //.fullScreen
+        deleteVC.nftImage = image
+        deleteVC.nftID = id
+        self.tabBarController?.present(deleteVC, animated: true)
     }
 
 }

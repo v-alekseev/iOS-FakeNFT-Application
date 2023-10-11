@@ -178,6 +178,7 @@ extension CartViewController: CartViewModelDelegate {
     
     /// Нужно показать сообщение
     func showAlert(message: String) {
+        showLoader(false)
         Alert.alertInformation(viewController: self, text: viewModel.alertMessage)
     }
 }
