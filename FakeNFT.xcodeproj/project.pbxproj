@@ -45,6 +45,8 @@
 		D86C213C2AD590ED000AD25C /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C213B2AD590ED000AD25C /* CartViewModel.swift */; };
 		D86C213F2AD59ACF000AD25C /* NftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C213E2AD59ACF000AD25C /* NftModel.swift */; };
 		D86C21412AD5F2D4000AD25C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21402AD5F2D4000AD25C /* Alert.swift */; };
+		D86C21462AD6C374000AD25C /* CartDeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21452AD6C374000AD25C /* CartDeleteViewController.swift */; };
+		D86C21482AD6CA7D000AD25C /* CartViewController+CartTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21472AD6CA7D000AD25C /* CartViewController+CartTableViewCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,8 @@
 		D86C213B2AD590ED000AD25C /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		D86C213E2AD59ACF000AD25C /* NftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftModel.swift; sourceTree = "<group>"; };
 		D86C21402AD5F2D4000AD25C /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		D86C21452AD6C374000AD25C /* CartDeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDeleteViewController.swift; sourceTree = "<group>"; };
+		D86C21472AD6CA7D000AD25C /* CartViewController+CartTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartViewController+CartTableViewCellDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,14 +286,11 @@
 		D8307F0E2AD2BCA7006302F6 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				D86C21432AD6C330000AD25C /* CartDeleteScreen */,
+				D86C21422AD6C311000AD25C /* CartScreen */,
 				D86C213D2AD59AAE000AD25C /* DataModels */,
 				D86C213A2AD556AA000AD25C /* DataProvider */,
 				D86C21332AD551BA000AD25C /* DtoModels */,
-				D8307F0F2AD2BCD3006302F6 /* CartViewController.swift */,
-				D8307F1C2AD3D941006302F6 /* CartTableViewCell.swift */,
-				D8307F1E2AD41CFE006302F6 /* CartViewController+UITableViewDelegate.swift */,
-				D8307F202AD41D2E006302F6 /* CartViewController+UITableViewDataSource.swift */,
-				D86C213B2AD590ED000AD25C /* CartViewModel.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -349,6 +350,27 @@
 				D86C213E2AD59ACF000AD25C /* NftModel.swift */,
 			);
 			path = DataModels;
+			sourceTree = "<group>";
+		};
+		D86C21422AD6C311000AD25C /* CartScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D8307F0F2AD2BCD3006302F6 /* CartViewController.swift */,
+				D86C213B2AD590ED000AD25C /* CartViewModel.swift */,
+				D8307F1C2AD3D941006302F6 /* CartTableViewCell.swift */,
+				D8307F1E2AD41CFE006302F6 /* CartViewController+UITableViewDelegate.swift */,
+				D8307F202AD41D2E006302F6 /* CartViewController+UITableViewDataSource.swift */,
+				D86C21472AD6CA7D000AD25C /* CartViewController+CartTableViewCellDelegate.swift */,
+			);
+			path = CartScreen;
+			sourceTree = "<group>";
+		};
+		D86C21432AD6C330000AD25C /* CartDeleteScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D86C21452AD6C374000AD25C /* CartDeleteViewController.swift */,
+			);
+			path = CartDeleteScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -533,7 +555,9 @@
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
 				D8307F1F2AD41CFE006302F6 /* CartViewController+UITableViewDelegate.swift in Sources */,
+				D86C21462AD6C374000AD25C /* CartDeleteViewController.swift in Sources */,
 				D8307F212AD41D2E006302F6 /* CartViewController+UITableViewDataSource.swift in Sources */,
+				D86C21482AD6CA7D000AD25C /* CartViewController+CartTableViewCellDelegate.swift in Sources */,
 				D86C213C2AD590ED000AD25C /* CartViewModel.swift in Sources */,
 				D86C21372AD5521D000AD25C /* OrderDto.swift in Sources */,
 				D86C21352AD551D0000AD25C /* NftDto.swift in Sources */,
