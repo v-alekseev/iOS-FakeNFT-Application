@@ -13,7 +13,7 @@ protocol CardDataProviderProtocol {
     func getCurrencies()
     func getCurrency(id: Int)
     func paymentOrder()
-    
+    func updateCart(ids: [String],  _ completion: @escaping (Result<[String], Error>) -> Void)
     
 }
 
@@ -31,8 +31,22 @@ struct NFSRequest: NetworkRequest {
     }
 }
 
+struct cartUpdateRequest: NetworkRequest {
+    var httpMethod: HttpMethod { .put }
+    var dto: Encodable?
+    var endpoint: URL? = URL(string: "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/orders/1")
+    
+    init(cartIDs: [String]) {
+        self.dto = UpdateCartDto(nfts: cartIDs)
+    }
+}
+
+
 protocol CardDataProviderDelegate: AnyObject {
-    func didUpdateCart()
+    /// событие вызывается когда в переменную order и orderIDs загружены данные
+    func cartLoaded()
+    /// событие вызывается когда данные в корзине изменеились. При этом переменные order и orderIDs содержат старые данные
+    //func cartUpded()
 }
 
 final class CardDataProvider: CardDataProviderProtocol {
@@ -45,7 +59,7 @@ final class CardDataProvider: CardDataProviderProtocol {
         didSet {
             // если колличество загруженных nft равняется колличеству nftid, значит все запросы отработали и можно перегрузить отображать корзину
             if orderIDs.count == order.count {
-                delegate?.didUpdateCart()
+                delegate?.cartLoaded()
             }
         }
     }
@@ -84,10 +98,6 @@ final class CardDataProvider: CardDataProviderProtocol {
         return
     }
     
-    
-    //    DispatchQueue.main.async {
-    //        completion(Result.success(responce))
-    //    }
     func getNFT(id: String, _ completion: @escaping (Result<NftDto, Error>) -> Void) {
         let ntfsRequest = NFSRequest(nfsID: id)
         networkClient.send(request: ntfsRequest , type: NftDto.self)  { result in
@@ -95,6 +105,22 @@ final class CardDataProvider: CardDataProviderProtocol {
                 switch result {
                 case let .success(data):
                     completion(.success(data))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        return
+    }
+    
+    func updateCart(ids: [String],  _ completion: @escaping (Result<[String], Error>) -> Void) {
+        
+        let ntfsRequest = cartUpdateRequest(cartIDs: ids)
+        networkClient.send(request: ntfsRequest , type: UpdateCartDto.self)  { result in
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(data):
+                    completion(.success(data.nfts))
                 case let .failure(error):
                     completion(.failure(error))
                 }

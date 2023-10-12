@@ -8,13 +8,10 @@
 import Foundation
 import UIKit
 
+
 final class CartDeleteViewController: UIViewController {
-    // in - [ID]  корзина текщая
-    // in - NFTmodel для удаления
-    // out - update collection
     
-    var nftImage: UIImage?
-    var nftID: String = ""
+    var viewModel: CartDeleteViewModel?
     
     private var canvasView: UIView = {
         var view = UIView()
@@ -65,25 +62,17 @@ final class CartDeleteViewController: UIViewController {
         return button
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        nftImageView.image = viewModel?.nftImage
         
-        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight  )
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
-        
-        nftImageView.image = nftImage
-    
         setupUI()
     }
     
     /// Функция обрабатывает нажатие на кнопку отмены
     @objc
     private func returnButtonTap() {
-        print("RETURN button pressed")
         dismiss(animated: true)
     }
     
@@ -91,10 +80,18 @@ final class CartDeleteViewController: UIViewController {
     @objc
     private func deleteButtonTap() {
         print("DELETE button pressed")
+        viewModel?.deleteNFT()
        
     }
     
     private func setupUI() {
+        
+        // добавление blur на background
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight  )
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
         
         view.addSubview(canvasView)
         NSLayoutConstraint.activate([
@@ -138,3 +135,10 @@ final class CartDeleteViewController: UIViewController {
             ])
     }
 }
+
+extension CartDeleteViewController: CartDeleteDelegate {
+    func deleteCompleted() {
+        self.dismiss(animated: true)
+    }
+}
+

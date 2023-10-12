@@ -30,11 +30,26 @@ final class CartViewModel {
         }
     }
     
-    private (set) var totalPrice: Double = 0
+    var totalPrice: Double  {
+        get {
+            var price: Double = 0
+            for nft in order {
+                price += nft.price
+            }
+            return price
+        }
+    }
+    
+    var cartNftIDs: [String] {
+        get {
+            order.map { $0.id }
+        }
+    }
     
     init() {
         cartDataProvider.delegate = self
     }
+    
     
     func getOrder() {
         cartDataProvider.getOrder() { [weak self] result in
@@ -42,25 +57,31 @@ final class CartViewModel {
             switch result {
             case .success(_):
                 //  сюда никогда не попадаем
-              break
+                break
             case let .failure(error):
                 print("[error] cartDataProvider.getOrder() \(error) / \(error.localizedDescription)")
                 self.alertMessage = L10n.Cart.getOrderError
-              break
+                break
             }
         }
     }
 }
 
 extension CartViewModel: CardDataProviderDelegate {
-    func didUpdateCart() {
+    func cartLoaded() {
         var tmpOrder: [NftModel] = []
-        totalPrice = 0
+        // totalPrice = 0
         for nft in cartDataProvider.order {
             tmpOrder.append(NftModel(nft: nft))
-            totalPrice += nft.price
+            //totalPrice += nft.price
         }
         order = tmpOrder
     }
     
+}
+
+extension CartViewModel: CartDeleteStorageDelegate {
+    func nftDeletedFromCart(id: String) {
+        order = order.compactMap { $0.id != id  ?  $0 : nil}
+    }
 }

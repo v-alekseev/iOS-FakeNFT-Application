@@ -47,6 +47,7 @@
 		D86C21412AD5F2D4000AD25C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21402AD5F2D4000AD25C /* Alert.swift */; };
 		D86C21462AD6C374000AD25C /* CartDeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21452AD6C374000AD25C /* CartDeleteViewController.swift */; };
 		D86C21482AD6CA7D000AD25C /* CartViewController+CartTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21472AD6CA7D000AD25C /* CartViewController+CartTableViewCellDelegate.swift */; };
+		D86C214A2AD716A0000AD25C /* CartDeleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21492AD716A0000AD25C /* CartDeleteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		D86C21402AD5F2D4000AD25C /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		D86C21452AD6C374000AD25C /* CartDeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDeleteViewController.swift; sourceTree = "<group>"; };
 		D86C21472AD6CA7D000AD25C /* CartViewController+CartTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartViewController+CartTableViewCellDelegate.swift"; sourceTree = "<group>"; };
+		D86C21492AD716A0000AD25C /* CartDeleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDeleteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				D86C21452AD6C374000AD25C /* CartDeleteViewController.swift */,
+				D86C21492AD716A0000AD25C /* CartDeleteViewModel.swift */,
 			);
 			path = CartDeleteScreen;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				D86C21412AD5F2D4000AD25C /* Alert.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
+				D86C214A2AD716A0000AD25C /* CartDeleteViewModel.swift in Sources */,
 				D8307F1D2AD3D941006302F6 /* CartTableViewCell.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,
