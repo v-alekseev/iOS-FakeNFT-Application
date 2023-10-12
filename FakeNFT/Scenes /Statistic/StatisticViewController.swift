@@ -11,15 +11,23 @@ import Combine
 final class StatisticViewController: UIViewController {
 
     private lazy var tableView = createTableView()
+    private lazy var loadIndicator = createActivityIndicator()
     private let viewModel = StatisticViewModel(dataProvider: StatisticDataProvider())
     private var subscribes = [AnyCancellable]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         viewModel.$usersData
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] _ in
+                
+                if self?.viewModel.dataLoad == true {
+                    self?.loadIndicator.startAnimating()
+                } else {
+                    self?.loadIndicator.stopAnimating()
+                }
+                
                 self?.tableView.reloadData()})
             .store(in: &subscribes)
     }
@@ -42,13 +50,17 @@ final class StatisticViewController: UIViewController {
         navigationItem.rightBarButtonItem  = filterButton
         
         view.addSubview(tableView)
+        view.addSubview(loadIndicator)
         
         NSLayoutConstraint.activate([
             
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            loadIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            loadIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
             
         ])
     }
@@ -62,6 +74,13 @@ final class StatisticViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
+    }
+    
+    private func createActivityIndicator() -> UIActivityIndicatorView {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
     }
 
     @objc

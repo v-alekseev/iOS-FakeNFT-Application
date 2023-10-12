@@ -12,12 +12,14 @@ import Combine
 final class StatisticViewModel {
     
     @Published var usersData: [UserModel]
+    @Published var dataLoad: Bool
     
     private let dataProvider: StatisticDataProviderProtocol?
     
     init(dataProvider: StatisticDataProviderProtocol) {
         self.usersData = []
         self.dataProvider = dataProvider
+        self.dataLoad = true
         
         dataProvider.getUsersData() { [weak self] result in
             guard let self else { return }
@@ -33,6 +35,7 @@ final class StatisticViewModel {
                 case let .failure(error):
                     print (error)
                 }
+                self.dataLoad = false
             }
         }
     }

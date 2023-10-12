@@ -12,12 +12,14 @@ import Combine
 final class UserCardViewController: UIViewController {
     
     var userID = ""
+    
     private lazy var avatarView = createAvatarView()
     private lazy var nameLabel = createNameLabel()
     private lazy var forwardButton = createForwardButton()
     private lazy var profileLabel = createProfileLabel()
     private lazy var websiteButton = createWebsiteButton()
     private lazy var collectionLabel = createCollectionLabel()
+    private lazy var loadIndicator = createActivityIndicator()
     private lazy var userAvatarStub = UIImage(named: "userAvatarStub")
     private var subscribes = [AnyCancellable]()
     
@@ -28,6 +30,11 @@ final class UserCardViewController: UIViewController {
         viewModel.$actualUserData
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] _ in
+                if viewModel.dataLoad {
+                    self?.loadIndicator.startAnimating()
+                } else {
+                    self?.loadIndicator.stopAnimating()
+                }
                 self?.nameLabel.text = viewModel.actualUserData.name
                 self?.profileLabel.text = viewModel.actualUserData.description
                 self?.collectionLabel.text = ("Коллекция NFT (\(viewModel.actualUserData.nfts.count))")
@@ -58,6 +65,7 @@ final class UserCardViewController: UIViewController {
         view.addSubview(profileLabel)
         view.addSubview(websiteButton)
         view.addSubview(collectionLabel)
+        view.addSubview(loadIndicator)
         
         NSLayoutConstraint.activate([
             
@@ -84,7 +92,10 @@ final class UserCardViewController: UIViewController {
             collectionLabel.trailingAnchor.constraint(lessThanOrEqualTo: forwardButton.leadingAnchor, constant: 16),
             
             forwardButton.centerYAnchor.constraint(equalTo: collectionLabel.centerYAnchor),
-            forwardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            forwardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            loadIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            loadIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
             
         ])
     }
@@ -147,7 +158,14 @@ final class UserCardViewController: UIViewController {
         label.textColor = .ypBlackWithDarkMode
         return label
     }
-
+    
+    private func createActivityIndicator() -> UIActivityIndicatorView {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }
+    
     @objc
     private func tapBackButton() {
         tabBarController?.tabBar.isHidden = false

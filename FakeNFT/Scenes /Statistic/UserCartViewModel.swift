@@ -12,6 +12,7 @@ import Combine
 final class UserCartViewModel {
     
     @Published var actualUserData: UserModel
+    @Published var dataLoad: Bool
     
     private let dataProvider: StatisticDataProviderProtocol?
     
@@ -24,6 +25,7 @@ final class UserCartViewModel {
                                         rating: "",
                                         id: userID)
         self.dataProvider = dataProvider
+        self.dataLoad = true
         
         dataProvider.getActualUserData(id: userID) { [weak self] result in
             guard let self else { return }
@@ -34,6 +36,7 @@ final class UserCartViewModel {
                 case let .failure(error):
                     print (error)
                 }
+                self.dataLoad = false
             }
         }
     }
