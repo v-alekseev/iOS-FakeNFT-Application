@@ -41,8 +41,8 @@
 		F228EF982AD5D522001BA148 /* StatisticDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF972AD5D522001BA148 /* StatisticDataProvider.swift */; };
 		F228EF9A2AD5D57A001BA148 /* UserCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF992AD5D57A001BA148 /* UserCardViewController.swift */; };
 		F228EF9C2AD5D5D0001BA148 /* UsersCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF9B2AD5D5D0001BA148 /* UsersCollectionViewController.swift */; };
-		F228EF9F2AD5F6DE001BA148 /* NFTModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EF9E2AD5F6DE001BA148 /* NFTModel.swift */; };
 		F228EFA12AD5F731001BA148 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA02AD5F731001BA148 /* UserModel.swift */; };
+		F228EFA52AD7FD47001BA148 /* UserCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA42AD7FD47001BA148 /* UserCartViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,8 +102,8 @@
 		F228EF972AD5D522001BA148 /* StatisticDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticDataProvider.swift; sourceTree = "<group>"; };
 		F228EF992AD5D57A001BA148 /* UserCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewController.swift; sourceTree = "<group>"; };
 		F228EF9B2AD5D5D0001BA148 /* UsersCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionViewController.swift; sourceTree = "<group>"; };
-		F228EF9E2AD5F6DE001BA148 /* NFTModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTModel.swift; sourceTree = "<group>"; };
 		F228EFA02AD5F731001BA148 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		F228EFA42AD7FD47001BA148 /* UserCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCartViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +307,7 @@
 				F228EF922AD5D462001BA148 /* StatisticViewModel.swift */,
 				F228EF942AD5D49C001BA148 /* StatisticCell.swift */,
 				F228EF992AD5D57A001BA148 /* UserCardViewController.swift */,
+				F228EFA42AD7FD47001BA148 /* UserCartViewModel.swift */,
 				F228EF9B2AD5D5D0001BA148 /* UsersCollectionViewController.swift */,
 			);
 			path = Statistic;
@@ -331,7 +332,6 @@
 		F228EF9D2AD5F694001BA148 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				F228EF9E2AD5F6DE001BA148 /* NFTModel.swift */,
 				F228EFA02AD5F731001BA148 /* UserModel.swift */,
 			);
 			path = DataModels;
@@ -521,8 +521,8 @@
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				F228EFA12AD5F731001BA148 /* UserModel.swift in Sources */,
-				F228EF9F2AD5F6DE001BA148 /* NFTModel.swift in Sources */,
 				D827F56E2ACEDD0000F01BBE /* ProductDetailsTableViewController.swift in Sources */,
+				F228EFA52AD7FD47001BA148 /* UserCartViewModel.swift in Sources */,
 				D8307F192AD2CB02006302F6 /* StatisticViewController.swift in Sources */,
 				F228EF9A2AD5D57A001BA148 /* UserCardViewController.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,

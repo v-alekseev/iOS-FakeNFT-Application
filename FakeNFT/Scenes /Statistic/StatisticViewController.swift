@@ -11,25 +11,25 @@ import Combine
 final class StatisticViewController: UIViewController {
 
     private lazy var tableView = createTableView()
-    private let viewModel = StatisticViewModel(userDataProvider: StatisticDataProvider())
+    private let viewModel = StatisticViewModel(dataProvider: StatisticDataProvider())
     private var subscribes = [AnyCancellable]()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupView()
-
-    }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewModel.$userData
+        viewModel.$usersData
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] _ in
                 self?.tableView.reloadData()})
             .store(in: &subscribes)
     }
+    
+    override func viewDidLoad() {
+         super.viewDidLoad()
+         setupView()
 
+     }
+    
     private func setupView() {
         
         view.backgroundColor = .ypWhiteWithDarkMode
@@ -87,7 +87,7 @@ extension StatisticViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            viewModel.userData.count
+            viewModel.usersData.count
         default:
             0
         }
@@ -97,7 +97,7 @@ extension StatisticViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: StatisticCell.defaultReuseIdentifier,
             for: indexPath) as? StatisticCell
-        cell?.provide(userData: viewModel.userData[indexPath.row])
+        cell?.provide(userData: viewModel.usersData[indexPath.row])
         return cell ?? StatisticCell()
     }
 }
@@ -111,6 +111,7 @@ extension StatisticViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let userCardViewController = UserCardViewController()
+        userCardViewController.userID = viewModel.usersData[indexPath.row].id
         tabBarController?.tabBar.isHidden = true
         navigationController?.pushViewController(userCardViewController, animated: true)
 

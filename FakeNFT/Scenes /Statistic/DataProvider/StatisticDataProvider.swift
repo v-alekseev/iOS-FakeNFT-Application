@@ -7,316 +7,58 @@
 
 import Foundation
 
-protocol UserDataProvider {
-    func getActualUserData(completion: @escaping([UserModel]) -> Void)
+protocol StatisticDataProviderProtocol {
+    func getUsersData( _ completion: @escaping (Result<[UserModel], Error>) -> Void)
+    func getActualUserData(id: String, _ completion: @escaping (Result<UserModel, Error>) -> Void)
 }
 
-final class StatisticDataProvider: UserDataProvider {
+final class StatisticDataProvider: StatisticDataProviderProtocol {
     
-    func getActualUserData(completion: @escaping([UserModel]) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            completion(UserModel.mockUserData)
+    private var networkClient = DefaultNetworkClient()
+    
+    struct UsersRequest: NetworkRequest {
+        var endpoint: URL? = URL(string: "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/users")
+    }
+    
+    struct ActualUserRequest: NetworkRequest {
+        let userID: String
+        var endpoint: URL? = nil
+        init(userID: String) {
+            self.userID = userID
+            self.endpoint =  URL(string: "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/users/\(userID)")
         }
     }
     
-}
-
-private extension UserModel {
-    static var mockUserData: [UserModel] {
-        [UserModel(name: "Alex",
-                   avatar: "https://img01.kupiprodai.ru/092016/1474549920694.jpg",
-                   description: "Очень хороший друг",
-                   website: "https://ya.ru",
-                   nfts: [NFTModel(createdAt: "",
-                                   name: "",
-                                   images: [],
-                                   rating: 2,
-                                   description: "",
-                                   price: 3,
-                                   author: UserModel(name: "FGD",
-                                                     avatar: "https://ya.ru",
-                                                     description: "",
-                                                     website: "https://ya.ru",
-                                                     nfts: [],
-                                                     rating: "1",
-                                                     id: "757"),
-                                   id: "6786"),
-                          NFTModel(createdAt: "",
-                                   name: "",
-                                   images: [],
-                                   rating: 2,
-                                   description: "",
-                                   price: 3,
-                                   author: UserModel(name: "FGD",
-                                                     avatar: "https://ya.ru",
-                                                     description: "",
-                                                     website: "https://ya.ru",
-                                                     nfts: [],
-                                                     rating: "2",
-                                                     id: "757"),
-                                   id: "6786"),
-                          NFTModel(createdAt: "",
-                                   name: "",
-                                   images: [],
-                                   rating: 2,
-                                   description: "",
-                                   price: 3,
-                                   author: UserModel(name: "FGD",
-                                                     avatar: "https://ya.ru",
-                                                     description: "",
-                                                     website: "https://ya.ru",
-                                                     nfts: [],
-                                                     rating: "3",
-                                                     id: "757"),
-                                   id: "6786")
-                   ],
-                   rating: "13",
-                   id: "1"),
-
-         UserModel(name: "Bolex",
-                   avatar: "https://img.goodfon.ru/original/800x480/4/cf/chiornaia-zmeia-red-belly-black-iazyk.jpg",
-                   description: "Очень плохое существо",
-                   website: "https://ya.ru",
-                   nfts: [],
-                   rating: "4",
-                   id: "2"),
-
-         UserModel(name: "",
-                   avatar: "https://img01.kupiprodai.ru/092016/1474549920694.jpg",
-                   description: "Странный",
-                   website: "https://ya.ru",
-                   nfts: [],
-                   rating: "5",
-                   id: "4"),
-
-         UserModel(name: "Slon",
-                   avatar: "https://i.ytimg.com/vi/p2jXct3Ewbo/hqdefault.jpg",
-                   description: "Очень дерзкий",
-                   website: "https://ya.ru",
-                   nfts: [],
-                   rating: "Битый рейтинг",
-                   id: "6"),
-
-         UserModel(name: "Крендель",
-                   avatar: "https://cdn.idntimes.com/content-images/post/20190216/labusas-org-ec92f317eb8a7039d3180e11c13ba810_600x400.jpg",
-                   description: "Варю борщи",
-                   website: "https://ya.ru",
-                   nfts: [NFTModel(createdAt: "",
-                                   name: "",
-                                   images: [],
-                                   rating: 2,
-                                   description: "",
-                                   price: 3,
-                                   author: UserModel(name: "FGD",
-                                                     avatar: "https://ya.ru",
-                                                     description: "",
-                                                     website: "https://ya.ru",
-                                                     nfts: [],
-                                                     rating: "7",
-                                                     id: "757"),
-                                   id: "6786"),
-                          NFTModel(createdAt: "",
-                                   name: "",
-                                   images: [],
-                                   rating: 2,
-                                   description: "",
-                                   price: 3,
-                                   author: UserModel(name: "FGD",
-                                                     avatar: "https://ya.ru",
-                                                     description: "",
-                                                     website: "https://ya.ru",
-                                                     nfts: [],
-                                                     rating: "8",
-                                                     id: "757"),
-                                   id: "6786")
-                   ],
-                   rating: "13",
-                   id: "1"),
-
-         UserModel(name: "Varik",
-                   avatar: "https://img.goodfon.ru/original/800x480/4/cf/chiornaia-zmeia-red-belly-black-iazyk.jpg",
-                   description: "Люблю выпить",
-                   website: "https://ya.ru",
-                   nfts: [],
-                   rating: "9",
-                   id: "2"),
-
-         UserModel(name: "Sharik",
-                   avatar: "https://img01.kupiprodai.ru/092016/1474549920694.jpg",
-                   description: "Дуремар",
-                   website: "https://ya.ru",
-                   nfts: [],
-                   rating: "10",
-                   id: "8"),
-
-         UserModel(name: "Bobik",
-                   avatar: "Битая ссылка",
-                   description: "Быстроо езжу на машине",
-                   website: "https://ya.ru",
-                   nfts: [NFTModel(createdAt: "",
-                                   name: "",
-                                   images: [],
-                                   rating: 2,
-                                   description: "",
-                                   price: 3,
-                                   author: UserModel(name: "FGD",
-                                                     avatar: "https://ya.ru",
-                                                     description: "",
-                                                     website: "https://ya.ru",
-                                                     nfts: [],
-                                                     rating: "11",
-                                                     id: "757"),
-                                   id: "6786")],
-                   rating: "17",
-                   id: "0"),
-
-         UserModel(name: "Krokus",
-                    avatar: "https://img01.kupiprodai.ru/092016/1474549920694.jpg",
-                    description: "Очень хороший друг",
-                    website: "https://ya.ru",
-                    nfts: [NFTModel(createdAt: "",
-                                    name: "",
-                                    images: [],
-                                    rating: 2,
-                                    description: "",
-                                    price: 3,
-                                    author: UserModel(name: "FGD",
-                                                      avatar: "https://ya.ru",
-                                                      description: "",
-                                                      website: "https://ya.ru",
-                                                      nfts: [],
-                                                      rating: "1",
-                                                      id: "757"),
-                                    id: "6786"),
-                           NFTModel(createdAt: "",
-                                    name: "",
-                                    images: [],
-                                    rating: 2,
-                                    description: "",
-                                    price: 3,
-                                    author: UserModel(name: "FGD",
-                                                      avatar: "https://ya.ru",
-                                                      description: "",
-                                                      website: "https://ya.ru",
-                                                      nfts: [],
-                                                      rating: "2",
-                                                      id: "757"),
-                                    id: "6786"),
-                           NFTModel(createdAt: "",
-                                    name: "",
-                                    images: [],
-                                    rating: 2,
-                                    description: "",
-                                    price: 3,
-                                    author: UserModel(name: "FGD",
-                                                      avatar: "https://ya.ru",
-                                                      description: "",
-                                                      website: "https://ya.ru",
-                                                      nfts: [],
-                                                      rating: "3",
-                                                      id: "757"),
-                                    id: "6786")
-                    ],
-                    rating: "17",
-                    id: "1"),
-
-          UserModel(name: "Pokus",
-                    avatar: "https://img.goodfon.ru/original/800x480/4/cf/chiornaia-zmeia-red-belly-black-iazyk.jpg",
-                    description: "Очень плохое существо",
-                    website: "https://ya.ru",
-                    nfts: [],
-                    rating: "18",
-                    id: "2"),
-
-          UserModel(name: "Очень огромное имя Васисуалий Васисуальевич Изподвыпедвертов",
-                    avatar: "https://img01.kupiprodai.ru/092016/1474549920694.jpg",
-                    description: "Странный",
-                    website: "https://ya.ru",
-                    nfts: [],
-                    rating: "19",
-                    id: "4"),
-
-          UserModel(name: "Shmolex",
-                    avatar: "https://i.ytimg.com/vi/p2jXct3Ewbo/hqdefault.jpg",
-                    description: "Очень дерзкий",
-                    website: "https://ya.ru",
-                    nfts: [],
-                    rating: "Битый рейтинг",
-                    id: "6"),
-
-          UserModel(name: "Jonni",
-                    avatar: "https://cdn.idntimes.com/content-images/post/20190216/labusas-org-ec92f317eb8a7039d3180e11c13ba810_600x400.jpg",
-                    description: "Варю борщи",
-                    website: "https://ya.ru",
-                    nfts: [NFTModel(createdAt: "",
-                                    name: "",
-                                    images: [],
-                                    rating: 2,
-                                    description: "",
-                                    price: 3,
-                                    author: UserModel(name: "FGD",
-                                                      avatar: "https://ya.ru",
-                                                      description: "",
-                                                      website: "https://ya.ru",
-                                                      nfts: [],
-                                                      rating: "7",
-                                                      id: "757"),
-                                    id: "6786"),
-                           NFTModel(createdAt: "",
-                                    name: "",
-                                    images: [],
-                                    rating: 2,
-                                    description: "",
-                                    price: 3,
-                                    author: UserModel(name: "FGD",
-                                                      avatar: "https://ya.ru",
-                                                      description: "",
-                                                      website: "https://ya.ru",
-                                                      nfts: [],
-                                                      rating: "8",
-                                                      id: "757"),
-                                    id: "6786")
-                    ],
-                    rating: "13",
-                    id: "1"),
-
-          UserModel(name: "Poni",
-                    avatar: "https://img.goodfon.ru/original/800x480/4/cf/chiornaia-zmeia-red-belly-black-iazyk.jpg",
-                    description: "Люблю выпить",
-                    website: "https://ya.ru",
-                    nfts: [],
-                    rating: "20",
-                    id: "2"),
-
-          UserModel(name: "Sharik",
-                    avatar: "https://img01.kupiprodai.ru/092016/1474549920694.jpg",
-                    description: "Дуремар",
-                    website: "https://ya.ru",
-                    nfts: [],
-                    rating: "32",
-                    id: "8"),
-
-          UserModel(name: "Sloun",
-                    avatar: "Битая ссылка",
-                    description: "Быстроо езжу на машине",
-                    website: "https://ya.ru",
-                    nfts: [NFTModel(createdAt: "",
-                                    name: "",
-                                    images: [],
-                                    rating: 2,
-                                    description: "",
-                                    price: 3,
-                                    author: UserModel(name: "FGD",
-                                                      avatar: "https://ya.ru",
-                                                      description: "",
-                                                      website: "https://ya.ru",
-                                                      nfts: [],
-                                                      rating: "11",
-                                                      id: "757"),
-                                    id: "6786")],
-                    rating: "33",
-                    id: "0")
-        ]
-
+    func getUsersData( _ completion: @escaping (Result<[UserModel], Error>) -> Void) {
+        let usersRequest = UsersRequest()
+        networkClient.send(request: usersRequest, type: [UserModel].self) { [weak self] result in
+            guard self != nil else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(data):
+                    completion(.success(data))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        return
+    }
+    
+    func getActualUserData(id: String, _ completion: @escaping (Result<UserModel, Error>) -> Void) {
+        let actualUserRequest = ActualUserRequest(userID: id)
+        networkClient.send(request: actualUserRequest, type: UserModel.self)  { [weak self] result in
+            guard self != nil else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(data):
+                    completion(.success(data))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        return
     }
 }
+
