@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-final class CatalogViewController: UIViewController {
+final class CollectionsViewController: UIViewController {
+    private let viewModel: CollectionsViewModelProtocol = CollectionsViewModel()
 
     // MARK: - Private Properties
     //
