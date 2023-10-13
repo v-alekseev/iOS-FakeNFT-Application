@@ -17,6 +17,14 @@ internal enum L10n {
     ///   Created by Vitaly on 06.10.2023.
     internal static let title = L10n.tr("Localizable", "application.title", fallback: "Фейк NFT")
   }
+  internal enum Catalog {
+    internal enum Sort {
+      /// По названию
+      internal static let byName = L10n.tr("Localizable", "catalog.sort.byName", fallback: "По названию")
+      /// По количеству NFT
+      internal static let byNFTQuantity = L10n.tr("Localizable", "catalog.sort.byNFTQuantity", fallback: "По количеству NFT")
+    }
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

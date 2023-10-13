@@ -1,5 +1,9 @@
 import Foundation
 final class CollectionsViewModel: CollectionsViewModelProtocol {
+    func setSortType(sortType: SortType) {
+        print("ok")
+    }
+    
     func howManyCollections() -> Int {
         return 0
     }

@@ -1,6 +1,7 @@
 
 import Foundation
 protocol CollectionsViewModelProtocol {
+    func setSortType(sortType: SortType)
     func howManyCollections() -> Int
     func getCollection(at indexPath: IndexPath) -> CollectionModel?
     func getCollectionName(at indexPath: IndexPath) -> String
