@@ -5,7 +5,6 @@
 //  Created by Vitaly on 08.10.2023.
 //
 
-import Foundation
 import UIKit
 
 struct ModuleFactory {
@@ -48,8 +47,10 @@ struct ModuleFactory {
         return ProfileViewController()
     }
     static func createStatisticViewController() -> UIViewController {
-        let vc = StatisticViewController()
-        let navigationVC = UINavigationController(rootViewController: vc)
+        let dataProvider = StatisticDataProvider()
+        let viewModel = StatisticViewModel(dataProvider: dataProvider)
+        let viewController = StatisticViewController(viewModel)
+        let navigationVC = UINavigationController(rootViewController: viewController)
         return navigationVC
     }
 }

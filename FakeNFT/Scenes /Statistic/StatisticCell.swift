@@ -10,7 +10,7 @@ import Kingfisher
 
 final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
-    static var defaultReuseIdentifier = "StatisticCell"
+    static let defaultReuseIdentifier = "StatisticCell"
     private let urlSession = URLSession.shared
     
     private lazy var roundRect = createRoundRect()
@@ -38,7 +38,7 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     }
     
     func provide(userData: UserModel) {
-        if  let url = URL(string: userData.avatar) {
+        if let url = URL(string: userData.avatar) {
             avatarView.kf.setImage(with: url, placeholder: userAvatarStub)
         }
         nameLabel.text = "\(userData.name)"
@@ -57,26 +57,26 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
         
         NSLayoutConstraint.activate([
             
-            roundRect.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            roundRect.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
-            roundRect.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 51),
-            roundRect.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            roundRect.topAnchor.constraint(equalTo: topAnchor, constant: Constants.offset_4),
+            roundRect.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.offset_4),
+            roundRect.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_51),
+            roundRect.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset_16),
             
             avatarView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            avatarView.leadingAnchor.constraint(equalTo: roundRect.leadingAnchor, constant: 16),
-            avatarView.heightAnchor.constraint(equalToConstant: 28),
-            avatarView.widthAnchor.constraint(equalToConstant: 28),
+            avatarView.leadingAnchor.constraint(equalTo: roundRect.leadingAnchor, constant: Constants.offset_16),
+            avatarView.heightAnchor.constraint(equalToConstant: Constants.offset_28),
+            avatarView.widthAnchor.constraint(equalToConstant: Constants.offset_28),
             
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: 8),
-            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: roundRect.trailingAnchor, constant: -70),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: Constants.offset_8),
+            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: roundRect.trailingAnchor, constant: -Constants.offset_70),
             
             nftCountLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            nftCountLabel.trailingAnchor.constraint(equalTo: roundRect.trailingAnchor, constant: -16),
+            nftCountLabel.trailingAnchor.constraint(equalTo: roundRect.trailingAnchor, constant: -Constants.offset_16),
             nftCountLabel.leadingAnchor.constraint(greaterThanOrEqualTo: nameLabel.trailingAnchor),
             
             userRatingLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            userRatingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            userRatingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_16),
             userRatingLabel.trailingAnchor.constraint(lessThanOrEqualTo: roundRect.leadingAnchor)
             
         ])
@@ -124,3 +124,15 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
         return label
     }
 }
+
+extension StatisticCell {
+    private enum Constants {
+        static let offset_4: CGFloat = 4
+        static let offset_8: CGFloat = 8
+        static let offset_16: CGFloat = 16
+        static let offset_28: CGFloat = 28
+        static let offset_51: CGFloat = 51
+        static let offset_70: CGFloat = 70
+    }
+}
+

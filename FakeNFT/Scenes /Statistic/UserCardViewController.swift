@@ -11,8 +11,9 @@ import Combine
 
 final class UserCardViewController: UIViewController {
     
-    var userID = ""
-    
+    private let viewModel: UserCartViewModel
+    private var subscribes = [AnyCancellable]()
+    private var userID: String
     private lazy var avatarView = createAvatarView()
     private lazy var nameLabel = createNameLabel()
     private lazy var forwardButton = createForwardButton()
@@ -21,24 +22,32 @@ final class UserCardViewController: UIViewController {
     private lazy var collectionLabel = createCollectionLabel()
     private lazy var loadIndicator = createActivityIndicator()
     private lazy var userAvatarStub = UIImage(named: "userAvatarStub")
-    private var subscribes = [AnyCancellable]()
+    
+    init(_ viewModel: UserCartViewModel) {
+        self.viewModel = viewModel
+        self.userID = viewModel.actualUserData.id
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let viewModel = UserCartViewModel(dataProvider: StatisticDataProvider(), userID: self.userID)
         viewModel.$actualUserData
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] _ in
-                if viewModel.dataLoad {
+                if self?.viewModel.dataLoad == true {
                     self?.loadIndicator.startAnimating()
                 } else {
                     self?.loadIndicator.stopAnimating()
                 }
-                self?.nameLabel.text = viewModel.actualUserData.name
-                self?.profileLabel.text = viewModel.actualUserData.description
-                self?.collectionLabel.text = ("Коллекция NFT (\(viewModel.actualUserData.nfts.count))")
-                if  let url = URL(string: viewModel.actualUserData.avatar) {
+                self?.nameLabel.text = self?.viewModel.actualUserData.name
+                self?.profileLabel.text = self?.viewModel.actualUserData.description
+                self?.collectionLabel.text = ("Коллекция NFT (\( self?.viewModel.actualUserData.nfts.count ?? 0))")
+                if  let url = URL(string: self?.viewModel.actualUserData.avatar ?? "") {
                     self?.avatarView.kf.setImage(with: url, placeholder: self?.userAvatarStub)
                 }
             })
@@ -69,30 +78,30 @@ final class UserCardViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            avatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            avatarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            avatarView.heightAnchor.constraint(equalToConstant: 70),
-            avatarView.widthAnchor.constraint(equalToConstant: 70),
+            avatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.offset_20),
+            avatarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.offset_16),
+            avatarView.heightAnchor.constraint(equalToConstant: Constants.offset_70),
+            avatarView.widthAnchor.constraint(equalToConstant: Constants.offset_70),
             
             nameLabel.centerYAnchor.constraint(equalTo: avatarView.centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: 16),
-            nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: Constants.offset_16),
+            nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.offset_16),
             
-            profileLabel.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 20),
-            profileLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            profileLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            profileLabel.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: Constants.offset_20),
+            profileLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.offset_16),
+            profileLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.offset_16),
             
-            websiteButton.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 28),
-            websiteButton.heightAnchor.constraint(equalToConstant: 40),
-            websiteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            websiteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            websiteButton.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: Constants.offset_28),
+            websiteButton.heightAnchor.constraint(equalToConstant: Constants.offset_40),
+            websiteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.offset_16),
+            websiteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.offset_16),
             
-            collectionLabel.topAnchor.constraint(equalTo: websiteButton.bottomAnchor, constant: 56),
-            collectionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            collectionLabel.trailingAnchor.constraint(lessThanOrEqualTo: forwardButton.leadingAnchor, constant: 16),
+            collectionLabel.topAnchor.constraint(equalTo: websiteButton.bottomAnchor, constant: Constants.offset_56),
+            collectionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.offset_16),
+            collectionLabel.trailingAnchor.constraint(lessThanOrEqualTo: forwardButton.leadingAnchor, constant: Constants.offset_16),
             
             forwardButton.centerYAnchor.constraint(equalTo: collectionLabel.centerYAnchor),
-            forwardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            forwardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.offset_20),
             
             loadIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             loadIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
@@ -174,7 +183,6 @@ final class UserCardViewController: UIViewController {
     
     @objc
     private func tapForwardButton() {
-        
         let usersCollectionViewController = UsersCollectionViewController()
         navigationController?.pushViewController(usersCollectionViewController, animated: true)
     }
@@ -183,5 +191,16 @@ final class UserCardViewController: UIViewController {
     private func tapWebsiteButton() {
         //TODO 
         print (#function)
+    }
+}
+
+extension UserCardViewController {
+    private enum Constants {
+        static let offset_16: CGFloat = 16
+        static let offset_20: CGFloat = 20
+        static let offset_28: CGFloat = 28
+        static let offset_40: CGFloat = 40
+        static let offset_56: CGFloat = 56
+        static let offset_70: CGFloat = 70
     }
 }
