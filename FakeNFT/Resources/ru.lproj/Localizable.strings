@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  FakeNFT
+
+  Created by Vitaly on 06.10.2023.
+  
+*/
+
+
+
+"application.title" = "Фейк NFT";
+
+"cart.price_label_name" = "Цена";
+"cart.payment_button_title" = "К оплате";
+"cart.getOrderError" = "К сожалению, не получилось загрузить данные. Попробуйте еще раз попозже.";
+
+"alert.header" = "Сообщение для вас!";
+"alert.button" = "Понятно";
