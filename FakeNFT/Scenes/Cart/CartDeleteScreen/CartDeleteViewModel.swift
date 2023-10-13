@@ -23,16 +23,18 @@ final class CartDeleteViewModel {
     private var nftIDforDelete: String
     private var cartIDs: [String]
 
-    private let dataProvider = CardDataProvider()
+    var dataProvider: CardDataProviderProtocol?
     
     var storageDelegate: CartDeleteStorageDelegate?
     var delegate: CartDeleteDelegate?
     
-    
-    init(nftImage: UIImage, nftID: String, cartIDs: [String]) {
+    init(nftImage: UIImage, nftIDforDelete: String, cartIDs: [String], dataProvider: CardDataProviderProtocol? = nil, storageDelegate: CartDeleteStorageDelegate? = nil, delegate: CartDeleteDelegate? = nil) {
         self.nftImage = nftImage
-        self.nftIDforDelete = nftID
+        self.nftIDforDelete = nftIDforDelete
         self.cartIDs = cartIDs
+        self.dataProvider = dataProvider
+        self.storageDelegate = storageDelegate
+        self.delegate = delegate
     }
     
     func deleteNFT() {
@@ -40,7 +42,7 @@ final class CartDeleteViewModel {
         cartIDs.removeAll(where: {$0 == nftIDforDelete})
         print("after \(cartIDs)")
         
-        dataProvider.updateCart(ids: cartIDs) { [weak self] result in
+        dataProvider?.updateCart(ids: cartIDs) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(data):

@@ -14,7 +14,8 @@ protocol CardDataProviderProtocol {
     func getCurrency(id: Int)
     func paymentOrder()
     func updateCart(ids: [String],  _ completion: @escaping (Result<[String], Error>) -> Void)
-    
+    var order: [NftDto] { get }
+    var delegate: CardDataProviderDelegate? { get set }
 }
 
 struct OrderRequest: NetworkRequest {
@@ -41,7 +42,6 @@ struct cartUpdateRequest: NetworkRequest {
     }
 }
 
-
 protocol CardDataProviderDelegate: AnyObject {
     /// событие вызывается когда в переменную order и orderIDs загружены данные
     func cartLoaded()
@@ -51,7 +51,7 @@ protocol CardDataProviderDelegate: AnyObject {
 
 final class CardDataProvider: CardDataProviderProtocol {
     
-    private var networkClient = DefaultNetworkClient()
+    var networkClient: NetworkClient? // = DefaultNetworkClient()
     weak var delegate: CardDataProviderDelegate?
     
     var orderIDs: [String] = []
@@ -63,12 +63,15 @@ final class CardDataProvider: CardDataProviderProtocol {
             }
         }
     }
+    init(networkClient: NetworkClient? = DefaultNetworkClient()) {
+        self.networkClient = networkClient
+    }
     
     func getOrder(_ completion: @escaping (Result<String, Error>) -> Void) {
         let orderRequest = OrderRequest()
         self.orderIDs.removeAll()
         
-        networkClient.send(request: orderRequest , type: OrderDto.self)  { [weak self] result in
+        networkClient?.send(request: orderRequest , type: OrderDto.self)  { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -100,7 +103,7 @@ final class CardDataProvider: CardDataProviderProtocol {
     
     func getNFT(id: String, _ completion: @escaping (Result<NftDto, Error>) -> Void) {
         let ntfsRequest = NFSRequest(nfsID: id)
-        networkClient.send(request: ntfsRequest , type: NftDto.self)  { result in
+        networkClient?.send(request: ntfsRequest , type: NftDto.self)  { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
@@ -116,7 +119,7 @@ final class CardDataProvider: CardDataProviderProtocol {
     func updateCart(ids: [String],  _ completion: @escaping (Result<[String], Error>) -> Void) {
         
         let ntfsRequest = cartUpdateRequest(cartIDs: ids)
-        networkClient.send(request: ntfsRequest , type: UpdateCartDto.self)  { result in
+        networkClient?.send(request: ntfsRequest , type: UpdateCartDto.self)  { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):

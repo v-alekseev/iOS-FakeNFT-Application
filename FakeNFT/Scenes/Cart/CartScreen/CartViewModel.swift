@@ -14,8 +14,10 @@ protocol CartViewModelDelegate: AnyObject {
 
 final class CartViewModel {
     
-    let cartDataProvider = CardDataProvider()
+    var cartDataProvider: CardDataProviderProtocol? // = CardDataProvider()
+    
     weak var delegate: CartViewModelDelegate?
+    
     private (set) var alertMessage: String = "" {
         didSet {
             if !alertMessage.isEmpty {
@@ -46,13 +48,8 @@ final class CartViewModel {
         }
     }
     
-    init() {
-        cartDataProvider.delegate = self
-    }
-    
-    
     func getOrder() {
-        cartDataProvider.getOrder() { [weak self] result in
+        cartDataProvider?.getOrder() { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(_):
@@ -69,6 +66,7 @@ final class CartViewModel {
 
 extension CartViewModel: CardDataProviderDelegate {
     func cartLoaded() {
+        guard let cartDataProvider = cartDataProvider  else {return}
         var tmpOrder: [NftModel] = []
         // totalPrice = 0
         for nft in cartDataProvider.order {

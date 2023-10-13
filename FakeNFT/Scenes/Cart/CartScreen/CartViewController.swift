@@ -66,6 +66,10 @@ final class CartViewController: UIViewController {
         
         viewModel.delegate = self
         
+        let dataProvider = CardDataProvider()
+        dataProvider.delegate = viewModel
+        viewModel.cartDataProvider = dataProvider
+        
         setupNavigationBar()
         setupUI()
         view.backgroundColor = .white

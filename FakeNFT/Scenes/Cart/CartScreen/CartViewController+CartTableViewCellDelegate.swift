@@ -13,9 +13,13 @@ extension CartViewController: CartTableViewCellDelegate {
         // показать экран
         
         let deleteVC = CartDeleteViewController()
-        deleteVC.viewModel = CartDeleteViewModel(nftImage: image, nftID: id, cartIDs: viewModel.cartNftIDs)
-        deleteVC.viewModel?.delegate = deleteVC
-        deleteVC.viewModel?.storageDelegate =  self.viewModel
+        
+        let deleteViewModel = CartDeleteViewModel(nftImage: image, nftIDforDelete: id, cartIDs: viewModel.cartNftIDs)
+        deleteViewModel.dataProvider = CardDataProvider()
+        deleteViewModel.delegate = deleteVC
+        deleteViewModel.storageDelegate =  self.viewModel
+        
+        deleteVC.viewModel = deleteViewModel
         deleteVC.modalPresentationStyle = .overCurrentContext
         
         self.tabBarController?.present(deleteVC, animated: true)
