@@ -14,7 +14,7 @@ final class CartViewController: UIViewController {
     //
     let viewModel = CartViewModel()
     
-    private var bottomView: UIView = {
+    private lazy var bottomView: UIView = {
         var view = UIView()
         view.backgroundColor = .ypLightGreyWithDarkMode
         view.layer.masksToBounds = true
@@ -24,14 +24,14 @@ final class CartViewController: UIViewController {
         return view
     }()
     
-    private var countItemsLabel: UILabel = {
+    private lazy var countItemsLabel: UILabel = {
         var label = UILabel()
         label.font =  UIFont.caption1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private var totalAmountLabel: UILabel = {
+    private lazy var totalAmountLabel: UILabel = {
         var label = UILabel()
         label.font =  UIFont.bodyBold
         label.textColor = .ypGreen
@@ -52,7 +52,7 @@ final class CartViewController: UIViewController {
         return button
     }()
     
-    private (set) var cartTable: UITableView = {
+    private (set) lazy var cartTable: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.separatorStyle = .none

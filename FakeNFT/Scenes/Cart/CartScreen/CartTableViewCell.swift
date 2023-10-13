@@ -16,18 +16,18 @@ protocol CartTableViewCellDelegate: AnyObject {
 final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - Consts
     
-    private let placeholderImage = UIImage(resource: .nftNo)
+    private lazy let placeholderImage = UIImage(resource: .nftNo)
     var delegate: CartTableViewCellDelegate?
     
     private var nftID: String = ""
     
-    private var canvasView: UIView = {
+    private lazy var canvasView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private var nftImage: UIImageView = {
+    private lazy var nftImage: UIImageView = {
         var image = UIImageView()
         image.layer.masksToBounds = true
         image.layer.cornerRadius = 12
@@ -35,14 +35,14 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return image
     }()
     
-    private var nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.bodyBold
         return label
     }()
     
-    private let stackView: UIStackView  = {
+    private lazy var stackView: UIStackView  = {
         var sView = UIStackView()
         sView.axis  = NSLayoutConstraint.Axis.horizontal
         sView.distribution  = UIStackView.Distribution.equalSpacing
@@ -52,13 +52,13 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return sView
     }()
     
-    private var starImage: UIImageView = {
+    private lazy var starImage: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
-    private var priceNameLabel: UILabel = {
+    private lazy var priceNameLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.caption2
@@ -66,7 +66,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return label
     }()
     
-    private var priceLabel: UILabel = {
+    private lazy var priceLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.bodyBold
