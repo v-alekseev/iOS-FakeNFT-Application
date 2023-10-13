@@ -42,7 +42,7 @@ struct ModuleFactory {
         return CartViewController()
     }
     static func createCatalogViewController() -> UIViewController {
-        return CollectionsViewController()
+        return UINavigationController (rootViewController: CollectionsViewController())
     }
     static func createProfileViewController() -> UIViewController {
         return ProfileViewController()

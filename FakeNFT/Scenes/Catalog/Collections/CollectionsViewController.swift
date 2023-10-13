@@ -1,10 +1,3 @@
-//
-//  CatalogViewController.swift
-//  FakeNFT
-//
-//  Created by Vitaly on 08.10.2023.
-//
-
 import Foundation
 import UIKit
 
@@ -33,9 +26,10 @@ final class CollectionsViewController: UIViewController {
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupButtons()
         
         setupUI()
+        
         view.backgroundColor = .white
         print("CatalogViewController viewDidLoad")
     }
@@ -50,16 +44,21 @@ final class CollectionsViewController: UIViewController {
         ])
     }
     
-//    private func setupButtons() {
-//        filterBarButtonItem = {
-//            let barButtonItem = UIBarButtonItem(
-//                image: UIImage (named: "FilterIcon" ),
-//                style: .plain,
-//                target: self,
-//                action: #selector (filterButtonTapped)
-//            )
-//            barButtonItem.tintColor = UIColor (named: "blackWithDarkMode")
-//            return barButtonItem
-//        }()
-//    }
+    private func setupButtons() {
+        filterBarButtonItem = {
+            let barButtonItem = UIBarButtonItem(
+                image: UIImage (named: "SortIcon" ),
+                style: .plain,
+                target: self,
+                action: #selector (filterButtonTapped)
+            )
+            barButtonItem.tintColor = UIColor (named: "blackWithDarkMode")
+            return barButtonItem
+        }()
+    }
+    
+    @objc
+    private func filterButtonTapped() {
+        print("filterButtonTapped")
+    }
 }
