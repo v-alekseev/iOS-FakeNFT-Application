@@ -205,7 +205,6 @@
 		3F68069529CBBAF100B4F915 /* FakeNFT */ = {
 			isa = PBXGroup;
 			children = (
-				AF9A240F2AD5CA1800C73AEC /* UI */,
 				AF9A240B2AD5C3E100C73AEC /* Domain */,
 				AF3948E02AD1B408003A7B70 /* Data */,
 				AF1A63CF2AD81863000F8A4E /* Scenes */,
@@ -314,6 +313,8 @@
 		AF1A63D02AD81863000F8A4E /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
+				AF9A24112AD5CA3600C73AEC /* Collections */,
+				AF1A63E12AD95996000F8A4E /* NFTs */,
 				AF1A63D12AD81863000F8A4E /* CatalogViewController.swift */,
 			);
 			path = Catalog;
@@ -349,7 +350,7 @@
 				AF1A63E22AD95996000F8A4E /* PlaceHolder.swift */,
 			);
 			name = NFTs;
-			path = FakeNFT/UI/NFTs;
+			path = FakeNFT/Scenes/Catalog/NFTs;
 			sourceTree = SOURCE_ROOT;
 		};
 		AF3948D92AD1B382003A7B70 /* Catalog */ = {
@@ -405,23 +406,6 @@
 			isa = PBXGroup;
 			children = (
 				AF9A240D2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift */,
-			);
-			path = Catalog;
-			sourceTree = "<group>";
-		};
-		AF9A240F2AD5CA1800C73AEC /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				AF9A24102AD5CA2E00C73AEC /* Catalog */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		AF9A24102AD5CA2E00C73AEC /* Catalog */ = {
-			isa = PBXGroup;
-			children = (
-				AF1A63E12AD95996000F8A4E /* NFTs */,
-				AF9A24112AD5CA3600C73AEC /* Collections */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
