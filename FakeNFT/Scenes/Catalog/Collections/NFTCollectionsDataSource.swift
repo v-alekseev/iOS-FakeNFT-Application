@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NFTCollectionsDataSource {
+final class NFTCollectionsDataSource {
     private var collections: [CollectionModel]
     private let dataProvider: CatalogDataProviderProtocol
     
@@ -22,15 +22,22 @@ class NFTCollectionsDataSource {
             switch result {
             case .success(let collections):
                 self.collections = collections
+                print("успешно \(collections)")
+                completion(result)
             case .failure(let error):
                 print(error)
+                completion(result)
             }
-            completion(result)
+            
         }
     }
     
     func giveMeAllCollections() -> [CollectionModel] {
         return self.collections
+    }
+    
+    func howManyCollections() -> Int {
+        return self.collections.count
     }
     
     func reloadCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void = {_ in }) {

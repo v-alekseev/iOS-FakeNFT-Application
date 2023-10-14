@@ -7,20 +7,22 @@
 
 import Foundation
 final class CollectionsViewModel: CollectionsViewModelProtocol {
-  
+    private var dataSource: NFTCollectionsDataSource? = nil
     
     var navigationClosure: (CollectionsNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionsNavigationState = .base {
-        didSet(newValue) {
-            navigationClosure(newValue)
+        didSet {
+            navigationClosure(navigationState)
         }
     }
     
     var resultClosure: (CollectionsResultState) -> Void = {_ in }
     private (set) var resultState: CollectionsResultState = .start {
-        didSet(newValue) {
-            resultClosure(newValue)
+        didSet {
+            print("vm \(resultState)")
+            resultClosure(resultState)
         }
+        
     }
     
     
@@ -29,6 +31,9 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
     }
     
     func howManyCollections() -> Int {
+        if let ds = dataSource {
+            return ds.howManyCollections()
+        }
         return 0
     }
     
@@ -49,7 +54,32 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
     }
     
     func refresh() {
-        
+        resultState = .loading
+        if let ds = dataSource {
+            
+            ds.reloadCollections() { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success:
+                    self.resultState = .show
+                case .failure(let error):
+                    self.resultState = .error(error)
+                }
+            }
+        } else {
+            self.dataSource = NFTCollectionsDataSource(dataProvider: CatalogDataProvider()) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success:
+                    print("vm успешно вышла")
+                    self.resultState = .show
+                    print( self.resultState)
+                case .failure(let error):
+                    self.resultState = .error(error)
+                }
+            }
+            print("вышел из метода")
+        }
     }
     
     func handleNavigation(action: CollectionNavigationAction) {

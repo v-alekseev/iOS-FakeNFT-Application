@@ -41,6 +41,7 @@ final class CollectionsViewController: UIViewController {
         bind()
         view.backgroundColor = .white
         print("CatalogViewController viewDidLoad")
+        viewModel.refresh()
     }
     // MARK: - Private Methods
     //
@@ -127,9 +128,10 @@ final class CollectionsViewController: UIViewController {
             print("error")
         case .loading:
             ProgressHUD.show()
+            print("loading")
         case .show:
             ProgressHUD.dismiss()
-            print("show")
+            print("show \(viewModel.howManyCollections()))")
         case .start:
             ProgressHUD.dismiss()
             print("start")

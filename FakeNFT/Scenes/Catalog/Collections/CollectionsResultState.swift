@@ -10,5 +10,5 @@ enum CollectionsResultState {
     case start
     case loading
     case show
-    case error
+    case error(Error)
 }
