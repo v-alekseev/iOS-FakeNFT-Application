@@ -7,6 +7,22 @@
 
 import Foundation
 final class CollectionsViewModel: CollectionsViewModelProtocol {
+    
+    var navigationClosure: () -> Void = {}
+    private (set) var navigationState: CollectionsNavigationState? = nil {
+        didSet {
+            navigationClosure()
+        }
+    }
+    
+    var resultClosure: () -> Void = {}
+    private (set) var resultState: CollectionsResultState = .start {
+        didSet {
+            resultClosure()
+        }
+    }
+    
+    
     func setSortType(sortType: SortType) {
         print("ok")
     }
