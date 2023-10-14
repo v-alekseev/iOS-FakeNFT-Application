@@ -117,23 +117,19 @@ final class CollectionsViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    private func fetchData() {
-        viewModel.refresh()
-    }
-    
     private func renderState(state: CollectionsNavigationState) {
         switch state {
         case .base:
-            print("base")
+            break
         case .sortSelection:
             showSortSelector()
         case .collectionDetails(let collection):
-            print(collection)
-        case .sort(let type):
-            print(type)
+            navigationController?.pushViewController(SingleCollectionViewController(collection: collection), animated: true)
+        case .sort:
+            break
         case .pullToRefresh:
             tableView.refreshControl?.beginRefreshing()
-            fetchData()
+            viewModel.refresh()
         }
     }
     
@@ -143,18 +139,23 @@ final class CollectionsViewController: UIViewController {
             switch state {
             case .error:
                 ProgressHUD.dismiss()
-                print("error")
+                self.showErrorAlert()
             case .loading:
                 ProgressHUD.show()
-                print("loading")
             case .show:
                 ProgressHUD.dismiss()
-                print("show \(self.viewModel.howManyCollections()))")
                 self.tableView.reloadData()
             case .start:
                 ProgressHUD.dismiss()
-                print("start")
             }
+        }
+    }
+    
+    private func showErrorAlert() {
+        let alertPresenter = AlertPresenter()
+        let alertModel = AlertModel(title: L10n.Alert.Error.title, message: L10n.Alert.Error.description, primaryButtonText: L10n.Alert.Error.retry) { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
         }
     }
 }

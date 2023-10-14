@@ -7,7 +7,7 @@
 
 import Foundation
 enum CollectionNavigationAction {
-    case sorterDidTapped
+    case sortingDidTapped
     case sortDidSelected(which: SortType)
     case sortIsCancelled
     case pullToRefresh

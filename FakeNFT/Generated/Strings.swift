@@ -10,6 +10,16 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  internal enum Alert {
+    internal enum Error {
+      /// Что-то пошло не так.
+      internal static let description = L10n.tr("Localizable", "alert.error.description", fallback: "Что-то пошло не так.")
+      /// Перезагрузить
+      internal static let retry = L10n.tr("Localizable", "alert.error.retry", fallback: "Перезагрузить")
+      /// Ошибка
+      internal static let title = L10n.tr("Localizable", "alert.error.title", fallback: "Ошибка")
+    }
+  }
   internal enum Application {
     /// Localizable.strings
     ///   FakeNFT

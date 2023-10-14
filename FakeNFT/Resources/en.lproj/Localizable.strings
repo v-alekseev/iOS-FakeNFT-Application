@@ -13,3 +13,6 @@
 "catalog.sort.byNFTQuantity" = "By NFT quantity";
 "catalog.sort" = "Sort";
 "catalog.sort.close" = "Close";
+"alert.error.title" = "Error";
+"alert.error.description" = "Something went wrong.";
+"alert.error.retry" = "Reload";

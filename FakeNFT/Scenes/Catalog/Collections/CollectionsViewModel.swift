@@ -8,7 +8,6 @@
 import Foundation
 final class CollectionsViewModel: CollectionsViewModelProtocol {
     private var dataSource: NFTCollectionsDataSource? = nil
-    
     var navigationClosure: (CollectionsNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionsNavigationState = .base {
         didSet {
@@ -19,15 +18,9 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
     var resultClosure: (CollectionsResultState) -> Void = {_ in }
     private (set) var resultState: CollectionsResultState = .start {
         didSet {
-            print("vm \(resultState)")
             resultClosure(resultState)
         }
         
-    }
-    
-    
-    func setSortType(sortType: SortType) {
-        print("ok")
     }
     
     func howManyCollections() -> Int {
@@ -38,19 +31,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
     }
     
     func getCollection(at indexPath: IndexPath) -> CollectionModel? {
-        return dataSource?.giveMeCollectionAt(index: indexPath.row)
-    }
-    
-    func getCollectionName(at indexPath: IndexPath) -> String {
-        return ""
-    }
-    
-    func getCollectionImage(at indexPath: IndexPath) -> String {
-        return ""
-    }
-    
-    func getCollectionNFTQuantity(at indexPath: IndexPath) -> Int {
-        return 0
+        return dataSource?.giveMeCollectionAt(index: indexPath.row, withSort: true)
     }
     
     func refresh(isPullRefresh: Bool = false) {
@@ -71,32 +52,42 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
                 guard let self = self else { return }
                 switch result {
                 case .success:
-                    print("vm успешно вышла")
                     self.resultState = .show
                     print( self.resultState)
                 case .failure(let error):
                     self.resultState = .error(error)
                 }
             }
-            print("вышел из метода")
         }
     }
     
     func handleNavigation(action: CollectionNavigationAction) {
         switch action {
+            
         case .collectionDidTapped(let collection):
-            print("VM collection didTapped")
-            navigationState = .base
+            navigationState = .collectionDetails(collection: collection)
+            
         case .pullToRefresh:
             refresh(isPullRefresh: true)
             navigationState = .base
-        case .sorterDidTapped:
+            
+        case .sortingDidTapped:
             navigationState = .sortSelection
+            
         case .sortDidSelected(let which):
-            print("VM sort did selected")
+            resultState = .loading
+            
+            switch which {
+            case .byNFTQuantity:
+                dataSource?.sortCollectionsByNFTQuantity()
+            case .byName:
+                dataSource?.sortCollectionsByName()
+            }
+            
             navigationState = .base
+            resultState = .show
+            
         case .sortIsCancelled:
-            print("VM sort is cancelled")
             navigationState = .base
         }
     }
