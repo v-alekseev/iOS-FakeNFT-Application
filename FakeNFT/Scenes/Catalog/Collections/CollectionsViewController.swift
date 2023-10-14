@@ -62,7 +62,7 @@ final class CollectionsViewController: UIViewController {
                 target: self,
                 action: #selector (filterButtonTapped)
             )
-            barButtonItem.tintColor = UIColor (named: "blackWithDarkMode")
+            barButtonItem.tintColor = .ypBlackWithDarkMode
             return barButtonItem
         }()
     }
