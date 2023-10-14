@@ -12,7 +12,8 @@ import ProgressHUD
 final class CollectionsViewController: UIViewController {
     private var viewModel: CollectionsViewModelProtocol = CollectionsViewModel()
     private var filterBarButtonItem: UIBarButtonItem?
-
+    private let refreshControl = UIRefreshControl()
+    
     private let tableView: UITableView = {
         let tv = UITableView()
         tv.separatorStyle = .none
@@ -38,6 +39,8 @@ final class CollectionsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CollectionsTableViewCell.self, forCellReuseIdentifier: "CollectionCell")
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         view.backgroundColor = .white
         print("CatalogViewController viewDidLoad")
         
@@ -72,6 +75,11 @@ final class CollectionsViewController: UIViewController {
     private func filterButtonTapped() {
         print("filterButtonTapped")
         showSortSelector()
+    }
+    
+    @objc
+    private func didPullToRefresh() {
+        viewModel.handleNavigation(action: .pullToRefresh)
     }
     
     private func bind () {
@@ -109,6 +117,10 @@ final class CollectionsViewController: UIViewController {
         present(alertController, animated: true)
     }
     
+    private func fetchData() {
+        viewModel.refresh()
+    }
+    
     private func renderState(state: CollectionsNavigationState) {
         switch state {
         case .base:
@@ -119,11 +131,15 @@ final class CollectionsViewController: UIViewController {
             print(collection)
         case .sort(let type):
             print(type)
+        case .pullToRefresh:
+            tableView.refreshControl?.beginRefreshing()
+            fetchData()
         }
     }
     
     private func renderState(state: CollectionsResultState) {
         DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
             switch state {
             case .error:
                 ProgressHUD.dismiss()

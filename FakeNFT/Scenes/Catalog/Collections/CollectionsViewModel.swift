@@ -53,8 +53,8 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         return 0
     }
     
-    func refresh() {
-        resultState = .loading
+    func refresh(isPullRefresh: Bool = false) {
+        resultState = isPullRefresh ? .start : .loading
         if let ds = dataSource {
             
             ds.reloadCollections() { [weak self] result in
@@ -88,7 +88,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
             print("VM collection didTapped")
             navigationState = .base
         case .pullToRefresh:
-            print("VM pullToRefresh")
+            refresh(isPullRefresh: true)
             navigationState = .base
         case .sorterDidTapped:
             navigationState = .sortSelection

@@ -11,4 +11,5 @@ enum CollectionsNavigationState {
     case sortSelection
     case sort(type: SortType)
     case collectionDetails(collection: CollectionModel)
+    case pullToRefresh
 }

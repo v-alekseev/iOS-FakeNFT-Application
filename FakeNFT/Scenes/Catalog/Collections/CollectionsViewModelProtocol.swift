@@ -16,5 +16,11 @@ protocol CollectionsViewModelProtocol {
     func getCollectionName(at indexPath: IndexPath) -> String
     func getCollectionImage(at indexPath: IndexPath) -> String
     func getCollectionNFTQuantity(at indexPath: IndexPath) -> Int
-    func refresh()
+    func refresh(isPullRefresh: Bool)
+}
+
+extension CollectionsViewModelProtocol {
+    func refresh() {
+        refresh(isPullRefresh: false)
+    }
 }
