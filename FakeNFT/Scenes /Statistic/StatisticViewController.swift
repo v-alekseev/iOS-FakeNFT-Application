@@ -14,6 +14,7 @@ final class StatisticViewController: UIViewController {
     private lazy var loadIndicator = createActivityIndicator()
     private let viewModel: StatisticViewModel
     private var subscribes = [AnyCancellable]()
+    private var alertPresenter = AlertPresenter.shared
     
     init(_ viewModel: StatisticViewModel) {
         self.viewModel = viewModel
@@ -36,8 +37,12 @@ final class StatisticViewController: UIViewController {
                 } else {
                     self?.loadIndicator.stopAnimating()
                 }
+                self?.tableView.reloadData()
                 
-                self?.tableView.reloadData()})
+                if let error = self?.viewModel.possibleError {
+                    self?.alertPresenter.showAlert(self, alert: error.localizedDescription)
+                }
+            })
             .store(in: &subscribes)
     }
     

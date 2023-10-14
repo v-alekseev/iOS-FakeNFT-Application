@@ -12,6 +12,7 @@ final class StatisticViewModel {
     
     @Published var usersData: [UserModel]
     @Published var dataLoad: Bool
+    @Published var possibleError: Error?
     
     private let dataProvider: StatisticDataProviderProtocol?
     private let filtrationType = FiltrationTypeStorage()
@@ -20,6 +21,7 @@ final class StatisticViewModel {
         self.usersData = []
         self.dataProvider = dataProvider
         self.dataLoad = true
+        self.possibleError = nil
         
         dataProvider.getUsersData() { [weak self] result in
             guard let self else { return }
@@ -33,7 +35,7 @@ final class StatisticViewModel {
                         self.provideRatingFilter()
                     }
                 case let .failure(error):
-                    print (error)
+                    self.possibleError = error
                 }
                 self.dataLoad = false
             }

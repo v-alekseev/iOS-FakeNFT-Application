@@ -45,6 +45,7 @@
 		F228EFA52AD7FD47001BA148 /* UserCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA42AD7FD47001BA148 /* UserCartViewModel.swift */; };
 		F228EFA72AD9BB87001BA148 /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA62AD9BB87001BA148 /* NetworkRequests.swift */; };
 		F228EFA92AD9BDED001BA148 /* FiltrationTypeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */; };
+		F228EFAD2ADA6D18001BA148 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFAC2ADA6D18001BA148 /* AlertPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		F228EFA42AD7FD47001BA148 /* UserCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCartViewModel.swift; sourceTree = "<group>"; };
 		F228EFA62AD9BB87001BA148 /* NetworkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequests.swift; sourceTree = "<group>"; };
 		F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltrationTypeStorage.swift; sourceTree = "<group>"; };
+		F228EFAC2ADA6D18001BA148 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +310,7 @@
 				F228EF9D2AD5F694001BA148 /* DataModels */,
 				F228EF962AD5D505001BA148 /* DataProvider */,
 				D8307F182AD2CB02006302F6 /* StatisticViewController.swift */,
+				F228EFAC2ADA6D18001BA148 /* AlertPresenter.swift */,
 				F228EF922AD5D462001BA148 /* StatisticViewModel.swift */,
 				F228EF942AD5D49C001BA148 /* StatisticCell.swift */,
 				F228EF992AD5D57A001BA148 /* UserCardViewController.swift */,
@@ -522,6 +525,7 @@
 				D8307F102AD2BCD3006302F6 /* CartViewController.swift in Sources */,
 				F228EF9C2AD5D5D0001BA148 /* UsersCollectionViewController.swift in Sources */,
 				F228EF982AD5D522001BA148 /* StatisticDataProvider.swift in Sources */,
+				F228EFAD2ADA6D18001BA148 /* AlertPresenter.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				F228EFA72AD9BB87001BA148 /* NetworkRequests.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
