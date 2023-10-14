@@ -55,25 +55,36 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
         dispatchGroup.wait()
     }
     
-    func giveMeAllCollections() -> [CollectionModel] {
-        let dispatchGroup = DispatchGroup()
+//    func giveMeAllCollections() -> [CollectionModel] {
+//        let dispatchGroup = DispatchGroup()
+//        let getCollectionsRequest = DefaultNetworkRequest(
+//            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/collections")!,
+//            httpMethod: .get
+//        )
+//        var model: [CollectionModel] = []
+//        dispatchGroup.enter()
+//        currentTask = self.client.send(request: getCollectionsRequest, type: [CollectionModel].self) { result in
+//            switch result {
+//            case .success(let data):
+//                model = data
+//            case .failure:
+//                model = []
+//            }
+//            dispatchGroup.leave()
+//        }
+//        dispatchGroup.wait()
+//        return model
+//    }
+    
+    func giveMeAllCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void) {
         let getCollectionsRequest = DefaultNetworkRequest(
             endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/collections")!,
             httpMethod: .get
         )
-        var model: [CollectionModel] = []
-        dispatchGroup.enter()
+        
         currentTask = self.client.send(request: getCollectionsRequest, type: [CollectionModel].self) { result in
-            switch result {
-            case .success(let data):
-                model = data
-            case .failure:
-                model = []
-            }
-            dispatchGroup.leave()
+            completion(result)
         }
-        dispatchGroup.wait()
-        return model
     }
     
     func giveMeCollection(withID id: String) -> CollectionModel? {

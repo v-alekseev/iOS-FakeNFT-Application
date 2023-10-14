@@ -9,13 +9,41 @@ import Foundation
 
 class NFTCollectionsDataSource {
     private var collections: [CollectionModel]
+    private let dataProvider: CatalogDataProviderProtocol
     
-    init(dataProvider: CatalogDataProviderProtocol) {
-        collections = dataProvider.giveMeAllCollections()
+    init(
+        dataProvider: CatalogDataProviderProtocol,
+        completion: @escaping (Result<[CollectionModel], Error>) -> Void = {_ in }
+    ) {
+        self.dataProvider = dataProvider
+        self.collections = []
+        self.dataProvider.giveMeAllCollections() { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let collections):
+                self.collections = collections
+            case .failure(let error):
+                print(error)
+            }
+            completion(result)
+        }
     }
     
     func giveMeAllCollections() -> [CollectionModel] {
-        return collections
+        return self.collections
+    }
+    
+    func reloadCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void = {_ in }) {
+        self.dataProvider.giveMeAllCollections() { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let collections):
+                self.collections = collections
+            case .failure(let error):
+                print(error)
+            }
+            completion(result)
+        }
     }
     
     func sortCollectionsByName(inOrder: SortCases = .ascending ) -> [CollectionModel] {
@@ -34,10 +62,6 @@ class NFTCollectionsDataSource {
         case .descending:
             return collections.sorted { $0.nfts.count > $1.nfts.count }
         }
-    }
-    
-    func reloadCollections(dataProvider: CatalogDataProviderProtocol) {
-        collections = dataProvider.giveMeAllCollections()
     }
     
 }

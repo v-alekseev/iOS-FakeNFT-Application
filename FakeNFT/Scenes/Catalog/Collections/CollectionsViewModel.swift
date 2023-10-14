@@ -8,6 +8,7 @@
 import Foundation
 final class CollectionsViewModel: CollectionsViewModelProtocol {
   
+    
     var navigationClosure: (CollectionsNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionsNavigationState = .base {
         didSet(newValue) {
@@ -45,6 +46,10 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
     
     func getCollectionNFTQuantity(at indexPath: IndexPath) -> Int {
         return 0
+    }
+    
+    func refresh() {
+        
     }
     
     func handleNavigation(action: CollectionNavigationAction) {
