@@ -35,12 +35,12 @@ class CollectionsViewControllerUITests: XCTestCase {
         let exists = NSPredicate(format: "exists == true")
         expectation(for: exists, evaluatedWith: actionSheet, handler: nil)
         waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertTrue(actionSheet.exists, "Action sheet should appear after filter button tap")
+        XCTAssertTrue(actionSheet.exists, "Нет экшншита")
     }
     
     func selectCatalogFromTabBar() {
         let catalogTabBarItem = app.tabBars.buttons["Каталог"]
-        XCTAssertTrue(catalogTabBarItem.exists, "Catalog tab bar item should exist")
+        XCTAssertTrue(catalogTabBarItem.exists, "Таб бар должен существовать")
         catalogTabBarItem.tap()
     }
 }
