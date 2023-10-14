@@ -7,18 +7,18 @@
 
 import Foundation
 final class CollectionsViewModel: CollectionsViewModelProtocol {
-    
-    var navigationClosure: () -> Void = {}
-    private (set) var navigationState: CollectionsNavigationState? = nil {
-        didSet {
-            navigationClosure()
+  
+    var navigationClosure: (CollectionsNavigationState) -> Void = {_ in }
+    private (set) var navigationState: CollectionsNavigationState = .base {
+        didSet(newValue) {
+            navigationClosure(newValue)
         }
     }
     
-    var resultClosure: () -> Void = {}
+    var resultClosure: (CollectionsResultState) -> Void = {_ in }
     private (set) var resultState: CollectionsResultState = .start {
-        didSet {
-            resultClosure()
+        didSet(newValue) {
+            resultClosure(newValue)
         }
     }
     
@@ -47,5 +47,22 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         return 0
     }
     
-    
+    func handleNavigation(action: CollectionNavigationAction) {
+        switch action {
+        case .collectionDidTapped(let collection):
+            print("VM collection didTapped")
+            navigationState = .base
+        case .pullToRefresh:
+            print("VM pullToRefresh")
+            navigationState = .base
+        case .sorterDidTapped:
+            navigationState = .sortSelection
+        case .sortDidSelected(let which):
+            print("VM sort did selected")
+            navigationState = .base
+        case .sortIsCancelled:
+            print("VM sort is cancelled")
+            navigationState = .base
+        }
+    }
 }

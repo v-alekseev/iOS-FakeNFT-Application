@@ -18,11 +18,15 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "application.title", fallback: "Фейк NFT")
   }
   internal enum Catalog {
+    /// Сортировка
+    internal static let sort = L10n.tr("Localizable", "catalog.sort", fallback: "Сортировка")
     internal enum Sort {
       /// По названию
       internal static let byName = L10n.tr("Localizable", "catalog.sort.byName", fallback: "По названию")
       /// По количеству NFT
       internal static let byNFTQuantity = L10n.tr("Localizable", "catalog.sort.byNFTQuantity", fallback: "По количеству NFT")
+      /// Закрыть
+      internal static let close = L10n.tr("Localizable", "catalog.sort.close", fallback: "Закрыть")
     }
   }
 }

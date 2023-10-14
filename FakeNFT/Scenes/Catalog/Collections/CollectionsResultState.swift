@@ -9,6 +9,6 @@ import Foundation
 enum CollectionsResultState {
     case start
     case loading
-    case show(collections: [CollectionModel], sort: SortType)
+    case show
     case error
 }

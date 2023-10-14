@@ -11,4 +11,6 @@
 "application.title" = "Фейк NFT";
 "catalog.sort.byName" = "По названию";
 "catalog.sort.byNFTQuantity" = "По количеству NFT";
+"catalog.sort" = "Сортировка";
+"catalog.sort.close" = "Закрыть";
 

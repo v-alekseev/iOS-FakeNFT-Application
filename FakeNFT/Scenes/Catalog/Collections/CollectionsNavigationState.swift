@@ -7,6 +7,8 @@
 
 import Foundation
 enum CollectionsNavigationState {
+    case base
+    case sortSelection
     case sort(type: SortType)
     case collectionDetails(collection: CollectionModel)
 }

@@ -7,6 +7,9 @@
 
 import Foundation
 protocol CollectionsViewModelProtocol {
+    var navigationClosure: ((CollectionsNavigationState) -> Void) { get set }
+    var resultClosure: ((CollectionsResultState) -> Void) { get set }
+    func handleNavigation(action: CollectionNavigationAction)
     func setSortType(sortType: SortType)
     func howManyCollections() -> Int
     func getCollection(at indexPath: IndexPath) -> CollectionModel?
