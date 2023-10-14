@@ -38,7 +38,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
     }
     
     func getCollection(at indexPath: IndexPath) -> CollectionModel? {
-        return nil
+        return dataSource?.giveMeCollectionAt(index: indexPath.row)
     }
     
     func getCollectionName(at indexPath: IndexPath) -> String {

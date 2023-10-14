@@ -12,15 +12,12 @@ import ProgressHUD
 final class CollectionsViewController: UIViewController {
     private var viewModel: CollectionsViewModelProtocol = CollectionsViewModel()
     private var filterBarButtonItem: UIBarButtonItem?
-    private var tableView: UITableView?
-    // MARK: - Private Properties
-    //
-    private var textLabel: UILabel = {
-        var label = UILabel()
-        label.text = "Каталог"
-        label.font =  UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+
+    private let tableView: UITableView = {
+        let tv = UITableView()
+        tv.separatorStyle = .none
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        return tv
     }()
     
     init() {
@@ -34,24 +31,28 @@ final class CollectionsViewController: UIViewController {
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupButtons()
-        
-        setupUI()
-        
         bind()
+        viewModel.refresh()
+        setupButtons()
+        setupUI()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(CollectionsTableViewCell.self, forCellReuseIdentifier: "CollectionCell")
         view.backgroundColor = .white
         print("CatalogViewController viewDidLoad")
-        viewModel.refresh()
+        
     }
+    
     // MARK: - Private Methods
-    //
     private func setupUI() {
         navigationItem.rightBarButtonItem = filterBarButtonItem
-        view.addSubview(textLabel)
+        view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
     }
     
     private func setupButtons() {
@@ -122,19 +123,44 @@ final class CollectionsViewController: UIViewController {
     }
     
     private func renderState(state: CollectionsResultState) {
-        switch state {
-        case .error:
-            ProgressHUD.dismiss()
-            print("error")
-        case .loading:
-            ProgressHUD.show()
-            print("loading")
-        case .show:
-            ProgressHUD.dismiss()
-            print("show \(viewModel.howManyCollections()))")
-        case .start:
-            ProgressHUD.dismiss()
-            print("start")
+        DispatchQueue.main.async {
+            switch state {
+            case .error:
+                ProgressHUD.dismiss()
+                print("error")
+            case .loading:
+                ProgressHUD.show()
+                print("loading")
+            case .show:
+                ProgressHUD.dismiss()
+                print("show \(self.viewModel.howManyCollections()))")
+                self.tableView.reloadData()
+            case .start:
+                ProgressHUD.dismiss()
+                print("start")
+            }
         }
+    }
+}
+
+extension CollectionsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.howManyCollections()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath) as! CollectionsTableViewCell
+        guard let model = viewModel.getCollection(at: indexPath) else { return cell }
+        cell.configureCell(with: model)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let model = viewModel.getCollection(at: indexPath) else { return }
+        viewModel.handleNavigation(action: .collectionDidTapped(collection: model))
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CollectionsTableViewCell.cellHeight
     }
 }

@@ -40,6 +40,14 @@ final class NFTCollectionsDataSource {
         return self.collections.count
     }
     
+    func giveMeCollectionAt(index: Int) -> CollectionModel? {
+        if index < self.collections.count {
+            return self.collections[index]
+        } else {
+            return nil
+        }
+    }
+    
     func reloadCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void = {_ in }) {
         self.dataProvider.giveMeAllCollections() { [weak self] result in
             guard let self = self else { return }
