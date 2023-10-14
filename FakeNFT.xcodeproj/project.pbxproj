@@ -46,6 +46,7 @@
 		F228EFA72AD9BB87001BA148 /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA62AD9BB87001BA148 /* NetworkRequests.swift */; };
 		F228EFA92AD9BDED001BA148 /* FiltrationTypeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */; };
 		F228EFAD2ADA6D18001BA148 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFAC2ADA6D18001BA148 /* AlertPresenter.swift */; };
+		F26D6B6D2ADB190800B993CB /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D6B6C2ADB190800B993CB /* WebViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		F228EFA62AD9BB87001BA148 /* NetworkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequests.swift; sourceTree = "<group>"; };
 		F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltrationTypeStorage.swift; sourceTree = "<group>"; };
 		F228EFAC2ADA6D18001BA148 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		F26D6B6C2ADB190800B993CB /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +317,7 @@
 				F228EF942AD5D49C001BA148 /* StatisticCell.swift */,
 				F228EF992AD5D57A001BA148 /* UserCardViewController.swift */,
 				F228EFA42AD7FD47001BA148 /* UserCartViewModel.swift */,
+				F26D6B6C2ADB190800B993CB /* WebViewViewController.swift */,
 				F228EF9B2AD5D5D0001BA148 /* UsersCollectionViewController.swift */,
 			);
 			path = Statistic;
@@ -521,6 +524,7 @@
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
+				F26D6B6D2ADB190800B993CB /* WebViewViewController.swift in Sources */,
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,
 				D8307F102AD2BCD3006302F6 /* CartViewController.swift in Sources */,
 				F228EF9C2AD5D5D0001BA148 /* UsersCollectionViewController.swift in Sources */,

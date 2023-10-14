@@ -87,9 +87,8 @@ final class StatisticViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
         return tableView
     }
     

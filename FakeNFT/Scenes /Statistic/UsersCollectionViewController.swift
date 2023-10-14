@@ -20,7 +20,7 @@ final class UsersCollectionViewController: UIViewController {
                                             target: self,
                                             action: #selector(tapBackButton))
         leftBarButton.tintColor = .ypBlackWithDarkMode
-        self.navigationItem.leftBarButtonItem  = leftBarButton
+        navigationItem.leftBarButtonItem  = leftBarButton
 
         navigationItem.title = "Коллекция NFT"
         navigationItem.titleView?.tintColor = .ypBlackWithDarkMode

@@ -14,6 +14,7 @@ final class UserCardViewController: UIViewController {
     private let viewModel: UserCartViewModel
     private var subscribes = [AnyCancellable]()
     private var userID: String
+    private var weburl: String
     private lazy var avatarView = createAvatarView()
     private lazy var nameLabel = createNameLabel()
     private lazy var forwardButton = createForwardButton()
@@ -26,6 +27,7 @@ final class UserCardViewController: UIViewController {
     init(_ viewModel: UserCartViewModel) {
         self.viewModel = viewModel
         self.userID = viewModel.actualUserData.id
+        self.weburl = viewModel.actualUserData.website
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -50,6 +52,7 @@ final class UserCardViewController: UIViewController {
                 if  let url = URL(string: self?.viewModel.actualUserData.avatar ?? "") {
                     self?.avatarView.kf.setImage(with: url, placeholder: self?.userAvatarStub)
                 }
+                self?.weburl = self?.viewModel.actualUserData.website ?? ""
             })
             .store(in: &subscribes)
     }
@@ -189,8 +192,8 @@ final class UserCardViewController: UIViewController {
     
     @objc
     private func tapWebsiteButton() {
-        //TODO 
-        print (#function)
+        let webViewViewController = WebViewViewController(weburl)
+        navigationController?.pushViewController(webViewViewController, animated: true)
     }
 }
 
