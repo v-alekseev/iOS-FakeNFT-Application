@@ -1,3 +1,10 @@
+//
+//  StatisticViewController.swift
+//  FakeNFT
+//
+//  Created by Vitaly on 08.10.2023.
+//
+
 import Foundation
 import UIKit
 
