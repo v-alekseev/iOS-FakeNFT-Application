@@ -10,7 +10,7 @@ import UIKit
 import ProgressHUD
 
 final class CollectionsViewController: UIViewController {
-    private var viewModel: CollectionsViewModelProtocol = CollectionsViewModel()
+    private var viewModel: CollectionsViewModelProtocol
     private var filterBarButtonItem: UIBarButtonItem?
     private let refreshControl = UIRefreshControl()
     
@@ -21,7 +21,8 @@ final class CollectionsViewController: UIViewController {
         return tv
     }()
     
-    init() {
+    init(viewModel: CollectionsViewModelProtocol = CollectionsViewModel()) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
