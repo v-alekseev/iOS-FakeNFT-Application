@@ -91,4 +91,17 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
             navigationState = .base
         }
     }
+    
+    func bind(to controller: CollectionsViewController) {
+        self.navigationClosure = {[weak controller] state in
+            guard let controller = controller else { return }
+            controller.renderState(state: state)
+        }
+
+        self.resultClosure = {[weak controller] state in
+            guard let controller = controller else { return }
+            controller.renderState(state: state)
+        }
+    }
+
 }

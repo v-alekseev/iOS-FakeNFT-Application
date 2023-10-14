@@ -84,21 +84,13 @@ final class CollectionsViewController: UIViewController {
     }
     
     private func bind () {
-        self.viewModel.navigationClosure = {[weak self] state in
-            guard let self = self else { return }
-            self.renderState(state: state)
-        }
-        
-        self.viewModel.resultClosure = {[weak self] state in
-            guard let self = self else { return }
-            self.renderState(state: state)
-        }
+        viewModel.bind(to: self)
     }
     
     
     private func showSortSelector() {
         let alertController = UIAlertController(title: nil, message: L10n.Catalog.sort, preferredStyle: .actionSheet)
-        
+        alertController.accessibilityLabel = "SortActionSheet"
         let sortActionByName = UIAlertAction(title: L10n.Catalog.Sort.byName, style: .default) { _ in
             self.viewModel.handleNavigation(action: .sortDidSelected(which: .byName(order: .ascending)))
         }
@@ -118,7 +110,7 @@ final class CollectionsViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    private func renderState(state: CollectionsNavigationState) {
+    func renderState(state: CollectionsNavigationState) {
         switch state {
         case .base:
             break
@@ -134,7 +126,7 @@ final class CollectionsViewController: UIViewController {
         }
     }
     
-    private func renderState(state: CollectionsResultState) {
+    func renderState(state: CollectionsResultState) {
         DispatchQueue.main.async {
             self.tableView.refreshControl?.endRefreshing()
             switch state {

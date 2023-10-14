@@ -13,6 +13,7 @@ protocol CollectionsViewModelProtocol {
     func howManyCollections() -> Int
     func getCollection(at indexPath: IndexPath) -> CollectionModel?
     func refresh(isPullRefresh: Bool)
+    func bind(to controller: CollectionsViewController)
 }
 
 extension CollectionsViewModelProtocol {
