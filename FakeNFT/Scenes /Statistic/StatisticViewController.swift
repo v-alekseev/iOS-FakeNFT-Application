@@ -36,8 +36,9 @@ final class StatisticViewController: UIViewController {
                     self?.loadIndicator.startAnimating()
                 } else {
                     self?.loadIndicator.stopAnimating()
+                    self?.tableView.refreshControl?.endRefreshing()
+                    self?.tableView.reloadData()
                 }
-                self?.tableView.reloadData()
                 
                 if let error = self?.viewModel.possibleError {
                     self?.alertPresenter.showAlert(self, alert: error.localizedDescription)
@@ -86,6 +87,9 @@ final class StatisticViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         return tableView
     }
     
@@ -108,6 +112,11 @@ final class StatisticViewController: UIViewController {
         controller.addAction(.init(title: "Закрыть", style: .cancel))
         present(controller, animated: true)
     }
+    
+    @objc func refreshTable() {
+        viewModel.loadUserData()
+    }
+    
 }
 
 extension StatisticViewController: UITableViewDataSource {

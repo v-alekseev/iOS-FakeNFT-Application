@@ -309,8 +309,8 @@
 			children = (
 				F228EF9D2AD5F694001BA148 /* DataModels */,
 				F228EF962AD5D505001BA148 /* DataProvider */,
-				D8307F182AD2CB02006302F6 /* StatisticViewController.swift */,
 				F228EFAC2ADA6D18001BA148 /* AlertPresenter.swift */,
+				D8307F182AD2CB02006302F6 /* StatisticViewController.swift */,
 				F228EF922AD5D462001BA148 /* StatisticViewModel.swift */,
 				F228EF942AD5D49C001BA148 /* StatisticCell.swift */,
 				F228EF992AD5D57A001BA148 /* UserCardViewController.swift */,

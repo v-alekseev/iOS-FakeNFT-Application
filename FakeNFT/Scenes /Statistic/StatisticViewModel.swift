@@ -21,14 +21,17 @@ final class StatisticViewModel {
         self.usersData = []
         self.dataProvider = dataProvider
         self.dataLoad = true
-        self.possibleError = nil
-        
-        dataProvider.getUsersData() { [weak self] result in
+        loadUserData()
+    }
+    
+    func loadUserData() {
+        dataProvider?.getUsersData() { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
                     self.usersData = data
+                    self.possibleError = nil
                     if self.filtrationType.filterByName {
                         self.provideNameFilter()
                     } else {
