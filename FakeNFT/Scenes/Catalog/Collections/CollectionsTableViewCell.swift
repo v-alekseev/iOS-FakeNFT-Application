@@ -8,8 +8,9 @@
 import UIKit
 import Kingfisher
 final class CollectionsTableViewCell: UITableViewCell {
-    let titleLabel = UILabel()
-    let imageCollection = UIImageView()
+    private let titleLabel = UILabel()
+    private let imageCollection = UIImageView()
+    private let placeholderImage = UIImage(named: "CatPlaceholder")
     static let cellHeight: CGFloat = 179
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -50,7 +51,20 @@ final class CollectionsTableViewCell: UITableViewCell {
     }
     
     func configureCell(with collection: CollectionModel) {
-        imageCollection.kf.setImage(with: URL(string: collection.cover))
+        imageCollection.addGradientAnimation(cornerRadius: 12)
+        let processor = RoundCornerImageProcessor(cornerRadius: 12)
+        let options: KingfisherOptionsInfo = [
+            .backgroundDecode,
+            .onFailureImage(placeholderImage?.kf.image(withBlendMode: .normal, backgroundColor: .ypBlackWithDarkMode)),
+            .processor(processor)
+        ]
+        imageCollection.kf.setImage(
+            with: URL(string: collection.cover),
+            placeholder: placeholderImage,
+            options: options, completionHandler: { [weak self] _ in
+                guard let self = self else { return }
+                self.imageCollection.removeGradientAnimation()
+            })
         let quantity: Int  = collection.nfts.count
         titleLabel.text = "\(collection.name) (\(quantity))"
     }
