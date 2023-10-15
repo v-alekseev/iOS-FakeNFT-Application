@@ -12,7 +12,9 @@ import Combine
 final class UserCardViewController: UIViewController {
     
     private let viewModel: UserCartViewModel
-    private var subscribes = [AnyCancellable]()
+    private var subscribesDataLoad = [AnyCancellable]()
+    private var subscribesActualUserData = [AnyCancellable]()
+    private var subscribesPossibleError = [AnyCancellable]()
     private var userID: String
     private var weburl: String
     private lazy var avatarView = createAvatarView()
@@ -22,6 +24,7 @@ final class UserCardViewController: UIViewController {
     private lazy var websiteButton = createWebsiteButton()
     private lazy var collectionLabel = createCollectionLabel()
     private lazy var loadIndicator = createActivityIndicator()
+    private var alertPresenter = AlertPresenter.shared
     private lazy var userAvatarStub = UIImage(named: "userAvatarStub")
     
     init(_ viewModel: UserCartViewModel) {
@@ -41,11 +44,6 @@ final class UserCardViewController: UIViewController {
         viewModel.$actualUserData
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] _ in
-                if self?.viewModel.dataLoad == true {
-                    self?.loadIndicator.startAnimating()
-                } else {
-                    self?.loadIndicator.stopAnimating()
-                }
                 self?.nameLabel.text = self?.viewModel.actualUserData.name
                 self?.profileLabel.text = self?.viewModel.actualUserData.description
                 self?.collectionLabel.text = ("Коллекция NFT (\( self?.viewModel.actualUserData.nfts.count ?? 0))")
@@ -54,7 +52,27 @@ final class UserCardViewController: UIViewController {
                 }
                 self?.weburl = self?.viewModel.actualUserData.website ?? ""
             })
-            .store(in: &subscribes)
+            .store(in: &subscribesActualUserData)
+        
+        viewModel.$dataLoad
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] _ in
+                if self?.viewModel.dataLoad == true {
+                    self?.loadIndicator.startAnimating()
+                } else {
+                    self?.loadIndicator.stopAnimating()
+                }
+            })
+            .store(in: &subscribesDataLoad)
+        
+        viewModel.$possibleError
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] _ in
+                if let error = self?.viewModel.possibleError {
+                    self?.alertPresenter.showAlert(self, alert: error.localizedDescription)
+                }
+            })
+            .store(in: &subscribesPossibleError)
     }
     
     override func viewDidLoad() {

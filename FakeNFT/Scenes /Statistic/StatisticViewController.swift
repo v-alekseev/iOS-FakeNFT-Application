@@ -13,7 +13,9 @@ final class StatisticViewController: UIViewController {
     private lazy var tableView = createTableView()
     private lazy var loadIndicator = createActivityIndicator()
     private let viewModel: StatisticViewModel
-    private var subscribes = [AnyCancellable]()
+    private var subscribesDataLoad = [AnyCancellable]()
+    private var subscribesUsersData = [AnyCancellable]()
+    private var subscribesPossibleError = [AnyCancellable]()
     private var alertPresenter = AlertPresenter.shared
     
     init(_ viewModel: StatisticViewModel) {
@@ -28,23 +30,33 @@ final class StatisticViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.$usersData
+        viewModel.$dataLoad
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] _ in
-                
                 if self?.viewModel.dataLoad == true {
                     self?.loadIndicator.startAnimating()
                 } else {
                     self?.loadIndicator.stopAnimating()
                     self?.tableView.refreshControl?.endRefreshing()
-                    self?.tableView.reloadData()
                 }
-                
+            })
+            .store(in: &subscribesDataLoad)
+        
+        viewModel.$usersData
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] _ in
+                self?.tableView.reloadData()
+            })
+            .store(in: &subscribesUsersData)
+        
+        viewModel.$possibleError
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] _ in
                 if let error = self?.viewModel.possibleError {
                     self?.alertPresenter.showAlert(self, alert: error.localizedDescription)
                 }
             })
-            .store(in: &subscribes)
+            .store(in: &subscribesPossibleError)
     }
     
     override func viewDidLoad() {

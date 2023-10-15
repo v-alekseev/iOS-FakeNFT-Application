@@ -10,7 +10,6 @@ import Kingfisher
 
 final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
-    static let defaultReuseIdentifier = "StatisticCell"
     private let urlSession = URLSession.shared
     
     private lazy var roundRect = createRoundRect()
@@ -97,6 +96,7 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 14
+        imageView.image = userAvatarStub
         return imageView
     }
     
