@@ -31,11 +31,10 @@ class CollectionsViewControllerUITests: XCTestCase {
         let filterButton = app.navigationBars.buttons["SortIcon"]
         XCTAssertTrue(filterButton.exists, "Иконка сортировки должна существовать")
         filterButton.tap()
-        let actionSheet = app.sheets["SortActionSheet"]
-        let exists = NSPredicate(format: "exists == true")
-        expectation(for: exists, evaluatedWith: actionSheet, handler: nil)
-        waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertTrue(actionSheet.exists, "Нет экшншита")
+        sleep(1)
+        
+        let byNameButton = app.buttons["By name"]
+        XCTAssertTrue(byNameButton.exists, "Кнопка 'By name' должна существовать")
     }
     
     func selectCatalogFromTabBar() {

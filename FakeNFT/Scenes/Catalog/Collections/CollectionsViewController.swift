@@ -90,7 +90,7 @@ final class CollectionsViewController: UIViewController {
     
     private func showSortSelector() {
         let alertController = UIAlertController(title: nil, message: L10n.Catalog.sort, preferredStyle: .actionSheet)
-        alertController.accessibilityLabel = "SortActionSheet"
+        
         let sortActionByName = UIAlertAction(title: L10n.Catalog.Sort.byName, style: .default) { _ in
             self.viewModel.handleNavigation(action: .sortDidSelected(which: .byName(order: .ascending)))
         }
