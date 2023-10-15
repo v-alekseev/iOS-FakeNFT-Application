@@ -43,15 +43,21 @@ class AnimatedGradientView: UIView {
     func startAnimating() {
         let animation = CAKeyframeAnimation(keyPath: "locations")
         animation.values = [
-            [-1.5, -1.25, -1, -0.5, -0.25],
-            [-1, -0.75, -0.5, 0, 0.25],
-            [-0.5, -0.25, 0, 0.5, 0.75],
-            [0, 0.25, 0.5, 1, 1.25],
-            [0.5, 0.75, 1, 1.5, 1.75],
-            [1, 1.25, 1.5, 2, 2.25],  // добавлено
-            [1.5, 1.75, 2, 2.5, 2.75] // добавлено
+            [-1.0, -0.7, -0.5, -0.3, 0.0],
+            [-0.7, -0.4, -0.2, 0.0, 0.3],
+            [-0.4, -0.1, 0.1, 0.3, 0.6],
+            [-0.1, 0.2, 0.4, 0.6, 0.9],
+            [0.2, 0.5, 0.7, 0.9, 1.2],
+            [0.5, 0.8, 1.0, 1.2, 1.5],
+            [0.8, 1.1, 1.3, 1.5, 1.8],
+            [0.5, 0.8, 1.0, 1.2, 1.5],
+            [0.2, 0.5, 0.7, 0.9, 1.2],
+            [-0.1, 0.2, 0.4, 0.6, 0.9],
+            [-0.4, -0.1, 0.1, 0.3, 0.6],
+            [-0.7, -0.4, -0.2, 0.0, 0.3],
+            [-1.0, -0.7, -0.5, -0.3, 0.0],
         ]
-        animation.keyTimes = [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1]  // изменено
+        animation.keyTimes = [0, 0.08, 0.15, 0.23, 0.31, 0.38, 0.46, 0.54, 0.62, 0.69, 0.77, 0.85, 0.92, 1]
         animation.duration = 3
         animation.repeatCount = .infinity
         gradientLayer.add(animation, forKey: "locationsChange")
@@ -59,8 +65,6 @@ class AnimatedGradientView: UIView {
 
 
 
-
-    
     func stopAnimating() {
         gradientLayer.removeAnimation(forKey: "locationsChange")
     }
