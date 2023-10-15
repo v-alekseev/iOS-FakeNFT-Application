@@ -25,12 +25,13 @@ class AnimatedGradientView: UIView {
     
     func setupGradient() {
         gradientLayer.colors = [
-            UIColor(red: 0.098, green: 0.098, blue: 0.439, alpha: 1).cgColor,  // Темно-синий
-            UIColor(red: 0.510, green: 0.078, blue: 0.686, alpha: 1).cgColor,  // Фиолетовый
-            UIColor(red: 0.961, green: 0.269, blue: 0.435, alpha: 1).cgColor,   // Ярко-розовый
-            UIColor(red: 0.510, green: 0.078, blue: 0.686, alpha: 1).cgColor,  // Фиолетовый
-            UIColor(red: 0.098, green: 0.098, blue: 0.439, alpha: 1).cgColor  // Темно-синий
+            UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor,
+            UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1).cgColor,
+            UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).cgColor,
+            UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1).cgColor,
+            UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor
         ]
+        
         gradientLayer.locations = [-0.75, -0.5, -0.25, 0.25, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
