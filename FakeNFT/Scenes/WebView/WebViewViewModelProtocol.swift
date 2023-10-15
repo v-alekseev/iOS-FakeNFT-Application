@@ -1,8 +1,7 @@
-//
-//  WebViewViewModelProtocol.swift
-//  FakeNFT
-//
-//  Created by Leo Bonhart on 15.10.2023.
-//
-
 import Foundation
+
+protocol WebViewViewModelProtocol: AnyObject {
+    var currentProgressObserver: Observable<Float> { get }
+    var isReadyToHideProgressViewObservable: Observable<Bool> { get }
+    func setupProgres(newValue: Double)
+}
