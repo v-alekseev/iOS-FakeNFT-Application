@@ -150,6 +150,7 @@ final class CollectionsViewController: UIViewController {
             guard let self = self else { return }
             self.tableView.reloadData()
         }
+        alertPresenter.show(in: self, model: alertModel)
     }
 }
 

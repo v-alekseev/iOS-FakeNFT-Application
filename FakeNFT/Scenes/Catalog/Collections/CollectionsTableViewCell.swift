@@ -11,6 +11,9 @@ final class CollectionsTableViewCell: UITableViewCell {
     private let titleLabel = UILabel()
     private let imageCollection = UIImageView()
     private let placeholderImage = UIImage(named: "CatPlaceholder")
+    private lazy var animatedGradient: AnimatedGradientView = {
+        return AnimatedGradientView(frame: self.bounds, cornerRadius: 12)
+    }()
     static let cellHeight: CGFloat = 179
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -30,13 +33,14 @@ final class CollectionsTableViewCell: UITableViewCell {
         imageCollection.layer.cornerRadius = 12
         imageCollection.layer.masksToBounds = true
         imageCollection.contentMode = .scaleAspectFill
-        
         contentView.addSubview(imageCollection)
         contentView.addSubview(titleLabel)
-        
+        animatedGradient.isHidden = true
+        contentView.addSubview(animatedGradient)
         imageCollection.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        animatedGradient.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
         
             imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -45,13 +49,20 @@ final class CollectionsTableViewCell: UITableViewCell {
             imageCollection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             imageCollection.heightAnchor.constraint(equalToConstant: 140),
             
+            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+
+            animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            animatedGradient.heightAnchor.constraint(equalToConstant: 140),
+            
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             titleLabel.topAnchor.constraint(equalTo: imageCollection.bottomAnchor, constant: 4),
         ])
     }
     
     func configureCell(with collection: CollectionModel) {
-        imageCollection.addGradientAnimation(cornerRadius: 12)
+        animatedGradient.isHidden = false
+        animatedGradient.startAnimating()
         let processor = RoundCornerImageProcessor(cornerRadius: 12)
         let options: KingfisherOptionsInfo = [
             .backgroundDecode,
@@ -63,7 +74,8 @@ final class CollectionsTableViewCell: UITableViewCell {
             placeholder: placeholderImage,
             options: options, completionHandler: { [weak self] _ in
                 guard let self = self else { return }
-                self.imageCollection.removeGradientAnimation()
+                self.animatedGradient.stopAnimating()
+                self.animatedGradient.isHidden = true
             })
         let quantity: Int  = collection.nfts.count
         titleLabel.text = "\(collection.name) (\(quantity))"
