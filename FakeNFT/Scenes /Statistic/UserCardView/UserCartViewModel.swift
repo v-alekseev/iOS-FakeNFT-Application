@@ -12,19 +12,21 @@ final class UserCartViewModel {
     
     @Published var actualUserData: UserModel
     @Published var dataLoad: Bool
+    @Published var possibleError: Error?
     
     private let dataProvider: StatisticDataProviderProtocol?
     
     init(dataProvider: StatisticDataProviderProtocol, userID: String) {
-        self.actualUserData = UserModel(name: "",
-                                        avatar: "",
-                                        description: "",
-                                        website: "",
-                                        nfts: [""],
-                                        rating: "",
-                                        id: userID)
         self.dataProvider = dataProvider
-        self.dataLoad = true
+        actualUserData = UserModel(name: "",
+                                   avatar: "",
+                                   description: "",
+                                   website: "",
+                                   nfts: [""],
+                                   rating: "",
+                                   id: userID)
+        possibleError = nil
+        dataLoad = true
         
         dataProvider.getActualUserData(id: userID) { [weak self] result in
             guard let self else { return }
@@ -33,7 +35,8 @@ final class UserCartViewModel {
                 case let .success(data):
                     self.actualUserData = data
                 case let .failure(error):
-                    print (error)
+                    self.possibleError = error
+                    print(error)
                 }
                 self.dataLoad = false
             }

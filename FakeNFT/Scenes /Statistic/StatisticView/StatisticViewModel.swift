@@ -18,20 +18,20 @@ final class StatisticViewModel {
     private let filtrationType = FiltrationTypeStorage()
     
     init(dataProvider: StatisticDataProviderProtocol) {
-        self.usersData = []
         self.dataProvider = dataProvider
-        self.dataLoad = true
+        self.usersData = []
+        dataLoad = true
         loadUserData()
     }
     
     func loadUserData() {
+        possibleError = nil
         dataProvider?.getUsersData() { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
                     self.usersData = data
-                    self.possibleError = nil
                     if self.filtrationType.filterByName {
                         self.provideNameFilter()
                     } else {
