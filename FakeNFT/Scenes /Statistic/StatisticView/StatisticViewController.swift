@@ -54,8 +54,6 @@ final class StatisticViewController: UIViewController {
     
     private func setupView() {
         
-        view.backgroundColor = .ypWhiteWithDarkMode
-        
         let filterButton = UIBarButtonItem(image: UIImage(named: "filterButton"),
                                            style: .plain,
                                            target: self,
@@ -63,6 +61,7 @@ final class StatisticViewController: UIViewController {
         filterButton.tintColor = .ypBlackWithDarkMode
         navigationItem.rightBarButtonItem  = filterButton
         
+        view.backgroundColor = .ypWhiteWithDarkMode
         view.addSubview(tableView)
         view.addSubview(loadIndicator)
         
@@ -120,17 +119,8 @@ final class StatisticViewController: UIViewController {
 
 extension StatisticViewController: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            viewModel.usersData.count
-        default:
-            0
-        }
+        viewModel.usersData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

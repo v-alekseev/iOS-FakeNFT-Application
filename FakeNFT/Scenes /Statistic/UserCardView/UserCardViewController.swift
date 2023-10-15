@@ -50,7 +50,10 @@ final class UserCardViewController: UIViewController {
                 self?.profileLabel.text = self?.viewModel.actualUserData.description
                 self?.collectionLabel.text = ("Коллекция NFT (\( self?.viewModel.actualUserData.nfts.count ?? 0))")
                 if  let url = URL(string: self?.viewModel.actualUserData.avatar ?? "") {
-                    self?.avatarView.kf.setImage(with: url, placeholder: self?.userAvatarStub)
+                    self?.avatarView.kf.indicatorType = .activity
+                    self?.avatarView.kf.setImage(with: url,
+                                                 placeholder: self?.userAvatarStub,
+                                                 options: [.transition(.fade(1))])
                 }
                 self?.weburl = self?.viewModel.actualUserData.website ?? ""
             })
@@ -60,9 +63,13 @@ final class UserCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
+        tapForwardButton()
+        
     }
     
     private func setupView() {
+        
         let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                             style: .plain,
                                             target: self,

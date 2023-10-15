@@ -10,7 +10,6 @@ import Kingfisher
 
 final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
-    static let defaultReuseIdentifier = "StatisticCell"
     private let urlSession = URLSession.shared
     
     private lazy var roundRect = createRoundRect()
@@ -39,7 +38,9 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
     func provide(userData: UserModel) {
         if let url = URL(string: userData.avatar) {
-            avatarView.kf.setImage(with: url, placeholder: userAvatarStub)
+            avatarView.kf.indicatorType = .activity
+            avatarView.kf.setImage(with: url, placeholder: userAvatarStub,
+                                   options: [.transition(.fade(1))])
         }
         nameLabel.text = "\(userData.name)"
         nftCountLabel.text = "\(userData.nfts.count)"
@@ -97,6 +98,7 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 14
+        imageView.image = userAvatarStub
         return imageView
     }
     

@@ -15,7 +15,6 @@ final class WebViewViewController: UIViewController {
     private lazy var webView = createWebView()
     private lazy var progressBar = createProgressBar()
     
-    
     init(_ url: String) {
         self.url = url
         super.init(nibName: nil, bundle: nil)
