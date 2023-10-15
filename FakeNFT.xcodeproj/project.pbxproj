@@ -29,6 +29,7 @@
 		7B5E254A2ADBE8F6000BC664 /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E25492ADBE8F6000BC664 /* WebViewViewModel.swift */; };
 		7B5E254C2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E254B2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift */; };
 		7B5E254E2ADBEBEC000BC664 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E254D2ADBEBEC000BC664 /* Observable.swift */; };
+		7B5E25502ADBEEFA000BC664 /* UIView+Etension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E254F2ADBEEFA000BC664 /* UIView+Etension.swift */; };
 		AF1A63D82AD81863000F8A4E /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D12AD81863000F8A4E /* CollectionsViewController.swift */; };
 		AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D32AD81863000F8A4E /* ProfileViewController.swift */; };
 		AF1A63DA2AD81863000F8A4E /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D52AD81863000F8A4E /* CartViewController.swift */; };
@@ -82,6 +83,7 @@
 		7B5E25492ADBE8F6000BC664 /* WebViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewModel.swift; sourceTree = "<group>"; };
 		7B5E254B2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7B5E254D2ADBEBEC000BC664 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		7B5E254F2ADBEEFA000BC664 /* UIView+Etension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Etension.swift"; sourceTree = "<group>"; };
 		AF1A63D12AD81863000F8A4E /* CollectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		AF1A63D32AD81863000F8A4E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AF1A63D52AD81863000F8A4E /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				3F6806D629CBC50A00B4F915 /* CellsReusingUtils.swift */,
 				3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */,
 				7B5E254D2ADBEBEC000BC664 /* Observable.swift */,
+				7B5E254F2ADBEEFA000BC664 /* UIView+Etension.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
+				7B5E25502ADBEEFA000BC664 /* UIView+Etension.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
