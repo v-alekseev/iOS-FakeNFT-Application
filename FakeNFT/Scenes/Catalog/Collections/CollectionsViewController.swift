@@ -117,7 +117,7 @@ final class CollectionsViewController: UIViewController {
         case .sortSelection:
             showSortSelector()
         case .collectionDetails(let collection):
-            navigationController?.pushViewController(SingleCollectionViewController(collection: collection), animated: true)
+            navigationController?.pushViewController(NFTViewController(collection: collection, viewModel: viewModel.giveMeNFTViewModel()), animated: true)
         case .sort:
             break
         case .pullToRefresh:

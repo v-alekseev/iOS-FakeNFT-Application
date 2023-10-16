@@ -26,7 +26,6 @@ final class NFTCollectionsDataSource {
             case .success(let collections):
                 self.collections = collections
                 self.orderedCollections = collections
-                print("успешно \(collections)")
                 completion(result)
             case .failure(let error):
                 print(error)

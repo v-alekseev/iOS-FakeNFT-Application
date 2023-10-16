@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class SingleCollectionViewController: UIViewController {
-
+final class NFTViewController: UIViewController {
+    private var viewModel: NFTViewModelProtocol
     // MARK: - Private Properties
     //
     private var textLabel: UILabel = {
@@ -20,7 +20,8 @@ final class SingleCollectionViewController: UIViewController {
         return label
     }()
     
-    init (collection: CollectionModel) {
+    init (collection: CollectionModel, viewModel: NFTViewModelProtocol) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.textLabel.text = "Отдельная \nколлекция \nNFT: \n\(collection.name)"
     }

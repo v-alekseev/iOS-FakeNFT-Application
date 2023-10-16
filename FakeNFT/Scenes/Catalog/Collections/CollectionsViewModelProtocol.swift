@@ -14,6 +14,7 @@ protocol CollectionsViewModelProtocol {
     func getCollection(at indexPath: IndexPath) -> CollectionModel?
     func refresh(isPullRefresh: Bool)
     func bind(to controller: CollectionsViewController)
+    func giveMeNFTViewModel() -> NFTViewModelProtocol
 }
 
 extension CollectionsViewModelProtocol {

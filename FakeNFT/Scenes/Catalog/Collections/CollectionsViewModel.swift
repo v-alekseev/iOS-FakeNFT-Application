@@ -105,6 +105,15 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         }
     }
     
+    func giveMeNFTViewModel() -> NFTViewModelProtocol {
+        if dataSource != nil {
+            return NFTViewModel(dataSource: dataSource!)
+        } else {
+            let ds = NFTCollectionsDataSource(dataProvider: CatalogDataProvider()) { _ in }
+            return NFTViewModel(dataSource: ds)
+        }
+    }
+    
     private func saveSortType(_ type: SortType) {
         let value: String
         switch type {
