@@ -19,7 +19,7 @@ final class CartViewModel {
     
     var cartDataProvider: CardDataProviderProtocol? {
         didSet {
-            NotificationCenter.default.addObserver(self, 
+            NotificationCenter.default.addObserver(self,
                                                    selector: #selector(didCartChaged(_:)),
                                                    name: cartDataProvider?.orderChanged,
                                                    object: nil)
@@ -73,8 +73,8 @@ final class CartViewModel {
         cartDataProvider?.getOrder() { [weak self] result in
             guard let self = self else { return }
             switch result {
-            //case .success(_) - это значение не возвращается и никаких действий делать не надо  т.к. по окончанию загрузки придет нотификация
-            case let .failure(error):
+                //case .success(_) - это значение не возвращается и никаких действий делать не надо  т.к. по окончанию загрузки придет нотификация
+            case let .failure(_):
                 self.alertMessage = L10n.Cart.getOrderError
                 break
             default:

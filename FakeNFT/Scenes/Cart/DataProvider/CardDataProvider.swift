@@ -49,7 +49,7 @@ final class CardDataProvider: CardDataProviderProtocol {
     static var shared = CardDataProvider()
     
     var networkClient: NetworkClient?
-
+    
     let orderChanged = Notification.Name("CartUpdated")
     
     var orderIDs: [String] = []
@@ -114,13 +114,13 @@ final class CardDataProvider: CardDataProviderProtocol {
         }
         return
     }
-
+    
     /// удаление  элемента из корзины
     func removeItemFromCart(idForRemove: String,  _ completion: @escaping (Result<[String], Error>) -> Void) {
-
+        
         var newCartIds = orderIDs
         newCartIds.removeAll(where: {$0 == idForRemove})
-
+        
         let ntfsRequest = cartUpdateRequest(cartIDs: newCartIds)
         networkClient?.send(request: ntfsRequest , type: UpdateCartDto.self)  { result in
             DispatchQueue.main.async { [weak self] in
@@ -129,7 +129,7 @@ final class CardDataProvider: CardDataProviderProtocol {
                 case let .success(data):
                     orderIDs.removeAll(where: {$0 == idForRemove})
                     order.removeAll(where: {$0.id == idForRemove})
-            
+                    
                     completion(.success(data.nfts))
                 case let .failure(error):
                     completion(.failure(error))

@@ -25,7 +25,12 @@
 		3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39029D2453B0081F015 /* ExampleRequest.swift */; };
 		3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */; };
 		3FC8C39729D24D9D0081F015 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3FC8C39629D24D9D0081F015 /* .swiftlint.yml */; };
-		AF1A63D82AD81863000F8A4E /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D12AD81863000F8A4E /* CatalogViewController.swift */; };
+		7B5E25482ADBE83E000BC664 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E25472ADBE83E000BC664 /* WebViewViewController.swift */; };
+		7B5E254A2ADBE8F6000BC664 /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E25492ADBE8F6000BC664 /* WebViewViewModel.swift */; };
+		7B5E254C2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E254B2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift */; };
+		7B5E254E2ADBEBEC000BC664 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E254D2ADBEBEC000BC664 /* Observable.swift */; };
+		7B5E25502ADBEEFA000BC664 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E254F2ADBEEFA000BC664 /* UIView+Extension.swift */; };
+		AF1A63D82AD81863000F8A4E /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D12AD81863000F8A4E /* CollectionsViewController.swift */; };
 		AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D32AD81863000F8A4E /* ProfileViewController.swift */; };
 		AF1A63DB2AD81863000F8A4E /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D72AD81863000F8A4E /* StatisticViewController.swift */; };
 		D827F5712ACF10C900F01BBE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D827F5702ACF10C900F01BBE /* .gitignore */; };
@@ -87,7 +92,12 @@
 		3FC8C39029D2453B0081F015 /* ExampleRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRequest.swift; sourceTree = "<group>"; };
 		3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatters+Presets.swift"; sourceTree = "<group>"; };
 		3FC8C39629D24D9D0081F015 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		AF1A63D12AD81863000F8A4E /* CatalogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
+		7B5E25472ADBE83E000BC664 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		7B5E25492ADBE8F6000BC664 /* WebViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewModel.swift; sourceTree = "<group>"; };
+		7B5E254B2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewModelProtocol.swift; sourceTree = "<group>"; };
+		7B5E254D2ADBEBEC000BC664 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		7B5E254F2ADBEEFA000BC664 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		AF1A63D12AD81863000F8A4E /* CollectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		AF1A63D32AD81863000F8A4E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AF1A63D72AD81863000F8A4E /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		D827F5702ACF10C900F01BBE /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -232,6 +242,8 @@
 				3F6806CF29CBBDB100B4F915 /* NetworkClient */,
 				3F6806D629CBC50A00B4F915 /* CellsReusingUtils.swift */,
 				3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */,
+				7B5E254D2ADBEBEC000BC664 /* Observable.swift */,
+				7B5E254F2ADBEEFA000BC664 /* UIView+Extension.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -262,9 +274,20 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
+		7B5E25462ADBE821000BC664 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				7B5E25472ADBE83E000BC664 /* WebViewViewController.swift */,
+				7B5E25492ADBE8F6000BC664 /* WebViewViewModel.swift */,
+				7B5E254B2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 		AF1A63CF2AD81863000F8A4E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				7B5E25462ADBE821000BC664 /* WebView */,
 				AF1A63D02AD81863000F8A4E /* Catalog */,
 				AF1A63D22AD81863000F8A4E /* Profile */,
 				AF1A63D42AD81863000F8A4E /* Cart */,
@@ -276,7 +299,7 @@
 		AF1A63D02AD81863000F8A4E /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				AF1A63D12AD81863000F8A4E /* CatalogViewController.swift */,
+				AF1A63E82AD96F78000F8A4E /* Collections */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -307,6 +330,14 @@
 				AF1A63D72AD81863000F8A4E /* StatisticViewController.swift */,
 			);
 			path = Statistic;
+			sourceTree = "<group>";
+		};
+		AF1A63E82AD96F78000F8A4E /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				AF1A63D12AD81863000F8A4E /* CollectionsViewController.swift */,
+			);
+			path = Collections;
 			sourceTree = "<group>";
 		};
 		D847513D2AD0AB0400CEA0A7 /* Resources */ = {
@@ -535,18 +566,23 @@
 				D86C21B62AD82C38000AD25C /* CartTableViewCell.swift in Sources */,
 				D86C21B82AD82C38000AD25C /* CartDeleteViewModel.swift in Sources */,
 				AF1A63D82AD81863000F8A4E /* CatalogViewController.swift in Sources */,
+				AF1A63D82AD81863000F8A4E /* CollectionsViewController.swift in Sources */,
+				7B5E254A2ADBE8F6000BC664 /* WebViewViewModel.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
 				D8307F1B2AD2CE30006302F6 /* ModuleFactory.swift in Sources */,
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				D86C21B72AD82C38000AD25C /* CartViewController+CartTableViewCellDelegate.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
+				7B5E25502ADBEEFA000BC664 /* UIView+Extension.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				D86C21B32AD82C38000AD25C /* CartViewController+UITableViewDataSource.swift in Sources */,
+				7B5E254E2ADBEBEC000BC664 /* Observable.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
+				7B5E254C2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */,
 				D86C21B22AD82C38000AD25C /* CartViewController.swift in Sources */,
@@ -558,6 +594,7 @@
 				AF1A63DB2AD81863000F8A4E /* StatisticViewController.swift in Sources */,
 				D86C21B92AD82C38000AD25C /* CartDeleteViewController.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
+				7B5E25482ADBE83E000BC664 /* WebViewViewController.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				D86C21BC2AD82C38000AD25C /* NftDto.swift in Sources */,
 			);

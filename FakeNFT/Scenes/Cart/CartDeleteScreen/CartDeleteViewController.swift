@@ -65,7 +65,7 @@ final class CartDeleteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         nftImageView.image = viewModel?.nftImage
         setupUI()
     }
@@ -113,8 +113,8 @@ final class CartDeleteViewController: UIViewController {
             canvasView.heightAnchor.constraint(equalToConstant: 220),
             canvasView.widthAnchor.constraint(equalToConstant: 262),
             canvasView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-
-            ])
+            
+        ])
         
         view.addSubview(nftImageView)
         NSLayoutConstraint.activate([
@@ -122,7 +122,7 @@ final class CartDeleteViewController: UIViewController {
             nftImageView.widthAnchor.constraint(equalToConstant: 108),
             nftImageView.heightAnchor.constraint(equalToConstant: 108),
             nftImageView.centerXAnchor.constraint(equalTo: canvasView.centerXAnchor)
-            ])
+        ])
         
         
         view.addSubview(qestionLabel)
@@ -130,7 +130,7 @@ final class CartDeleteViewController: UIViewController {
             qestionLabel.topAnchor.constraint(equalTo: nftImageView.bottomAnchor,constant: 12),
             qestionLabel.centerXAnchor.constraint(equalTo: canvasView.centerXAnchor),
             qestionLabel.widthAnchor.constraint(equalToConstant: 180)
-            ])
+        ])
         
         view.addSubview(returnButton)
         NSLayoutConstraint.activate([
@@ -138,7 +138,7 @@ final class CartDeleteViewController: UIViewController {
             returnButton.heightAnchor.constraint(equalToConstant: 44),
             returnButton.widthAnchor.constraint(equalToConstant: 127),
             returnButton.bottomAnchor.constraint(equalTo: canvasView.bottomAnchor)
-            ])
+        ])
         
         view.addSubview(deleteButton)
         NSLayoutConstraint.activate([
@@ -146,7 +146,7 @@ final class CartDeleteViewController: UIViewController {
             deleteButton.heightAnchor.constraint(equalToConstant: 44),
             deleteButton.widthAnchor.constraint(equalToConstant: 127),
             deleteButton.bottomAnchor.constraint(equalTo: canvasView.bottomAnchor)
-            ])
+        ])
     }
 }
 

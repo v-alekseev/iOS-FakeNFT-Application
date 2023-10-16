@@ -13,7 +13,7 @@ final class CartDeleteViewModel {
     
     private (set) var nftImage: UIImage
     private var nftIDforDelete: String
-
+    
     var dataProvider: CardDataProviderProtocol?
     
     init(nftImage: UIImage, nftIDforDelete: String, dataProvider: CardDataProviderProtocol? = nil) {
@@ -30,7 +30,7 @@ final class CartDeleteViewModel {
                 //TODO:  убрать лоадер
                 completion(.success(data))
             case let .failure(error):
-               print(error)
+                print(error)
             }
         }
     }

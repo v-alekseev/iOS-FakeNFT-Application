@@ -76,11 +76,11 @@ final class CartViewController: UIViewController {
         cartTable.dataSource = self
         configureRefreshControl()
         updateTotal()
-
+        
         showLoader(true)
         viewModel.getOrder()
     }
-
+    
     // MARK: - Private Methods
     //
     private func updateTotal() {
@@ -90,7 +90,7 @@ final class CartViewController: UIViewController {
     private func configureRefreshControl () {
         cartTable.refreshControl = UIRefreshControl()
         cartTable.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
-     }
+    }
     @objc private func handleRefreshControl() {
         DispatchQueue.main.async { [weak self] in
             self?.viewModel.getOrder()
@@ -114,27 +114,27 @@ final class CartViewController: UIViewController {
     /// Функция обрабатывает нажатие на кнопку фильтр
     @objc
     private func filterButtonTap() {
-        let alert = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: L10n.Filter.caption, message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "По цене", style: .default , handler:{ [weak self] (UIAlertAction) in
+        alert.addAction(UIAlertAction(title: L10n.Filter.byPrice, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
             self.viewModel.filterCart(Filters.filterByPrice)
             
         }))
         
-        alert.addAction(UIAlertAction(title: "По рейтингу", style: .default , handler:{ [weak self] (UIAlertAction) in
+        alert.addAction(UIAlertAction(title: L10n.Filter.byRating, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
             self.viewModel.filterCart(Filters.filterByRating)
         }))
-
-        alert.addAction(UIAlertAction(title: "По названию", style: .default , handler:{ [weak self] (UIAlertAction) in
+        
+        alert.addAction(UIAlertAction(title: L10n.Filter.byName, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
             self.viewModel.filterCart(Filters.filterByName)
         }))
         
-        alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler:{(UIAlertAction) in
+        alert.addAction(UIAlertAction(title: L10n.Filter.close, style: .cancel, handler:{(UIAlertAction) in
         }))
-
+        
         self.present(alert, animated: true)
     }
     

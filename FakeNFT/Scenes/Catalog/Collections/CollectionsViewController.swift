@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class CatalogViewController: UIViewController {
+final class CollectionsViewController: UIViewController {
 
     // MARK: - Private Properties
     //
