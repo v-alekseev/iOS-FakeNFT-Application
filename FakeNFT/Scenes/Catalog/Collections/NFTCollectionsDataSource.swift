@@ -10,6 +10,7 @@ import Foundation
 final class NFTCollectionsDataSource {
     private var collections: [CollectionModel]
     private var orderedCollections: [CollectionModel]
+    private var currentSortType: SortType?
     private let dataProvider: CatalogDataProviderProtocol
     
     init(
@@ -59,6 +60,15 @@ final class NFTCollectionsDataSource {
             case .success(let collections):
                 self.collections = collections
                 self.orderedCollections = collections
+                
+                if let sortType = self.currentSortType {
+                    switch sortType {
+                    case .byName(let order):
+                        self.sortCollectionsByName(inOrder: order)
+                    case .byNFTQuantity(let order):
+                        self.sortCollectionsByNFTQuantity(inOrder: order)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
@@ -67,6 +77,7 @@ final class NFTCollectionsDataSource {
     }
     
     func sortCollectionsByName(inOrder: SortCases = .ascending ) {
+        currentSortType = .byName(order: inOrder)
         switch inOrder {
         case .ascending:
              self.orderedCollections = collections.sorted { $0.name < $1.name }
@@ -76,6 +87,7 @@ final class NFTCollectionsDataSource {
     }
     
     func sortCollectionsByNFTQuantity(inOrder: SortCases = .descending) {
+        currentSortType = .byNFTQuantity(order: inOrder)
         switch inOrder {
         case .ascending:
             self.orderedCollections =  collections.sorted { $0.nfts.count < $1.nfts.count }
