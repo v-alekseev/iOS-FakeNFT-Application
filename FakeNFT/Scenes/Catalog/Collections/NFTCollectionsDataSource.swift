@@ -20,12 +20,7 @@ final class NFTCollectionsDataSource {
         self.dataProvider = dataProvider
         self.collections = []
         
-        if let sortType = loadSortType() {
-            applySortType(sortType)
-        } else {
-            applySortType(.byNFTQuantity(order: .ascending))
-        }
-        print(currentSortType)
+        currentSortType = savedSortType()
         self.dataProvider.giveMeAllCollections() { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -35,9 +30,9 @@ final class NFTCollectionsDataSource {
                 case .byName:
                     sortCollectionsByName()
                 default:
+                    print(currentSortType)
                     sortCollectionsByNFTQuantity()
                 }
-                
                 completion(result)
                 
             case .failure(let error):
@@ -114,17 +109,19 @@ final class NFTCollectionsDataSource {
             value = "byNFTQuantity"
         }
         UserDefaults.standard.setValue(value, forKey: sortTypeKey)
+        print(UserDefaults.standard.string(forKey: sortTypeKey))
     }
     
     private func loadSortType() -> SortType? {
         guard let value = UserDefaults.standard.string(forKey: sortTypeKey) else {
             return nil
         }
-        print(value)
         switch value {
         case "byName":
+            currentSortType = .byName(order: .ascending)
             return .byName(order: .ascending)
         case "byNFTQuantity":
+            currentSortType = .byNFTQuantity(order: .descending)
             return .byNFTQuantity(order: .descending)
         default:
             return nil
@@ -134,6 +131,17 @@ final class NFTCollectionsDataSource {
     private func applySortType(_ type: SortType) {
         currentSortType = type
         saveSortType(type)
+        print(type)
+    }
+    
+    private func savedSortType() -> SortType {
+        let value = UserDefaults.standard.string(forKey: sortTypeKey)
+        switch value {
+        case "byName":
+            return .byName(order: .ascending)
+        default:
+            return .byNFTQuantity(order: .descending)
+        }
     }
     
 }
