@@ -8,9 +8,9 @@
 import Foundation
 
 final class NFTCollectionsDataSource {
+    private let sortTypeKey = "selectedSortType"
     private var collections: [CollectionModel]
-    private var orderedCollections: [CollectionModel]
-    private var currentSortType: SortType?
+    private var currentSortType: SortType? = nil
     private let dataProvider: CatalogDataProviderProtocol
     
     init(
@@ -19,14 +19,22 @@ final class NFTCollectionsDataSource {
     ) {
         self.dataProvider = dataProvider
         self.collections = []
-        self.orderedCollections = []
+        
+        currentSortType = savedSortType()
         self.dataProvider.giveMeAllCollections() { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let collections):
                 self.collections = collections
-                self.orderedCollections = collections
+                switch self.currentSortType {
+                case .byName:
+                    sortCollectionsByName()
+                default:
+                    print(currentSortType)
+                    sortCollectionsByNFTQuantity()
+                }
                 completion(result)
+                
             case .failure(let error):
                 print(error)
                 completion(result)
@@ -36,7 +44,7 @@ final class NFTCollectionsDataSource {
     }
     
     func giveMeAllCollections(isSorted: Bool = false) -> [CollectionModel] {
-        return isSorted ? self.orderedCollections : self.collections
+        return self.collections
     }
     
     func howManyCollections() -> Int {
@@ -45,8 +53,7 @@ final class NFTCollectionsDataSource {
     
     func giveMeCollectionAt(index: Int, withSort: Bool = false) -> CollectionModel? {
         if index < self.collections.count {
-            let base = withSort ? self.orderedCollections : self.collections
-            return base[index]
+            return self.collections[index]
         } else {
             return nil
         }
@@ -58,8 +65,6 @@ final class NFTCollectionsDataSource {
             switch result {
             case .success(let collections):
                 self.collections = collections
-                self.orderedCollections = collections
-                
                 if let sortType = self.currentSortType {
                     switch sortType {
                     case .byName(let order):
@@ -76,22 +81,66 @@ final class NFTCollectionsDataSource {
     }
     
     func sortCollectionsByName(inOrder: SortCases = .ascending ) {
-        currentSortType = .byName(order: inOrder)
+        applySortType(.byName(order: inOrder))
         switch inOrder {
         case .ascending:
-             self.orderedCollections = collections.sorted { $0.name < $1.name }
+             self.collections = collections.sorted { $0.name < $1.name }
         case .descending:
-            self.orderedCollections = collections.sorted { $0.name > $1.name }
+            self.collections = collections.sorted { $0.name > $1.name }
         }
     }
     
     func sortCollectionsByNFTQuantity(inOrder: SortCases = .descending) {
-        currentSortType = .byNFTQuantity(order: inOrder)
+        applySortType(.byNFTQuantity(order: inOrder))
         switch inOrder {
         case .ascending:
-            self.orderedCollections =  collections.sorted { $0.nfts.count < $1.nfts.count }
+            self.collections =  collections.sorted { $0.nfts.count < $1.nfts.count }
         case .descending:
-            self.orderedCollections =  collections.sorted { $0.nfts.count > $1.nfts.count }
+            self.collections =  collections.sorted { $0.nfts.count > $1.nfts.count }
+        }
+    }
+    
+    private func saveSortType(_ type: SortType) {
+        let value: String
+        switch type {
+        case .byName:
+            value = "byName"
+        case .byNFTQuantity:
+            value = "byNFTQuantity"
+        }
+        UserDefaults.standard.setValue(value, forKey: sortTypeKey)
+        print(UserDefaults.standard.string(forKey: sortTypeKey))
+    }
+    
+    private func loadSortType() -> SortType? {
+        guard let value = UserDefaults.standard.string(forKey: sortTypeKey) else {
+            return nil
+        }
+        switch value {
+        case "byName":
+            currentSortType = .byName(order: .ascending)
+            return .byName(order: .ascending)
+        case "byNFTQuantity":
+            currentSortType = .byNFTQuantity(order: .descending)
+            return .byNFTQuantity(order: .descending)
+        default:
+            return nil
+        }
+    }
+    
+    private func applySortType(_ type: SortType) {
+        currentSortType = type
+        saveSortType(type)
+        print(type)
+    }
+    
+    private func savedSortType() -> SortType {
+        let value = UserDefaults.standard.string(forKey: sortTypeKey)
+        switch value {
+        case "byName":
+            return .byName(order: .ascending)
+        default:
+            return .byNFTQuantity(order: .descending)
         }
     }
     

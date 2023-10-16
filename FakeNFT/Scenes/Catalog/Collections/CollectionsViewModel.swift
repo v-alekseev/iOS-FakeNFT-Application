@@ -7,8 +7,9 @@
 
 import Foundation
 final class CollectionsViewModel: CollectionsViewModelProtocol {
+    
     private var dataSource: NFTCollectionsDataSource? = nil
-    private let sortTypeKey = "selectedSortType"
+    
     var navigationClosure: (CollectionsNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionsNavigationState = .base {
         didSet {
@@ -24,25 +25,6 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         
     }
     
-    init() {
-        
-        self.dataSource = NFTCollectionsDataSource(dataProvider: CatalogDataProvider()) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.resultState = .show
-            case .failure(let error):
-                self.resultState = .error(error)
-            }
-        }
-        
-        if let sortType = loadSortType() {
-            applySortType(sortType)
-        } else {
-            applySortType(.byNFTQuantity(order: .ascending))
-        }
-    }
-    
     func howManyCollections() -> Int {
         if let ds = dataSource {
             return ds.howManyCollections()
@@ -56,14 +38,27 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
     
     func refresh(isPullRefresh: Bool = false) {
         resultState = isPullRefresh ? .start : .loading
-        
-        dataSource?.reloadCollections() { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                self.resultState = .show
-            case .failure(let error):
-                self.resultState = .error(error)
+        if let ds = dataSource {
+            
+            ds.reloadCollections() { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success:
+                    self.resultState = .show
+                case .failure(let error):
+                    self.resultState = .error(error)
+                }
+            }
+        } else {
+            self.dataSource = NFTCollectionsDataSource(dataProvider: CatalogDataProvider()) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success:
+                    self.resultState = .show
+                    print( self.resultState)
+                case .failure(let error):
+                    self.resultState = .error(error)
+                }
             }
         }
     }
@@ -83,8 +78,14 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
             
         case .sortDidSelected(let which):
             resultState = .loading
-            resultState = .loading
-            applySortType(which)
+            
+            switch which {
+            case .byNFTQuantity:
+                dataSource?.sortCollectionsByNFTQuantity()
+            case .byName:
+                dataSource?.sortCollectionsByName()
+            }
+            
             navigationState = .base
             resultState = .show
             
@@ -112,42 +113,6 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
             let ds = NFTCollectionsDataSource(dataProvider: CatalogDataProvider()) { _ in }
             return NFTViewModel(dataSource: ds)
         }
-    }
-    
-    private func saveSortType(_ type: SortType) {
-        let value: String
-        switch type {
-        case .byName:
-            value = "byName"
-        case .byNFTQuantity:
-            value = "byNFTQuantity"
-        }
-        UserDefaults.standard.setValue(value, forKey: sortTypeKey)
-    }
-    
-    private func loadSortType() -> SortType? {
-        guard let value = UserDefaults.standard.string(forKey: sortTypeKey) else {
-            return nil
-        }
-        
-        switch value {
-        case "byName":
-            return .byName(order: .ascending)
-        case "byNFTQuantity":
-            return .byNFTQuantity(order: .ascending)
-        default:
-            return nil
-        }
-    }
-    
-    private func applySortType(_ type: SortType) {
-        switch type {
-        case .byNFTQuantity:
-            dataSource?.sortCollectionsByNFTQuantity()
-        case .byName:
-            dataSource?.sortCollectionsByName()
-        }
-        saveSortType(type)
     }
 
 }
