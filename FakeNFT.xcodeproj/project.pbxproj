@@ -29,7 +29,6 @@
 		AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D32AD81863000F8A4E /* ProfileViewController.swift */; };
 		AF1A63DA2AD81863000F8A4E /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D52AD81863000F8A4E /* CartViewController.swift */; };
 		AF1A63DB2AD81863000F8A4E /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D72AD81863000F8A4E /* StatisticViewController.swift */; };
-		AF1A63E32AD95996000F8A4E /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63E22AD95996000F8A4E /* PlaceHolder.swift */; };
 		AF1A63E52AD96607000F8A4E /* CollectionsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63E42AD96607000F8A4E /* CollectionsViewModelProtocol.swift */; };
 		AF1A63E72AD96768000F8A4E /* CollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63E62AD96768000F8A4E /* CollectionsViewModel.swift */; };
 		AF1A63EA2AD99153000F8A4E /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63E92AD99153000F8A4E /* SortType.swift */; };
@@ -119,7 +118,6 @@
 		AF1A63D32AD81863000F8A4E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AF1A63D52AD81863000F8A4E /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		AF1A63D72AD81863000F8A4E /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
-		AF1A63E22AD95996000F8A4E /* PlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
 		AF1A63E42AD96607000F8A4E /* CollectionsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModelProtocol.swift; sourceTree = "<group>"; };
 		AF1A63E62AD96768000F8A4E /* CollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModel.swift; sourceTree = "<group>"; };
 		AF1A63E92AD99153000F8A4E /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
@@ -379,7 +377,6 @@
 		AF1A63E12AD95996000F8A4E /* NFTs */ = {
 			isa = PBXGroup;
 			children = (
-				AF1A63E22AD95996000F8A4E /* PlaceHolder.swift */,
 				AF6BEC6A2ADAED1500708F6E /* SingleCollectionViewController.swift */,
 			);
 			name = NFTs;
@@ -684,7 +681,6 @@
 				AF3949022AD1E13C003A7B70 /* SingleCollectionEndpoint.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				AFF11A082ADA9C7400315704 /* CollectionsNavigationState.swift in Sources */,
-				AF1A63E32AD95996000F8A4E /* PlaceHolder.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				AF39490F2AD31B42003A7B70 /* AllLikesEndPoint.swift in Sources */,
 				AF9A240A2AD5C04F00C73AEC /* Constants.swift in Sources */,
