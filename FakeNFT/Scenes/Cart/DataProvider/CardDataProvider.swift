@@ -13,9 +13,10 @@ protocol CardDataProviderProtocol {
     func getCurrencies()
     func getCurrency(id: Int)
     func paymentOrder()
-    func updateCart(ids: [String],  _ completion: @escaping (Result<[String], Error>) -> Void)
+    func removeItemFromCart(idForRemove: String,  _ completion: @escaping (Result<[String], Error>) -> Void)
+    
     var order: [NftDto] { get }
-    var delegate: CardDataProviderDelegate? { get set }
+    var orderChanged: NSNotification.Name { get }
 }
 
 struct OrderRequest: NetworkRequest {
@@ -42,28 +43,26 @@ struct cartUpdateRequest: NetworkRequest {
     }
 }
 
-protocol CardDataProviderDelegate: AnyObject {
-    /// событие вызывается когда в переменную order и orderIDs загружены данные
-    func cartLoaded()
-    /// событие вызывается когда данные в корзине изменеились. При этом переменные order и orderIDs содержат старые данные
-    //func cartUpded()
-}
 
 final class CardDataProvider: CardDataProviderProtocol {
     
-    var networkClient: NetworkClient? // = DefaultNetworkClient()
-    weak var delegate: CardDataProviderDelegate?
+    static var shared = CardDataProvider()
+    
+    var networkClient: NetworkClient?
+
+    let orderChanged = Notification.Name("CartUpdated")
     
     var orderIDs: [String] = []
     var order: [NftDto] = [] {
         didSet {
             // если колличество загруженных nft равняется колличеству nftid, значит все запросы отработали и можно перегрузить отображать корзину
             if orderIDs.count == order.count {
-                delegate?.cartLoaded()
+                NotificationCenter.default.post(name: orderChanged, object: nil )
             }
         }
     }
-    init(networkClient: NetworkClient? = DefaultNetworkClient()) {
+    
+    private init(networkClient: NetworkClient? = DefaultNetworkClient()) {
         self.networkClient = networkClient
     }
     
@@ -115,14 +114,22 @@ final class CardDataProvider: CardDataProviderProtocol {
         }
         return
     }
-    
-    func updateCart(ids: [String],  _ completion: @escaping (Result<[String], Error>) -> Void) {
-        
-        let ntfsRequest = cartUpdateRequest(cartIDs: ids)
+
+    /// удаление  элемента из корзины
+    func removeItemFromCart(idForRemove: String,  _ completion: @escaping (Result<[String], Error>) -> Void) {
+
+        var newCartIds = orderIDs
+        newCartIds.removeAll(where: {$0 == idForRemove})
+
+        let ntfsRequest = cartUpdateRequest(cartIDs: newCartIds)
         networkClient?.send(request: ntfsRequest , type: UpdateCartDto.self)  { result in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 switch result {
                 case let .success(data):
+                    orderIDs.removeAll(where: {$0 == idForRemove})
+                    order.removeAll(where: {$0.id == idForRemove})
+            
                     completion(.success(data.nfts))
                 case let .failure(error):
                     completion(.failure(error))

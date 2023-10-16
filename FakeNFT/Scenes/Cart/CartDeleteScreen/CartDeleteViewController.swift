@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ProgressHUD
 
 
 final class CartDeleteViewController: UIViewController {
@@ -66,7 +67,6 @@ final class CartDeleteViewController: UIViewController {
         super.viewDidLoad()
 
         nftImageView.image = viewModel?.nftImage
-        
         setupUI()
     }
     
@@ -79,9 +79,23 @@ final class CartDeleteViewController: UIViewController {
     /// Функция обрабатывает нажатие на кнопку удаления
     @objc
     private func deleteButtonTap() {
-        print("DELETE button pressed")
-        viewModel?.deleteNFT()
-       
+        showLoader(true)
+        viewModel?.deleteNFT() { [weak self] result in
+            guard let self = self else { return }
+            self.showLoader(false)
+            switch result {
+            case .success(_):
+                self.dismiss(animated: true)
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    private func showLoader(_ isShow: Bool) {
+        isShow ? ProgressHUD.show() : ProgressHUD.dismiss()
+        returnButton.isEnabled = !isShow
+        deleteButton.isEnabled = !isShow
     }
     
     private func setupUI() {
@@ -136,9 +150,4 @@ final class CartDeleteViewController: UIViewController {
     }
 }
 
-extension CartDeleteViewController: CartDeleteDelegate {
-    func deleteCompleted() {
-        self.dismiss(animated: true)
-    }
-}
 

@@ -46,6 +46,7 @@
 		D86C21BC2AD82C38000AD25C /* NftDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21B02AD82C38000AD25C /* NftDto.swift */; };
 		D86C21BD2AD82C38000AD25C /* OrderDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21B12AD82C38000AD25C /* OrderDto.swift */; };
 		D86C21BF2AD82CE7000AD25C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21BE2AD82CE7000AD25C /* Alert.swift */; };
+		D8B9765A2ADD7095007CA5D2 /* CartFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976592ADD7095007CA5D2 /* CartFilters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		D86C21B02AD82C38000AD25C /* NftDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NftDto.swift; sourceTree = "<group>"; };
 		D86C21B12AD82C38000AD25C /* OrderDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDto.swift; sourceTree = "<group>"; };
 		D86C21BE2AD82CE7000AD25C /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		D8B976592ADD7095007CA5D2 /* CartFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFilters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +326,7 @@
 				D86C21A52AD82C38000AD25C /* CartViewModel.swift */,
 				D86C21A62AD82C38000AD25C /* CartTableViewCell.swift */,
 				D86C21A72AD82C38000AD25C /* CartViewController+CartTableViewCellDelegate.swift */,
+				D8B976592ADD7095007CA5D2 /* CartFilters.swift */,
 			);
 			path = CartScreen;
 			sourceTree = "<group>";
@@ -331,8 +334,8 @@
 		D86C21A82AD82C38000AD25C /* CartDeleteScreen */ = {
 			isa = PBXGroup;
 			children = (
-				D86C21A92AD82C38000AD25C /* CartDeleteViewModel.swift */,
 				D86C21AA2AD82C38000AD25C /* CartDeleteViewController.swift */,
+				D86C21A92AD82C38000AD25C /* CartDeleteViewModel.swift */,
 			);
 			path = CartDeleteScreen;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */,
 				D86C21B22AD82C38000AD25C /* CartViewController.swift in Sources */,
 				D86C21BA2AD82C38000AD25C /* NftModel.swift in Sources */,
+				D8B9765A2ADD7095007CA5D2 /* CartFilters.swift in Sources */,
 				D86C21B42AD82C38000AD25C /* CartViewController+UITableViewDelegate.swift in Sources */,
 				D86C21B52AD82C38000AD25C /* CartViewModel.swift in Sources */,
 				D86C21BF2AD82CE7000AD25C /* Alert.swift in Sources */,

@@ -65,10 +65,7 @@ final class CartViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel.delegate = self
-        
-        let dataProvider = CardDataProvider()
-        dataProvider.delegate = viewModel
-        viewModel.cartDataProvider = dataProvider
+        viewModel.cartDataProvider = CardDataProvider.shared
         
         setupNavigationBar()
         setupUI()
@@ -82,7 +79,6 @@ final class CartViewController: UIViewController {
 
         showLoader(true)
         viewModel.getOrder()
-        
     }
 
     // MARK: - Private Methods
@@ -97,7 +93,7 @@ final class CartViewController: UIViewController {
      }
     @objc private func handleRefreshControl() {
         DispatchQueue.main.async { [weak self] in
-            self?.viewModel.getOrder() //cartTable.reloadData()
+            self?.viewModel.getOrder()
             self?.cartTable.refreshControl?.endRefreshing()
         }
     }
@@ -118,7 +114,28 @@ final class CartViewController: UIViewController {
     /// Функция обрабатывает нажатие на кнопку фильтр
     @objc
     private func filterButtonTap() {
-        print("filterButtonTap")
+        let alert = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "По цене", style: .default , handler:{ [weak self] (UIAlertAction) in
+            guard let self = self else { return }
+            self.viewModel.filterCart(Filters.filterByPrice)
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "По рейтингу", style: .default , handler:{ [weak self] (UIAlertAction) in
+            guard let self = self else { return }
+            self.viewModel.filterCart(Filters.filterByRating)
+        }))
+
+        alert.addAction(UIAlertAction(title: "По названию", style: .default , handler:{ [weak self] (UIAlertAction) in
+            guard let self = self else { return }
+            self.viewModel.filterCart(Filters.filterByName)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler:{(UIAlertAction) in
+        }))
+
+        self.present(alert, animated: true)
     }
     
     /// Функция обрабатывает нажатие на кнопку оплаты

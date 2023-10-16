@@ -14,9 +14,17 @@ protocol CartViewModelDelegate: AnyObject {
 
 final class CartViewModel {
     
-    var cartDataProvider: CardDataProviderProtocol? // = CardDataProvider()
-    
     weak var delegate: CartViewModelDelegate?
+    var currentFilter: Filters.FilterClosure = Filters.filterDefault
+    
+    var cartDataProvider: CardDataProviderProtocol? {
+        didSet {
+            NotificationCenter.default.addObserver(self, 
+                                                   selector: #selector(didCartChaged(_:)),
+                                                   name: cartDataProvider?.orderChanged,
+                                                   object: nil)
+        }
+    }
     
     private (set) var alertMessage: String = "" {
         didSet {
@@ -35,6 +43,7 @@ final class CartViewModel {
     var totalPrice: Double  {
         get {
             var price: Double = 0
+            
             for nft in order {
                 price += nft.price
             }
@@ -48,38 +57,29 @@ final class CartViewModel {
         }
     }
     
+    @objc func didCartChaged(_ notification: Notification) {
+        guard let cartDataProvider = cartDataProvider  else {return}
+        
+        let orderUnsorted = cartDataProvider.order.compactMap{NftModel(nft: $0)}
+        order = orderUnsorted.sorted(by: currentFilter)
+    }
+    
+    func filterCart(_ filter: @escaping Filters.FilterClosure) {
+        currentFilter = filter
+        order = order.sorted(by: currentFilter)
+    }
+    
     func getOrder() {
         cartDataProvider?.getOrder() { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(_):
-                //  сюда никогда не попадаем
-                break
+            //case .success(_) - это значение не возвращается и никаких действий делать не надо  т.к. по окончанию загрузки придет нотификация
             case let .failure(error):
-                print("[error] cartDataProvider.getOrder() \(error) / \(error.localizedDescription)")
                 self.alertMessage = L10n.Cart.getOrderError
+                break
+            default:
                 break
             }
         }
-    }
-}
-
-extension CartViewModel: CardDataProviderDelegate {
-    func cartLoaded() {
-        guard let cartDataProvider = cartDataProvider  else {return}
-        var tmpOrder: [NftModel] = []
-        // totalPrice = 0
-        for nft in cartDataProvider.order {
-            tmpOrder.append(NftModel(nft: nft))
-            //totalPrice += nft.price
-        }
-        order = tmpOrder
-    }
-    
-}
-
-extension CartViewModel: CartDeleteStorageDelegate {
-    func nftDeletedFromCart(id: String) {
-        order = order.compactMap { $0.id != id  ?  $0 : nil}
     }
 }
