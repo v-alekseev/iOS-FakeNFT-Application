@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum CollectionsResultState {
     case start
     case loading

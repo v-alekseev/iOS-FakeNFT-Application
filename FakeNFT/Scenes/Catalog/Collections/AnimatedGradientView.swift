@@ -6,7 +6,8 @@
 //
 
 import UIKit
-class AnimatedGradientView: UIView {
+
+final class AnimatedGradientView: UIView {
     
     private var cornerRadiusValue: CGFloat = 0.0
     
@@ -63,8 +64,6 @@ class AnimatedGradientView: UIView {
         animation.repeatCount = .infinity
         gradientLayer.add(animation, forKey: "locationsChange")
     }
-
-
 
     func stopAnimating() {
         gradientLayer.removeAnimation(forKey: "locationsChange")

@@ -8,6 +8,7 @@
 import Foundation
 
 final class NFTCollectionsDataSource {
+    
     private let sortTypeKey = "selectedSortType"
     private var collections: [CollectionModel]
     private var currentSortType: SortType?
@@ -30,7 +31,6 @@ final class NFTCollectionsDataSource {
                 case .byName:
                     sortCollectionsByName()
                 default:
-                    print(currentSortType)
                     sortCollectionsByNFTQuantity()
                 }
                 completion(result)
@@ -109,7 +109,6 @@ final class NFTCollectionsDataSource {
             value = "byNFTQuantity"
         }
         UserDefaults.standard.setValue(value, forKey: sortTypeKey)
-        print(UserDefaults.standard.string(forKey: sortTypeKey))
     }
     
     private func loadSortType() -> SortType? {
@@ -143,5 +142,4 @@ final class NFTCollectionsDataSource {
             return .byNFTQuantity(order: .descending)
         }
     }
-    
 }

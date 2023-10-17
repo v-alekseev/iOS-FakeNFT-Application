@@ -10,7 +10,6 @@ import UIKit
 final class SingleCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
-    //
     private var textLabel: UILabel = {
         var label = UILabel()
         label.text = "Отдельная коллекция NFT"
@@ -28,8 +27,8 @@ final class SingleCollectionViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - UIViewController(*)
-    //
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,8 +36,8 @@ final class SingleCollectionViewController: UIViewController {
         view.backgroundColor = .white
         print("CartViewController viewDidLoad")
     }
+    
     // MARK: - Private Methods
-    //
     private func setupUI() {
         view.addSubview(textLabel)
         NSLayoutConstraint.activate([

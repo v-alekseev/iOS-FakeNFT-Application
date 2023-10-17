@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct NFTModel: Codable {
     let createdAt: String
     let name: String

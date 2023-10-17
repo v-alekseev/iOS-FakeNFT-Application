@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum CollectionNavigationAction {
     case sortingDidTapped
     case sortDidSelected(which: SortType)

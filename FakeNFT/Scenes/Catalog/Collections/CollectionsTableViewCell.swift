@@ -7,13 +7,17 @@
 
 import UIKit
 import Kingfisher
+
 final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
+    
     private let titleLabel = UILabel()
     private let imageCollection = UIImageView()
     private let placeholderImage = UIImage(named: "CatPlaceholder")
+    
     private lazy var animatedGradient: AnimatedGradientView = {
         return AnimatedGradientView(frame: self.bounds, cornerRadius: 12)
     }()
+    
     static let cellHeight: CGFloat = 179
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -95,6 +99,5 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         let margins = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
         contentView.frame = contentView.frame.inset(by: margins)
         contentView.backgroundColor = .clear
-        }
-    
+    }
 }

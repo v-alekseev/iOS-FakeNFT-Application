@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 final class CollectionsViewModel: CollectionsViewModelProtocol {
     
     private var dataSource: NFTCollectionsDataSource?
@@ -105,5 +106,4 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
             controller.renderState(state: state)
         }
     }
-
 }

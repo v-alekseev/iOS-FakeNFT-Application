@@ -10,6 +10,7 @@ import UIKit
 import ProgressHUD
 
 final class CollectionsViewController: UIViewController {
+    
     private var viewModel: CollectionsViewModelProtocol
     private var filterBarButtonItem: UIBarButtonItem?
     private let refreshControl = UIRefreshControl()
@@ -87,7 +88,6 @@ final class CollectionsViewController: UIViewController {
     private func bind () {
         viewModel.bind(to: self)
     }
-    
     
     private func showSortSelector() {
         let alertController = UIAlertController(title: nil, message: L10n.Catalog.sort, preferredStyle: .actionSheet)
