@@ -17,6 +17,7 @@ final class CollectionsViewController: UIViewController {
     private let tableView: UITableView = {
         let tv = UITableView()
         tv.separatorStyle = .none
+        tv.backgroundColor = .clear
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
@@ -42,7 +43,7 @@ final class CollectionsViewController: UIViewController {
         tableView.register(CollectionsTableViewCell.self, forCellReuseIdentifier: "CollectionCell")
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
-        view.backgroundColor = .white
+        view.backgroundColor = .ypWhiteWithDarkMode
         print("CatalogViewController viewDidLoad")
         
     }

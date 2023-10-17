@@ -27,6 +27,7 @@ final class CollectionsTableViewCell: UITableViewCell {
     
     func setupCell() {
         self.selectionStyle = .none
+        self.backgroundColor = .clear
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         titleLabel.textColor = .ypBlackWithDarkMode
         
@@ -93,7 +94,7 @@ final class CollectionsTableViewCell: UITableViewCell {
 
         let margins = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
         contentView.frame = contentView.frame.inset(by: margins)
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .clear
         }
     
 }
