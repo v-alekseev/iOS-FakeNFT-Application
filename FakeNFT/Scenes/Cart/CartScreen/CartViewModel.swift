@@ -12,10 +12,18 @@ protocol CartViewModelDelegate: AnyObject {
     func showAlert(message: String)
 }
 
-final class CartViewModel {
+protocol CartViewModelProtocol {
+    var delegate: CartViewModelDelegate? {get set}
+    var cartDataProvider: CardDataProviderProtocol? {get set}
+    var order: [NftModel]  {get}
+    var totalPrice: Double {get}
     
+    func filterCart(_ filter: @escaping Filters.FilterClosure)
+    func getOrder()
+}
+
+final class CartViewModel: CartViewModelProtocol {
     weak var delegate: CartViewModelDelegate?
-    var currentFilter: Filters.FilterClosure = Filters.filterDefault
     
     var cartDataProvider: CardDataProviderProtocol? {
         didSet {
@@ -23,20 +31,6 @@ final class CartViewModel {
                                                    selector: #selector(didCartChaged(_:)),
                                                    name: cartDataProvider?.orderChanged,
                                                    object: nil)
-        }
-    }
-    
-    private (set) var alertMessage: String = "" {
-        didSet {
-            if !alertMessage.isEmpty {
-                delegate?.showAlert(message: alertMessage)
-            }
-        }
-    }
-    
-    private (set) var order: [NftModel] = [] {
-        didSet {
-            delegate?.didUpdateCart()
         }
     }
     
@@ -50,14 +44,24 @@ final class CartViewModel {
             return price
         }
     }
-    
-    var cartNftIDs: [String] {
-        get {
-            order.map { $0.id }
+
+    private (set) var order: [NftModel] = [] {
+        didSet {
+            delegate?.didUpdateCart()
         }
     }
     
-    @objc func didCartChaged(_ notification: Notification) {
+    private var alertMessage: String = "" {
+        didSet {
+            if !alertMessage.isEmpty {
+                delegate?.showAlert(message: alertMessage)
+            }
+        }
+    }
+    
+    private var currentFilter: Filters.FilterClosure = Filters.filterDefault
+    
+    @objc private func didCartChaged(_ notification: Notification) {
         guard let cartDataProvider = cartDataProvider  else {return}
         
         let orderUnsorted = cartDataProvider.order.compactMap{NftModel(nft: $0)}
@@ -74,7 +78,7 @@ final class CartViewModel {
             guard let self = self else { return }
             switch result {
                 //case .success(_) - это значение не возвращается и никаких действий делать не надо  т.к. по окончанию загрузки придет нотификация
-            case let .failure(_):
+            case .failure(_):
                 self.alertMessage = L10n.Cart.getOrderError
                 break
             default:

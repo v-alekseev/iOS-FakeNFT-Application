@@ -12,7 +12,7 @@ import ProgressHUD
 final class CartViewController: UIViewController {
     // MARK: - Private Properties
     //
-    let viewModel = CartViewModel()
+    private (set) var viewModel: CartViewModelProtocol? //CartViewModel()
     
     private lazy var bottomView: UIView = {
         var view = UIView()
@@ -59,13 +59,23 @@ final class CartViewController: UIViewController {
         return table
     }()
     
+    init(viewModel: CartViewModelProtocol? = CartViewModel()) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - UIViewController(*)
     //
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.delegate = self
-        viewModel.cartDataProvider = CardDataProvider.shared
+        viewModel?.delegate = self
+        viewModel?.cartDataProvider = CardDataProvider.shared
         
         setupNavigationBar()
         setupUI()
@@ -78,14 +88,14 @@ final class CartViewController: UIViewController {
         updateTotal()
         
         showLoader(true)
-        viewModel.getOrder()
+        viewModel?.getOrder()
     }
     
     // MARK: - Private Methods
     //
     private func updateTotal() {
-        countItemsLabel.text = "\(viewModel.order.count) NFT"
-        totalAmountLabel.text = "\(String(format: "%.2f", viewModel.totalPrice)) ETH"
+        countItemsLabel.text = "\(viewModel?.order.count ?? 00) NFT"
+        totalAmountLabel.text = "\(String(format: "%.2f", viewModel?.totalPrice ?? 0)) ETH"
     }
     private func configureRefreshControl () {
         cartTable.refreshControl = UIRefreshControl()
@@ -93,7 +103,7 @@ final class CartViewController: UIViewController {
     }
     @objc private func handleRefreshControl() {
         DispatchQueue.main.async { [weak self] in
-            self?.viewModel.getOrder()
+            self?.viewModel?.getOrder()
             self?.cartTable.refreshControl?.endRefreshing()
         }
     }
@@ -118,18 +128,18 @@ final class CartViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: L10n.Filter.byPrice, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
-            self.viewModel.filterCart(Filters.filterByPrice)
+            self.viewModel?.filterCart(Filters.filterByPrice)
             
         }))
         
         alert.addAction(UIAlertAction(title: L10n.Filter.byRating, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
-            self.viewModel.filterCart(Filters.filterByRating)
+            self.viewModel?.filterCart(Filters.filterByRating)
         }))
         
         alert.addAction(UIAlertAction(title: L10n.Filter.byName, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
-            self.viewModel.filterCart(Filters.filterByName)
+            self.viewModel?.filterCart(Filters.filterByName)
         }))
         
         alert.addAction(UIAlertAction(title: L10n.Filter.close, style: .cancel, handler:{(UIAlertAction) in
@@ -200,7 +210,7 @@ extension CartViewController: CartViewModelDelegate {
     /// Нужно показать сообщение
     func showAlert(message: String) {
         showLoader(false)
-        Alert.alertInformation(viewController: self, text: viewModel.alertMessage)
+        Alert.alertInformation(viewController: self, text: message)
     }
 }
 

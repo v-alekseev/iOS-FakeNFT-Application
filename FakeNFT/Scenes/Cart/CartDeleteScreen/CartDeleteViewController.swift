@@ -5,22 +5,21 @@
 //  Created by Vitaly on 11.10.2023.
 //
 
-import Foundation
 import UIKit
 import ProgressHUD
 
 
 final class CartDeleteViewController: UIViewController {
     
-    var viewModel: CartDeleteViewModel?
+    var viewModel: CartDeleteViewModelProtocol?
     
-    private var canvasView: UIView = {
+    private lazy var canvasView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private var nftImageView: UIImageView = {
+    private lazy var nftImageView: UIImageView = {
         var image = UIImageView()
         image.layer.masksToBounds = true
         image.layer.cornerRadius = 12
@@ -28,7 +27,7 @@ final class CartDeleteViewController: UIViewController {
         return image
     }()
     
-    private var qestionLabel: UILabel = {
+    private lazy var qestionLabel: UILabel = {
         var label = UILabel()
         label.font =  UIFont.caption2
         label.text = "Вы уверены, что хотите удалить объект из корзины?"

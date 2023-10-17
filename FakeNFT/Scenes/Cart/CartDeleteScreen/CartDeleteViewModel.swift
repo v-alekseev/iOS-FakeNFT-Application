@@ -4,12 +4,16 @@
 //
 //  Created by Vitaly on 11.10.2023.
 //
-
-import Foundation
 import UIKit
 
+protocol CartDeleteViewModelProtocol {
+    var nftImage: UIImage { get }
+    var dataProvider: CardDataProviderProtocol? {get set}
+    init(nftImage: UIImage, nftIDforDelete: String, dataProvider: CardDataProviderProtocol?)
+    func deleteNFT( _ completion: @escaping (Result<[String], Error>) -> Void)
+}
 
-final class CartDeleteViewModel {
+final class CartDeleteViewModel: CartDeleteViewModelProtocol {
     
     private (set) var nftImage: UIImage
     private var nftIDforDelete: String

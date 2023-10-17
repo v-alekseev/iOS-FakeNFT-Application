@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Filters {
+struct Filters {
     typealias FilterClosure =  (NftModel, NftModel) -> Bool
     
     static var filterDefault: FilterClosure = {a , b in
@@ -22,5 +22,4 @@ class Filters {
     static var filterByRating: FilterClosure = {a , b in
         return a.rating > b.rating
     }
-
 }

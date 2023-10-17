@@ -33,7 +33,7 @@ struct NFSRequest: NetworkRequest {
     }
 }
 
-struct cartUpdateRequest: NetworkRequest {
+struct СartUpdateRequest: NetworkRequest {
     var httpMethod: HttpMethod { .put }
     var dto: Encodable?
     var endpoint: URL? = URL(string: "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/orders/1")
@@ -121,7 +121,7 @@ final class CardDataProvider: CardDataProviderProtocol {
         var newCartIds = orderIDs
         newCartIds.removeAll(where: {$0 == idForRemove})
         
-        let ntfsRequest = cartUpdateRequest(cartIDs: newCartIds)
+        let ntfsRequest = СartUpdateRequest(cartIDs: newCartIds)
         networkClient?.send(request: ntfsRequest , type: UpdateCartDto.self)  { result in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
