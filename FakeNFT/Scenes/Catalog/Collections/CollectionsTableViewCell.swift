@@ -10,6 +10,7 @@ import Kingfisher
 
 final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
     
+    // MARK: - Elements
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.bodyBold
@@ -33,6 +34,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
     
     static let cellHeight: CGFloat = 179
     
+    // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCell()
@@ -42,6 +44,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup Methods
     private func setupCell() {
         hyerarchyUI()
         constraintUI()
@@ -79,6 +82,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         ])
     }
     
+    // MARK: - Configure Methods
     func configureCell(with collection: CollectionModel) {
         animatedGradient.isHidden = false
         animatedGradient.startAnimating()
@@ -100,6 +104,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         titleLabel.text = "\(collection.name) (\(quantity))"
     }
     
+    // MARK: - Support
     override func prepareForReuse() {
         super.prepareForReuse()
         imageCollection.kf.cancelDownloadTask()

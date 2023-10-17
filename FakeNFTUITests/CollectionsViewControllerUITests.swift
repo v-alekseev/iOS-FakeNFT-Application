@@ -19,12 +19,14 @@ class CollectionsViewControllerUITests: XCTestCase {
         app.launch()
     }
 
+    // MARK: - Table
     func testInitialUIElementsLoaded() {
         selectCatalogFromTabBar()
         let tableView = app.tables.firstMatch
         XCTAssertTrue(tableView.exists, "TableView должен отобразиться")
     }
 
+    // MARK: - Action Sheet
     func testFilterButtonTapShowsActionSheet() {
         selectCatalogFromTabBar()
         sleep(1)
@@ -37,6 +39,7 @@ class CollectionsViewControllerUITests: XCTestCase {
         XCTAssertTrue(byNameButton.exists, "Кнопка 'By name' должна существовать")
     }
     
+    // MARK: - Tab bar
     func selectCatalogFromTabBar() {
         let catalogTabBarItem = app.tabBars.buttons["Каталог"]
         XCTAssertTrue(catalogTabBarItem.exists, "Таб бар должен существовать")

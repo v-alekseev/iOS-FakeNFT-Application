@@ -32,7 +32,7 @@ final class CollectionsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - ViewDidLoad
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
@@ -49,7 +49,7 @@ final class CollectionsViewController: UIViewController {
         
     }
     
-    // MARK: - Private Methods
+    // MARK: - Setup Methods
     private func setupUI() {
         navigationItem.rightBarButtonItem = filterBarButtonItem
         view.addSubview(tableView)
@@ -74,6 +74,7 @@ final class CollectionsViewController: UIViewController {
         }()
     }
     
+    // MARK: - Objc Methods
     @objc
     private func filterButtonTapped() {
         print("filterButtonTapped")
@@ -85,9 +86,11 @@ final class CollectionsViewController: UIViewController {
         viewModel.handleNavigation(action: .pullToRefresh)
     }
     
+    // MARK: - Private Methods
     private func bind () {
         viewModel.bind(to: self)
     }
+    
     
     private func showSortSelector() {
         let alertController = UIAlertController(title: nil, message: L10n.Catalog.sort, preferredStyle: .actionSheet)
@@ -111,6 +114,7 @@ final class CollectionsViewController: UIViewController {
         present(alertController, animated: true)
     }
     
+    // MARK: - Rendering
     func renderState(state: CollectionsNavigationState) {
         switch state {
         case .base:
@@ -145,6 +149,7 @@ final class CollectionsViewController: UIViewController {
         }
     }
     
+    // MARK: - Alert Error
     private func showErrorAlert() {
         let alertPresenter = AlertPresenter()
         let alertModel = AlertModel(title: L10n.Alert.Error.title, message: L10n.Alert.Error.description, primaryButtonText: L10n.Alert.Error.retry) { [weak self] in
@@ -155,6 +160,7 @@ final class CollectionsViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension CollectionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.howManyCollections()

@@ -24,6 +24,7 @@ final class AnimatedGradientView: UIView {
         setupGradient()
     }
     
+    // MARK: - Setup
     func setupGradient() {
         gradientLayer.colors = [
             UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor,
@@ -42,6 +43,7 @@ final class AnimatedGradientView: UIView {
         layer.addSublayer(gradientLayer)
     }
 
+    // MARK: - Animations
     func startAnimating() {
         let animation = CAKeyframeAnimation(keyPath: "locations")
         animation.values = [

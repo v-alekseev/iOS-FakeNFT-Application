@@ -9,7 +9,7 @@ import UIKit
 
 final class SingleCollectionViewController: UIViewController {
 
-    // MARK: - Private Properties
+    // MARK: - Properties
     private var textLabel: UILabel = {
         var label = UILabel()
         label.text = "Отдельная коллекция NFT"

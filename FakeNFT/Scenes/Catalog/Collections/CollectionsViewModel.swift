@@ -9,6 +9,7 @@ import Foundation
 
 final class CollectionsViewModel: CollectionsViewModelProtocol {
     
+    // MARK: - Properties
     private var dataSource: NFTCollectionsDataSource?
     
     var navigationClosure: (CollectionsNavigationState) -> Void = {_ in }
@@ -26,6 +27,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         
     }
     
+    // MARK: - Answers
     func howManyCollections() -> Int {
         if let ds = dataSource {
             return ds.howManyCollections()
@@ -37,6 +39,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         return dataSource?.giveMeCollectionAt(index: indexPath.row, withSort: true)
     }
     
+    // MARK: - Refresh
     func refresh(isPullRefresh: Bool = false) {
         resultState = isPullRefresh ? .start : .loading
 
@@ -51,6 +54,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         }
     }
     
+    // MARK: - Handlers
     private func handleResult(_ result: Result<[CollectionModel], Error>) {
         switch result {
         case .success:
@@ -91,6 +95,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         }
     }
     
+    // MARK: - Binding
     func bind(to controller: CollectionsViewController) {
         self.navigationClosure = {[weak controller] state in
             guard let controller = controller else { return }

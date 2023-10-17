@@ -23,6 +23,7 @@ final class CollectionsViewControllerTests: XCTestCase {
         mockViewModel = nil
     }
 
+    // MARK: - Error
     func testViewModelReturnsError() {
         let expectation = self.expectation(description: "Ожидаем получение ошибки")
         

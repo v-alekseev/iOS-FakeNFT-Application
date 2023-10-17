@@ -14,6 +14,7 @@ final class NFTCollectionsDataSource {
     private var currentSortType: SortType?
     private let dataProvider: CatalogDataProviderProtocol
     
+    // MARK: - INIT
     init(
         dataProvider: CatalogDataProviderProtocol,
         completion: @escaping (Result<[CollectionModel], Error>) -> Void = {_ in }
@@ -43,6 +44,7 @@ final class NFTCollectionsDataSource {
         }
     }
     
+    // MARK: - Answers
     func giveMeAllCollections(isSorted: Bool = false) -> [CollectionModel] {
         return self.collections
     }
@@ -59,6 +61,7 @@ final class NFTCollectionsDataSource {
         }
     }
     
+    // MARK: - Reload
     func reloadCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void = {_ in }) {
         self.dataProvider.giveMeAllCollections() { [weak self] result in
             guard let self = self else { return }
@@ -80,6 +83,7 @@ final class NFTCollectionsDataSource {
         }
     }
     
+    // MARK: - Sort
     func sortCollectionsByName(inOrder: SortCases = .ascending ) {
         applySortType(.byName(order: inOrder))
         switch inOrder {
@@ -100,6 +104,7 @@ final class NFTCollectionsDataSource {
         }
     }
     
+    // MARK: - Save/Load
     private func saveSortType(_ type: SortType) {
         let value: String
         switch type {

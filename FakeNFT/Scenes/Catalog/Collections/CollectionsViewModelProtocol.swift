@@ -17,6 +17,7 @@ protocol CollectionsViewModelProtocol {
     func bind(to controller: CollectionsViewController)
 }
 
+// MARK: - Extensions
 extension CollectionsViewModelProtocol {
     func refresh() {
         refresh(isPullRefresh: false)
