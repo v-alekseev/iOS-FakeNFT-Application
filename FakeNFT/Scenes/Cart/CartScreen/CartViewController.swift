@@ -12,7 +12,7 @@ import ProgressHUD
 final class CartViewController: UIViewController {
     // MARK: - Private Properties
     //
-    private (set) var viewModel: CartViewModelProtocol? //CartViewModel()
+    private (set) var viewModel: CartViewModelProtocol?
     
     private lazy var bottomView: UIView = {
         var view = UIView()
@@ -69,13 +69,28 @@ final class CartViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private lazy var emptyCartLabel: UILabel = {
+        var label = UILabel()
+        label.font =  UIFont.bodyBold
+        label.text = "Корзина пуста"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     // MARK: - UIViewController(*)
     //
+    override func viewWillAppear(_ animated: Bool) {
+        if (viewModel?.order.count == 0 ) {
+            showLoader(true)
+            viewModel?.getOrder()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel?.delegate = self
-        viewModel?.cartDataProvider = CardDataProvider.shared
+       // viewModel?.initDataProvider() //  cartDataProvider = CardDataProvider.shared
         
         setupNavigationBar()
         setupUI()
@@ -87,12 +102,18 @@ final class CartViewController: UIViewController {
         configureRefreshControl()
         updateTotal()
         
-        showLoader(true)
-        viewModel?.getOrder()
+        hideCart(viewModel?.order.count == 0 )
+
     }
     
     // MARK: - Private Methods
     //
+    private func hideCart(_ isHidden: Bool) {
+        emptyCartLabel.isHidden = !isHidden
+        
+        cartTable.isHidden = isHidden
+        bottomView.isHidden = isHidden
+    }
     private func updateTotal() {
         countItemsLabel.text = "\(viewModel?.order.count ?? 00) NFT"
         totalAmountLabel.text = "\(String(format: "%.2f", viewModel?.totalPrice ?? 0)) ETH"
@@ -171,7 +192,7 @@ final class CartViewController: UIViewController {
             cartTable.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
         ])
         
-        view.addSubview(paymentButton)
+        bottomView.addSubview(paymentButton)
         NSLayoutConstraint.activate([
             paymentButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -16),
             paymentButton.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 16),
@@ -179,7 +200,7 @@ final class CartViewController: UIViewController {
             paymentButton.widthAnchor.constraint(equalToConstant: 240),
         ])
         
-        view.addSubview(countItemsLabel)
+        bottomView.addSubview(countItemsLabel)
         NSLayoutConstraint.activate([
             countItemsLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 16),
             countItemsLabel.trailingAnchor.constraint(equalTo: paymentButton.leadingAnchor, constant: -5),
@@ -187,13 +208,20 @@ final class CartViewController: UIViewController {
             countItemsLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 16)
         ])
         
-        view.addSubview(totalAmountLabel)
+        bottomView.addSubview(totalAmountLabel)
         NSLayoutConstraint.activate([
             totalAmountLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 16),
             totalAmountLabel.trailingAnchor.constraint(equalTo: paymentButton.leadingAnchor, constant: -5),
             totalAmountLabel.heightAnchor.constraint(equalToConstant: 22),
             totalAmountLabel.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -16)
         ])
+        
+        view.addSubview(emptyCartLabel)
+        NSLayoutConstraint.activate([
+            emptyCartLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyCartLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
         
     }
 }
@@ -204,6 +232,7 @@ extension CartViewController: CartViewModelDelegate {
     func didUpdateCart() {
         updateTotal()
         cartTable.reloadData()
+        hideCart(viewModel?.order.count == 0 )
         showLoader(false)
     }
     

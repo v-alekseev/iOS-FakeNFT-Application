@@ -14,7 +14,7 @@ protocol CartViewModelDelegate: AnyObject {
 
 protocol CartViewModelProtocol {
     var delegate: CartViewModelDelegate? {get set}
-    var cartDataProvider: CardDataProviderProtocol? {get set}
+    var cartDataProvider: CardDataProviderProtocol? {get}
     var order: [NftModel]  {get}
     var totalPrice: Double {get}
     
@@ -25,14 +25,7 @@ protocol CartViewModelProtocol {
 final class CartViewModel: CartViewModelProtocol {
     weak var delegate: CartViewModelDelegate?
     
-    var cartDataProvider: CardDataProviderProtocol? {
-        didSet {
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(didCartChaged(_:)),
-                                                   name: cartDataProvider?.orderChanged,
-                                                   object: nil)
-        }
-    }
+    private (set) var cartDataProvider: CardDataProviderProtocol?
     
     var totalPrice: Double  {
         get {
@@ -60,6 +53,14 @@ final class CartViewModel: CartViewModelProtocol {
     }
     
     private var currentFilter: Filters.FilterClosure = Filters.filterDefault
+    
+    init(dataProvider: CardDataProviderProtocol? = CardDataProvider.shared) {
+        self.cartDataProvider = dataProvider
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didCartChaged(_:)),
+                                               name: self.cartDataProvider?.orderChanged,
+                                               object: nil)
+    }
     
     @objc private func didCartChaged(_ notification: Notification) {
         guard let cartDataProvider = cartDataProvider  else {return}

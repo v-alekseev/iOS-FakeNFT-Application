@@ -52,8 +52,8 @@ final class CardDataProvider: CardDataProviderProtocol {
     
     let orderChanged = Notification.Name("CartUpdated")
     
-    var orderIDs: [String] = []
-    var order: [NftDto] = [] {
+    private (set) var orderIDs: [String] = []
+    private (set) var order: [NftDto] = [] {
         didSet {
             // если колличество загруженных nft равняется колличеству nftid, значит все запросы отработали и можно перегрузить отображать корзину
             if orderIDs.count == order.count {
