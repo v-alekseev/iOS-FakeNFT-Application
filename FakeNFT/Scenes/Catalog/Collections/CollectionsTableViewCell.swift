@@ -10,8 +10,21 @@ import Kingfisher
 
 final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
     
-    private let titleLabel = UILabel()
-    private let imageCollection = UIImageView()
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.bodyBold
+        label.textColor = .ypBlackWithDarkMode
+        return label
+    }()
+    
+    private let imageCollection: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 12
+        return imageView
+    }()
+    
     private let placeholderImage = UIImage(named: "CatPlaceholder")
     
     private lazy var animatedGradient: AnimatedGradientView = {
@@ -29,25 +42,26 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell() {
+    private func setupCell() {
+        hyerarchyUI()
+        constraintUI()
         self.selectionStyle = .none
         self.backgroundColor = .clear
-        titleLabel.font = UIFont.bodyBold
-        titleLabel.textColor = .ypBlackWithDarkMode
-        
-        imageCollection.layer.cornerRadius = 12
-        imageCollection.layer.masksToBounds = true
-        imageCollection.contentMode = .scaleAspectFill
+        animatedGradient.isHidden = true
+    }
+    
+    private func hyerarchyUI() {
         contentView.addSubview(imageCollection)
         contentView.addSubview(titleLabel)
-        animatedGradient.isHidden = true
         contentView.addSubview(animatedGradient)
+        
         imageCollection.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         animatedGradient.translatesAutoresizingMaskIntoConstraints = false
-
+    }
+    
+    private func constraintUI() {
         NSLayoutConstraint.activate([
-        
             imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
@@ -95,7 +109,6 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         let margins = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
         contentView.frame = contentView.frame.inset(by: margins)
         contentView.backgroundColor = .clear
