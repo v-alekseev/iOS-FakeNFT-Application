@@ -39,28 +39,24 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
     
     func refresh(isPullRefresh: Bool = false) {
         resultState = isPullRefresh ? .start : .loading
-        if let ds = dataSource {
-            
-            ds.reloadCollections() { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    self.resultState = .show
-                case .failure(let error):
-                    self.resultState = .error(error)
-                }
-            }
+
+        let completion: (Result<[CollectionModel], Error>) -> Void = { [weak self] result in
+            self?.handleResult(result)
+        }
+
+        if dataSource == nil {
+            dataSource = NFTCollectionsDataSource(dataProvider: CatalogDataProvider(), completion: completion)
         } else {
-            self.dataSource = NFTCollectionsDataSource(dataProvider: CatalogDataProvider()) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    self.resultState = .show
-                    print( self.resultState)
-                case .failure(let error):
-                    self.resultState = .error(error)
-                }
-            }
+            dataSource?.reloadCollections(completion: completion)
+        }
+    }
+    
+    private func handleResult(_ result: Result<[CollectionModel], Error>) {
+        switch result {
+        case .success:
+            self.resultState = .show
+        case .failure(let error):
+            self.resultState = .error(error)
         }
     }
     
