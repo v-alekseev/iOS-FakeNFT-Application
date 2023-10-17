@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum CollectionsNavigationState {
     case base
     case sortSelection

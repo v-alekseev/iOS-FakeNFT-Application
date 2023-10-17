@@ -18,6 +18,7 @@ final class CatalogDataRepositoryTests: XCTestCase {
         sut = CatalogDataProvider(client: mockClient)
     }
     
+    // MARK: - All collections
     func testGiveMeAllCollectionsReturnsCollections() {
         
         // Given
@@ -41,7 +42,8 @@ final class CatalogDataRepositoryTests: XCTestCase {
         XCTAssertNotNil(result)
         XCTAssertEqual(result.first?.name, "Test")
     }
-
+    
+    // MARK: - Single collection
     func testGiveMeCollectionReturnsCollection() {
         
         // Given

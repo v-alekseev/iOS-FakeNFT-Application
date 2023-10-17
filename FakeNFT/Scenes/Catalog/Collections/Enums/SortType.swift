@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum SortType {
     
     case byName(order: SortCases)

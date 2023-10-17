@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol CatalogDataProviderProtocol {
     func giveMeAllLikes() -> ProfileLikesModel?
     func setLikes(likes: [String])

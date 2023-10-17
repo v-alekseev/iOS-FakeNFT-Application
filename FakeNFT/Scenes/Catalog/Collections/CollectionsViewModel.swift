@@ -6,9 +6,11 @@
 //
 
 import Foundation
+
 final class CollectionsViewModel: CollectionsViewModelProtocol {
     
-    private var dataSource: NFTCollectionsDataSource? = nil
+    // MARK: - Properties
+    private var dataSource: DataProviderInteractorProtocol?
     
     var navigationClosure: (CollectionsNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionsNavigationState = .base {
@@ -22,9 +24,9 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         didSet {
             resultClosure(resultState)
         }
-        
     }
     
+    // MARK: - Answers
     func howManyCollections() -> Int {
         if let ds = dataSource {
             return ds.howManyCollections()
@@ -36,30 +38,28 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         return dataSource?.giveMeCollectionAt(index: indexPath.row, withSort: true)
     }
     
+    // MARK: - Refresh
     func refresh(isPullRefresh: Bool = false) {
         resultState = isPullRefresh ? .start : .loading
-        if let ds = dataSource {
-            
-            ds.reloadCollections() { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    self.resultState = .show
-                case .failure(let error):
-                    self.resultState = .error(error)
-                }
-            }
+
+        let completion: (Result<[CollectionModel], Error>) -> Void = { [weak self] result in
+            self?.handleResult(result)
+        }
+
+        if dataSource == nil {
+            dataSource = DataProviderInteractor(dataProvider: CatalogDataProvider(), completion: completion)
         } else {
-            self.dataSource = NFTCollectionsDataSource(dataProvider: CatalogDataProvider()) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    self.resultState = .show
-                    print( self.resultState)
-                case .failure(let error):
-                    self.resultState = .error(error)
-                }
-            }
+            dataSource?.reloadCollections(completion: completion)
+        }
+    }
+    
+    // MARK: - Handlers
+    private func handleResult(_ result: Result<[CollectionModel], Error>) {
+        switch result {
+        case .success:
+            self.resultState = .show
+        case .failure(let error):
+            self.resultState = .error(error)
         }
     }
     
@@ -94,6 +94,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         }
     }
     
+    // MARK: - Binding
     func bind(to controller: CollectionsViewController) {
         self.navigationClosure = {[weak controller] state in
             guard let controller = controller else { return }
@@ -110,7 +111,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         if dataSource != nil {
             return NFTViewModel(dataSource: dataSource!)
         } else {
-            let ds = NFTCollectionsDataSource(dataProvider: CatalogDataProvider()) { _ in }
+            let ds = DataProviderInteractor(dataProvider: CatalogDataProvider()) { _ in }
             return NFTViewModel(dataSource: ds)
         }
     }

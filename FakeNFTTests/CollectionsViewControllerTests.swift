@@ -8,7 +8,7 @@
 import XCTest
 @testable import FakeNFT
 
-class CollectionsViewControllerTests: XCTestCase {
+final class CollectionsViewControllerTests: XCTestCase {
     var viewController: CollectionsViewController!
     var mockViewModel: MockCollectionsViewModel!
 
@@ -23,6 +23,7 @@ class CollectionsViewControllerTests: XCTestCase {
         mockViewModel = nil
     }
 
+    // MARK: - Error
     func testViewModelReturnsError() {
         let expectation = self.expectation(description: "Ожидаем получение ошибки")
         

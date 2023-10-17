@@ -7,7 +7,7 @@
 
 import Foundation
 final class NFTViewModel: NFTViewModelProtocol {
-    private var dataSource: NFTCollectionsDataSource
+    private var dataSource: DataProviderInteractorProtocol
     
     var navigationClosure: (NFTNavigationState) -> Void = {_ in }
     private (set) var navigationState: NFTNavigationState = .base {
@@ -16,7 +16,7 @@ final class NFTViewModel: NFTViewModelProtocol {
         }
     }
     
-    init(dataSource: NFTCollectionsDataSource) {
+    init(dataSource: DataProviderInteractorProtocol) {
         self.dataSource = dataSource
     }
 }

@@ -7,15 +7,34 @@
 
 import UIKit
 import Kingfisher
-final class CollectionsTableViewCell: UITableViewCell {
-    private let titleLabel = UILabel()
-    private let imageCollection = UIImageView()
+
+final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
+    
+    // MARK: - Elements
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.bodyBold
+        label.textColor = .ypBlackWithDarkMode
+        return label
+    }()
+    
+    private let imageCollection: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 12
+        return imageView
+    }()
+    
     private let placeholderImage = UIImage(named: "CatPlaceholder")
+    
     private lazy var animatedGradient: AnimatedGradientView = {
         return AnimatedGradientView(frame: self.bounds, cornerRadius: 12)
     }()
+    
     static let cellHeight: CGFloat = 179
     
+    // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCell()
@@ -25,41 +44,45 @@ final class CollectionsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell() {
+    // MARK: - Setup Methods
+    private func setupCell() {
+        hyerarchyUI()
+        constraintUI()
         self.selectionStyle = .none
-        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        titleLabel.textColor = .ypBlackWithDarkMode
-        
-        imageCollection.layer.cornerRadius = 12
-        imageCollection.layer.masksToBounds = true
-        imageCollection.contentMode = .scaleAspectFill
+        self.backgroundColor = .clear
+        animatedGradient.isHidden = true
+    }
+    
+    private func hyerarchyUI() {
         contentView.addSubview(imageCollection)
         contentView.addSubview(titleLabel)
-        animatedGradient.isHidden = true
         contentView.addSubview(animatedGradient)
+        
         imageCollection.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         animatedGradient.translatesAutoresizingMaskIntoConstraints = false
-
+    }
+    
+    private func constraintUI() {
         NSLayoutConstraint.activate([
-        
-            imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
             imageCollection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             imageCollection.heightAnchor.constraint(equalToConstant: 140),
             
-            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
             animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             animatedGradient.heightAnchor.constraint(equalToConstant: 140),
             
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             titleLabel.topAnchor.constraint(equalTo: imageCollection.bottomAnchor, constant: 4),
         ])
     }
     
+    // MARK: - Configure Methods
     func configureCell(with collection: CollectionModel) {
         animatedGradient.isHidden = false
         animatedGradient.startAnimating()
@@ -81,6 +104,7 @@ final class CollectionsTableViewCell: UITableViewCell {
         titleLabel.text = "\(collection.name) (\(quantity))"
     }
     
+    // MARK: - Support
     override func prepareForReuse() {
         super.prepareForReuse()
         imageCollection.kf.cancelDownloadTask()
@@ -90,10 +114,8 @@ final class CollectionsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         let margins = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
         contentView.frame = contentView.frame.inset(by: margins)
-        contentView.backgroundColor = .white
-        }
-    
+        contentView.backgroundColor = .clear
+    }
 }

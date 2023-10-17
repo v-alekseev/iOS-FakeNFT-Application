@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol CollectionsViewModelProtocol {
     var navigationClosure: ((CollectionsNavigationState) -> Void) { get set }
     var resultClosure: ((CollectionsResultState) -> Void) { get set }
@@ -17,6 +18,7 @@ protocol CollectionsViewModelProtocol {
     func giveMeNFTViewModel() -> NFTViewModelProtocol
 }
 
+// MARK: - Extensions
 extension CollectionsViewModelProtocol {
     func refresh() {
         refresh(isPullRefresh: false)

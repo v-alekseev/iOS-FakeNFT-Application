@@ -6,7 +6,8 @@
 //
 
 import UIKit
-class AnimatedGradientView: UIView {
+
+final class AnimatedGradientView: UIView {
     
     private var cornerRadiusValue: CGFloat = 0.0
     
@@ -23,6 +24,7 @@ class AnimatedGradientView: UIView {
         setupGradient()
     }
     
+    // MARK: - Setup
     func setupGradient() {
         gradientLayer.colors = [
             UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1).cgColor,
@@ -41,6 +43,7 @@ class AnimatedGradientView: UIView {
         layer.addSublayer(gradientLayer)
     }
 
+    // MARK: - Animations
     func startAnimating() {
         let animation = CAKeyframeAnimation(keyPath: "locations")
         animation.values = [
@@ -63,8 +66,6 @@ class AnimatedGradientView: UIView {
         animation.repeatCount = .infinity
         gradientLayer.add(animation, forKey: "locationsChange")
     }
-
-
 
     func stopAnimating() {
         gradientLayer.removeAnimation(forKey: "locationsChange")

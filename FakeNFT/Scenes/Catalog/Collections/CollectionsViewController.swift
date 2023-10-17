@@ -10,6 +10,7 @@ import UIKit
 import ProgressHUD
 
 final class CollectionsViewController: UIViewController {
+    
     private var viewModel: CollectionsViewModelProtocol
     private var filterBarButtonItem: UIBarButtonItem?
     private let refreshControl = UIRefreshControl()
@@ -17,6 +18,7 @@ final class CollectionsViewController: UIViewController {
     private let tableView: UITableView = {
         let tv = UITableView()
         tv.separatorStyle = .none
+        tv.backgroundColor = .clear
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
@@ -30,7 +32,7 @@ final class CollectionsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - ViewDidLoad
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
@@ -39,22 +41,22 @@ final class CollectionsViewController: UIViewController {
         setupUI()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(CollectionsTableViewCell.self, forCellReuseIdentifier: "CollectionCell")
+        tableView.register(CollectionsTableViewCell.self)
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
-        view.backgroundColor = .white
+        view.backgroundColor = .ypWhiteWithDarkMode
         print("CatalogViewController viewDidLoad")
         
     }
     
-    // MARK: - Private Methods
+    // MARK: - Setup Methods
     private func setupUI() {
         navigationItem.rightBarButtonItem = filterBarButtonItem
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
     }
@@ -72,6 +74,7 @@ final class CollectionsViewController: UIViewController {
         }()
     }
     
+    // MARK: - Objc Methods
     @objc
     private func filterButtonTapped() {
         print("filterButtonTapped")
@@ -83,6 +86,7 @@ final class CollectionsViewController: UIViewController {
         viewModel.handleNavigation(action: .pullToRefresh)
     }
     
+    // MARK: - Private Methods
     private func bind () {
         viewModel.bind(to: self)
     }
@@ -110,6 +114,7 @@ final class CollectionsViewController: UIViewController {
         present(alertController, animated: true)
     }
     
+    // MARK: - Rendering
     func renderState(state: CollectionsNavigationState) {
         switch state {
         case .base:
@@ -144,6 +149,7 @@ final class CollectionsViewController: UIViewController {
         }
     }
     
+    // MARK: - Alert Error
     private func showErrorAlert() {
         let alertPresenter = AlertPresenter()
         let alertModel = AlertModel(title: L10n.Alert.Error.title, message: L10n.Alert.Error.description, primaryButtonText: L10n.Alert.Error.retry) { [weak self] in
@@ -154,13 +160,14 @@ final class CollectionsViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension CollectionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.howManyCollections()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath) as! CollectionsTableViewCell
+        let cell: CollectionsTableViewCell = tableView.dequeueReusableCell()
         guard let model = viewModel.getCollection(at: indexPath) else { return cell }
         cell.configureCell(with: model)
         return cell
