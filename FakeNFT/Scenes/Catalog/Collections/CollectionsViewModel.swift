@@ -24,7 +24,6 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         didSet {
             resultClosure(resultState)
         }
-        
     }
     
     // MARK: - Answers
