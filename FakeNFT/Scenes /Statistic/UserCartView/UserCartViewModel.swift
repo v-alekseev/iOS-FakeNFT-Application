@@ -11,8 +11,24 @@ import Combine
 final class UserCartViewModel {
     
     @Published var actualUserData: UserModel
-    @Published var dataLoad: Bool
-    @Published var possibleError: Error?
+    @Published var isLoading = true
+    @Published var needShowCollectionScreen = false
+    @Published var needShowWebsite = false
+    @Published var loadError = false
+    
+    var didTapCollectionButton = false {
+        didSet { if didTapCollectionButton {
+            needShowCollectionScreen = true
+            didTapCollectionButton = false}
+        }
+    }
+    
+    var didTapWebsiteButton = false {
+        didSet { if didTapWebsiteButton {
+            needShowWebsite = true
+            didTapWebsiteButton = false}
+        }
+    }
     
     private let dataProvider: StatisticDataProviderProtocol?
     
@@ -25,20 +41,21 @@ final class UserCartViewModel {
                                    nfts: [""],
                                    rating: "",
                                    id: userID)
-        possibleError = nil
-        dataLoad = true
-        
-        dataProvider.getActualUserData(id: userID) { [weak self] result in
+        loadUserData()
+    }
+    
+    func loadUserData() {
+        loadError = false
+        dataProvider?.getActualUserData(id: actualUserData.id) { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
                     self.actualUserData = data
-                case let .failure(error):
-                    self.possibleError = error
-                    print(error)
+                case .failure(_):
+                    self.loadError = true
                 }
-                self.dataLoad = false
+                self.isLoading = false
             }
         }
     }

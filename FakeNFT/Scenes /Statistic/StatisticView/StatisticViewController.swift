@@ -53,7 +53,7 @@ final class StatisticViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] _ in
                 if let error = self?.viewModel.possibleError {
-                    self?.alertPresenter.showAlert(self, alert: error.localizedDescription)
+                    self?.alertPresenter.showAlert(self) //, alert: error.localizedDescription)
                 }
             })
             .store(in: &subscribesPossibleError)
@@ -155,7 +155,7 @@ extension StatisticViewController: UITableViewDelegate {
         let dataProvider = StatisticDataProvider()
         let viewModel = UserCartViewModel(dataProvider: dataProvider,
                                           userID: viewModel.usersData[indexPath.row].id)
-        let userCardViewController = UserCardViewController(viewModel)
+        let userCardViewController = UserCartViewController(viewModel)
         tabBarController?.tabBar.isHidden = true
         navigationController?.pushViewController(userCardViewController, animated: true)
         

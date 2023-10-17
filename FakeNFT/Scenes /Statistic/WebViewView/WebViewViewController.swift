@@ -30,7 +30,7 @@ final class WebViewViewController: UIViewController {
         if let weburl = URL(string: url) {
             webView.load(URLRequest(url: weburl))
         } else {
-            alertPresenter.showAlert(self, alert: "Неверный адрес web-страницы")
+            alertPresenter.showAlert(self)
         }
     }
     
