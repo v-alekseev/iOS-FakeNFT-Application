@@ -57,6 +57,7 @@ final class StatisticViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] selectedRow in
                 self?.viewModel.rowForOpenUserCard = selectedRow
+                print(selectedRow)
             })
             .store(in: &bindings)
         
@@ -87,14 +88,11 @@ final class StatisticViewController: UIViewController {
             })
             .store(in: &bindings)
         
-        viewModel.$needOpenUserCardWithID
+        viewModel.$actualUserData
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] userID in
-                guard let userID else { return }
-                let dataProvider = StatisticDataProvider()
-                let viewModel = UserCardViewModel(dataProvider: dataProvider,
-                                                  userID: userID)
-                let userCardViewController = UserCardViewController(viewModel)
+            .sink(receiveValue: {[weak self] actualUserData in
+                guard let actualUserData else { return }
+                let userCardViewController = UserCardViewController(actualUserData)
                 self?.tabBarController?.tabBar.isHidden = true
                 self?.navigationController?.pushViewController(userCardViewController, animated: true)
             })

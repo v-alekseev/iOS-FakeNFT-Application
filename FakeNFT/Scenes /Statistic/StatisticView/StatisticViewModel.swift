@@ -12,7 +12,7 @@ final class StatisticViewModel {
     
     @Published var usersData: [UserModel]
     @Published var isLoading = false
-    @Published var needOpenUserCardWithID: String?
+    @Published var actualUserData: UserModel?
     @Published var loadError = false
     
     private let dataProvider: StatisticDataProviderProtocol?
@@ -21,8 +21,7 @@ final class StatisticViewModel {
     var rowForOpenUserCard: Int? = nil {
         didSet {
             guard let rowForOpenUserCard else { return }
-            let userID = usersData[rowForOpenUserCard].id
-            needOpenUserCardWithID = "\(userID)"
+            actualUserData = usersData[rowForOpenUserCard]
         }
     }
     

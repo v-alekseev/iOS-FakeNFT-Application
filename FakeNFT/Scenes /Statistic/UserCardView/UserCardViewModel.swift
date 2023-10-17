@@ -11,10 +11,8 @@ import Combine
 final class UserCardViewModel {
     
     @Published var actualUserData: UserModel
-    @Published var isLoading = false
     @Published var needShowCollectionScreen = false
     @Published var needShowWebsite = false
-    @Published var loadError = false
     
     var didTapCollectionButton = false {
         didSet { if didTapCollectionButton {
@@ -30,34 +28,7 @@ final class UserCardViewModel {
         }
     }
     
-    private let dataProvider: StatisticDataProviderProtocol?
-    
-    init(dataProvider: StatisticDataProviderProtocol, userID: String) {
-        self.dataProvider = dataProvider
-        actualUserData = UserModel(name: "",
-                                   avatar: "",
-                                   description: "",
-                                   website: "",
-                                   nfts: [""],
-                                   rating: "",
-                                   id: userID)
-        loadUserData()
-    }
-    
-    func loadUserData() {
-        isLoading = true
-        loadError = false
-        dataProvider?.getActualUserData(id: actualUserData.id) { [weak self] result in
-            guard let self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(data):
-                    self.actualUserData = data
-                case .failure(_):
-                    self.loadError = true
-                }
-                self.isLoading = false
-            }
-        }
+    init(userData: UserModel) {
+        actualUserData = userData
     }
 }

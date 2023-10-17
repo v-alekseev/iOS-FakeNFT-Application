@@ -24,7 +24,6 @@ final class UserCardView: UIView {
     private lazy var collectionButton = createCollectionButton()
     private lazy var websiteButton = createWebsiteButton()
     private lazy var loadIndicator = createActivityIndicator()
-    private lazy var userAvatarStub = UIImage(named: "userAvatarStub")
     
     init() {
         super.init(frame: .zero)
@@ -91,7 +90,6 @@ final class UserCardView: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 35
-        imageView.image = userAvatarStub
         return imageView
     }
     

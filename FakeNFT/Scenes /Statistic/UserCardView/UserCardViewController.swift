@@ -13,15 +13,14 @@ final class UserCardViewController: UIViewController {
     
     private let contentView = UserCardView()
     private let viewModel: UserCardViewModel
-    private let alertPresenter = AlertPresenter.shared
     private var bindings = Set<AnyCancellable>()
-    private var userID: String
-    private var weburl: String
+    private var actualUserData: UserModel
+    private lazy var userAvatarStub = UIImage(named: "userAvatarStub")
     
-    init(_ viewModel: UserCardViewModel) {
-        self.viewModel = viewModel
-        self.userID = viewModel.actualUserData.id
-        self.weburl = viewModel.actualUserData.website
+    init(_ actualUserData: UserModel) {
+        self.viewModel = UserCardViewModel(userData: actualUserData)
+        self.actualUserData = actualUserData
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -40,6 +39,15 @@ final class UserCardViewController: UIViewController {
         leftBarButton.tintColor = .ypBlackWithDarkMode
         navigationItem.leftBarButtonItem  = leftBarButton
         
+        contentView.nameLabel.text = actualUserData.name
+        contentView.descriptionLabel.text = actualUserData.description
+        contentView.nftsCountLabel.text = ("Коллекция NFT (\(actualUserData.nfts.count))")
+        contentView.avatarView.kf.indicatorType = .activity
+        contentView.avatarView.kf.setImage(with: URL(string: actualUserData.avatar),
+                                                 placeholder: userAvatarStub,
+                                                 options: [.transition(.fade(1)),
+                                                           .forceRefresh])
+        
         bindViewToViewModel()
         bindViewModelToView()
     }
@@ -57,23 +65,6 @@ final class UserCardViewController: UIViewController {
     
     func bindViewModelToView() {
         
-        viewModel.$actualUserData
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] actualUserData in
-                self?.contentView.nameLabel.text = actualUserData.name
-                self?.contentView.descriptionLabel.text = actualUserData.description
-                self?.contentView.nftsCountLabel.text = ("Коллекция NFT (\(actualUserData.nfts.count))")
-                self?.weburl = actualUserData.website
-                if  let url = URL(string: actualUserData.avatar) {
-                    self?.contentView.avatarView.kf.setImage(with: url)
-                }
-            })
-            .store(in: &bindings)
-        
-        viewModel.$isLoading
-            .assign(to: \.isLoading, on: contentView)
-            .store(in: &bindings)
-        
         viewModel.$needShowCollectionScreen
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] needShowCollectionScreen in
@@ -88,22 +79,12 @@ final class UserCardViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] needShowWebsite in
                 if needShowWebsite {
-                    let webViewViewController = WebViewViewController(self?.weburl ?? "")
+                    let webViewViewController = WebViewViewController(self?.actualUserData.website ?? "")
                     self?.navigationController?.pushViewController(webViewViewController, animated: true)
                 }
             })
             .store(in: &bindings)
         
-        viewModel.$loadError
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] loadError in
-                if loadError {
-                    self?.alertPresenter.showAlert(self) {_ in
-                        self?.viewModel.loadUserData()
-                    }
-                }
-            })
-            .store(in: &bindings)
     }
     
     @objc
