@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class NFTCollectionsDataSource {
+final class DataProviderInteractor: DataProviderInteractorProtocol {
     
     private let sortTypeKey = "selectedSortType"
     private var collections: [CollectionModel]

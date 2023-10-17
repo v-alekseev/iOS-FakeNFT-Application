@@ -10,7 +10,7 @@ import Foundation
 final class CollectionsViewModel: CollectionsViewModelProtocol {
     
     // MARK: - Properties
-    private var dataSource: NFTCollectionsDataSource?
+    private var dataSource: DataProviderInteractorProtocol?
     
     var navigationClosure: (CollectionsNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionsNavigationState = .base {
@@ -48,7 +48,7 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         }
 
         if dataSource == nil {
-            dataSource = NFTCollectionsDataSource(dataProvider: CatalogDataProvider(), completion: completion)
+            dataSource = DataProviderInteractor(dataProvider: CatalogDataProvider(), completion: completion)
         } else {
             dataSource?.reloadCollections(completion: completion)
         }
