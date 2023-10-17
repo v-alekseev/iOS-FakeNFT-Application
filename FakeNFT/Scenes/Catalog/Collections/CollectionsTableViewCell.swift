@@ -28,7 +28,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
     func setupCell() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
-        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        titleLabel.font = UIFont.bodyBold
         titleLabel.textColor = .ypBlackWithDarkMode
         
         imageCollection.layer.cornerRadius = 12

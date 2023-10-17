@@ -8,7 +8,7 @@
 import XCTest
 @testable import FakeNFT
 
-class CollectionsViewControllerTests: XCTestCase {
+final class CollectionsViewControllerTests: XCTestCase {
     var viewController: CollectionsViewController!
     var mockViewModel: MockCollectionsViewModel!
 
