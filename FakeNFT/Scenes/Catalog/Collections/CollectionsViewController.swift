@@ -40,7 +40,7 @@ final class CollectionsViewController: UIViewController {
         setupUI()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(CollectionsTableViewCell.self, forCellReuseIdentifier: "CollectionCell")
+        tableView.register(CollectionsTableViewCell.self)
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
         view.backgroundColor = .ypWhiteWithDarkMode
@@ -161,7 +161,7 @@ extension CollectionsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath) as! CollectionsTableViewCell
+        let cell: CollectionsTableViewCell = tableView.dequeueReusableCell()
         guard let model = viewModel.getCollection(at: indexPath) else { return cell }
         cell.configureCell(with: model)
         return cell

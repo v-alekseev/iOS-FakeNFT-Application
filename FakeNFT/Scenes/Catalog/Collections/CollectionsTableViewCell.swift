@@ -7,7 +7,7 @@
 
 import UIKit
 import Kingfisher
-final class CollectionsTableViewCell: UITableViewCell {
+final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
     private let titleLabel = UILabel()
     private let imageCollection = UIImageView()
     private let placeholderImage = UIImage(named: "CatPlaceholder")
