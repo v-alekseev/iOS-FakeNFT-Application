@@ -1,5 +1,5 @@
 //
-//  UserCartViewModel.swift
+//  UserCardViewModel.swift
 //  FakeNFT
 //
 //  Created by Александр Пичугин on 12.10.2023.
@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-final class UserCartViewModel {
+final class UserCardViewModel {
     
     @Published var actualUserData: UserModel
-    @Published var isLoading = true
+    @Published var isLoading = false
     @Published var needShowCollectionScreen = false
     @Published var needShowWebsite = false
     @Published var loadError = false
@@ -45,6 +45,7 @@ final class UserCartViewModel {
     }
     
     func loadUserData() {
+        isLoading = true
         loadError = false
         dataProvider?.getActualUserData(id: actualUserData.id) { [weak self] result in
             guard let self else { return }

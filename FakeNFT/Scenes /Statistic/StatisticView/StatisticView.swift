@@ -10,19 +10,28 @@ import Combine
 
 final class StatisticView: UIView {
     
-    @Published var didRefreshTable = false
+    @Published var needRefreshTable = false
+    @Published var selectedRow: Int?
     
     var isLoading: Bool = false {
-            didSet { isLoading ? loadIndicator.startAnimating() : loadIndicator.stopAnimating() }
-        }
+        didSet { if isLoading {
+            if let refreshing = tableView.refreshControl?.isRefreshing,
+               !refreshing {
+                loadIndicator.startAnimating()
+            }
+        } else {
+            loadIndicator.stopAnimating()
+            tableView.refreshControl?.endRefreshing()
+        } }
+    }
     
-    private var usersData: [UserModel] = []
+    var usersData: [UserModel] = []
     private lazy var tableView = createTableView()
     private lazy var loadIndicator = createActivityIndicator()
     
     init() {
         super.init(frame: .zero)
-
+        
         setUpViews()
     }
     
@@ -50,6 +59,10 @@ final class StatisticView: UIView {
         ])
     }
     
+    func reloadTable() {
+        tableView.reloadData()
+    }
+    
     private func createTableView() -> UITableView {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
@@ -69,7 +82,7 @@ final class StatisticView: UIView {
     }
     
     @objc func refreshTable() {
-        didRefreshTable = true
+        needRefreshTable = true
     }
     
 }
@@ -96,7 +109,7 @@ extension StatisticView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        selectedRow = indexPath.row
     }
     
 }

@@ -2,7 +2,7 @@
 //  StatisticViewController.swift
 //  FakeNFT
 //
-//  Created by Александр Пичугин on 08.10.2023.
+//  Created by Александр Пичугин on 17.10.2023.
 //
 
 import UIKit
@@ -10,13 +10,10 @@ import Combine
 
 final class StatisticViewController: UIViewController {
     
-    private lazy var tableView = createTableView()
-    private lazy var loadIndicator = createActivityIndicator()
+    private let contentView = StatisticView()
     private let viewModel: StatisticViewModel
-    private var subscribesDataLoad = [AnyCancellable]()
-    private var subscribesUsersData = [AnyCancellable]()
-    private var subscribesPossibleError = [AnyCancellable]()
     private var alertPresenter = AlertPresenter.shared
+    private var bindings = Set<AnyCancellable>()
     
     init(_ viewModel: StatisticViewModel) {
         self.viewModel = viewModel
@@ -27,44 +24,10 @@ final class StatisticViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewModel.$dataLoad
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] _ in
-                if self?.viewModel.dataLoad == true {
-                    self?.loadIndicator.startAnimating()
-                } else {
-                    self?.loadIndicator.stopAnimating()
-                    self?.tableView.refreshControl?.endRefreshing()
-                }
-            })
-            .store(in: &subscribesDataLoad)
-        
-        viewModel.$usersData
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] _ in
-                self?.tableView.reloadData()
-            })
-            .store(in: &subscribesUsersData)
-        
-        viewModel.$possibleError
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] _ in
-                if let error = self?.viewModel.possibleError {
-                    self?.alertPresenter.showAlert(self) //, alert: error.localizedDescription)
-                }
-            })
-            .store(in: &subscribesPossibleError)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-    }
-    
-    private func setupView() {
+        
+        view = contentView
         
         let filterButton = UIBarButtonItem(image: UIImage(named: "filterButton"),
                                            style: .plain,
@@ -73,41 +36,69 @@ final class StatisticViewController: UIViewController {
         filterButton.tintColor = .ypBlackWithDarkMode
         navigationItem.rightBarButtonItem  = filterButton
         
-        view.backgroundColor = .ypWhiteWithDarkMode
-        view.addSubview(tableView)
-        view.addSubview(loadIndicator)
+        bindViewToViewModel()
+        bindViewModelToView()
         
-        NSLayoutConstraint.activate([
-            
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            loadIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            loadIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
-            
-        ])
     }
     
-    private func createTableView() -> UITableView {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .clear
-        tableView.register(StatisticCell.self)
-        tableView.separatorStyle = .none
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
-        return tableView
+    func bindViewToViewModel() {
+        
+        contentView.$needRefreshTable
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] needRefreshTable in
+                if needRefreshTable {
+                    self?.viewModel.loadUsersData()
+                    self?.contentView.needRefreshTable = false
+                }
+            })
+            .store(in: &bindings)
+        
+        contentView.$selectedRow
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] selectedRow in
+                self?.viewModel.rowForOpenUserCard = selectedRow
+            })
+            .store(in: &bindings)
+        
     }
     
-    private func createActivityIndicator() -> UIActivityIndicatorView {
-        let indicator = UIActivityIndicatorView()
-        indicator.hidesWhenStopped = true
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        return indicator
+    func bindViewModelToView() {
+        
+        viewModel.$usersData
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] usersData in
+                self?.contentView.usersData = usersData
+                self?.contentView.reloadTable()
+            })
+            .store(in: &bindings)
+        
+        viewModel.$isLoading
+            .assign(to: \.isLoading, on: contentView)
+            .store(in: &bindings)
+        
+        viewModel.$loadError
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] loadError in
+                if loadError {
+                    self?.alertPresenter.showAlert(self) {_ in
+                        self?.viewModel.loadUsersData()
+                    }
+                }
+            })
+            .store(in: &bindings)
+        
+        viewModel.$needOpenUserCardWithID
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] userID in
+                guard let userID else { return }
+                let dataProvider = StatisticDataProvider()
+                let viewModel = UserCardViewModel(dataProvider: dataProvider,
+                                                  userID: userID)
+                let userCardViewController = UserCardViewController(viewModel)
+                self?.tabBarController?.tabBar.isHidden = true
+                self?.navigationController?.pushViewController(userCardViewController, animated: true)
+            })
+            .store(in: &bindings)
     }
     
     @objc
@@ -123,42 +114,5 @@ final class StatisticViewController: UIViewController {
         present(controller, animated: true)
     }
     
-    @objc func refreshTable() {
-        viewModel.loadUserData()
-    }
-    
 }
 
-extension StatisticViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.usersData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: StatisticCell.defaultReuseIdentifier,
-            for: indexPath) as? StatisticCell
-        cell?.provide(userData: viewModel.usersData[indexPath.row])
-        return cell ?? StatisticCell()
-    }
-}
-
-extension StatisticViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        88
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let dataProvider = StatisticDataProvider()
-        let viewModel = UserCartViewModel(dataProvider: dataProvider,
-                                          userID: viewModel.usersData[indexPath.row].id)
-        let userCardViewController = UserCartViewController(viewModel)
-        tabBarController?.tabBar.isHidden = true
-        navigationController?.pushViewController(userCardViewController, animated: true)
-        
-    }
-    
-}

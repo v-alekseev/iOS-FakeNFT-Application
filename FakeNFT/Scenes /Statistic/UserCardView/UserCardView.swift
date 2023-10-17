@@ -1,5 +1,5 @@
 //
-//  UserCartView.swift
+//  UserCardView.swift
 //  FakeNFT
 //
 //  Created by Александр Пичугин on 16.10.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class UserCartView: UIView {
+final class UserCardView: UIView {
     
     @Published var didTapCollectionButton = false
     @Published var didTapWebsiteButton = false
@@ -148,7 +148,7 @@ final class UserCartView: UIView {
     }
 }
 
-extension UserCartView {
+extension UserCardView {
     private enum Constants {
         static let offset_16: CGFloat = 16
         static let offset_20: CGFloat = 20

@@ -11,21 +11,30 @@ import Combine
 final class StatisticViewModel {
     
     @Published var usersData: [UserModel]
-    @Published var dataLoad: Bool
-    @Published var possibleError: Error?
+    @Published var isLoading = false
+    @Published var needOpenUserCardWithID: String?
+    @Published var loadError = false
     
     private let dataProvider: StatisticDataProviderProtocol?
     private let filtrationType = FiltrationTypeStorage()
     
+    var rowForOpenUserCard: Int? = nil {
+        didSet {
+            guard let rowForOpenUserCard else { return }
+            let userID = usersData[rowForOpenUserCard].id
+            needOpenUserCardWithID = "\(userID)"
+        }
+    }
+    
     init(dataProvider: StatisticDataProviderProtocol) {
         self.dataProvider = dataProvider
         self.usersData = []
-        dataLoad = true
-        loadUserData()
+        loadUsersData()
     }
     
-    func loadUserData() {
-        possibleError = nil
+    func loadUsersData() {
+        isLoading = true
+        loadError = false
         dataProvider?.getUsersData() { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
@@ -37,10 +46,10 @@ final class StatisticViewModel {
                     } else {
                         self.provideRatingFilter()
                     }
-                case let .failure(error):
-                    self.possibleError = error
+                case .failure(_):
+                    self.loadError = true
                 }
-                self.dataLoad = false
+                self.isLoading = false
             }
         }
     }

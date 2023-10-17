@@ -1,5 +1,5 @@
 //
-//  UserCartViewController.swift
+//  UserCardViewController.swift
 //  FakeNFT
 //
 //  Created by Александр Пичугин on 08.10.2023.
@@ -9,16 +9,16 @@ import UIKit
 import Kingfisher
 import Combine
 
-final class UserCartViewController: UIViewController {
+final class UserCardViewController: UIViewController {
     
-    private let contentView = UserCartView()
-    private let viewModel: UserCartViewModel
+    private let contentView = UserCardView()
+    private let viewModel: UserCardViewModel
     private let alertPresenter = AlertPresenter.shared
     private var bindings = Set<AnyCancellable>()
     private var userID: String
     private var weburl: String
     
-    init(_ viewModel: UserCartViewModel) {
+    init(_ viewModel: UserCardViewModel) {
         self.viewModel = viewModel
         self.userID = viewModel.actualUserData.id
         self.weburl = viewModel.actualUserData.website
