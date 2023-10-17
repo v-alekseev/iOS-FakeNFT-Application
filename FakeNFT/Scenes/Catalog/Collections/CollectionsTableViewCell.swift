@@ -44,19 +44,19 @@ final class CollectionsTableViewCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
         
-            imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
             imageCollection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             imageCollection.heightAnchor.constraint(equalToConstant: 140),
             
-            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
             animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             animatedGradient.heightAnchor.constraint(equalToConstant: 140),
             
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             titleLabel.topAnchor.constraint(equalTo: imageCollection.bottomAnchor, constant: 4),
         ])
     }
