@@ -31,6 +31,18 @@ internal enum L10n {
     /// Цена
     internal static let priceLabelName = L10n.tr("Localizable", "cart.price_label_name", fallback: "Цена")
   }
+  internal enum Filter {
+    /// По имени
+    internal static let byName = L10n.tr("Localizable", "filter.byName", fallback: "По имени")
+    /// По цене
+    internal static let byPrice = L10n.tr("Localizable", "filter.byPrice", fallback: "По цене")
+    /// По рейтингу
+    internal static let byRating = L10n.tr("Localizable", "filter.byRating", fallback: "По рейтингу")
+    /// Сортировка
+    internal static let caption = L10n.tr("Localizable", "filter.caption", fallback: "Сортировка")
+    /// Закрыть
+    internal static let close = L10n.tr("Localizable", "filter.close", fallback: "Закрыть")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

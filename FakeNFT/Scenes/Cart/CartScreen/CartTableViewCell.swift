@@ -9,14 +9,17 @@ import Foundation
 import UIKit
 import Kingfisher
 
+protocol CartTableViewCellDelegate: AnyObject {
+    func didDeleteButtonPressed(id: String, image: UIImage)
+}
 
 final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
-    //NFTcard
     // MARK: - Consts
-    //static let cellID = "cartCell"
-    //static var defaultReuseIdentifier = "cartCall"
     
     private lazy var placeholderImage = UIImage(resource: .nftNo)
+    weak var delegate: CartTableViewCellDelegate?
+    
+    private var nftID: String = ""
     
     private lazy var canvasView: UIView = {
         let view = UIView()
@@ -83,14 +86,15 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupUI()
-        setup(imageUrl: URL(string: ""), name: "-", rank: 0, price: "0 ETH")
+        setup(imageUrl: URL(string: ""), name: "-", rank: 0, price: "0 ETH", id: "0")
     }
     
-    func setup(imageUrl: URL?, name: String, rank: Int, price: String ) {
+    func setup(imageUrl: URL?, name: String, rank: Int, price: String, id: String ) {
         // заполняем данными ячейку
         nftImage.kf.setImage(with: imageUrl, placeholder: placeholderImage)
-        nameLabel.text = name //"April"
-        priceLabel.text = price //"1,78 ETH"
+        nameLabel.text = name
+        priceLabel.text = price
+        nftID = id
         
         var computedRank = rank
         if rank < 1 ||  rank > 5  {
@@ -108,13 +112,14 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     func setup(nfs: NftModel) {
-        setup(imageUrl: nfs.imageUrl, name: nfs.name, rank: nfs.rating, price: String(nfs.price) )
+        setup(imageUrl: nfs.imageUrl, name: nfs.name, rank: nfs.rating, price: String(nfs.price), id: nfs.id )
     }
     
-    /// Функция обрабатывает нажатие на кнопку фильтр
+    /// Функция обрабатывает нажатие на кнопку удалить
     @objc
-    private func deleteButtonTap() {
-        print("deleteButtonTap")
+    private func deleteButtonTap() {        
+        let image = nftImage.image ?? placeholderImage
+        delegate?.didDeleteButtonPressed(id: nftID, image: image)
     }
     
     private func setupUI() {
@@ -143,7 +148,6 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         self.contentView.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            //stackView.widthAnchor.constraint(equalToConstant: 108),
             stackView.heightAnchor.constraint(equalToConstant: 12),
             stackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4)
         ])

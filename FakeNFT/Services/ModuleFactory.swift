@@ -44,7 +44,7 @@ struct ModuleFactory {
         return navigationVC
     }
     static func createCatalogViewController() -> UIViewController {
-        return CatalogViewController()
+        return CollectionsViewController()
     }
     static func createProfileViewController() -> UIViewController {
         return ProfileViewController()

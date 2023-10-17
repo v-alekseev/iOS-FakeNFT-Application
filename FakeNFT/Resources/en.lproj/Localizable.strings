@@ -17,3 +17,9 @@
 
 "alert.header" = "Message for you!";
 "alert.button" = "Ok";
+
+"filter.caption" = "Sort";
+"filter.byName" = "By Name";
+"filter.byPrice" = "By price";
+"filter.byRating" = "By rating";
+"filter.close" = "Close";

@@ -11,3 +11,8 @@ struct OrderDto: Codable {
     var nfts: [String]
     var id: String
 }
+
+
+struct UpdateCartDto: Codable {
+    var nfts: [String]
+}

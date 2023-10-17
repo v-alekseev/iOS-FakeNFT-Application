@@ -28,18 +28,18 @@
 
 `Total:` est: 4h; fact: 6h.
 
-### Module 2 (est 8h; fact x) :
+### Module 2 (est 8h; fact 11h) :
 #### Удаление из корзины элемента.
-- Верстка экрана Delete from cart (est 1h; fact x).
-- Добавление сетевого запроса на уждаление из корзины (est 3h; fact x).
+- Верстка экрана Delete from cart (est 1h; fact 2h).
+- Добавление сетевого запроса на уждаление из корзины (est 3h; fact 7h).
 
-`Total:` est: 4h ; fact: x .
+`Total:` est: 4h ; fact: 9h .
 
 #### Реализация фильтров на экране.
-- Верстка экрана Cart filter (est 1h; fact x).
-- Реализации логики фильтров (est 3h; fact x).
+- Верстка экрана Cart filter (est 1h; fact 1h).
+- Реализации логики фильтров (est 3h; fact 1h).
 
-`Total:` est: 4h; fact: x.
+`Total:` est: 4h; fact: 2h.
 
 ### Module 3 (est 8h; fact x) :
 ### Экран Оплата за NFT (est 8h; fact x).
