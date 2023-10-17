@@ -10,7 +10,7 @@ import Foundation
 final class NFTCollectionsDataSource {
     private let sortTypeKey = "selectedSortType"
     private var collections: [CollectionModel]
-    private var currentSortType: SortType? = nil
+    private var currentSortType: SortType?
     private let dataProvider: CatalogDataProviderProtocol
     
     init(

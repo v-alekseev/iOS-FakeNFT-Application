@@ -8,7 +8,7 @@
 import Foundation
 final class CollectionsViewModel: CollectionsViewModelProtocol {
     
-    private var dataSource: NFTCollectionsDataSource? = nil
+    private var dataSource: NFTCollectionsDataSource?
     
     var navigationClosure: (CollectionsNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionsNavigationState = .base {
