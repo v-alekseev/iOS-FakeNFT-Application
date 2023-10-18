@@ -13,6 +13,7 @@ final class StatisticView: UIView {
     @Published var needRefreshTable = false
     @Published var selectedRow: Int?
     
+    var usersData: [UserModel] = []
     var isLoading: Bool = false {
         didSet { if isLoading {
             if let refreshing = tableView.refreshControl?.isRefreshing,
@@ -25,7 +26,6 @@ final class StatisticView: UIView {
         } }
     }
     
-    var usersData: [UserModel] = []
     private lazy var tableView = createTableView()
     private lazy var loadIndicator = createActivityIndicator()
     
@@ -37,6 +37,10 @@ final class StatisticView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func reloadTable() {
+        tableView.reloadData()
     }
     
     private func setUpViews() {
@@ -57,10 +61,6 @@ final class StatisticView: UIView {
             loadIndicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
             loadIndicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
         ])
-    }
-    
-    func reloadTable() {
-        tableView.reloadData()
     }
     
     private func createTableView() -> UITableView {

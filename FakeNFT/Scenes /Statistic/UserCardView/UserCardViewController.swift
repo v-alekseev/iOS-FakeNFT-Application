@@ -68,9 +68,17 @@ final class UserCardViewController: UIViewController {
         viewModel.$needShowCollectionScreen
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] needShowCollectionScreen in
-                if needShowCollectionScreen {
-                    let usersCollectionViewController = UsersCollectionViewController()
-                    self?.navigationController?.pushViewController(usersCollectionViewController, animated: true)
+                if needShowCollectionScreen,
+                   let actualUserData = self?.actualUserData {
+ //                   let usersCollectionViewController = UsersCollectionViewController()
+                    
+                    let dataProvider = StatisticDataProvider()
+                    let viewModel = UsersCollectionViewModel(dataProvider: dataProvider,
+                                                             actualUserData: actualUserData)
+                    let viewController = UsersCollectionViewController(viewModel)
+                    self?.navigationController?.pushViewController(viewController, animated: true)
+                    
+//                    self?.navigationController?.pushViewController(usersCollectionViewController, animated: true)
                 }
             })
             .store(in: &bindings)

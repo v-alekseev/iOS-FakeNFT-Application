@@ -16,7 +16,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var cartButton = createCartButton()
     private lazy var priceLabel = createPriceLabel()
     
-    private lazy var imageNftStub = UIImage(systemName: "rays")
+    private lazy var imageNftStub = UIImage(named: "nftStub")
     
     private var task: URLSessionDataTask?
     

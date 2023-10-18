@@ -51,6 +51,8 @@
 		F280EED02ADDD323004DFC1B /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F280EECF2ADDD323004DFC1B /* UserCardView.swift */; };
 		F280EED52ADEC07A004DFC1B /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F280EED42ADEC07A004DFC1B /* StatisticView.swift */; };
 		F280EEDB2ADEC989004DFC1B /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F280EEDA2ADEC989004DFC1B /* StatisticViewController.swift */; };
+		F2AFCC0A2AE05F6D009B4B06 /* UsersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AFCC092AE05F6D009B4B06 /* UsersCollectionView.swift */; };
+		F2AFCC0C2AE05F87009B4B06 /* UsersCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AFCC0B2AE05F87009B4B06 /* UsersCollectionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +122,8 @@
 		F280EECF2ADDD323004DFC1B /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
 		F280EED42ADEC07A004DFC1B /* StatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticView.swift; sourceTree = "<group>"; };
 		F280EEDA2ADEC989004DFC1B /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
+		F2AFCC092AE05F6D009B4B06 /* UsersCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionView.swift; sourceTree = "<group>"; };
+		F2AFCC0B2AE05F87009B4B06 /* UsersCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,7 +383,9 @@
 		F280EECA2ADBD3CC004DFC1B /* UsersCollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				F2AFCC092AE05F6D009B4B06 /* UsersCollectionView.swift */,
 				F228EF9B2AD5D5D0001BA148 /* UsersCollectionViewController.swift */,
+				F2AFCC0B2AE05F87009B4B06 /* UsersCollectionViewModel.swift */,
 				F280EECB2ADBD6BB004DFC1B /* UsersCollectionCell.swift */,
 			);
 			path = UsersCollectionView;
@@ -585,7 +591,9 @@
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
+				F2AFCC0C2AE05F87009B4B06 /* UsersCollectionViewModel.swift in Sources */,
 				F228EFA12AD5F731001BA148 /* UserModel.swift in Sources */,
+				F2AFCC0A2AE05F6D009B4B06 /* UsersCollectionView.swift in Sources */,
 				D827F56E2ACEDD0000F01BBE /* ProductDetailsTableViewController.swift in Sources */,
 				F228EFA52AD7FD47001BA148 /* UserCardViewModel.swift in Sources */,
 				F228EF9A2AD5D57A001BA148 /* UserCardViewController.swift in Sources */,
