@@ -55,35 +55,18 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
         dispatchGroup.wait()
     }
     
-//    func giveMeAllCollections() -> [CollectionModel] {
-//        let dispatchGroup = DispatchGroup()
-//        let getCollectionsRequest = DefaultNetworkRequest(
-//            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/collections")!,
-//            httpMethod: .get
-//        )
-//        var model: [CollectionModel] = []
-//        dispatchGroup.enter()
-//        currentTask = self.client.send(request: getCollectionsRequest, type: [CollectionModel].self) { result in
-//            switch result {
-//            case .success(let data):
-//                model = data
-//            case .failure:
-//                model = []
-//            }
-//            dispatchGroup.leave()
-//        }
-//        dispatchGroup.wait()
-//        return model
-//    }
-    
     func fetchMeAllCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void) {
-        let getCollectionsRequest = DefaultNetworkRequest(
-            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/collections")!,
-            httpMethod: .get
-        )
-        
-        currentTask = self.client.send(request: getCollectionsRequest, type: [CollectionModel].self) { result in
-            completion(result)
+        DispatchQueue.global(qos: .userInitiated).async {
+            let getCollectionsRequest = DefaultNetworkRequest(
+                endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/collections")!,
+                httpMethod: .get
+            )
+            
+            self.currentTask = self.client.send(request: getCollectionsRequest, type: [CollectionModel].self) { result in
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
         }
     }
     
