@@ -15,14 +15,6 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-
-        let path = UIBezierPath(roundedRect: imageView.bounds,
-                                byRoundingCorners: [.bottomLeft, .bottomRight],
-                                cornerRadii: CGSize(width: 12, height: 12))
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        imageView.layer.mask = maskLayer
-
         return imageView
     }()
     
@@ -111,8 +103,18 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
         ])
     }
     
+    private func maskImage(with size: CGSize) {
+        super.layoutSubviews()
+        let path = UIBezierPath(roundedRect: CGRect(origin: .zero, size: size),
+                                byRoundingCorners: [.bottomLeft, .bottomRight],
+                                cornerRadii: CGSize(width: 12, height: 12))
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        titleImage.layer.mask = maskLayer
+    }
+    
     // MARK: - Configure Methods
-    func configureCell(with collection: CollectionModel, author: AuthorModel) {
+    func configureCell(with collection: CollectionModel, author: AuthorModel, imageSize: CGSize) {
         animatedGradient.isHidden = false
         animatedGradient.startAnimating()
         let processor = RoundCornerImageProcessor(cornerRadius: 12)
@@ -124,9 +126,10 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
         titleImage.kf.setImage(
             with: URL(string: collection.cover),
             placeholder: placeholderImage,
-            options: options, 
+            options: options,
             completionHandler: { [weak self] _ in
                 guard let self = self else { return }
+                maskImage(with: imageSize)
                 self.animatedGradient.stopAnimating()
                 self.animatedGradient.isHidden = true
             })

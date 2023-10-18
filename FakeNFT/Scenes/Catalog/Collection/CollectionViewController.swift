@@ -90,7 +90,8 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CollectionHeaderTableViewCell = tableView.dequeueReusableCell()
         let data = viewModel.giveMeHeaderComponent()
-        cell.configureCell(with: data.collection, author: data.author)
+        let imageSize = CGSize(width: tableView.bounds.width, height: 310)
+        cell.configureCell(with: data.collection, author: data.author, imageSize: imageSize)
         return cell
     }
 }
