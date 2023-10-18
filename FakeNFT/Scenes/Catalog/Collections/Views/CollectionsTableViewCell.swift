@@ -15,6 +15,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         let label = UILabel()
         label.font = UIFont.bodyBold
         label.textColor = .ypBlackWithDarkMode
+        label.numberOfLines = 1
         return label
     }()
     

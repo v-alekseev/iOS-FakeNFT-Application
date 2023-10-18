@@ -11,10 +11,13 @@ final class AnimatedGradientView: UIView {
     
     private var cornerRadiusValue: CGFloat = 0.0
     
+    private var onlyLowerCorners: Bool = false
+    
     private let gradientLayer = CAGradientLayer()
     
-    init(frame: CGRect, cornerRadius: CGFloat) {
+    init(frame: CGRect, cornerRadius: CGFloat, onlyLowerCorners: Bool = false) {
         self.cornerRadiusValue = cornerRadius
+        self.onlyLowerCorners = onlyLowerCorners
         super.init(frame: frame)
         setupGradient()
     }
@@ -38,9 +41,24 @@ final class AnimatedGradientView: UIView {
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         gradientLayer.frame = bounds
-        gradientLayer.cornerRadius = cornerRadiusValue
+        if onlyLowerCorners {
+            applyBottomCorners()
+        } else {
+            gradientLayer.cornerRadius = cornerRadiusValue
+        }
         gradientLayer.masksToBounds = true
         layer.addSublayer(gradientLayer)
+    }
+    
+    private func applyBottomCorners() {
+        let maskPath = UIBezierPath(
+            roundedRect: bounds,
+            byRoundingCorners: [.bottomLeft, .bottomRight],
+            cornerRadii: CGSize(width: cornerRadiusValue, height: cornerRadiusValue)
+        )
+        let shape = CAShapeLayer()
+        shape.path = maskPath.cgPath
+        gradientLayer.mask = shape
     }
 
     // MARK: - Animations
@@ -74,5 +92,8 @@ final class AnimatedGradientView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
+        if onlyLowerCorners {
+            applyBottomCorners()
+        }
     }
 }
