@@ -9,3 +9,11 @@
 
 
 "application.title" = "Фейк NFT";
+"catalog.sort.byName" = "По названию";
+"catalog.sort.byNFTQuantity" = "По количеству NFT";
+"catalog.sort" = "Сортировка";
+"catalog.sort.close" = "Закрыть";
+"alert.error.title" = "Ошибка";
+"alert.error.description" = "Что-то пошло не так.";
+"alert.error.retry" = "Перезагрузить";
+

@@ -1,3 +1,10 @@
+//
+//  CollectionsNavigationState.swift
+//  FakeNFT
+//
+//  Created by Александр Поляков on 08.10.2023.
+//
+
 @testable import FakeNFT
 import XCTest
 
@@ -11,6 +18,7 @@ final class CatalogDataRepositoryTests: XCTestCase {
         sut = CatalogDataProvider(client: mockClient)
     }
     
+    // MARK: - All collections
     func testGiveMeAllCollectionsReturnsCollections() {
         
         // Given
@@ -19,13 +27,23 @@ final class CatalogDataRepositoryTests: XCTestCase {
         mockClient.mockData = data
 
         // When
-        let resultCollection = sut.giveMeAllCollections()
+        var resultCollection: [CollectionModel]?
+        sut.giveMeAllCollections() { result in
+            switch result {
+                case .success(let collections):
+                resultCollection = collections
+                case .failure:
+                resultCollection = []
+            }
+        }
                 
         // Then
-        XCTAssertNotNil(resultCollection)
-        XCTAssertEqual(resultCollection.first?.name, "Test")
+        guard let result = resultCollection else {return}
+        XCTAssertNotNil(result)
+        XCTAssertEqual(result.first?.name, "Test")
     }
-
+    
+    // MARK: - Single collection
     func testGiveMeCollectionReturnsCollection() {
         
         // Given

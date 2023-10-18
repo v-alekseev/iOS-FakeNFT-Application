@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   FakeNFT
 
@@ -9,3 +9,10 @@
 
 
 "application.title" = "Fake NFT";
+"catalog.sort.byName" = "By name";
+"catalog.sort.byNFTQuantity" = "By NFT quantity";
+"catalog.sort" = "Sort";
+"catalog.sort.close" = "Close";
+"alert.error.title" = "Error";
+"alert.error.description" = "Something went wrong.";
+"alert.error.retry" = "Reload";
