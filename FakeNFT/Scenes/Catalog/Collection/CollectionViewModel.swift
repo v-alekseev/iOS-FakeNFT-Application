@@ -53,7 +53,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
         return (
             collection: model,
             author: AuthorModel(
-                name: "1",
+                name: "Aleksandr Poliakov",
                 avatar: "2",
                 description: "dsfasfkab",
                 website: "https://yandex.ru/",
