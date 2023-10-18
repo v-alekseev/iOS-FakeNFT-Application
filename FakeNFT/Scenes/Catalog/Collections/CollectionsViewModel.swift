@@ -107,12 +107,12 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
         }
     }
     
-    func giveMeNFTViewModel() -> NFTViewModelProtocol {
+    func giveMeNFTViewModel() -> CollectionViewModelProtocol {
         if dataSource != nil {
-            return NFTViewModel(dataSource: dataSource!)
+            return CollectionViewModel(dataSource: dataSource!)
         } else {
             let ds = DataProviderInteractor(dataProvider: CatalogDataProvider()) { _ in }
-            return NFTViewModel(dataSource: ds)
+            return CollectionViewModel(dataSource: ds)
         }
     }
 

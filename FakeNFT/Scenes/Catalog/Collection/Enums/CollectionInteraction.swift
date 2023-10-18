@@ -1,5 +1,5 @@
 //
-//  NFTInteraction.swift
+//  CollectionInteraction.swift
 //  FakeNFT
 //
 //  Created by Александр Поляков on 18.10.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NFTInteraction {
+enum CollectionInteraction {
     case authorLinkDidTapped
     case basketDidTapped(at: IndexPath)
     case likeDidTapped(at: IndexPath)

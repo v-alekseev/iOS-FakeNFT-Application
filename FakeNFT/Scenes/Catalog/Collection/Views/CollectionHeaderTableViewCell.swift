@@ -1,5 +1,5 @@
 //
-//  NFTHeaderTableViewCell.swift
+//  CollectionHeaderTableViewCell.swift
 //  FakeNFT
 //
 //  Created by Александр Поляков on 18.10.2023.
@@ -7,7 +7,8 @@
 
 import UIKit
 import Kingfisher
-final class NFTHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
+
+final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
     
     // MARK: - Elements
     private let titleImage: UIImageView = {

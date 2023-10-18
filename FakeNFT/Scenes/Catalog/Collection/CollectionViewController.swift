@@ -1,5 +1,5 @@
 //
-//  SingleCollectionViewController.swift
+//  CollectionViewController.swift
 //  FakeNFT
 //
 //  Created by Александр Поляков on 14.10.2023.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class NFTViewController: UIViewController {
-    private var viewModel: NFTViewModelProtocol
+final class CollectionViewController: UIViewController {
+    private var viewModel: CollectionViewModelProtocol
     // MARK: - Private Properties
     //
     private var textLabel: UILabel = {
@@ -20,7 +20,7 @@ final class NFTViewController: UIViewController {
         return label
     }()
     
-    init (collection: CollectionModel, viewModel: NFTViewModelProtocol) {
+    init (collection: CollectionModel, viewModel: CollectionViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.textLabel.text = "Отдельная \nколлекция \nNFT: \n\(collection.name)"
