@@ -91,7 +91,6 @@ final class CollectionsViewController: UIViewController {
         viewModel.bind(to: self)
     }
     
-    
     private func showSortSelector() {
         let alertController = UIAlertController(title: nil, message: L10n.Catalog.sort, preferredStyle: .actionSheet)
         

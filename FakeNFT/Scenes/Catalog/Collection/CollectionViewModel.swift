@@ -6,7 +6,11 @@
 //
 
 import Foundation
+
 final class CollectionViewModel: CollectionViewModelProtocol {
+    
+    
+    
     private var dataSource: DataProviderInteractorProtocol
     private var model: CollectionModel
     var navigationClosure: (CollectionNavigationState) -> Void = {_ in }
@@ -39,5 +43,24 @@ final class CollectionViewModel: CollectionViewModelProtocol {
                 self.resultState = .error(error: error)
             }
         }
+    }
+    
+    func handleInteractionType(_ type: CollectionInteraction) {
+        return
+    }
+    
+    func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel) {
+        return (
+            collection: model,
+            author: AuthorModel(
+                name: "1",
+                avatar: "2",
+                description: "dsfasfkab",
+                website: "https://yandex.ru/",
+                nfts: [],
+                rating: "1",
+                id: "1"
+            )
+        )
     }
 }

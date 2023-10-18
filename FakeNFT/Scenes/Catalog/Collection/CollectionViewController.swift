@@ -9,8 +9,21 @@ import UIKit
 
 final class CollectionViewController: UIViewController {
     private var viewModel: CollectionViewModelProtocol
-    // MARK: - Private Properties
-    //
+    private var backButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.image = (UIImage(named: "BackwardIcon"))
+        button.style = .plain
+        button.tintColor = .ypBlackWithDarkMode
+        return button
+    }()
+    private let tableView: UITableView = {
+        let tv = UITableView()
+        tv.separatorStyle = .none
+        tv.backgroundColor = .clear
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        return tv
+    }()
+    
     private var textLabel: UILabel = {
         var label = UILabel()
         label.text = "Отдельная коллекция NFT"
@@ -33,18 +46,51 @@ final class CollectionViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupButtons()
         setupUI()
-        view.backgroundColor = .white
-        print("CartViewController viewDidLoad")
+        view.backgroundColor = .ypWhiteWithDarkMode
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(CollectionHeaderTableViewCell.self)
     }
     // MARK: - Private Methods
     //
+    
+    private func setupButtons() {
+        backButton.target = self
+        backButton.action = #selector(handleBackButton)
+    }
+    
     private func setupUI() {
-        view.addSubview(textLabel)
+        navigationItem.leftBarButtonItem = backButton
+        view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    @objc private func handleBackButton() {
+        viewModel.handleInteractionType(.pop)
+    }
+}
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfSections section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: CollectionHeaderTableViewCell = tableView.dequeueReusableCell()
+        let data = viewModel.giveMeHeaderComponent()
+        cell.configureCell(with: data.collection, author: data.author)
+        return cell
     }
 }

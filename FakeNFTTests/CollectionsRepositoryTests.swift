@@ -22,7 +22,16 @@ final class CatalogDataRepositoryTests: XCTestCase {
     func testGiveMeAllCollectionsReturnsCollections() {
         
         // Given
-        let mockCollection = [CollectionModel(createdAt: "Date", name: "Test", cover: "CoverURL", nfts: ["1", "2"], description: "TestDescription", id: "1")]
+        let mockCollection = [
+            CollectionModel(
+            createdAt: "Date",
+            name: "Test",
+            cover: "CoverURL",
+            nfts: ["1", "2"],
+            description: "TestDescription",
+            id: "1",
+            author: "Boss")
+        ]
         let data = try! JSONEncoder().encode(mockCollection)
         mockClient.mockData = data
 
@@ -47,7 +56,14 @@ final class CatalogDataRepositoryTests: XCTestCase {
     func testGiveMeCollectionReturnsCollection() {
         
         // Given
-        let mockCollection = CollectionModel(createdAt: "Date", name: "Test", cover: "CoverURL", nfts: ["1", "2"], description: "TestDescription", id: "1")
+        let mockCollection = CollectionModel(
+            createdAt: "Date",
+            name: "Test",
+            cover: "CoverURL",
+            nfts: ["1", "2"],
+            description: "TestDescription",
+            id: "1",
+            author: "Boss")
         let data = try! JSONEncoder().encode(mockCollection)
         mockClient.mockData = data
 

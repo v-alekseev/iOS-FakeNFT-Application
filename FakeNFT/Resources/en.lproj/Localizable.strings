@@ -16,3 +16,4 @@
 "alert.error.title" = "Error";
 "alert.error.description" = "Something went wrong.";
 "alert.error.retry" = "Reload";
+"catalog.collection.authorString" = "Author";

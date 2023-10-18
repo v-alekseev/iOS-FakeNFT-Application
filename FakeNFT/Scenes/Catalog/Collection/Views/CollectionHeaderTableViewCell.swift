@@ -112,7 +112,7 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     // MARK: - Configure Methods
-    func configureCell(with collection: CollectionModel) {
+    func configureCell(with collection: CollectionModel, author: AuthorModel) {
         animatedGradient.isHidden = false
         animatedGradient.startAnimating()
         let processor = RoundCornerImageProcessor(cornerRadius: 12)
@@ -124,27 +124,48 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
         titleImage.kf.setImage(
             with: URL(string: collection.cover),
             placeholder: placeholderImage,
-            options: options, completionHandler: { [weak self] _ in
+            options: options, 
+            completionHandler: { [weak self] _ in
                 guard let self = self else { return }
                 self.animatedGradient.stopAnimating()
                 self.animatedGradient.isHidden = true
             })
-//        let authorName: String  = collection.
-//        titleLabel.text = "\(collection.name) (\(quantity))"
+        titleLabel.text = "\(collection.name))"
+        let linkText = "\(L10n.Catalog.Collection.authorString): \(author.name)"
+        let linkSize = author.name.count
+        let descriptionText = NSAttributedString(string: "\n\(collection.description)")
+        let linkAttributedString = NSMutableAttributedString(string: linkText)
+        linkAttributedString.addAttribute(
+            .link,
+            value: "\(author.website)",
+            range: NSRange(
+                location: linkText.count-linkSize,
+                length: linkSize
+            )
+        )
+        let finalAttributedString = NSMutableAttributedString()
+        finalAttributedString.append(linkAttributedString)
+        finalAttributedString.append(descriptionText)
+        descriptionTextView.attributedText = finalAttributedString
+        descriptionTextView.linkTextAttributes = [
+            .foregroundColor: UIColor.blue,
+            .font: UIFont.caption1
+        ]
     }
     
     // MARK: - Support
     override func prepareForReuse() {
         super.prepareForReuse()
-//        imageCollection.kf.cancelDownloadTask()
-//        imageCollection.image = nil
+        titleImage.kf.cancelDownloadTask()
+        titleImage.image = nil
         titleLabel.text = nil
+        descriptionTextView.text = nil
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let margins = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-        contentView.frame = contentView.frame.inset(by: margins)
+//        let margins = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+//        contentView.frame = contentView.frame.inset(by: margins)
         contentView.backgroundColor = .clear
     }
     

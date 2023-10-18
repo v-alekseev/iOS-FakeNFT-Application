@@ -30,6 +30,10 @@ internal enum L10n {
   internal enum Catalog {
     /// Сортировка
     internal static let sort = L10n.tr("Localizable", "catalog.sort", fallback: "Сортировка")
+    internal enum Collection {
+      /// Автор коллекции
+      internal static let authorString = L10n.tr("Localizable", "catalog.collection.authorString", fallback: "Автор коллекции")
+    }
     internal enum Sort {
       /// По названию
       internal static let byName = L10n.tr("Localizable", "catalog.sort.byName", fallback: "По названию")

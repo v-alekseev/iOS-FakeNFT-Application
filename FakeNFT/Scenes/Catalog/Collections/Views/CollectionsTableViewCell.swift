@@ -96,7 +96,8 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         imageCollection.kf.setImage(
             with: URL(string: collection.cover),
             placeholder: placeholderImage,
-            options: options, completionHandler: { [weak self] _ in
+            options: options, 
+            completionHandler: { [weak self] _ in
                 guard let self = self else { return }
                 self.animatedGradient.stopAnimating()
                 self.animatedGradient.isHidden = true
