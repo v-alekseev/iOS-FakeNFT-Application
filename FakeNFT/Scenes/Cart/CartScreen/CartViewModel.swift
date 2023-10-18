@@ -10,6 +10,8 @@ import Foundation
 protocol CartViewModelDelegate: AnyObject {
     func didUpdateCart()
     func showAlert(message: String)
+    func hideCartEvent(hide: Bool)
+    func willUpdateCart()
 }
 
 protocol CartViewModelProtocol {
@@ -41,6 +43,7 @@ final class CartViewModel: CartViewModelProtocol {
     private (set) var order: [NftModel] = [] {
         didSet {
             delegate?.didUpdateCart()
+            delegate?.hideCartEvent(hide: order.count == 0)
         }
     }
     
@@ -75,11 +78,13 @@ final class CartViewModel: CartViewModelProtocol {
     }
     
     func getOrder() {
+        delegate?.willUpdateCart()
         cartDataProvider?.getOrder() { [weak self] result in
             guard let self = self else { return }
             switch result {
                 //case .success(_) - это значение не возвращается и никаких действий делать не надо  т.к. по окончанию загрузки придет нотификация
             case .failure(_):
+                self.delegate?.didUpdateCart()
                 self.alertMessage = L10n.Cart.getOrderError
                 break
             default:

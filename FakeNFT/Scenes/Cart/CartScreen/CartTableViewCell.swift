@@ -75,7 +75,8 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     
     private lazy var trashButton: UIButton = {
         var button = UIButton()
-        button.setImage(UIImage(resource: .cartRemove), for: .normal)
+        button.tintColor = .ypBlackWithDarkMode
+        button.setImage(UIImage(resource: .cartRemove).withRenderingMode(.alwaysTemplate), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(deleteButtonTap), for: .touchUpInside)
         return button
@@ -85,6 +86,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        contentView.backgroundColor = .ypWhiteWithDarkMode
         setupUI()
         setup(imageUrl: URL(string: ""), name: "-", rank: 0, price: "0 ETH", id: "0")
     }
@@ -95,6 +97,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         nameLabel.text = name
         priceLabel.text = price
         nftID = id
+
         
         var computedRank = rank
         if rank < 1 ||  rank > 5  {

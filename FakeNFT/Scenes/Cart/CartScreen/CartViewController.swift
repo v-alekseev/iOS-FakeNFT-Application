@@ -56,6 +56,7 @@ final class CartViewController: UIViewController {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.separatorStyle = .none
+        table.backgroundColor = .ypWhiteWithDarkMode
         return table
     }()
     
@@ -90,11 +91,10 @@ final class CartViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel?.delegate = self
-       // viewModel?.initDataProvider() //  cartDataProvider = CardDataProvider.shared
         
         setupNavigationBar()
         setupUI()
-        view.backgroundColor = .white
+        view.backgroundColor = .ypWhiteWithDarkMode
         
         cartTable.register(CartTableViewCell.self)
         cartTable.delegate = self
@@ -102,7 +102,7 @@ final class CartViewController: UIViewController {
         configureRefreshControl()
         updateTotal()
         
-        hideCart(viewModel?.order.count == 0 )
+        //hideCart(viewModel?.order.count == 0 )
 
     }
     
@@ -232,14 +232,24 @@ extension CartViewController: CartViewModelDelegate {
     func didUpdateCart() {
         updateTotal()
         cartTable.reloadData()
-        hideCart(viewModel?.order.count == 0 )
+        //hideCart(viewModel?.order.count == 0 )
         showLoader(false)
     }
     
     /// Нужно показать сообщение
     func showAlert(message: String) {
-        showLoader(false)
+       // showLoader(false)
         Alert.alertInformation(viewController: self, text: message)
     }
+    
+    /// Нужно показать сообщение
+    func hideCartEvent(hide: Bool) {
+        hideCart(hide)
+    }
+    
+    func willUpdateCart() {
+        showLoader(true)
+    }
+
 }
 
