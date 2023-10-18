@@ -59,6 +59,8 @@
 		AF9A240E2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A240D2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift */; };
 		AF9A24132AD5CA5400C73AEC /* DataProviderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A24122AD5CA5400C73AEC /* DataProviderInteractor.swift */; };
 		AF9A24152AD5CB4D00C73AEC /* SortCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A24142AD5CB4D00C73AEC /* SortCases.swift */; };
+		AFA320B22AE022050025C54E /* AuthorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA320B12AE022050025C54E /* AuthorModel.swift */; };
+		AFA320B42AE0304B0025C54E /* CollectionResultState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA320B32AE0304B0025C54E /* CollectionResultState.swift */; };
 		AFA7CEEF2ADF24B700685E14 /* DataProviderInteractorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA7CEEE2ADF24B700685E14 /* DataProviderInteractorProtocol.swift */; };
 		AFD6454D2ADC741B00D48BC0 /* AnimatedGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6454C2ADC741B00D48BC0 /* AnimatedGradientView.swift */; };
 		AFD6454F2ADDCEF600D48BC0 /* CollectionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6454E2ADDCEF600D48BC0 /* CollectionViewModelProtocol.swift */; };
@@ -154,6 +156,8 @@
 		AF9A240D2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDataProviderProtocol.swift; sourceTree = "<group>"; };
 		AF9A24122AD5CA5400C73AEC /* DataProviderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderInteractor.swift; sourceTree = "<group>"; };
 		AF9A24142AD5CB4D00C73AEC /* SortCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCases.swift; sourceTree = "<group>"; };
+		AFA320B12AE022050025C54E /* AuthorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorModel.swift; sourceTree = "<group>"; };
+		AFA320B32AE0304B0025C54E /* CollectionResultState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionResultState.swift; sourceTree = "<group>"; };
 		AFA7CEEE2ADF24B700685E14 /* DataProviderInteractorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderInteractorProtocol.swift; sourceTree = "<group>"; };
 		AFD6454C2ADC741B00D48BC0 /* AnimatedGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientView.swift; sourceTree = "<group>"; };
 		AFD6454E2ADDCEF600D48BC0 /* CollectionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -404,6 +408,7 @@
 				AF3948DB2AD1B382003A7B70 /* UserModel.swift */,
 				AF3948DC2AD1B382003A7B70 /* CollectionModel.swift */,
 				AF39490C2AD31B11003A7B70 /* ProfileLikesModel.swift */,
+				AFA320B12AE022050025C54E /* AuthorModel.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -452,6 +457,7 @@
 			children = (
 				AFD645522ADDD21700D48BC0 /* CollectionNavigationState.swift */,
 				AF7F8F3C2ADFF66100C84AFD /* CollectionInteraction.swift */,
+				AFA320B32AE0304B0025C54E /* CollectionResultState.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -718,6 +724,7 @@
 			files = (
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
 				AF9A240E2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift in Sources */,
+				AFA320B42AE0304B0025C54E /* CollectionResultState.swift in Sources */,
 				AF1A63E72AD96768000F8A4E /* CollectionsViewModel.swift in Sources */,
 				AF1A63D82AD81863000F8A4E /* CollectionsViewController.swift in Sources */,
 				AF6BEC6B2ADAED1500708F6E /* CollectionViewController.swift in Sources */,
@@ -732,6 +739,7 @@
 				AFD645532ADDD21700D48BC0 /* CollectionNavigationState.swift in Sources */,
 				AFF11A082ADA9C7400315704 /* CollectionsNavigationState.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
+				AFA320B22AE022050025C54E /* AuthorModel.swift in Sources */,
 				AF39490F2AD31B42003A7B70 /* AllLikesEndPoint.swift in Sources */,
 				AF9A240A2AD5C04F00C73AEC /* Constants.swift in Sources */,
 				AF3948FC2AD1D847003A7B70 /* AllCollectionsEndpoint.swift in Sources */,

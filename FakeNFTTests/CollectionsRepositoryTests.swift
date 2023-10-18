@@ -28,7 +28,7 @@ final class CatalogDataRepositoryTests: XCTestCase {
 
         // When
         var resultCollection: [CollectionModel]?
-        sut.giveMeAllCollections() { result in
+        sut.fetchMeAllCollections() { result in
             switch result {
                 case .success(let collections):
                 resultCollection = collections

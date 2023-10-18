@@ -11,6 +11,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     
     private let sortTypeKey = "selectedSortType"
     private var collections: [CollectionModel]
+    private var author: AuthorModel?
     private var currentSortType: SortType?
     private let dataProvider: CatalogDataProviderProtocol
     
@@ -23,7 +24,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
         self.collections = []
         
         currentSortType = savedSortType()
-        self.dataProvider.giveMeAllCollections() { [weak self] result in
+        self.dataProvider.fetchMeAllCollections() { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let collections):
@@ -40,7 +41,6 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
                 print(error)
                 completion(result)
             }
-            
         }
     }
     
@@ -63,7 +63,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     
     // MARK: - Reload
     func reloadCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void = {_ in }) {
-        self.dataProvider.giveMeAllCollections() { [weak self] result in
+        self.dataProvider.fetchMeAllCollections() { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let collections):
@@ -81,6 +81,22 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
             }
             completion(result)
         }
+    }
+    
+    // MARK: - Authors
+    func fetchMyAuthor(with id: String, completion: @escaping (Result<AuthorModel, Error>) -> Void = {_ in })  {
+        self.author = nil
+        self.dataProvider.fetchMyAuthor(with: id) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let author):
+                self.author = author
+            case .failure(let error):
+                print(error)
+            }
+            completion(result)
+        }
+        
     }
     
     // MARK: - Sort

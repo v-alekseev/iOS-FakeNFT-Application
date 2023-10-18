@@ -76,13 +76,23 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
 //        return model
 //    }
     
-    func giveMeAllCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void) {
+    func fetchMeAllCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void) {
         let getCollectionsRequest = DefaultNetworkRequest(
             endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/collections")!,
             httpMethod: .get
         )
         
         currentTask = self.client.send(request: getCollectionsRequest, type: [CollectionModel].self) { result in
+            completion(result)
+        }
+    }
+    
+    func fetchMyAuthor(with id: String, completion: @escaping (Result<AuthorModel, Error>) -> Void) {
+        let getAuthorRequest = DefaultNetworkRequest(
+            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/users/\(id)")!,
+            httpMethod: .get
+        )
+        currentTask = self.client.send(request: getAuthorRequest, type: AuthorModel.self) { result in
             completion(result)
         }
     }

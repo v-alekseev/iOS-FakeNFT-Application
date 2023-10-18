@@ -13,6 +13,7 @@ protocol DataProviderInteractorProtocol {
     func reloadCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void)
     func sortCollectionsByName(inOrder: SortCases)
     func sortCollectionsByNFTQuantity(inOrder: SortCases)
+    func fetchMyAuthor(with id: String, completion: @escaping (Result<AuthorModel, Error>) -> Void)
 }
 
 extension DataProviderInteractorProtocol {
