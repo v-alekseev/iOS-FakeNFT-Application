@@ -111,6 +111,7 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
         let maskLayer = CAShapeLayer()
         maskLayer.path = path.cgPath
         titleImage.layer.mask = maskLayer
+        
     }
     
     // MARK: - Configure Methods
