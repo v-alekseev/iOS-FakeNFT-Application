@@ -88,8 +88,6 @@ final class CollectionViewController: UIViewController {
     }
     
     // MARK: - Private Methods
-    //
-    
     private func bind () {
         viewModel.bind(to: self)
     }
