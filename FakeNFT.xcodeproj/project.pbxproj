@@ -52,6 +52,8 @@
 		D86C21BD2AD82C38000AD25C /* OrderDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21B12AD82C38000AD25C /* OrderDto.swift */; };
 		D86C21BF2AD82CE7000AD25C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86C21BE2AD82CE7000AD25C /* Alert.swift */; };
 		D8B9765A2ADD7095007CA5D2 /* CartFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976592ADD7095007CA5D2 /* CartFilters.swift */; };
+		D8B9765D2ADFD45D007CA5D2 /* PayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9765C2ADFD45D007CA5D2 /* PayViewController.swift */; };
+		D8B9765F2AE06BEE007CA5D2 /* PayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9765E2AE06BEE007CA5D2 /* PayCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +124,8 @@
 		D86C21B12AD82C38000AD25C /* OrderDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDto.swift; sourceTree = "<group>"; };
 		D86C21BE2AD82CE7000AD25C /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		D8B976592ADD7095007CA5D2 /* CartFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFilters.swift; sourceTree = "<group>"; };
+		D8B9765C2ADFD45D007CA5D2 /* PayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayViewController.swift; sourceTree = "<group>"; };
+		D8B9765E2AE06BEE007CA5D2 /* PayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +319,7 @@
 		AF1A63D42AD81863000F8A4E /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				D8B9765B2ADFD436007CA5D2 /* PayScreen */,
 				D86C21A82AD82C38000AD25C /* CartDeleteScreen */,
 				D86C21A12AD82C38000AD25C /* CartScreen */,
 				D86C21AB2AD82C38000AD25C /* DataModels */,
@@ -394,6 +399,15 @@
 				D86C21B12AD82C38000AD25C /* OrderDto.swift */,
 			);
 			path = DtoModels;
+			sourceTree = "<group>";
+		};
+		D8B9765B2ADFD436007CA5D2 /* PayScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D8B9765C2ADFD45D007CA5D2 /* PayViewController.swift */,
+				D8B9765E2AE06BEE007CA5D2 /* PayCollectionViewCell.swift */,
+			);
+			path = PayScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -565,7 +579,7 @@
 				D86C21BB2AD82C38000AD25C /* CardDataProvider.swift in Sources */,
 				D86C21B62AD82C38000AD25C /* CartTableViewCell.swift in Sources */,
 				D86C21B82AD82C38000AD25C /* CartDeleteViewModel.swift in Sources */,
-				AF1A63D82AD81863000F8A4E /* CatalogViewController.swift in Sources */,
+				AF1A63D82AD81863000F8A4E /* CollectionsViewController.swift in Sources */,
 				AF1A63D82AD81863000F8A4E /* CollectionsViewController.swift in Sources */,
 				7B5E254A2ADBE8F6000BC664 /* WebViewViewModel.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
@@ -578,6 +592,7 @@
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
+				D8B9765D2ADFD45D007CA5D2 /* PayViewController.swift in Sources */,
 				D86C21B32AD82C38000AD25C /* CartViewController+UITableViewDataSource.swift in Sources */,
 				7B5E254E2ADBEBEC000BC664 /* Observable.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
@@ -595,6 +610,7 @@
 				D86C21B92AD82C38000AD25C /* CartDeleteViewController.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				7B5E25482ADBE83E000BC664 /* WebViewViewController.swift in Sources */,
+				D8B9765F2AE06BEE007CA5D2 /* PayCollectionViewCell.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				D86C21BC2AD82C38000AD25C /* NftDto.swift in Sources */,
 			);

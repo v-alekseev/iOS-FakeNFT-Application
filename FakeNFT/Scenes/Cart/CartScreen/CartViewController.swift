@@ -99,11 +99,9 @@ final class CartViewController: UIViewController {
         cartTable.register(CartTableViewCell.self)
         cartTable.delegate = self
         cartTable.dataSource = self
+        
         configureRefreshControl()
         updateTotal()
-        
-        //hideCart(viewModel?.order.count == 0 )
-
     }
     
     // MARK: - Private Methods
@@ -173,6 +171,16 @@ final class CartViewController: UIViewController {
     @objc
     private func paymentButtonTap() {
         print("paymentButtonTap")
+        let vc = PayViewController()
+        vc.hidesBottomBarWhenPushed = true
+       
+        navigationItem.backButtonTitle = ""
+
+        
+
+        
+        navigationController?.pushViewController(vc, animated: true)
+
     }
     
     private func setupUI() {
