@@ -9,6 +9,13 @@ import Foundation
 
 final class CollectionViewModel: CollectionViewModelProtocol {
     
+    private let operationQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 2
+        queue.isSuspended = true
+        return queue
+    }()
+    
     private var dataSource: DataProviderInteractorProtocol
     private var model: CollectionModel
     
@@ -44,48 +51,70 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     func refresh() {
         self.dataSource.clearNFTs()
         self.dataSource.clearAuthor()
-//        print("refreshing")
         self.refreshAuthor()
         self.refreshNFTs()
+        self.startOperations()
     }
     
     private func refreshAuthor() {
         self.incrementLoading()
-        self.dataSource.fetchMyAuthor(with: model.author) {[weak self] result in
+        let operation = BlockOperation { [weak self] in
             guard let self = self else { return }
-            switch result {
-            case .success:
-//                print("author success")
-                self.handleLoadingState()
-            case .failure(let error):
-                print(error)
-                self.resultState = .error(error: error)
-            }
-        }
-    }
-    
-    private func refreshNFTs() {
-        self.model.nfts.forEach { id in
-            self.incrementLoading()
-            self.dataSource.fetchMyNFT(with: id) { [weak self] result in
+            self.dataSource.fetchMyAuthor(with: self.model.author) {[weak self] result in
                 guard let self = self else { return }
-                switch result {
-                case .success:
-//                    print("nft success")
-                    self.handleLoadingState()
-                case .failure(let error):
-                    print(error)
-                    self.resultState = .error(error: error)
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        self.handleLoadingState()
+                    case .failure(let error):
+                        self.resultState = .error(error: error)
+                    }
                 }
             }
         }
+        addOperationWithDelay(operation)
+    }
+    
+    private func refreshNFTs() {
+        for id in model.nfts {
+            self.incrementLoading()
+            let operation = BlockOperation { [weak self] in
+                self?.dataSource.fetchMyNFT(with: id) { [weak self] result in
+                    guard let self = self else { return }
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success:
+                            self.handleLoadingState()
+                        case .failure(let error):
+                            self.resultState = .error(error: error)
+                        }
+                    }
+                }
+            }
+            addOperationWithDelay(operation)
+        }
+    }
+    
+    private func addOperationWithDelay(_ operation: Operation) {
+        let delayOperation = BlockOperation {
+            Thread.sleep(forTimeInterval: 0.6)
+        }
+        self.operationQueue.addOperation(operation)
+        self.operationQueue.addOperation(delayOperation)
+    }
+    
+    private func startOperations() {
+        operationQueue.isSuspended = false
     }
     
     private func handleLoadingState() {
         self.decrementLoading()
         switch self.resultState {
+        case .error(let error):
+            resultState = .error(error: error)
+            break
         case .loading(let inProgress):
-            if inProgress == 0 {
+            if inProgress <= 0 {
                 self.resultState = .showCollection
             }
         default:
@@ -107,13 +136,9 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     }
     
     private func decrementLoading() {
-        switch resultState {
+        switch self.resultState {
         case .loading(let inProgress):
-            if inProgress <= 0 {
-                resultState = .showCollection
-            } else {
-                resultState = .loading(inProgress: inProgress - 1)
-            }
+            self.resultState = .loading(inProgress: inProgress - 1)
         default:
             break
         }
@@ -124,6 +149,9 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     }
     
     func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel?) {
+        print("giveMeHeaderComponent")
+        print("current collection: \(model)")
+        print("current author: \(self.dataSource.giveMeCurrentAuthor())")
         return (
             collection: model,
             author: self.dataSource.giveMeCurrentAuthor()
