@@ -102,6 +102,10 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
         self.author = nil
     }
     
+    func giveMeCurrentAuthor() -> AuthorModel? {
+        return self.author
+    }
+    
     // MARK: - NFTs
     func fetchMyNFT(with id: String, completion: @escaping (Result<NFTModel, Error>) -> Void = {_ in }) {
         self.dataProvider.giveMeNft(withID: id) { [weak self] result in
@@ -118,6 +122,18 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     
     func clearNFTs() {
         self.NFTs = []
+    }
+    
+    func giveMeNFTsQuantity() -> Int {
+        return self.NFTs.count
+    }
+    
+    func giveMeNFTAt(index: Int) -> NFTModel? {
+        if index < self.NFTs.count {
+            return self.NFTs[index]
+        } else {
+            return nil
+        }
     }
     
     // MARK: - Sort

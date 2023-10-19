@@ -11,5 +11,6 @@ enum CollectionNavigationState {
     case authorLinkDidTapped(url: URL)
     case NFTdidTapped(NFT: NFTModel)
     case basketDidTapped(at: IndexPath)
-    case lokeDidTapped(at: IndexPath)
+    case likeDidTapped(at: IndexPath)
+    case backButtonTapped
 }

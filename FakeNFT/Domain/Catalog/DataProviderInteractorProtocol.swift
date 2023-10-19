@@ -17,6 +17,9 @@ protocol DataProviderInteractorProtocol {
     func fetchMyAuthor(with id: String, completion: @escaping (Result<AuthorModel, Error>) -> Void)
     func clearNFTs()
     func fetchMyNFT(with id: String, completion: @escaping (Result<NFTModel, Error>) -> Void)
+    func giveMeCurrentAuthor() -> AuthorModel?
+    func giveMeNFTsQuantity() -> Int
+    func giveMeNFTAt(index: Int) -> NFTModel?
 }
 
 extension DataProviderInteractorProtocol {

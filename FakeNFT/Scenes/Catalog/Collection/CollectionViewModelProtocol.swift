@@ -8,6 +8,7 @@
 import Foundation
 
 protocol CollectionViewModelProtocol {
-    func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel)
+    func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel?)
     func handleInteractionType(_ type: CollectionInteraction)
+    func bind(to controller: CollectionViewController)
 }

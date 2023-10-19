@@ -15,6 +15,8 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     var navigationClosure: (CollectionNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionNavigationState = .base {
         didSet {
+            
+            print(navigationState)
             navigationClosure(navigationState)
         }
     }
@@ -22,7 +24,10 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     var resultClosure: (CollectionResultState) -> Void = {_ in }
     private (set) var resultState: CollectionResultState = .start {
         didSet {
-            resultClosure(resultState)
+            DispatchQueue.main.async { [self] in
+                print(self.resultState)
+                resultClosure(self.resultState)
+            }
         }
     }
     
@@ -38,15 +43,18 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     func refresh() {
         self.dataSource.clearNFTs()
         self.dataSource.clearAuthor()
+        print("refreshing")
         self.refreshAuthor()
         self.refreshNFTs()
     }
     
     private func refreshAuthor() {
+        self.incrementLoading()
         self.dataSource.fetchMyAuthor(with: model.author) {[weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
+                print("author success")
                 self.handleLoadingState()
             case .failure(let error):
                 print(error)
@@ -57,10 +65,12 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     
     private func refreshNFTs() {
         self.model.nfts.forEach { id in
+            self.incrementLoading()
             self.dataSource.fetchMyNFT(with: id) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success:
+                    print("nft success")
                     self.handleLoadingState()
                 case .failure(let error):
                     print(error)
@@ -104,18 +114,23 @@ final class CollectionViewModel: CollectionViewModelProtocol {
         return
     }
     
-    func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel) {
+    func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel?) {
         return (
             collection: model,
-            author: AuthorModel(
-                name: "Aleksandr Poliakov",
-                avatar: "2",
-                description: "dsfasfkab",
-                website: "https://yandex.ru/",
-                nfts: [],
-                rating: "1",
-                id: "1"
-            )
+            author: self.dataSource.giveMeCurrentAuthor()
         )
+    }
+    
+    // MARK: - Binding
+    func bind(to controller: CollectionViewController) {
+        self.navigationClosure = {[weak controller] state in
+            guard let controller = controller else { return }
+            controller.renderState(state: state)
+        }
+
+        self.resultClosure = {[weak controller] state in
+            guard let controller = controller else { return }
+            controller.renderState(state: state)
+        }
     }
 }

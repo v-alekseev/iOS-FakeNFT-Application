@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 final class CollectionViewController: UIViewController {
     private var viewModel: CollectionViewModelProtocol
@@ -48,13 +49,49 @@ final class CollectionViewController: UIViewController {
         super.viewDidLoad()
         setupButtons()
         setupUI()
+        bind()
         view.backgroundColor = .ypWhiteWithDarkMode
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CollectionHeaderTableViewCell.self)
     }
+    
+    // MARK: - Rendering
+    func renderState(state: CollectionResultState) {
+        switch state {
+        case .start:
+            ProgressHUD.dismiss()
+            break
+        case .loading:
+            tableView.isHidden = true
+            ProgressHUD.show()
+        case .error:
+            ProgressHUD.dismiss()
+            tableView.isHidden = false
+            tableView.reloadData()
+            break
+        case .showCollection:
+            ProgressHUD.dismiss()
+            break
+        }
+    }
+    
+    func renderState(state: CollectionNavigationState) {
+        switch state {
+        case .backButtonTapped:
+            navigationController?.popViewController(animated: true)
+        default:
+            break
+        }
+    
+    }
+    
     // MARK: - Private Methods
     //
+    
+    private func bind () {
+        viewModel.bind(to: self)
+    }
     
     private func setupButtons() {
         backButton.target = self
@@ -102,7 +139,10 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
         let cell: CollectionHeaderTableViewCell = tableView.dequeueReusableCell()
         let data = viewModel.giveMeHeaderComponent()
         let imageSize = CGSize(width: tableView.bounds.width, height: 310)
-        cell.configureCell(with: data.collection, author: data.author, imageSize: imageSize)
+        guard let author = data.author else {
+            return cell
+        }
+        cell.configureCell(with: data.collection, author: author, imageSize: imageSize)
         return cell
     }
 }
