@@ -40,8 +40,10 @@ final class UsersCollectionView: UIView {
     
     private func setUpViews() {
         backgroundColor = .ypWhiteWithDarkMode
-        addSubview(collectionView)
-        addSubview(loadIndicator)
+        [collectionView, loadIndicator].forEach {
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     private func setUpConstraints() {
@@ -58,7 +60,6 @@ final class UsersCollectionView: UIView {
     
     private func createCollecionView() -> UICollectionView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
         collectionView.register(UsersCollectionCell.self)
         collectionView.dataSource = self
@@ -92,7 +93,7 @@ extension UsersCollectionView: UICollectionViewDataSource {
 extension UsersCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: (collectionView.bounds.width - 2*16 - 2*10) / 3, height: 192)
+        CGSize(width: (collectionView.bounds.width - 2 * Constants.fromEdge - 2 * Constants.betweenСells) / 3, height: Constants.heightCell)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -100,6 +101,14 @@ extension UsersCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        return UIEdgeInsets(top: 0, left: Constants.fromEdge, bottom: 0, right: Constants.fromEdge)
+    }
+}
+
+extension UsersCollectionView {
+    private enum Constants {
+        static let betweenСells: CGFloat = 10
+        static let fromEdge: CGFloat = 16
+        static let heightCell: CGFloat = 192
     }
 }

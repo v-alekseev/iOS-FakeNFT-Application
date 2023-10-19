@@ -9,7 +9,7 @@ import Foundation
 
 struct NftModel: Codable {
     let name: String
-    let imageURL: [String]
+    let images: [String]
     let rating: Int
     let price: Double
     let id: String

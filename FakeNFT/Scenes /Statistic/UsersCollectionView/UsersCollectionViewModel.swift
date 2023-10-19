@@ -16,7 +16,7 @@ final class UsersCollectionViewModel {
     
     private var actualUserData: UserModel
     private let dataProvider: StatisticDataProviderProtocol?
-
+    
     init(dataProvider: StatisticDataProviderProtocol, actualUserData: UserModel) {
         
         self.dataProvider = dataProvider
@@ -26,19 +26,23 @@ final class UsersCollectionViewModel {
     }
     
     func loadNftsData() {
-        isLoading = true
-        loadError = false
-        dataProvider?.getArrayOfNftsWithID(arrayOfId: actualUserData.nfts) { [weak self] result in
-            guard let self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(data):
-                    self.nfts = data
-                case .failure(_):
-                    self.loadError = true
+        nfts = []
+        actualUserData.nfts.forEach({ nft in
+            isLoading = true
+            loadError = false
+            dataProvider?.getNftWithId(nftId: nft) { [weak self] result in
+                guard let self else { return }
+                DispatchQueue.main.async {
+                    switch result {
+                    case let .success(data):
+                        self.nfts.append(data)
+                    case .failure(_):
+                        self.loadError = true
+                    }
+                    self.isLoading = false
                 }
-                self.isLoading = false
             }
-        }
+        })
+        
     }
 }

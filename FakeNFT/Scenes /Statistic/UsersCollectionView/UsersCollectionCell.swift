@@ -37,7 +37,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     func provide(nftData: NftModel, isInCart: Bool) {
-        if  let firstImage = nftData.imageURL.first,
+        if  let firstImage = nftData.images.first,
             let url = URL(string: firstImage) {
             imageNftView.kf.indicatorType = .activity
             imageNftView.kf.setImage(with: url,
