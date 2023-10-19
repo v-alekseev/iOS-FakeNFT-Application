@@ -67,11 +67,11 @@ final class CollectionViewController: UIViewController {
             ProgressHUD.show()
         case .error:
             ProgressHUD.dismiss()
-            tableView.isHidden = false
-            tableView.reloadData()
             break
         case .showCollection:
             ProgressHUD.dismiss()
+            tableView.isHidden = false
+            tableView.reloadData()
             break
         }
     }

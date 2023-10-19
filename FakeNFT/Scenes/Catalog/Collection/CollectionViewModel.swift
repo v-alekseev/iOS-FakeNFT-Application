@@ -95,7 +95,11 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     private func incrementLoading() {
         switch resultState {
         case .loading(let inProgress):
-            resultState = .loading(inProgress: inProgress + 1)
+            if inProgress <= 0 {
+                resultState = .loading(inProgress: 1)
+            } else {
+                resultState = .loading(inProgress: inProgress + 1)
+            }
         default:
             resultState = .loading(inProgress: 0)
         }
@@ -104,7 +108,11 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     private func decrementLoading() {
         switch resultState {
         case .loading(let inProgress):
-            resultState = .loading(inProgress: inProgress - 1)
+            if inProgress <= 0 {
+                resultState = .showCollection
+            } else {
+                resultState = .loading(inProgress: inProgress - 1)
+            }
         default:
             break
         }
