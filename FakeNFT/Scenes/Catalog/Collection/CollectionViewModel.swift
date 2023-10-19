@@ -32,8 +32,6 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     private (set) var resultState: CollectionResultState = .start {
         didSet {
             DispatchQueue.main.async { [self] in
-                print(self.resultState)
-//                print("current NFTs count: \(self.dataSource.giveMeNFTsQuantity())")
                 resultClosure(self.resultState)
             }
         }
@@ -149,9 +147,6 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     }
     
     func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel?) {
-        print("giveMeHeaderComponent")
-        print("current collection: \(model)")
-        print("current author: \(self.dataSource.giveMeCurrentAuthor())")
         return (
             collection: model,
             author: self.dataSource.giveMeCurrentAuthor()
