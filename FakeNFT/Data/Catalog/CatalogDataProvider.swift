@@ -125,28 +125,40 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
         return model
     }
     
-    func giveMeNft(withID id: String) -> NFTModel? {
-        let dispatchGroup = DispatchGroup()
-        let getNFTRequest = DefaultNetworkRequest(
-            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/nft/\(id)")!,
-            httpMethod: .get
-        )
-        var model: NFTModel? = nil
-        dispatchGroup.enter()
-        currentTask = self.client.send(request: getNFTRequest, type: NFTModel.self) { result in
-            switch result {
-            case .success(let data):
-                model = data
-            case .failure:
-                model = nil
-            }
-            dispatchGroup.leave()
-        }
-        dispatchGroup.wait()
-        return model
-    }
+//    func giveMeNft(withID id: String) -> NFTModel? {
+//        let dispatchGroup = DispatchGroup()
+//        let getNFTRequest = DefaultNetworkRequest(
+//            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/nft/\(id)")!,
+//            httpMethod: .get
+//        )
+//        var model: NFTModel? = nil
+//        dispatchGroup.enter()
+//        currentTask = self.client.send(request: getNFTRequest, type: NFTModel.self) { result in
+//            switch result {
+//            case .success(let data):
+//                model = data
+//            case .failure:
+//                model = nil
+//            }
+//            dispatchGroup.leave()
+//        }
+//        dispatchGroup.wait()
+//        return model
+//    }
     
-
+    func giveMeNft(withID id: String, completion: @escaping (Result<NFTModel, Error>) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let getNFTRequest = DefaultNetworkRequest(
+                endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/nft/\(id)")!,
+                httpMethod: .get
+            )
+            self.client.send(request: getNFTRequest, type: NFTModel.self) { result in
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+        }
+    }
     
     func giveMeData<T: Endpoint>(
         using endpoint: T,

@@ -9,10 +9,9 @@ import Foundation
 
 final class CollectionViewModel: CollectionViewModelProtocol {
     
-    
-    
     private var dataSource: DataProviderInteractorProtocol
     private var model: CollectionModel
+    
     var navigationClosure: (CollectionNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionNavigationState = .base {
         didSet {
@@ -33,15 +32,71 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     ) {
         self.dataSource = dataSource
         self.model = model
+        self.refresh()
+    }
+    
+    func refresh() {
+        self.dataSource.clearNFTs()
+        self.dataSource.clearAuthor()
+        self.refreshAuthor()
+        self.refreshNFTs()
+    }
+    
+    private func refreshAuthor() {
         self.dataSource.fetchMyAuthor(with: model.author) {[weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let author):
-                self.resultState = .showCollection(collection: self.model, author: author)
+            case .success:
+                self.handleLoadingState()
             case .failure(let error):
                 print(error)
                 self.resultState = .error(error: error)
             }
+        }
+    }
+    
+    private func refreshNFTs() {
+        self.model.nfts.forEach { id in
+            self.dataSource.fetchMyNFT(with: id) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success:
+                    self.handleLoadingState()
+                case .failure(let error):
+                    print(error)
+                    self.resultState = .error(error: error)
+                }
+            }
+        }
+    }
+    
+    private func handleLoadingState() {
+        self.decrementLoading()
+        switch self.resultState {
+        case .loading(let inProgress):
+            if inProgress == 0 {
+                self.resultState = .showCollection
+            }
+        default:
+            break
+        }
+    }
+    
+    private func incrementLoading() {
+        switch resultState {
+        case .loading(let inProgress):
+            resultState = .loading(inProgress: inProgress + 1)
+        default:
+            resultState = .loading(inProgress: 0)
+        }
+    }
+    
+    private func decrementLoading() {
+        switch resultState {
+        case .loading(let inProgress):
+            resultState = .loading(inProgress: inProgress - 1)
+        default:
+            break
         }
     }
     

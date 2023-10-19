@@ -12,6 +12,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     private let sortTypeKey = "selectedSortType"
     private var collections: [CollectionModel]
     private var author: AuthorModel?
+    private var NFTs: [NFTModel] = []
     private var currentSortType: SortType?
     private let dataProvider: CatalogDataProviderProtocol
     
@@ -85,7 +86,6 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     
     // MARK: - Authors
     func fetchMyAuthor(with id: String, completion: @escaping (Result<AuthorModel, Error>) -> Void = {_ in })  {
-        self.author = nil
         self.dataProvider.fetchMyAuthor(with: id) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -96,7 +96,28 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
             }
             completion(result)
         }
-        
+    }
+    
+    func clearAuthor() {
+        self.author = nil
+    }
+    
+    // MARK: - NFTs
+    func fetchMyNFT(with id: String, completion: @escaping (Result<NFTModel, Error>) -> Void = {_ in }) {
+        self.dataProvider.giveMeNft(withID: id) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let nft):
+                self.NFTs.append(nft)
+            case .failure(let error):
+                print(error)
+            }
+            completion(result)
+        }
+    }
+    
+    func clearNFTs() {
+        self.NFTs = []
     }
     
     // MARK: - Sort

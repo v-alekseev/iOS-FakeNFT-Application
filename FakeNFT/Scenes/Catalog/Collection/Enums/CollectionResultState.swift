@@ -9,7 +9,7 @@ import Foundation
 
 enum CollectionResultState {
     case start
-    case loading
-    case showCollection(collection: CollectionModel, author: AuthorModel)
+    case loading(inProgress: Int)
+    case showCollection
     case error(error: Error)
 }

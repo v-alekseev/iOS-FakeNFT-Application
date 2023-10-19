@@ -13,6 +13,6 @@ protocol CatalogDataProviderProtocol {
     func fetchMeAllCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void)
     func giveMeCollection(withID id: String) -> CollectionModel?
     func giveMeAllNFTs() -> [NFTModel]
-    func giveMeNft(withID id: String) -> NFTModel?
+    func giveMeNft(withID id: String, completion: @escaping (Result<NFTModel, Error>) -> Void)
     func fetchMyAuthor(with id: String, completion: @escaping (Result<AuthorModel, Error>) -> Void)
 }
