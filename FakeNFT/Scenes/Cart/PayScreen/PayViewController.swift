@@ -164,13 +164,23 @@ struct CollectionLayout {
     static let countOfColumsCell: Double = 2
 }
 
+extension PayViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = currencyCollectionView.cellForItem(at: indexPath) as? PayCollectionViewCell
+        cell?.selectCell(isSelected: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = currencyCollectionView.cellForItem(at: indexPath) as? PayCollectionViewCell
+        cell?.selectCell(isSelected: false)
+    }
+}
+
 extension PayViewController: UICollectionViewDelegateFlowLayout {
     // размер ячейки
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let speceBetweenCells = CollectionLayout.leadingOffsetCell+CollectionLayout.trailingOffsetCell+CollectionLayout.spaceBetweenColumns
-        
         let cellWight = (collectionView.bounds.width - speceBetweenCells)/CollectionLayout.countOfColumsCell
-        print("cellWight = \(cellWight)  collectionView.bounds.width = \(collectionView.bounds.width) speceBetweenCells = \(speceBetweenCells) collectionView.bounds.width - speceBetweenCells = \(collectionView.bounds.width - speceBetweenCells)")
         return CGSize(width: cellWight, height: CollectionLayout.heightOfCell)
     }
     // отступ между яейками в одном ряду  (горизонтальные отступы)   // отвечает за горизонтальные отступы между ячейками.

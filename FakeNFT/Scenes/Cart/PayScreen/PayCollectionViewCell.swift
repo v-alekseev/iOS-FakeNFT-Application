@@ -47,6 +47,7 @@ final class PayCollectionViewCell: UICollectionViewCell,  ReuseIdentifying  {
         contentView.backgroundColor = .ypLightGreyWithDarkMode //.red // .clear
         contentView.layer.cornerRadius = 12
         contentView.layer.masksToBounds = true
+        contentView.layer.borderColor = UIColor.ypBlackWithDarkMode.cgColor
     
         setup(imageURL: URL(string: "https://code.s3.yandex.net/Mobile/iOS/Currencies/Dogecoin_(DOGE).png"), currencyName: "Dogecoin", currencyCode: "DOGE")
         
@@ -57,6 +58,10 @@ final class PayCollectionViewCell: UICollectionViewCell,  ReuseIdentifying  {
         currencyImage.kf.setImage(with: imageURL, placeholder:  UIImage(resource: .cur))
         currencyNameLabel.text = currencyName
         currencyCodeLabel.text = currencyCode
+    }
+    
+    func selectCell(isSelected: Bool) {
+        contentView.layer.borderWidth = isSelected ? 1 : 0
     }
     
     
