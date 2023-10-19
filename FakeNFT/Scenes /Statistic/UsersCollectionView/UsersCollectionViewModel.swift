@@ -27,7 +27,9 @@ final class UsersCollectionViewModel {
     
     func loadNftsData() {
         nfts = []
+        let dispatchGroup = DispatchGroup()
         actualUserData.nfts.forEach({ nft in
+            dispatchGroup.enter()
             isLoading = true
             loadError = false
             dataProvider?.getNftWithId(nftId: nft) { [weak self] result in
@@ -39,10 +41,13 @@ final class UsersCollectionViewModel {
                     case .failure(_):
                         self.loadError = true
                     }
-                    self.isLoading = false
+                    dispatchGroup.leave()
                 }
             }
         })
-        
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            self.isLoading = false
+            self.nfts = self.nfts.sorted(by: {$0.name < $1.name})
+        }
     }
 }

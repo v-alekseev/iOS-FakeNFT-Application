@@ -42,7 +42,8 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
             imageNftView.kf.indicatorType = .activity
             imageNftView.kf.setImage(with: url,
                                      placeholder: imageNftStub,
-                                     options: [.transition(.fade(1))])
+                                     options: [.transition(.fade(1)),
+                                               .forceRefresh])
         }
         
         nftNameLabel.text = nftData.name
