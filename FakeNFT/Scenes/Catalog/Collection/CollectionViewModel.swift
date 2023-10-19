@@ -26,6 +26,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
         didSet {
             DispatchQueue.main.async { [self] in
                 print(self.resultState)
+//                print("current NFTs count: \(self.dataSource.giveMeNFTsQuantity())")
                 resultClosure(self.resultState)
             }
         }
@@ -43,7 +44,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     func refresh() {
         self.dataSource.clearNFTs()
         self.dataSource.clearAuthor()
-        print("refreshing")
+//        print("refreshing")
         self.refreshAuthor()
         self.refreshNFTs()
     }
@@ -54,7 +55,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success:
-                print("author success")
+//                print("author success")
                 self.handleLoadingState()
             case .failure(let error):
                 print(error)
@@ -70,7 +71,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
                 guard let self = self else { return }
                 switch result {
                 case .success:
-                    print("nft success")
+//                    print("nft success")
                     self.handleLoadingState()
                 case .failure(let error):
                     print(error)
@@ -119,7 +120,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     }
     
     func handleInteractionType(_ type: CollectionInteraction) {
-        return
+        self.navigationState = .backButtonTapped
     }
     
     func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel?) {

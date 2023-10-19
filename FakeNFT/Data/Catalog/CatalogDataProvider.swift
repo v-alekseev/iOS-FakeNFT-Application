@@ -146,7 +146,7 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
 //        return model
 //    }
     
-    func giveMeNft(withID id: String, completion: @escaping (Result<NFTModel, Error>) -> Void) {
+    func fetchMeNft(withID id: String, completion: @escaping (Result<NFTModel, Error>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let getNFTRequest = DefaultNetworkRequest(
                 endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/nft/\(id)")!,

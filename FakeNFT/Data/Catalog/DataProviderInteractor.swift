@@ -108,7 +108,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     
     // MARK: - NFTs
     func fetchMyNFT(with id: String, completion: @escaping (Result<NFTModel, Error>) -> Void = {_ in }) {
-        self.dataProvider.giveMeNft(withID: id) { [weak self] result in
+        self.dataProvider.fetchMeNft(withID: id) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let nft):
