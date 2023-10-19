@@ -11,7 +11,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     
     private let operationQueue: OperationQueue = {
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 2
+        queue.maxConcurrentOperationCount = 1
         queue.isSuspended = true
         return queue
     }()
@@ -97,7 +97,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     
     private func addOperationWithDelay(_ operation: Operation) {
         let delayOperation = BlockOperation {
-            Thread.sleep(forTimeInterval: 0.6)
+            Thread.sleep(forTimeInterval: 0.5)
         }
         self.operationQueue.addOperation(operation)
         self.operationQueue.addOperation(delayOperation)

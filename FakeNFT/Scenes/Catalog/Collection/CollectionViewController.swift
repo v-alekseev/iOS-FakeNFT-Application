@@ -67,6 +67,7 @@ final class CollectionViewController: UIViewController {
             ProgressHUD.show()
         case .error:
             ProgressHUD.dismiss()
+            showErrorAlert()
             break
         case .showCollection:
             ProgressHUD.dismiss()
@@ -96,6 +97,15 @@ final class CollectionViewController: UIViewController {
     private func setupButtons() {
         backButton.target = self
         backButton.action = #selector(handleBackButton)
+    }
+    
+    private func showErrorAlert() {
+        let alertPresenter = AlertPresenter()
+        let alertModel = AlertModel(title: L10n.Alert.Error.title, message: L10n.Alert.Error.description, primaryButtonText: L10n.Alert.Error.retry) { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.refresh()
+        }
+        alertPresenter.show(in: self, model: alertModel)
     }
     
     private func setupUI() {

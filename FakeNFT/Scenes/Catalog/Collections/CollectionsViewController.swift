@@ -153,7 +153,7 @@ final class CollectionsViewController: UIViewController {
         let alertPresenter = AlertPresenter()
         let alertModel = AlertModel(title: L10n.Alert.Error.title, message: L10n.Alert.Error.description, primaryButtonText: L10n.Alert.Error.retry) { [weak self] in
             guard let self = self else { return }
-            self.tableView.reloadData()
+            self.viewModel.refresh()
         }
         alertPresenter.show(in: self, model: alertModel)
     }
