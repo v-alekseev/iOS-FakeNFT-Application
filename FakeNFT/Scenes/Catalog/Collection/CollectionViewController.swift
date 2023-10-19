@@ -25,26 +25,16 @@ final class CollectionViewController: UIViewController {
         return tv
     }()
     
-    private var textLabel: UILabel = {
-        var label = UILabel()
-        label.text = "Отдельная коллекция NFT"
-        label.numberOfLines = 0
-        label.font =  UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     init (collection: CollectionModel, viewModel: CollectionViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.textLabel.text = "Отдельная \nколлекция \nNFT: \n\(collection.name)"
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - UIViewController(*)
-    //
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
@@ -84,7 +74,6 @@ final class CollectionViewController: UIViewController {
         default:
             break
         }
-    
     }
     
     // MARK: - Private Methods
