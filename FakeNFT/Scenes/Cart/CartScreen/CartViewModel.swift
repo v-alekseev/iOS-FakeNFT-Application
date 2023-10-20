@@ -25,6 +25,8 @@ protocol CartViewModelProtocol {
 }
 
 final class CartViewModel: CartViewModelProtocol {
+    // MARK: - Properties
+    //
     weak var delegate: CartViewModelDelegate?
     
     private (set) var cartDataProvider: CardDataProviderProtocol?
@@ -57,6 +59,9 @@ final class CartViewModel: CartViewModelProtocol {
     
     private var currentFilter: Filters.FilterClosure = Filters.filterDefault
     
+    // MARK: - init
+    //
+
     init(dataProvider: CardDataProviderProtocol? = CardDataProvider.shared) {
         self.cartDataProvider = dataProvider
         NotificationCenter.default.addObserver(self,
@@ -65,6 +70,8 @@ final class CartViewModel: CartViewModelProtocol {
                                                object: nil)
     }
     
+    // MARK: - Actions
+    //
     @objc private func didCartChaged(_ notification: Notification) {
         guard let cartDataProvider = cartDataProvider  else {return}
         
@@ -72,6 +79,8 @@ final class CartViewModel: CartViewModelProtocol {
         order = orderUnsorted.sorted(by: currentFilter)
     }
     
+    // MARK: - Public functions
+    //
     func filterCart(_ filter: @escaping Filters.FilterClosure) {
         currentFilter = filter
         order = order.sorted(by: currentFilter)

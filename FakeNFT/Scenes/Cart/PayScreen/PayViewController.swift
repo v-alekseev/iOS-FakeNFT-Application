@@ -10,13 +10,15 @@ import ProgressHUD
 
 final class PayViewController: UIViewController {
     
+    // MARK: - Consts
+    //
     let termOfUseUrl = "https://yandex.ru/legal/practicum_termsofuse"
     
-    var viewModel: PayViewModel?
-    
-    // MARK: - Private Properties
+
+    // MARK: - Properties
     //
     
+    var viewModel: PayViewModel?
     
     private lazy var bottomView: UIView = {
         var view = UIView()
@@ -30,7 +32,6 @@ final class PayViewController: UIViewController {
     
     private lazy var termsOfUseFirstLineLabel = UILabel(font: UIFont.caption2, text: L10n.Cart.PayScreen.termOfUseFirstString)
     private lazy var termsOfUseSecondLineLabel = UILabel(font: UIFont.caption2, text: L10n.Cart.PayScreen.termOfUseSecondString,textColor: .ypBlue)
-    
     private lazy var paymentButton = UIButton(title: L10n.Cart.paymentButtonTitle, cornerRadius: 16)
     
     lazy var currencyCollectionView = {
@@ -47,38 +48,16 @@ final class PayViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .ypWhiteWithDarkMode
         viewModel?.delegate = self
-        
-        guard let navBar = navigationController?.navigationBar  else { return }
-        navigationItem.title = L10n.Cart.PayScreen.screenHeader
-        navBar.tintColor = .ypBlackWithDarkMode
-        navBar.titleTextAttributes =  [ .font: UIFont.bodyBold]
-        
-        paymentButton.addTarget(self, action: #selector(paymentButtonTap), for: .touchUpInside)
-        termsOfUseSecondLineLabel.isUserInteractionEnabled = true
-        
-        currencyCollectionView.delegate = self
-        currencyCollectionView.dataSource = self
-        currencyCollectionView.register(PayCollectionViewCell.self)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        termsOfUseSecondLineLabel.addGestureRecognizer(tapGesture)
-        
-        setupUI()
-        
+
+        setupUIElements()
+        setupUIElementsConstraints()
         enablePayButton(false)
         
         viewModel?.getCurrensies()
     }
-    
-    internal func showLoader(_ isShow: Bool) {
-        isShow ? ProgressHUD.show() : ProgressHUD.dismiss()
-    }
-    
-    internal func enablePayButton(_ isEnable: Bool) {
-        paymentButton.isEnabled = isEnable
-        paymentButton.backgroundColor = isEnable ? .ypBlackWithDarkMode : .darkGray
-    }
-    
+
+    // MARK: - Action Methods
+    //
     @objc
     func handleTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
@@ -96,9 +75,38 @@ final class PayViewController: UIViewController {
     private func paymentButtonTap() {
         viewModel?.payOrder()
     }
+    
+    // MARK: - Internal Methods
+    //
+    internal func showLoader(_ isShow: Bool) {
+        isShow ? ProgressHUD.show() : ProgressHUD.dismiss()
+    }
+    
+    internal func enablePayButton(_ isEnable: Bool) {
+        paymentButton.isEnabled = isEnable
+        paymentButton.backgroundColor = isEnable ? .ypBlackWithDarkMode : .darkGray
+    }
+    
     // MARK: - Private Methods
     //
-    private func setupUI() {
+    func setupUIElements() {
+        guard let navBar = navigationController?.navigationBar  else { return }
+        navigationItem.title = L10n.Cart.PayScreen.screenHeader
+        navBar.tintColor = .ypBlackWithDarkMode
+        navBar.titleTextAttributes =  [ .font: UIFont.bodyBold]
+        
+        paymentButton.addTarget(self, action: #selector(paymentButtonTap), for: .touchUpInside)
+        
+        currencyCollectionView.delegate = self
+        currencyCollectionView.dataSource = self
+        currencyCollectionView.register(PayCollectionViewCell.self)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        termsOfUseSecondLineLabel.addGestureRecognizer(tapGesture)
+        termsOfUseSecondLineLabel.isUserInteractionEnabled = true
+    }
+    
+    private func setupUIElementsConstraints() {
         view.addSubview(bottomView)
         NSLayoutConstraint.activate([
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

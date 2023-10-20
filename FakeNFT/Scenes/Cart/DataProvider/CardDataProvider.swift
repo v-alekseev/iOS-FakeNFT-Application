@@ -10,9 +10,6 @@ import Foundation
 protocol CardDataProviderProtocol {
     func getOrder(_ completion: @escaping (Result<String, Error>) -> Void)
     func getNFT(id: String, _ completion: @escaping (Result<NftDto, Error>) -> Void)
-    func getCurrencies()
-    func getCurrency(id: Int)
-    func paymentOrder()
     func removeItemFromCart(idForRemove: String,  _ completion: @escaping (Result<[String], Error>) -> Void)
     
     var order: [NftDto] { get }
@@ -65,7 +62,7 @@ final class CardDataProvider: CardDataProviderProtocol {
     private init(networkClient: NetworkClient? = DefaultNetworkClient()) {
         self.networkClient = networkClient
     }
-    
+    /// получение корзины. По результатам работы функции заполняется свойства orderIDs и order
     func getOrder(_ completion: @escaping (Result<String, Error>) -> Void) {
         let orderRequest = OrderRequest()
         self.orderIDs.removeAll()
@@ -99,7 +96,7 @@ final class CardDataProvider: CardDataProviderProtocol {
         }
         return
     }
-    
+    /// получение отдельного NFT по id
     func getNFT(id: String, _ completion: @escaping (Result<NftDto, Error>) -> Void) {
         let ntfsRequest = NFSRequest(nfsID: id)
         networkClient?.send(request: ntfsRequest , type: NftDto.self)  { result in
@@ -136,18 +133,6 @@ final class CardDataProvider: CardDataProviderProtocol {
                 }
             }
         }
-        return
-    }
-    
-    func getCurrencies() {
-        return
-    }
-    
-    func getCurrency(id: Int) {
-        return
-    }
-    
-    func paymentOrder() {
         return
     }
 }

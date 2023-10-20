@@ -26,10 +26,9 @@ protocol PayViewModelProtocol {
 }
 
 final class PayViewModel: PayViewModelProtocol {
+    
     weak var delegate: PayViewModelDelegate?
-    
     private (set) var payDataProvider: PayDataProviderProtocol?
-    
     private (set) var currencies: [Currency] = []
     
     var selectedCurrency: Currency? {
@@ -50,7 +49,7 @@ final class PayViewModel: PayViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case let .success(data):
-                self.currencies = data.compactMap( { Currency($0) })   // конечно можно написать просто   self.currencies = data, но так как-то "правильнее"
+                self.currencies = data.compactMap( { Currency($0) })   // конечно можно написать просто   self.currencies = data, но так как-то "правильнее" 
                 delegate?.didUpdateCurrensies()
             case let .failure(error):
                 print("getCurrencies error: \(error)")

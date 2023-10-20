@@ -9,7 +9,7 @@ import UIKit
 import ProgressHUD
 
 final class CartViewController: UIViewController {
-    // MARK: - Private Properties
+    // MARK: - Properties
     //
     private (set) var viewModel: CartViewModelProtocol?
     
@@ -58,60 +58,32 @@ final class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .ypWhiteWithDarkMode
         
         viewModel?.delegate = self
         
         setupNavigationBar()
         
         paymentButton.addTarget(self, action: #selector(paymentButtonTap), for: .touchUpInside)
-        
-        setupUI()
-        view.backgroundColor = .ypWhiteWithDarkMode
-        
+  
         cartTable.register(CartTableViewCell.self)
         cartTable.delegate = self
         cartTable.dataSource = self
         
         configureRefreshControl()
         updateTotal()
+        
+        setupUIElementsConstraints()
     }
     
-    // MARK: - Private Methods
+    // MARK: - Actions Properties
     //
-    internal func hideCart(_ isHidden: Bool) {
-        emptyCartLabel.isHidden = !isHidden
-        
-        cartTable.isHidden = isHidden
-        bottomView.isHidden = isHidden
-    }
-    internal func updateTotal() {
-        countItemsLabel.text = "\(viewModel?.order.count ?? 00) NFT"
-        totalAmountLabel.text = "\(String(format: "%.2f", viewModel?.totalPrice ?? 0)) ETH"
-    }
-    private func configureRefreshControl () {
-        cartTable.refreshControl = UIRefreshControl()
-        cartTable.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
-    }
     @objc private func handleRefreshControl() {
         DispatchQueue.main.async { [weak self] in
             self?.viewModel?.getOrder()
             self?.cartTable.refreshControl?.endRefreshing()
         }
     }
-    
-    internal func showLoader(_ isShow: Bool) {
-        isShow ? ProgressHUD.show(): ProgressHUD.dismiss()
-        paymentButton.isEnabled = !isShow
-    }
-    
-    ///настройка NAvigationBar
-    private func setupNavigationBar() {
-        guard let navBar = navigationController?.navigationBar else  { return }
-        let rightButton = UIBarButtonItem(image: UIImage(resource: .sort), style: .plain, target: self, action: #selector(filterButtonTap))
-        rightButton.tintColor = .ypBlackWithDarkMode
-        navBar.topItem?.setRightBarButton(rightButton, animated: false)
-    }
-    
     /// Функция обрабатывает нажатие на кнопку фильтр
     @objc
     private func filterButtonTap() {
@@ -120,7 +92,6 @@ final class CartViewController: UIViewController {
         alert.addAction(UIAlertAction(title: L10n.Filter.byPrice, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
             self.viewModel?.filterCart(Filters.filterByPrice)
-            
         }))
         
         alert.addAction(UIAlertAction(title: L10n.Filter.byRating, style: .default , handler:{ [weak self] (UIAlertAction) in
@@ -149,7 +120,38 @@ final class CartViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func setupUI() {
+    // MARK: - Internal Properties
+    //
+    internal func showLoader(_ isShow: Bool) {
+        isShow ? ProgressHUD.show(): ProgressHUD.dismiss()
+        paymentButton.isEnabled = !isShow
+    }
+    internal func hideCart(_ isHidden: Bool) {
+        emptyCartLabel.isHidden = !isHidden
+        
+        cartTable.isHidden = isHidden
+        bottomView.isHidden = isHidden
+    }
+    internal func updateTotal() {
+        countItemsLabel.text = "\(viewModel?.order.count ?? 00) NFT"
+        totalAmountLabel.text = "\(String(format: "%.2f", viewModel?.totalPrice ?? 0)) ETH"
+    }
+    
+    // MARK: - Private Methods
+    //
+    private func configureRefreshControl () {
+        cartTable.refreshControl = UIRefreshControl()
+        cartTable.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+    }
+    ///настройка NAvigationBar
+    private func setupNavigationBar() {
+        guard let navBar = navigationController?.navigationBar else  { return }
+        let rightButton = UIBarButtonItem(image: UIImage(resource: .sort), style: .plain, target: self, action: #selector(filterButtonTap))
+        rightButton.tintColor = .ypBlackWithDarkMode
+        navBar.topItem?.setRightBarButton(rightButton, animated: false)
+    }
+    
+    private func setupUIElementsConstraints() {
         view.addSubview(bottomView)
         NSLayoutConstraint.activate([
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -195,8 +197,6 @@ final class CartViewController: UIViewController {
             emptyCartLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyCartLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        
     }
 }
 

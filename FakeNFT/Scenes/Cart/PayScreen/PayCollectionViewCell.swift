@@ -33,12 +33,16 @@ final class PayCollectionViewCell: UICollectionViewCell,  ReuseIdentifying  {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.backgroundColor = .ypLightGreyWithDarkMode //.red // .clear
+        contentView.backgroundColor = .ypLightGreyWithDarkMode
         contentView.layer.cornerRadius = 12
         contentView.layer.masksToBounds = true
         contentView.layer.borderColor = UIColor.ypBlackWithDarkMode.cgColor
     
-        setupUI()
+        setupUIElementsConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setup(currency: Currency) {
@@ -54,7 +58,7 @@ final class PayCollectionViewCell: UICollectionViewCell,  ReuseIdentifying  {
         contentView.layer.borderWidth = isSelected ? 1 : 0
     }    
     
-    private func setupUI() {
+    private func setupUIElementsConstraints() {
         self.contentView.addSubview(imageCanvasView)
         NSLayoutConstraint.activate([
             imageCanvasView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
@@ -84,10 +88,4 @@ final class PayCollectionViewCell: UICollectionViewCell,  ReuseIdentifying  {
             currencyCodeLabel.topAnchor.constraint(equalTo: currencyNameLabel.bottomAnchor)
         ])
     }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }

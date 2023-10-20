@@ -9,6 +9,7 @@ import UIKit
 protocol CartDeleteViewModelProtocol {
     var nftImage: UIImage { get }
     var dataProvider: CardDataProviderProtocol? {get set}
+    
     init(nftImage: UIImage, nftIDforDelete: String, dataProvider: CardDataProviderProtocol?)
     func deleteNFT( _ completion: @escaping (Result<[String], Error>) -> Void)
 }

@@ -11,6 +11,8 @@ import ProgressHUD
 
 final class CartDeleteViewController: UIViewController {
     
+    // MARK: - Properties
+    //
     var viewModel: CartDeleteViewModelProtocol?
     
     private lazy var canvasView: UIView = {
@@ -31,6 +33,8 @@ final class CartDeleteViewController: UIViewController {
     private lazy var returnButton = UIButton(title: L10n.Cart.DeleteConfirmScreen.returnButtonTitle, cornerRadius: 12)
     private lazy var deleteButton = UIButton(title: L10n.Cart.DeleteConfirmScreen.deleteButtonTitle, cornerRadius: 12, titleColor: .ypRed)
 
+    // MARK:  - UIViewController(*)
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,9 +44,12 @@ final class CartDeleteViewController: UIViewController {
         qestionLabel.textAlignment = .center
         
         nftImageView.image = viewModel?.nftImage
-        setupUI()
+        
+        setupUIElementsConstraints()
     }
     
+    // MARK:  - Actions
+    //
     /// Функция обрабатывает нажатие на кнопку отмены
     @objc
     private func returnButtonTap() {
@@ -65,13 +72,15 @@ final class CartDeleteViewController: UIViewController {
         }
     }
     
-    private func showLoader(_ isShow: Bool) { 
+    // MARK:  - Private Methods
+    //
+    private func showLoader(_ isShow: Bool) {
         isShow ? ProgressHUD.show() : ProgressHUD.dismiss()
         returnButton.isEnabled = !isShow
         deleteButton.isEnabled = !isShow
     }
     
-    private func setupUI() {
+    private func setupUIElementsConstraints() {
         // добавление blur на background
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight  )
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
