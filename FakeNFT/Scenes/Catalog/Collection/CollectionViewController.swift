@@ -70,6 +70,7 @@ final class CollectionViewController: UIViewController {
     func renderState(state: CollectionNavigationState) {
         switch state {
         case .backButtonTapped:
+            viewModel.clearLinks()
             navigationController?.popViewController(animated: true)
         default:
             break
