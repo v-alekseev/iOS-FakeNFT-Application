@@ -65,6 +65,7 @@
 		D8B976722AE28AB8007CA5D2 /* PayViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976712AE28AB8007CA5D2 /* PayViewController+UICollectionViewDelegate.swift */; };
 		D8B976742AE2A0C6007CA5D2 /* UIButton+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976732AE2A0C6007CA5D2 /* UIButton+extension.swift */; };
 		D8B976762AE2A0F2007CA5D2 /* UILabel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976752AE2A0F2007CA5D2 /* UILabel+extension.swift */; };
+		D8B9767A2AE305FB007CA5D2 /* RatingComponet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976792AE305FB007CA5D2 /* RatingComponet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +149,7 @@
 		D8B976712AE28AB8007CA5D2 /* PayViewController+UICollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PayViewController+UICollectionViewDelegate.swift"; sourceTree = "<group>"; };
 		D8B976732AE2A0C6007CA5D2 /* UIButton+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+extension.swift"; sourceTree = "<group>"; };
 		D8B976752AE2A0F2007CA5D2 /* UILabel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extension.swift"; sourceTree = "<group>"; };
+		D8B976792AE305FB007CA5D2 /* RatingComponet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingComponet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +267,7 @@
 		3F6806CE29CBBD1B00B4F915 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				D8B976792AE305FB007CA5D2 /* RatingComponet.swift */,
 				3F6806CF29CBBDB100B4F915 /* NetworkClient */,
 				3F6806D629CBC50A00B4F915 /* CellsReusingUtils.swift */,
 				3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */,
@@ -648,6 +651,8 @@
 				7B5E254C2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift in Sources */,
 				D8B976702AE28A94007CA5D2 /* PayViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
+				AF1A63DA2AD81863000F8A4E /* CartViewController.swift in Sources */,
+				D8B9767A2AE305FB007CA5D2 /* RatingComponet.swift in Sources */,
 				AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */,
 				D86C21B22AD82C38000AD25C /* CartViewController.swift in Sources */,
 				D86C21BA2AD82C38000AD25C /* NftModel.swift in Sources */,
