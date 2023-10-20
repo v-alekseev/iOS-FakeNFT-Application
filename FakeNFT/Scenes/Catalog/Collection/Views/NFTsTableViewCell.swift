@@ -11,7 +11,7 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - Elements
     private var collection: UICollectionView
     private var dataSource: NFTDataSourceProtocol?
-    let numberOfColumns: CGFloat = 6
+    let numberOfColumns: CGFloat = 3
     var selectedIndexPath: IndexPath? = nil
 
     // MARK: - INIT
@@ -35,12 +35,13 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
 
 extension NFTsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return dataSource?.numberOfNFTs() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionViewCell = collection.dequeueReusableCell(indexPath: indexPath)
+        cell.cellWidth = floor((collection.frame.width - (numberOfColumns - 1)) / numberOfColumns)
         cell.backgroundColor = .red
         return cell
     }
