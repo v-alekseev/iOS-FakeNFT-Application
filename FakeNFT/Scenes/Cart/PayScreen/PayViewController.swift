@@ -12,6 +12,8 @@ final class PayViewController: UIViewController {
     
     let termOfUseUrl = "https://yandex.ru/legal/practicum_termsofuse"
     
+    var viewModel: PayViewModel?
+    
     // MARK: - Private Properties
     //
     
@@ -28,7 +30,7 @@ final class PayViewController: UIViewController {
     private lazy var termsOfUseFirstLineLabel: UILabel = {
         var label = UILabel()
         let string = "Совершая покупку, вы соглашаетесь с условиями"
-
+        
         label.text = string
         label.font =  UIFont.caption2
         label.textColor = .ypBlackWithDarkMode
@@ -40,7 +42,7 @@ final class PayViewController: UIViewController {
     private lazy var termsOfUseSecondLineLabel: UILabel = {
         var label = UILabel() //UITextView()
         let string = "Пользовательского соглашения"
-
+        
         label.text = string //"Оплата"
         label.font =  UIFont.caption2
         label.textColor = .ypBlue
@@ -55,11 +57,12 @@ final class PayViewController: UIViewController {
         button.setTitle(L10n.Cart.paymentButtonTitle, for: .normal)
         button.titleLabel?.font =  UIFont.bodyBold
         button.setTitleColor(.ypWhiteWithDarkMode, for: .normal)
-        button.backgroundColor = .ypBlackWithDarkMode
+        //button.backgroundColor = .darkGray
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 16
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(paymentButtonTap), for: .touchUpInside)
+        //button.isEnabled = false
         return button
     }()
     
@@ -76,6 +79,7 @@ final class PayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .ypWhiteWithDarkMode
+        viewModel?.delegate = self
         
         guard let navBar = navigationController?.navigationBar  else { return }
         navigationItem.title = "Выберите способ оплаты"
@@ -85,13 +89,25 @@ final class PayViewController: UIViewController {
         currencyCollectionView.delegate = self
         currencyCollectionView.dataSource = self
         currencyCollectionView.register(PayCollectionViewCell.self)
-
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         termsOfUseSecondLineLabel.addGestureRecognizer(tapGesture)
-
+        
         setupUI()
+        
+        enablePayButton(false)
+        
+        viewModel?.getCurrensies()
     }
-
+    
+    private func showLoader(_ isShow: Bool) {
+        isShow ? ProgressHUD.show() : ProgressHUD.dismiss()
+    }
+    
+    private func enablePayButton(_ isEnable: Bool) {
+        paymentButton.isEnabled = isEnable
+        paymentButton.backgroundColor = isEnable ? .ypBlackWithDarkMode : .darkGray
+    }
     
     @objc
     func handleTap(sender: UITapGestureRecognizer) {
@@ -104,12 +120,12 @@ final class PayViewController: UIViewController {
             self.present(termsOfUseVC, animated: true)
         }
     }
-     
     
     /// Функция обрабатывает нажатие на кнопку оплаты
     @objc
     private func paymentButtonTap() {
-        print("paymentButtonTap")
+        print("PayViewController  paymentButtonTap")
+        viewModel?.payOrder()
     }
     // MARK: - Private Methods
     //
@@ -143,14 +159,12 @@ final class PayViewController: UIViewController {
         ])
         
         view.addSubview(currencyCollectionView)
-        
         NSLayoutConstraint.activate([
             currencyCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             currencyCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             currencyCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             currencyCollectionView.bottomAnchor.constraint(equalTo: bottomView.topAnchor)
         ])
-        
     }
 }
 
@@ -168,6 +182,7 @@ extension PayViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = currencyCollectionView.cellForItem(at: indexPath) as? PayCollectionViewCell
         cell?.selectCell(isSelected: true)
+        viewModel?.selectedCurrency = cell?.currency
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -200,12 +215,48 @@ extension PayViewController: UICollectionViewDelegateFlowLayout {
 
 extension PayViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return viewModel?.currencies.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PayCollectionViewCell = currencyCollectionView.dequeueReusableCell(indexPath: indexPath)
+        guard let currency = viewModel?.currencies[indexPath.row] else { return cell }
+        cell.setup(currency: currency)
         return cell
     }
+}
 
+extension PayViewController: PayViewModelDelegate {
+    func willDoPayment() {
+        showLoader(true)
+        enablePayButton(false)
+    }
+    
+    func didPayment(result: Bool) {
+        showLoader(false)
+        enablePayButton(true)
+        if result {
+            let vc = PayResultViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true) {
+                self.navigationController?.popViewController(animated: true)
+                self.tabBarController?.selectedViewController =  self.tabBarController?.viewControllers?[1]
+            }
+        } else {
+            Alert.alertInformation(viewController: self, text: "Попробуйте ещё раз!", title: "Упс! Что-то пошло не так :(")
+        }
+    }
+    
+    func didSelectCurrency() {
+        enablePayButton(true)
+    }
+    
+    func willUpdateCurrensies() {
+        showLoader(true)
+    }
+    
+    func didUpdateCurrensies() {
+        showLoader(false)
+        self.currencyCollectionView.reloadData()
+    }
 }

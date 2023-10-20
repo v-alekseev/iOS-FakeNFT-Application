@@ -10,6 +10,8 @@ import Kingfisher
 
 final class PayCollectionViewCell: UICollectionViewCell,  ReuseIdentifying  {
     
+    private (set) var currency: Currency?
+    
     private lazy var imageCanvasView: UIView = {
         let view = UIView()
         view.backgroundColor = .ypBlackWithDarkMode
@@ -49,21 +51,21 @@ final class PayCollectionViewCell: UICollectionViewCell,  ReuseIdentifying  {
         contentView.layer.masksToBounds = true
         contentView.layer.borderColor = UIColor.ypBlackWithDarkMode.cgColor
     
-        setup(imageURL: URL(string: "https://code.s3.yandex.net/Mobile/iOS/Currencies/Dogecoin_(DOGE).png"), currencyName: "Dogecoin", currencyCode: "DOGE")
-        
         setupUI()
     }
     
-    func setup(imageURL: URL?, currencyName: String, currencyCode: String) {
+    func setup(currency: Currency) {
+        let imageURL = URL(string: currency.image)
         currencyImage.kf.setImage(with: imageURL, placeholder:  UIImage(resource: .cur))
-        currencyNameLabel.text = currencyName
-        currencyCodeLabel.text = currencyCode
+        currencyNameLabel.text = currency.title
+        currencyCodeLabel.text = currency.name
+        
+        self.currency = currency
     }
     
     func selectCell(isSelected: Bool) {
         contentView.layer.borderWidth = isSelected ? 1 : 0
-    }
-    
+    }    
     
     private func setupUI() {
         self.contentView.addSubview(imageCanvasView)

@@ -170,17 +170,11 @@ final class CartViewController: UIViewController {
     /// Функция обрабатывает нажатие на кнопку оплаты
     @objc
     private func paymentButtonTap() {
-        print("paymentButtonTap")
         let vc = PayViewController()
+        vc.viewModel = PayViewModel()
         vc.hidesBottomBarWhenPushed = true
-       
         navigationItem.backButtonTitle = ""
-
-        
-
-        
         navigationController?.pushViewController(vc, animated: true)
-
     }
     
     private func setupUI() {
