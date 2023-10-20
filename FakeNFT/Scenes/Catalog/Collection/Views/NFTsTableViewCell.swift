@@ -22,11 +22,14 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         collection.isScrollEnabled = false
         collection.dataSource = self
         collection.delegate = self
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setDataSource(with source: NFTDataSourceProtocol) {
+        self.dataSource = source
     }
 }
 
