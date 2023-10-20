@@ -44,8 +44,14 @@ final class CommonDataStorage: CommonDataProtocol {
         return isDataLoaded
     }
     
-    func reloadCommonData() {
+    func reloadCommonData(asap: Bool) {
         queue.cancelAllOperations()
+        switch asap {
+        case true:
+            queue.qualityOfService = .userInitiated
+        default:
+            queue.qualityOfService = .background
+        }
         queue.isSuspended = true
         self.markUnready()
         queue.addOperation(loadLikeData, withDelay: 1)

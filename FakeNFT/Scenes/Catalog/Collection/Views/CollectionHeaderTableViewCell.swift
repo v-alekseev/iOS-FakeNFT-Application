@@ -137,8 +137,19 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
         titleLabel.text = "\(collection.name))"
         let linkText = "\(L10n.Catalog.Collection.authorString): \(author.name)"
         let linkSize = author.name.count
-        let descriptionText = NSAttributedString(string: "\n\(collection.description)")
+        
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.ypBlackWithDarkMode,
+            .font: UIFont.caption2
+        ]
+        
+        let descriptionText = NSAttributedString(string: "\n\(collection.description)", attributes: attributes)
+        
         let linkAttributedString = NSMutableAttributedString(string: linkText)
+        let rangeOfPrefix = (linkText as NSString).range(of: "\(L10n.Catalog.Collection.authorString): ")
+        linkAttributedString.addAttribute(.foregroundColor, value: UIColor.ypBlackWithDarkMode , range: rangeOfPrefix)
+
         linkAttributedString.addAttribute(
             .link,
             value: "\(author.website)",

@@ -8,9 +8,15 @@
 import Foundation
 
 protocol CommonDataProtocol {
-    func reloadCommonData()
+    func reloadCommonData(asap: Bool)
     func isReady() -> Bool
     func isNFTLiked(id: String) -> Bool
     func isNFTOrderd(id: String) -> Bool
     func setDelegate(delegate: StorageDelegate)
+}
+
+extension CommonDataProtocol {
+    func reloadCommonData() {
+        reloadCommonData(asap: false)
+    }
 }

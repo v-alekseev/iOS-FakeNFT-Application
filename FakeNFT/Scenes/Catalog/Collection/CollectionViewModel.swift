@@ -60,7 +60,6 @@ final class CollectionViewModel: CollectionViewModelProtocol {
         self.dataSource = dataSource
         self.model = model
         if let storage = self.commonStorage {
-            print("set delegate")
             storage.setDelegate(delegate: self)
             self.isBackgroundDataLoaded = storage.isReady()
         }
@@ -143,8 +142,6 @@ final class CollectionViewModel: CollectionViewModelProtocol {
             resultState = .error(error: error)
             break
         case .loading(let inProgress):
-            print("inProgress: \(inProgress)")
-            print("isBackgroundDataLoaded: \(isBackgroundDataLoaded)")
             if inProgress <= 0 && self.isBackgroundDataLoaded {
                 self.resultState = .showCollection
             }
