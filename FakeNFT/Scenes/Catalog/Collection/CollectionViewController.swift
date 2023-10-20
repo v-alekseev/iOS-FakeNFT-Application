@@ -115,6 +115,8 @@ final class CollectionViewController: UIViewController {
                 constant: -navigationBarHeight - statusBarHeight),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        tableView.estimatedRowHeight = 374
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     @objc private func handleBackButton() {

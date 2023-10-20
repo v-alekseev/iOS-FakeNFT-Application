@@ -48,7 +48,7 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
         )
     }()
     
-    static let cellHeight: CGFloat = 374
+//    static let cellHeight: CGFloat = 374
 
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -99,7 +99,8 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
             
             descriptionTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8)
+            descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            descriptionTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
         ])
     }
     
