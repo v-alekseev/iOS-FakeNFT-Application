@@ -50,11 +50,10 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     private func setupView() {
         
         backgroundColor = .clear
-        addSubview(roundRect)
-        addSubview(avatarView)
-        addSubview(nameLabel)
-        addSubview(nftCountLabel)
-        addSubview(userRatingLabel)
+        [roundRect, avatarView, nameLabel, nftCountLabel, userRatingLabel].forEach {
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             
@@ -85,7 +84,6 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
     private func createRoundRect() -> UIView {
         let roundRect = UIView()
-        roundRect.translatesAutoresizingMaskIntoConstraints = false
         roundRect.layer.masksToBounds = true
         roundRect.layer.cornerRadius = 16
         roundRect.backgroundColor = .ypLightGreyWithDarkMode
@@ -94,7 +92,6 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
     private func createAvatarView() -> UIImageView {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 14
@@ -104,7 +101,6 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
     private func createNameLabel() -> UILabel {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .headline3
         label.textColor = .ypBlackWithDarkMode
         return label
@@ -112,7 +108,6 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
     private func createNftCountLabel() -> UILabel {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .headline3
         label.textColor = .ypBlackWithDarkMode
         return label
@@ -120,7 +115,6 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
     private func createUserRatingLabel() -> UILabel {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .caption1
         label.textColor = .ypBlackWithDarkMode
         return label

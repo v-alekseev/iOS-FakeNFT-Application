@@ -91,7 +91,10 @@ final class StatisticViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] actualUserData in
                 guard let actualUserData else { return }
-                let userCardViewController = UserCardViewController(actualUserData)
+                let dataProvider = StatisticDataProvider()
+                let viewModel = UserCardViewModel(dataProvider: dataProvider,
+                                                  userData: actualUserData)
+                let userCardViewController = UserCardViewController(viewModel)
                 self?.tabBarController?.tabBar.isHidden = true
                 self?.navigationController?.pushViewController(userCardViewController, animated: true)
             })

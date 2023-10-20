@@ -11,6 +11,7 @@ import Combine
 final class UsersCollectionView: UIView {
     
     var nfts: [NftModel] = []
+    var nftsIdForDisplayingLikes: [String] = []
     
     var isLoading: Bool = false {
         didSet { if isLoading {
@@ -103,7 +104,9 @@ extension UsersCollectionView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: UsersCollectionCell.defaultReuseIdentifier,
             for: indexPath) as? UsersCollectionCell
-            cell?.provide(nftData: nfts[indexPath.row], isInCart: true)
+        let nftData = nfts[indexPath.row]
+        let isLiked = nftsIdForDisplayingLikes.contains(nftData.id)
+        cell?.provide(nftData: nftData, isLiked: isLiked, isInCart: true)
         return cell ?? UsersCollectionCell()
     }
 }

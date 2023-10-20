@@ -13,13 +13,14 @@ final class UserCardViewController: UIViewController {
     
     private let contentView = UserCardView()
     private let viewModel: UserCardViewModel
+    private var alertPresenter = AlertPresenter.shared
     private var bindings = Set<AnyCancellable>()
     private var actualUserData: UserModel
     private lazy var userAvatarStub = UIImage(named: "userAvatarStub")
     
-    init(_ actualUserData: UserModel) {
-        self.viewModel = UserCardViewModel(userData: actualUserData)
-        self.actualUserData = actualUserData
+    init(_ viewModel: UserCardViewModel) {
+        self.viewModel = viewModel
+        self.actualUserData = viewModel.actualUserData
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,6 +55,21 @@ final class UserCardViewController: UIViewController {
     
     func bindViewToViewModel() {
         
+        viewModel.$isLoading
+            .assign(to: \.isLoading, on: contentView)
+            .store(in: &bindings)
+        
+        viewModel.$loadError
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] loadError in
+                if loadError {
+                    self?.alertPresenter.showAlert(self) {_ in
+                        self?.viewModel.loadProfileLikes()
+                    }
+                }
+            })
+            .store(in: &bindings)
+        
         contentView.$didTapCollectionButton
             .assign(to: \.didTapCollectionButton, on: viewModel)
             .store(in: &bindings)
@@ -69,10 +85,12 @@ final class UserCardViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] needShowCollectionScreen in
                 if needShowCollectionScreen,
-                   let actualUserData = self?.actualUserData {
+                   let actualUserData = self?.actualUserData,
+                   let profileLikes = self?.viewModel.profileLikes {
                     let dataProvider = StatisticDataProvider()
                     let viewModel = UsersCollectionViewModel(dataProvider: dataProvider,
-                                                             actualUserData: actualUserData)
+                                                             actualUserData: actualUserData,
+                                                             profileLikes: profileLikes)
                     let viewController = UsersCollectionViewController(viewModel)
                     self?.navigationController?.pushViewController(viewController, animated: true)
                 }

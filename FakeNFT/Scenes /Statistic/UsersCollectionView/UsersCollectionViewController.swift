@@ -55,6 +55,9 @@ final class UsersCollectionViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] nfts in
                 self?.contentView.nfts = nfts
+                if let nftsIdForDisplayingLikes = self?.viewModel.nftsIdForDisplayingLikes {
+                    self?.contentView.nftsIdForDisplayingLikes = nftsIdForDisplayingLikes
+                }
                 self?.contentView.reloadCollection()
             })
             .store(in: &bindings)
@@ -77,7 +80,6 @@ final class UsersCollectionViewController: UIViewController {
                 }
             })
             .store(in: &bindings)
-        
     }
     
     @objc

@@ -15,6 +15,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var nftNameLabel = createNftNameLabel()
     private lazy var cartButton = createCartButton()
     private lazy var priceLabel = createPriceLabel()
+    private lazy var likeImageView = createLikeImageView()
     
     private lazy var imageNftStub = UIImage(named: "nftStub")
     
@@ -36,7 +37,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func provide(nftData: NftModel, isInCart: Bool) {
+    func provide(nftData: NftModel, isLiked: Bool, isInCart: Bool) {
         if  let firstImage = nftData.images.first,
             let url = URL(string: firstImage) {
             imageNftView.kf.indicatorType = .activity
@@ -48,17 +49,24 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         
         nftNameLabel.text = nftData.name
         priceLabel.text = String(format: "%.2f", nftData.price) + " ETH"
+        let isLikedImage = isLiked ? UIImage(named: "isLiked") : UIImage(named: "isNotLiked")
+        likeImageView.image = isLikedImage
         let buttonImage = isInCart ? UIImage(named: "deleteFromCart") : UIImage(named: "addFromCart")
         cartButton.setImage(buttonImage, for: .normal)
     }
     
     private func setupView() {
         
-        addSubview(imageNftView)
-        addSubview(footerView)
-        footerView.addSubview(nftNameLabel)
-        footerView.addSubview(priceLabel)
-        footerView.addSubview(cartButton)
+        [imageNftView, footerView].forEach {
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        [nftNameLabel, priceLabel, cartButton].forEach {
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        imageNftView.addSubview(likeImageView)
         
         footerView.backgroundColor = .green
         
@@ -85,14 +93,18 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
             
             priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            priceLabel.trailingAnchor.constraint(lessThanOrEqualTo: cartButton.leadingAnchor)
+            priceLabel.trailingAnchor.constraint(lessThanOrEqualTo: cartButton.leadingAnchor),
+            
+            likeImageView.topAnchor.constraint(equalTo: imageNftView.topAnchor),
+            likeImageView.trailingAnchor.constraint(equalTo: imageNftView.trailingAnchor),
+            likeImageView.heightAnchor.constraint(equalToConstant: 40),
+            likeImageView.widthAnchor.constraint(equalToConstant: 40)
             
         ])
     }
     
     private func createImageNftView() -> UIImageView {
         let imageNftView = UIImageView()
-        imageNftView.translatesAutoresizingMaskIntoConstraints = false
         imageNftView.contentMode = .scaleAspectFill
         imageNftView.layer.masksToBounds = true
         imageNftView.layer.cornerRadius = 12
@@ -100,15 +112,20 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         return imageNftView
     }
     
+    private func createLikeImageView() -> UIImageView {
+        let likeImageView = UIImageView()
+        likeImageView.translatesAutoresizingMaskIntoConstraints = false
+        likeImageView.contentMode = .scaleAspectFill
+        return likeImageView
+    }
+    
     private func createFooterView() -> UIView {
         let footerView = UIView()
-        footerView.translatesAutoresizingMaskIntoConstraints = false
         return footerView
     }
     
     private func createNftNameLabel() -> UILabel {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .bodyBold
         label.textColor = .ypBlackWithDarkMode
         return label
@@ -118,14 +135,12 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         let cartButton = UIButton.systemButton(with: UIImage(),
                                                target: self,
                                                action: #selector(tapCartButton))
-        cartButton.translatesAutoresizingMaskIntoConstraints = false
         cartButton.tintColor = .ypBlackWithDarkMode
         return cartButton
     }
     
     private func createPriceLabel() -> UILabel {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .medium10
         label.textColor = .ypBlackWithDarkMode
         return label

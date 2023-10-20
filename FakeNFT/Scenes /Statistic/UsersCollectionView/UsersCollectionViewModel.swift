@@ -15,19 +15,24 @@ final class UsersCollectionViewModel {
     @Published var loadError = false
     @Published var showStub = false
     
-    private var actualUserData: UserModel
+    var nftsIdForDisplayingLikes: [String]
     private let dataProvider: StatisticDataProviderProtocol?
+    private var actualUserData: UserModel
+    private var profileLikes: [String]
     
-    init(dataProvider: StatisticDataProviderProtocol, actualUserData: UserModel) {
+    init(dataProvider: StatisticDataProviderProtocol, actualUserData: UserModel, profileLikes: [String]) {
         
         self.dataProvider = dataProvider
         self.nfts = []
+        self.nftsIdForDisplayingLikes = []
+        self.profileLikes = profileLikes
         self.actualUserData = actualUserData
         loadNftsData()
     }
     
     func loadNftsData() {
         nfts = []
+        nftsIdForDisplayingLikes = []
         showStub = false
         let dispatchGroup = DispatchGroup()
         actualUserData.nfts.forEach({ nft in
@@ -40,6 +45,9 @@ final class UsersCollectionViewModel {
                     switch result {
                     case let .success(data):
                         self.nfts.append(data)
+                        if self.profileLikes.contains(data.id) {
+                            self.nftsIdForDisplayingLikes.append(data.id)
+                        }
                     case .failure(_):
                         self.loadError = true
                     }
