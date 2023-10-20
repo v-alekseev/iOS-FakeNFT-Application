@@ -13,6 +13,7 @@ final class UsersCollectionViewModel {
     @Published var nfts: [NftModel]
     @Published var isLoading = false
     @Published var loadError = false
+    @Published var showStub = false
     
     private var actualUserData: UserModel
     private let dataProvider: StatisticDataProviderProtocol?
@@ -27,6 +28,7 @@ final class UsersCollectionViewModel {
     
     func loadNftsData() {
         nfts = []
+        showStub = false
         let dispatchGroup = DispatchGroup()
         actualUserData.nfts.forEach({ nft in
             dispatchGroup.enter()
@@ -48,6 +50,7 @@ final class UsersCollectionViewModel {
         dispatchGroup.notify(queue: DispatchQueue.main) {
             self.isLoading = false
             self.nfts = self.nfts.sorted(by: {$0.name < $1.name})
+            self.showStub = self.nfts.isEmpty ? true : false
         }
     }
 }

@@ -20,8 +20,15 @@ final class UsersCollectionView: UIView {
         }
     }
     
+    var showStub: Bool = false {
+        didSet {
+            stubLabel.isHidden = !showStub
+        }
+    }
+    
     private lazy var collectionView = createCollecionView()
     private lazy var loadIndicator = createActivityIndicator()
+    private lazy var stubLabel = createStubLabel()
     
     init() {
         super.init(frame: .zero)
@@ -40,7 +47,7 @@ final class UsersCollectionView: UIView {
     
     private func setUpViews() {
         backgroundColor = .ypWhiteWithDarkMode
-        [collectionView, loadIndicator].forEach {
+        [collectionView, loadIndicator, stubLabel].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -54,7 +61,10 @@ final class UsersCollectionView: UIView {
             collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             
             loadIndicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-            loadIndicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
+            loadIndicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            
+            stubLabel.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            stubLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
         ])
     }
     
@@ -65,6 +75,14 @@ final class UsersCollectionView: UIView {
         collectionView.dataSource = self
         collectionView.delegate = self
         return collectionView
+    }
+    
+    private func createStubLabel() -> UILabel {
+        let label = UILabel()
+        label.font = .bodyBold
+        label.textColor = .ypBlackWithDarkMode
+        label.text = "У пользователя ещё нет NFT"
+        return label
     }
     
     private func createActivityIndicator() -> UIActivityIndicatorView {

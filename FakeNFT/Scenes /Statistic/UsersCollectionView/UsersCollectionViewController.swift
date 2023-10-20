@@ -63,6 +63,10 @@ final class UsersCollectionViewController: UIViewController {
             .assign(to: \.isLoading, on: contentView)
             .store(in: &bindings)
         
+        viewModel.$showStub
+            .assign(to: \.showStub, on: contentView)
+            .store(in: &bindings)
+        
         viewModel.$loadError
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] loadError in
