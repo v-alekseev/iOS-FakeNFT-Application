@@ -13,6 +13,7 @@ protocol CommonDataProtocol {
     func isNFTLiked(id: String) -> Bool
     func isNFTOrderd(id: String) -> Bool
     func setDelegate(delegate: StorageDelegate)
+    func clearDelegate()
 }
 
 extension CommonDataProtocol {

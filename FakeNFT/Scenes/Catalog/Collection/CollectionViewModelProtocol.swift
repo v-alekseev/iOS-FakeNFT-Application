@@ -12,6 +12,7 @@ protocol CollectionViewModelProtocol {
     func handleInteractionType(_ type: CollectionInteraction)
     func bind(to controller: CollectionViewController)
     func refresh(withCommonData: Bool)
+    func clearLinks()
 }
 
 extension CollectionViewModelProtocol {

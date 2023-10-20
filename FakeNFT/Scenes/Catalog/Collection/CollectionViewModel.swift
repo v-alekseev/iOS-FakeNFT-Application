@@ -8,6 +8,8 @@
 import Foundation
 
 final class CollectionViewModel: CollectionViewModelProtocol {
+
+    
     
     private let operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -81,6 +83,12 @@ final class CollectionViewModel: CollectionViewModelProtocol {
         self.refreshAuthor()
         self.refreshNFTs()
         self.startOperations()
+    }
+    
+    func clearLinks() {
+        self.dataSource.clearNFTs()
+        self.dataSource.clearNFTs()
+        self.commonStorage?.clearDelegate()
     }
     
     private func refreshAuthor() {

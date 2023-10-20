@@ -9,6 +9,8 @@ import Foundation
 
 final class CommonDataStorage: CommonDataProtocol {
     
+    
+    
     static var shared: CommonDataStorage? = nil
     
     private var isDataLoaded: Bool = false {
@@ -72,6 +74,10 @@ final class CommonDataStorage: CommonDataProtocol {
     
     func setDelegate(delegate: StorageDelegate) {
         self.delegate = delegate
+    }
+    
+    func clearDelegate() {
+        self.delegate = nil
     }
     
     private func loadLikeData() {
