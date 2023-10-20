@@ -65,7 +65,6 @@
 		D8B976722AE28AB8007CA5D2 /* PayViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976712AE28AB8007CA5D2 /* PayViewController+UICollectionViewDelegate.swift */; };
 		D8B976742AE2A0C6007CA5D2 /* UIButton+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976732AE2A0C6007CA5D2 /* UIButton+extension.swift */; };
 		D8B976762AE2A0F2007CA5D2 /* UILabel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976752AE2A0F2007CA5D2 /* UILabel+extension.swift */; };
-		D8B976782AE2FEE8007CA5D2 /* RatingComponet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976772AE2FEE8007CA5D2 /* RatingComponet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,7 +148,6 @@
 		D8B976712AE28AB8007CA5D2 /* PayViewController+UICollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PayViewController+UICollectionViewDelegate.swift"; sourceTree = "<group>"; };
 		D8B976732AE2A0C6007CA5D2 /* UIButton+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+extension.swift"; sourceTree = "<group>"; };
 		D8B976752AE2A0F2007CA5D2 /* UILabel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extension.swift"; sourceTree = "<group>"; };
-		D8B976772AE2FEE8007CA5D2 /* RatingComponet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingComponet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,7 +272,6 @@
 				7B5E254F2ADBEEFA000BC664 /* UIView+Extension.swift */,
 				D8B976732AE2A0C6007CA5D2 /* UIButton+extension.swift */,
 				D8B976752AE2A0F2007CA5D2 /* UILabel+extension.swift */,
-				D8B976772AE2FEE8007CA5D2 /* RatingComponet.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -638,7 +635,6 @@
 				D86C21B72AD82C38000AD25C /* CartViewController+CartTableViewCellDelegate.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
-				D8B976782AE2FEE8007CA5D2 /* RatingComponet.swift in Sources */,
 				7B5E25502ADBEEFA000BC664 /* UIView+Extension.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,
