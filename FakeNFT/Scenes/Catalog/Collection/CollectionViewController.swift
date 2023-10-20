@@ -136,13 +136,24 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CollectionHeaderTableViewCell = tableView.dequeueReusableCell()
-        let data = viewModel.giveMeHeaderComponent()
-        let imageSize = CGSize(width: tableView.bounds.width, height: 310)
-        guard let author = data.author else {
+        let section = indexPath.section
+        switch section {
+        case 0:
+            let cell: CollectionHeaderTableViewCell = tableView.dequeueReusableCell()
+            let data = viewModel.giveMeHeaderComponent()
+            let imageSize = CGSize(width: tableView.bounds.width, height: 310)
+            guard let author = data.author else {
+                return cell
+            }
+            cell.configureCell(with: data.collection, author: author, imageSize: imageSize)
+            return cell
+        default:
+            let cell: NFTsTableViewCell = tableView.dequeueReusableCell()
+            if let dataSource = viewModel as? NFTDataSourceProtocol {
+                cell.setDataSource(with: dataSource)
+            }
             return cell
         }
-        cell.configureCell(with: data.collection, author: author, imageSize: imageSize)
-        return cell
+        
     }
 }
