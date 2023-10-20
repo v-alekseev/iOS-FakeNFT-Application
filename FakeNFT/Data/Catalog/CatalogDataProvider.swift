@@ -8,6 +8,8 @@
 import Foundation
 
 final class CatalogDataProvider: CatalogDataProviderProtocol {
+    
+    
     private let client: NetworkClient
     private var currentTask: NetworkTask?
     
@@ -15,25 +17,49 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
         self.client = client
     }
     
-    func giveMeAllLikes() -> ProfileLikesModel? {
-        let dispatchGroup = DispatchGroup()
-        let getLikesRequest = DefaultNetworkRequest(
-            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/profile/1")!,
-            httpMethod: .get
-        )
-        var model: ProfileLikesModel? = nil
-        dispatchGroup.enter()
-        currentTask = self.client.send(request: getLikesRequest, type: ProfileLikesModel.self) { result in
-            switch result {
-            case .success(let data):
-                model = data
-            case .failure:
-                model = nil
+//    func fetchMeLikes() -> ProfileLikesModel? {
+//        let dispatchGroup = DispatchGroup()
+//        let getLikesRequest = DefaultNetworkRequest(
+//            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/profile/1")!,
+//            httpMethod: .get
+//        )
+//        var model: ProfileLikesModel? = nil
+//        dispatchGroup.enter()
+//        currentTask = self.client.send(request: getLikesRequest, type: ProfileLikesModel.self) { result in
+//            switch result {
+//            case .success(let data):
+//                model = data
+//            case .failure:
+//                model = nil
+//            }
+//            dispatchGroup.leave()
+//        }
+//        dispatchGroup.wait()
+//        return model
+//    }
+    
+    func fetchMeLikes(completion: @escaping (Result<ProfileLikesModel, Error>) -> Void) {
+        DispatchQueue.global(qos: .background).async{
+            let getLikesRequest = DefaultNetworkRequest(
+                endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/profile/1")!,
+                httpMethod: .get
+            )
+            self.client.send(request: getLikesRequest, type: ProfileLikesModel.self) { result in
+                completion(result)
             }
-            dispatchGroup.leave()
         }
-        dispatchGroup.wait()
-        return model
+    }
+    
+    func fetchMeOrders(completion: @escaping (Result<OrderModel, Error>) -> Void) {
+        DispatchQueue.global(qos: .background).async{
+            let getOrdersRequest = DefaultNetworkRequest(
+                endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/orders/1")!,
+                httpMethod: .get
+            )
+            self.client.send(request: getOrdersRequest, type: OrderModel.self) { result in
+                completion(result)
+            }
+        }
     }
     
     func setLikes(likes: [String]) {
