@@ -210,7 +210,7 @@ extension CollectionViewModel: NFTDataSourceProtocol {
     
     func nft(at indexPath: IndexPath) -> NFTModel? {
         let row = indexPath.row
-        if (row > model.nfts.count - 1) {
+        if (row > self.numberOfNFTs() - 1) {
             return nil
         } else {
             return dataSource.giveMeNFTAt(index: row)
@@ -219,7 +219,7 @@ extension CollectionViewModel: NFTDataSourceProtocol {
     
     func isNFTLiked(at indexPath: IndexPath) -> Bool {
         let row = indexPath.row
-        if (row > model.nfts.count - 1) {
+        if (row > self.numberOfNFTs() - 1) {
             return false
         } else {
             let id = self.model.nfts[row]
@@ -230,7 +230,7 @@ extension CollectionViewModel: NFTDataSourceProtocol {
     
     func isNFTOrdered(at indexPath: IndexPath) -> Bool {
         let row = indexPath.row
-        if (row > model.nfts.count - 1) {
+        if (row > self.numberOfNFTs() - 1) {
             return false
         } else {
             let id = self.model.nfts[row]
