@@ -8,12 +8,12 @@
 import Foundation
 
 protocol CardDataProviderProtocol {
+    var order: [NftDto] { get }
+    var orderChanged: NSNotification.Name { get }
+    
     func getOrder(_ completion: @escaping (Result<String, Error>) -> Void)
     func getNFT(id: String, _ completion: @escaping (Result<NftDto, Error>) -> Void)
     func removeItemFromCart(idForRemove: String,  _ completion: @escaping (Result<[String], Error>) -> Void)
-    
-    var order: [NftDto] { get }
-    var orderChanged: NSNotification.Name { get }
 }
 
 struct OrderRequest: NetworkRequest {

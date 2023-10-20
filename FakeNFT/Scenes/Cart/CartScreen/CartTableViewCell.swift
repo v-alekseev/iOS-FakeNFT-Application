@@ -46,12 +46,6 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return sView
     }()
     
-    private lazy var starImage: UIImageView = {
-        var image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
     private lazy var priceNameLabel = UILabel(font: .caption2, text: L10n.Cart.priceLabelName)
     private lazy var priceLabel = UILabel(font: .bodyBold)
     

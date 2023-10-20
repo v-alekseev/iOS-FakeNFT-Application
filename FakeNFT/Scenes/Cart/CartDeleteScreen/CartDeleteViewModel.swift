@@ -6,7 +6,7 @@
 //
 import UIKit
 
-protocol CartDeleteViewModelProtocol {
+protocol CartDeleteViewModelProtocol: AnyObject {
     var nftImage: UIImage { get }
     var dataProvider: CardDataProviderProtocol? {get set}
     
@@ -15,13 +15,13 @@ protocol CartDeleteViewModelProtocol {
 }
 
 final class CartDeleteViewModel: CartDeleteViewModelProtocol {
-    
+
     private (set) var nftImage: UIImage
     private var nftIDforDelete: String
     
     var dataProvider: CardDataProviderProtocol?
     
-    init(nftImage: UIImage, nftIDforDelete: String, dataProvider: CardDataProviderProtocol? = nil) {
+    init(nftImage: UIImage, nftIDforDelete: String, dataProvider: CardDataProviderProtocol? = CardDataProvider.shared) {
         self.nftImage = nftImage
         self.nftIDforDelete = nftIDforDelete
         self.dataProvider = dataProvider
