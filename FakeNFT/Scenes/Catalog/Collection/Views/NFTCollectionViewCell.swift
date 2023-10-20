@@ -27,11 +27,13 @@ final class NFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.caption2
+        label.font = UIFont.currency
         label.textColor = .ypBlackWithDarkMode
         label.numberOfLines = 1
         return label
     }()
+    
+    var cellWidth: CGFloat = 0
     
     private let placeholderImage = UIImage(named: "CatPlaceholder")
     
