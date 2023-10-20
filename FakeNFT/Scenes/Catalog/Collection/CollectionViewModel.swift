@@ -89,6 +89,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
         self.dataSource.clearNFTs()
         self.dataSource.clearNFTs()
         self.commonStorage?.clearDelegate()
+        self.operationQueue.cancelAllOperations()
     }
     
     private func refreshAuthor() {
