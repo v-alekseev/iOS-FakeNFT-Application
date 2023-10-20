@@ -5,7 +5,6 @@
 //  Created by Vitaly on 08.10.2023.
 //
 
-import Foundation
 import UIKit
 import ProgressHUD
 
@@ -24,33 +23,9 @@ final class CartViewController: UIViewController {
         return view
     }()
     
-    private lazy var countItemsLabel: UILabel = {
-        var label = UILabel()
-        label.font =  UIFont.caption1
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var totalAmountLabel: UILabel = {
-        var label = UILabel()
-        label.font =  UIFont.bodyBold
-        label.textColor = .ypGreen
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var paymentButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(L10n.Cart.paymentButtonTitle, for: .normal)
-        button.titleLabel?.font =  UIFont.bodyBold
-        button.setTitleColor(.ypWhiteWithDarkMode, for: .normal)
-        button.backgroundColor = .ypBlackWithDarkMode
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 16
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(paymentButtonTap), for: .touchUpInside)
-        return button
-    }()
+    private lazy var countItemsLabel = UILabel(font: UIFont.caption1)
+    private lazy var totalAmountLabel = UILabel(font: UIFont.bodyBold, textColor:  .ypGreen)
+    private lazy var paymentButton = UIButton(title: L10n.Cart.paymentButtonTitle, cornerRadius: 16)
     
     private (set) lazy var cartTable: UITableView = {
         let table = UITableView()
@@ -59,27 +34,21 @@ final class CartViewController: UIViewController {
         table.backgroundColor = .ypWhiteWithDarkMode
         return table
     }()
+
+    private lazy var emptyCartLabel = UILabel(font: .bodyBold, text:  L10n.Cart.CartScreen.emptyCartMessage )
+    
+    // MARK: - UIViewController(*)
+    //
     
     init(viewModel: CartViewModelProtocol? = CartViewModel()) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
-
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private lazy var emptyCartLabel: UILabel = {
-        var label = UILabel()
-        label.font =  UIFont.bodyBold
-        label.text = "Корзина пуста"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    // MARK: - UIViewController(*)
-    //
     override func viewWillAppear(_ animated: Bool) {
         if (viewModel?.order.count == 0 ) {
             showLoader(true)
@@ -93,6 +62,9 @@ final class CartViewController: UIViewController {
         viewModel?.delegate = self
         
         setupNavigationBar()
+        
+        paymentButton.addTarget(self, action: #selector(paymentButtonTap), for: .touchUpInside)
+        
         setupUI()
         view.backgroundColor = .ypWhiteWithDarkMode
         
@@ -106,13 +78,13 @@ final class CartViewController: UIViewController {
     
     // MARK: - Private Methods
     //
-    private func hideCart(_ isHidden: Bool) {
+    internal func hideCart(_ isHidden: Bool) {
         emptyCartLabel.isHidden = !isHidden
         
         cartTable.isHidden = isHidden
         bottomView.isHidden = isHidden
     }
-    private func updateTotal() {
+    internal func updateTotal() {
         countItemsLabel.text = "\(viewModel?.order.count ?? 00) NFT"
         totalAmountLabel.text = "\(String(format: "%.2f", viewModel?.totalPrice ?? 0)) ETH"
     }
@@ -127,8 +99,8 @@ final class CartViewController: UIViewController {
         }
     }
     
-    private func showLoader(_ isShow: Bool) {
-        isShow ? ProgressHUD.show() : ProgressHUD.dismiss()
+    internal func showLoader(_ isShow: Bool) {
+        isShow ? ProgressHUD.show(): ProgressHUD.dismiss()
         paymentButton.isEnabled = !isShow
     }
     
@@ -226,32 +198,5 @@ final class CartViewController: UIViewController {
         
         
     }
-}
-
-
-extension CartViewController: CartViewModelDelegate {
-    /// Изменилась корзина
-    func didUpdateCart() {
-        updateTotal()
-        cartTable.reloadData()
-        //hideCart(viewModel?.order.count == 0 )
-        showLoader(false)
-    }
-    
-    /// Нужно показать сообщение
-    func showAlert(message: String) {
-       // showLoader(false)
-        Alert.alertInformation(viewController: self, text: message)
-    }
-    
-    /// Нужно показать сообщение
-    func hideCartEvent(hide: Bool) {
-        hideCart(hide)
-    }
-    
-    func willUpdateCart() {
-        showLoader(true)
-    }
-
 }
 

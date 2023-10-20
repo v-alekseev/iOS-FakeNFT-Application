@@ -50,7 +50,6 @@ final class PayViewModel: PayViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case let .success(data):
-                print("getCurrencies success. Count = \(data.count)")
                 self.currencies = data.compactMap( { Currency($0) })   // конечно можно написать просто   self.currencies = data, но так как-то "правильнее"
                 delegate?.didUpdateCurrensies()
             case let .failure(error):
@@ -66,11 +65,9 @@ final class PayViewModel: PayViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case let .success(data):
-                print("getCurrencies success = \(data)")
                 delegate?.didPayment(result: data.success)
-            case let .failure(error):
+            case .failure(_):
                 delegate?.didPayment(result: false)
-                print("getCurrencies error: \(error)")
             }
         }
     }

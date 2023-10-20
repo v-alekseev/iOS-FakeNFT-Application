@@ -27,21 +27,8 @@ final class PayCollectionViewCell: UICollectionViewCell,  ReuseIdentifying  {
         return image
     }()
     
-    private lazy var currencyNameLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.caption2
-        label.textColor = .ypBlackWithDarkMode
-        return label
-    }()
-    
-    private lazy var currencyCodeLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.caption2
-        label.textColor = .ypGreen
-        return label
-    }()
+    private lazy var currencyNameLabel = UILabel(font:  UIFont.caption2)
+    private lazy var currencyCodeLabel = UILabel(font: UIFont.caption2, textColor: .ypGreen)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,9 +66,9 @@ final class PayCollectionViewCell: UICollectionViewCell,  ReuseIdentifying  {
         
         self.imageCanvasView.addSubview(currencyImage)
         NSLayoutConstraint.activate([
-            currencyImage.centerXAnchor.constraint(equalTo: imageCanvasView.centerXAnchor),  //leadingAnchor.constraint(equalTo: imageCanvasView.leadingAnchor, constant: 2.25),
+            currencyImage.centerXAnchor.constraint(equalTo: imageCanvasView.centerXAnchor),
             currencyImage.widthAnchor.constraint(equalToConstant: 31.5),
-            currencyImage.centerYAnchor.constraint(equalTo: imageCanvasView.centerYAnchor), // topAnchor.constraint(equalTo: imageCanvasView.topAnchor, constant: 2.25),
+            currencyImage.centerYAnchor.constraint(equalTo: imageCanvasView.centerYAnchor),
             currencyImage.heightAnchor.constraint(equalToConstant: 31.5)
         ])
         

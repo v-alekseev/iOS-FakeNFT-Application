@@ -35,13 +35,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return image
     }()
     
-    private lazy var nameLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.bodyBold
-        return label
-    }()
-    
+    private lazy var nameLabel = UILabel(font: .bodyBold)
     private lazy var stackView: UIStackView  = {
         var sView = UIStackView()
         sView.axis  = NSLayoutConstraint.Axis.horizontal
@@ -58,20 +52,8 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return image
     }()
     
-    private lazy var priceNameLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.caption2
-        label.text = L10n.Cart.priceLabelName
-        return label
-    }()
-    
-    private lazy var priceLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.bodyBold
-        return label
-    }()
+    private lazy var priceNameLabel = UILabel(font: .caption2, text: L10n.Cart.priceLabelName)
+    private lazy var priceLabel = UILabel(font: .bodyBold)
     
     private lazy var trashButton: UIButton = {
         var button = UIButton()

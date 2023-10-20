@@ -27,43 +27,17 @@ final class CartDeleteViewController: UIViewController {
         return image
     }()
     
-    private lazy var qestionLabel: UILabel = {
-        var label = UILabel()
-        label.font =  UIFont.caption2
-        label.text = "Вы уверены, что хотите удалить объект из корзины?"
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var returnButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Вернуться", for: .normal)
-        button.titleLabel?.font =  UIFont.bodyBold
-        button.setTitleColor(.ypWhiteWithDarkMode, for: .normal)
-        button.backgroundColor = .ypBlackWithDarkMode
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 12
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(returnButtonTap), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var deleteButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Удалить", for: .normal)
-        button.titleLabel?.font =  UIFont.bodyBold
-        button.setTitleColor(.ypRed, for: .normal)
-        button.backgroundColor = .ypBlackWithDarkMode
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 12
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(deleteButtonTap), for: .touchUpInside)
-        return button
-    }()
-    
+    private lazy var qestionLabel = UILabel(font: UIFont.caption2, text: L10n.Cart.DeleteConfirmScreen.confiremText)
+    private lazy var returnButton = UIButton(title: L10n.Cart.DeleteConfirmScreen.returnButtonTitle, cornerRadius: 12)
+    private lazy var deleteButton = UIButton(title: L10n.Cart.DeleteConfirmScreen.deleteButtonTitle, cornerRadius: 12, titleColor: .ypRed)
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        returnButton.addTarget(self, action: #selector(returnButtonTap), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(deleteButtonTap), for: .touchUpInside)
+        
+        qestionLabel.textAlignment = .center
         
         nftImageView.image = viewModel?.nftImage
         setupUI()
@@ -91,19 +65,16 @@ final class CartDeleteViewController: UIViewController {
         }
     }
     
-    private func showLoader(_ isShow: Bool) {
+    private func showLoader(_ isShow: Bool) { 
         isShow ? ProgressHUD.show() : ProgressHUD.dismiss()
         returnButton.isEnabled = !isShow
         deleteButton.isEnabled = !isShow
     }
     
     private func setupUI() {
-        
         // добавление blur на background
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight  )
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        blurEffectView.frame = view.bounds
-//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(blurEffectView)
         NSLayoutConstraint.activate([

@@ -15,32 +15,16 @@ final class PayResultViewController: UIViewController {
         return image
     }()
     
-    private lazy var infoLabel: UILabel = {
-        var label = UILabel()
-        label.font =  UIFont.headline3
-        label.text = "Успех! Оплата прошла,\nпоздравляем с покупкой!"
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var infoLabel = UILabel(font: UIFont.headline3, text: L10n.Cart.PayResultScreen.succsesPaymentText)
     
-    private lazy var toCatalogButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Вернуться в каталог", for: .normal)
-        button.titleLabel?.font =  UIFont.bodyBold
-        button.setTitleColor(.ypWhiteWithDarkMode, for: .normal)
-        button.backgroundColor = .ypBlackWithDarkMode
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 16
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(toCatalpgButtonTap), for: .touchUpInside)
-        return button
-    }()
+    private lazy var toCatalogButton = UIButton(title: L10n.Cart.PayResultScreen.buttonText, cornerRadius: 16)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .ypWhiteWithDarkMode
+        
+        infoLabel.textAlignment = .center
+        toCatalogButton.addTarget(self, action: #selector(toCatalpgButtonTap), for: .touchUpInside)
         
         sucsessImageView.image = UIImage(resource: .paySuccsesful)
         setupUI()
@@ -65,6 +49,8 @@ final class PayResultViewController: UIViewController {
         NSLayoutConstraint.activate([
             infoLabel.topAnchor.constraint(equalTo: sucsessImageView.bottomAnchor,constant: 20),
             infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            infoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -36),
+            infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 36)
         ])
         
         view.addSubview(toCatalogButton)
