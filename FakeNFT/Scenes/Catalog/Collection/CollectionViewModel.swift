@@ -202,3 +202,40 @@ extension CollectionViewModel: StorageDelegate {
         self.isBackgroundDataLoaded = isLoading
     }
 }
+
+extension CollectionViewModel: NFTDataSourceProtocol {
+    func numberOfNFTs() -> Int {
+        return model.nfts.count
+    }
+    
+    func nft(at indexPath: IndexPath) -> NFTModel? {
+        let row = indexPath.row
+        if (row > model.nfts.count - 1) {
+            return nil
+        } else {
+            return dataSource.giveMeNFTAt(index: row)
+        }
+    }
+    
+    func isNFTLiked(at indexPath: IndexPath) -> Bool {
+        let row = indexPath.row
+        if (row > model.nfts.count - 1) {
+            return false
+        } else {
+            let id = self.model.nfts[row]
+            guard let store = commonStorage else { return false }
+            return store.isNFTLiked(id: id)
+        }
+    }
+    
+    func isNFTOrdered(at indexPath: IndexPath) -> Bool {
+        let row = indexPath.row
+        if (row > model.nfts.count - 1) {
+            return false
+        } else {
+            let id = self.model.nfts[row]
+            guard let store = commonStorage else { return false }
+            return store.isNFTOrderd(id: id)
+        }
+    }
+}

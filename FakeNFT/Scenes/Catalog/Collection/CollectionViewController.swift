@@ -90,7 +90,7 @@ final class CollectionViewController: UIViewController {
         let alertPresenter = AlertPresenter()
         let alertModel = AlertModel(title: L10n.Alert.Error.title, message: L10n.Alert.Error.description, primaryButtonText: L10n.Alert.Error.retry) { [weak self] in
             guard let self = self else { return }
-            self.viewModel.refresh()
+            self.viewModel.refresh(withCommonData: true)
         }
         alertPresenter.show(in: self, model: alertModel)
     }
