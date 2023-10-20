@@ -14,7 +14,6 @@ protocol CollectionViewModelProtocol {
     func refresh(withCommonData: Bool)
 }
 
-
 extension CollectionViewModelProtocol {
     func refresh() {
         refresh(withCommonData: false)
