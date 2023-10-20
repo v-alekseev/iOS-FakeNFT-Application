@@ -8,5 +8,5 @@
 import Foundation
 
 protocol StorageDelegate {
-    func notifyDataLoaded()
+    func notifyAboutLoadingState(isLoading: Bool)
 }

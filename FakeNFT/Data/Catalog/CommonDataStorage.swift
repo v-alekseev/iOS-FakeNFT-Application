@@ -9,15 +9,11 @@ import Foundation
 
 final class CommonDataStorage: CommonDataProtocol {
     
-    
-
     static var shared: CommonDataStorage? = nil
     
     private var isDataLoaded: Bool = false {
         didSet {
-            if isDataLoaded {
-                delegate?.notifyDataLoaded()
-            }
+            delegate?.notifyAboutLoadingState(isLoading:isDataLoaded)
         }
     }
     private var currentOrder: OrderModel?
@@ -99,13 +95,16 @@ final class CommonDataStorage: CommonDataProtocol {
     private func markReady() {
         self.isDataLoaded = true
         print("data ready")
-        print(currentLikes)
-        print(currentOrder)
-        delegate?.notifyDataLoaded()
+        print(currentLikes ?? "nil")
+        print(currentOrder ?? "nil")
+        delegate?.notifyAboutLoadingState(isLoading: true)
     }
     
     private func markUnready() {
         print("data unready")
+        self.delegate?.notifyAboutLoadingState(isLoading: false)
+        self.currentOrder = nil
+        self.currentLikes = nil
         self.isDataLoaded = false
     }
 }

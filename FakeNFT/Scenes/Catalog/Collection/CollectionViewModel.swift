@@ -16,13 +16,29 @@ final class CollectionViewModel: CollectionViewModelProtocol {
         return queue
     }()
     
+    let commonStorage = CommonDataStorage.shared
+    
     private var dataSource: DataProviderInteractorProtocol
     private var model: CollectionModel
+    private var isBackgroundDataLoaded: Bool = false {
+        didSet {
+            switch isBackgroundDataLoaded {
+            case false:
+                switch resultState {
+                case .showCollection:
+                    resultState = .loading(inProgress: 0)
+                default:
+                    break
+                }
+            default:
+                handleLoadingState()
+            }
+        }
+    }
     
     var navigationClosure: (CollectionNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionNavigationState = .base {
         didSet {
-            
             print(navigationState)
             navigationClosure(navigationState)
         }
@@ -43,10 +59,24 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     ) {
         self.dataSource = dataSource
         self.model = model
+        if let storage = self.commonStorage {
+            print("set delegate")
+            storage.setDelegate(delegate: self)
+            self.isBackgroundDataLoaded = storage.isReady()
+        }
         self.refresh()
     }
     
-    func refresh() {
+    func refresh(withCommonData: Bool) {
+        if (withCommonData) {
+            self.isBackgroundDataLoaded = false
+            self.commonStorage?.reloadCommonData()
+        } else {
+            if let store = self.commonStorage {
+                self.isBackgroundDataLoaded = store.isReady()
+            }
+        }
+        self.operationQueue.cancelAllOperations()
         self.dataSource.clearNFTs()
         self.dataSource.clearAuthor()
         self.refreshAuthor()
@@ -63,6 +93,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
+                        self.decrementLoading()
                         self.handleLoadingState()
                     case .failure(let error):
                         self.resultState = .error(error: error)
@@ -82,6 +113,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
                     DispatchQueue.main.async {
                         switch result {
                         case .success:
+                            self.decrementLoading()
                             self.handleLoadingState()
                         case .failure(let error):
                             self.resultState = .error(error: error)
@@ -106,13 +138,14 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     }
     
     private func handleLoadingState() {
-        self.decrementLoading()
         switch self.resultState {
         case .error(let error):
             resultState = .error(error: error)
             break
         case .loading(let inProgress):
-            if inProgress <= 0 {
+            print("inProgress: \(inProgress)")
+            print("isBackgroundDataLoaded: \(isBackgroundDataLoaded)")
+            if inProgress <= 0 && self.isBackgroundDataLoaded {
                 self.resultState = .showCollection
             }
         default:
@@ -164,5 +197,11 @@ final class CollectionViewModel: CollectionViewModelProtocol {
             guard let controller = controller else { return }
             controller.renderState(state: state)
         }
+    }
+}
+
+extension CollectionViewModel: StorageDelegate {
+    func notifyAboutLoadingState(isLoading: Bool) {
+        self.isBackgroundDataLoaded = isLoading
     }
 }

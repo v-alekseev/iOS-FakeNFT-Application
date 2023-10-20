@@ -11,5 +11,12 @@ protocol CollectionViewModelProtocol {
     func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel?)
     func handleInteractionType(_ type: CollectionInteraction)
     func bind(to controller: CollectionViewController)
-    func refresh()
+    func refresh(withCommonData: Bool)
+}
+
+
+extension CollectionViewModelProtocol {
+    func refresh() {
+        refresh(withCommonData: false)
+    }
 }
