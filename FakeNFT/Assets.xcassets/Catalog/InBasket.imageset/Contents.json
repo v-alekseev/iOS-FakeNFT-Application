@@ -3,6 +3,16 @@
     {
       "filename" : "Property 1=Delete.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Group 7.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

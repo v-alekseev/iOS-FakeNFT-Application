@@ -3,6 +3,16 @@
     {
       "filename" : "No Active.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "No Active 1.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -3,6 +3,16 @@
     {
       "filename" : "Property 1=Add.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Cart.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

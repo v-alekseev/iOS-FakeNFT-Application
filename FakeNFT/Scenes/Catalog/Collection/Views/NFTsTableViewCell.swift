@@ -57,7 +57,8 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     private func setupUI() {
         collection.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(collection)
-        print(estimatedHeight)
+        contentView.backgroundColor = .ypWhiteWithDarkMode
+        collection.backgroundColor = .clear
         NSLayoutConstraint.activate([
             collection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             collection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),

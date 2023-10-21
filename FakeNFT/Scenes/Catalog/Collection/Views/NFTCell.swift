@@ -49,6 +49,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
         img.contentMode = .scaleAspectFill
+
         return img
     }()
     
@@ -70,6 +71,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -84,7 +86,6 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         contentView.addSubview(ratingView)
         contentView.addSubview(likeImage)
         contentView.addSubview(basketImage)
-        
         contentView.backgroundColor = .clear
         NSLayoutConstraint.activate([
             NFTImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -145,9 +146,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         ratingView.setRating(rank: Int(NFT.rating))
         basketImage.image = isOrdered ? UIImage(named: "InBasket") : UIImage(named: "NotInBasket")
         likeImage.image = isLiked ? UIImage(named: "LikeActive") : UIImage(named: "LikeInactive")
-        if (isLiked) {
-            likeImage.tintColor = .ypLightGreyWithDarkMode
-        }
+
     }
     
 }
