@@ -21,6 +21,13 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     private var dataSource: NFTDataSourceProtocol?
     let numberOfColumns: CGFloat = 3
     var selectedIndexPath: IndexPath? = nil
+    private var collectionHeightConstraint: NSLayoutConstraint?
+//    var estimatedHeight: CGFloat = 0 {
+//        didSet {
+//                collectionHeightConstraint?.constant = estimatedHeight
+//                layoutIfNeeded()
+//            }
+//    }
 
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -53,6 +60,7 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         collection.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)
         contentView.addSubview(collection)
+//        print(estimatedHeight)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -62,8 +70,10 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
             collection.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             collection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             collection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            collection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            collection.heightAnchor.constraint(equalToConstant: 1000)
         ])
+//        collectionHeightConstraint = collection.heightAnchor.constraint(equalToConstant: estimatedHeight)
+//            collectionHeightConstraint?.isActive = true
     }
 }
 

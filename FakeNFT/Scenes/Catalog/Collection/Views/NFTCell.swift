@@ -110,7 +110,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     
     func configureCell(isLiked: Bool, isOrdered: Bool, NFT: NFTModel) {
         NFTNameLabel.text = NFT.name
-        NFTCostLabel.text = "\(Int(NFT.price)) ETH"
+        NFTCostLabel.text = "\(NFT.price) ETH"
         ratingView.setRating(rank: Int(NFT.rating))
         basketImage.image = isOrdered ? UIImage(named: "InBasket") : UIImage(named: "NotInBasket")
         likeImage.image = isLiked ? UIImage(named: "LikeActive") : UIImage(named: "LikeInactive")
