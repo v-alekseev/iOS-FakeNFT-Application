@@ -59,19 +59,17 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         contentView.addSubview(collection)
         print(estimatedHeight)
         NSLayoutConstraint.activate([
-            
             collection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             collection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             collection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             collection.heightAnchor.constraint(equalToConstant: estimatedHeight)
         ])
-//        collectionHeightConstraint = collection.heightAnchor.constraint(equalToConstant: estimatedHeight)
-//            collectionHeightConstraint?.isActive = true
     }
 }
 
 extension NFTsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("Я таблица — узнаю количетсво ячеек во мне")
         print(dataSource?.numberOfNFTs() ?? 0)
         return dataSource?.numberOfNFTs() ?? 0
     }
@@ -80,12 +78,14 @@ extension NFTsTableViewCell: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCell = collection.dequeueReusableCell(indexPath: indexPath)
         cell.imageWidth = estimatedCellWidth
-        print("pre configurecell")
+        print("pre configurecell for indexpath \(indexPath)")
         guard let dataSource = dataSource,
               let NFT = dataSource.nft(at: indexPath) 
-        else { return cell }
+        else { 
+            print("ухожу из цикла по гарду")
+            return cell }
         cell.configureCell(isLiked: dataSource.isNFTLiked(at: indexPath), isOrdered: dataSource.isNFTOrdered(at: indexPath), NFT:NFT)
-        print("post configurecell")
+        print("post configurecell at indexpath \(indexPath)")
         return cell
     }
 }

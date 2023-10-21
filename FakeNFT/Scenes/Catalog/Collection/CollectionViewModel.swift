@@ -114,6 +114,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     
     private func refreshNFTs() {
         for id in model.nfts {
+            print("отправляю задачу на сборку NFT с id: \(id)")
             self.incrementLoading()
             let operation = BlockOperation { [weak self] in
                 self?.dataSource.fetchMyNFT(with: id) { [weak self] result in
@@ -214,12 +215,17 @@ extension CollectionViewModel: StorageDelegate {
 
 extension CollectionViewModel: NFTDataSourceProtocol {
     func numberOfNFTs() -> Int {
+        print("Возвращаю количество NFT = \(model.nfts.count)")
         return model.nfts.count
     }
     
     func nft(at indexPath: IndexPath) -> NFTModel? {
         let row = indexPath.row
         if (row > self.numberOfNFTs() - 1) {
+            print("я вьюмодель")
+            print("Возвращаю nil")
+            print("row = \(row)")
+            print("numberOfNFTs = \(self.numberOfNFTs())")
             return nil
         } else {
             return dataSource.giveMeNFTAt(index: row)
