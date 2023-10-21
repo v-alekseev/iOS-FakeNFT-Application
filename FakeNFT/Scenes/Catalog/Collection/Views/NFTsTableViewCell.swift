@@ -31,7 +31,10 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         collection.dataSource = self
         collection.delegate = self
         collection.register(NFTCell.self)
+        
         setupUI()
+        contentView.layoutIfNeeded()
+        print(collection.frame)
     }
     
     required init?(coder: NSCoder) {
@@ -40,6 +43,7 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     
     func setDataSource(with source: NFTDataSourceProtocol) {
         self.dataSource = source
+        self.collection.reloadData()
     }
     
     private func setupUI() {
@@ -61,7 +65,7 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     }
 }
 
-extension NFTsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension NFTsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(dataSource?.numberOfNFTs() ?? 0)
         return dataSource?.numberOfNFTs() ?? 0
@@ -71,10 +75,36 @@ extension NFTsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCell = collection.dequeueReusableCell(indexPath: indexPath)
         cell.cellWidth = floor((collection.frame.width - (numberOfColumns - 1)) / numberOfColumns)
+        print("pre comfigurecell")
         guard let dataSource = dataSource,
               let NFT = dataSource.nft(at: indexPath) 
         else { return cell }
+        
         cell.configureCell(isLiked: dataSource.isNFTLiked(at: indexPath), isOrdered: dataSource.isNFTOrdered(at: indexPath), NFT:NFT)
+        print("post comfigurecell")
         return cell
+    }
+}
+
+extension NFTsTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width - (numberOfColumns - 1)) / numberOfColumns
+        return CGSize(width: width, height: width) // или другая высота, если это необходимо
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }

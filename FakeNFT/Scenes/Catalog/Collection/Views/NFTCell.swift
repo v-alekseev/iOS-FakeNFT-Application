@@ -118,7 +118,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         if (isLiked) {
             likeImage.tintColor = .ypLightGreyWithDarkMode
         }
-        NFTImage.image = UIImage(named: NFT.images[0])
+        NFTImage.image = UIImage(named: "NFTPlaceholder")
     }
     
 }
