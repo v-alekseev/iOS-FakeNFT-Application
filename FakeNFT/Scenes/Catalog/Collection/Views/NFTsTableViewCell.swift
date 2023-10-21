@@ -19,7 +19,7 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         return lbl
     }()
     private var dataSource: NFTDataSourceProtocol?
-    let numberOfColumns: CGFloat = 3
+    static let numberOfColumns: CGFloat = 3
     var selectedIndexPath: IndexPath? = nil
     private var collectionHeightConstraint: NSLayoutConstraint?
     var estimatedHeight: CGFloat = 0 //{
@@ -65,7 +65,7 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         collection.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)
         contentView.addSubview(collection)
-//        print(estimatedHeight)
+        print(estimatedHeight)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -91,7 +91,7 @@ extension NFTsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCell = collection.dequeueReusableCell(indexPath: indexPath)
-        cell.imageWidth = floor((collection.frame.width - (numberOfColumns - 1)) / numberOfColumns)
+        cell.imageWidth = floor((collection.frame.width - (NFTsTableViewCell.numberOfColumns - 1)) / NFTsTableViewCell.numberOfColumns)
         print("pre configurecell")
         guard let dataSource = dataSource,
               let NFT = dataSource.nft(at: indexPath) 
@@ -104,8 +104,8 @@ extension NFTsTableViewCell: UICollectionViewDataSource {
 
 extension NFTsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - (numberOfColumns - 1)) / numberOfColumns
-        return CGSize(width: width, height: width) // или другая высота, если это необходимо
+        let width = (collectionView.frame.width - (NFTsTableViewCell.numberOfColumns - 1)) / NFTsTableViewCell.numberOfColumns
+        return CGSize(width: width, height: width)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

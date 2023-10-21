@@ -21,6 +21,7 @@ final class CollectionViewController: UIViewController {
         let tv = UITableView()
         tv.separatorStyle = .none
         tv.backgroundColor = .clear
+        tv.isScrollEnabled = true
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
@@ -149,7 +150,9 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(with: data.collection, author: author, imageSize: imageSize)
             return cell
         default:
-            let estimatedHeightValue = 56 + 6 + (tableView.bounds.width - 32 - (3 - 1))/3
+            let rowsCount = ceil(CGFloat(viewModel.giveMeHeaderComponent().collection.nfts.count)/NFTsTableViewCell.numberOfColumns)
+            let estimatedHeightValue = (56 + 6 + (tableView.bounds.width - 32 - (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns) * rowsCount
+//            print("estimated height value = \()")
             let cell = NFTsTableViewCell(style: .default, reuseIdentifier: "NFTsCell", estimatedHeight: estimatedHeightValue)
 //            let cell: NFTsTableViewCell = tableView.dequeueReusableCell()
 //            cell.estimatedHeight = 56 + 6 + (tableView.bounds.width - 32 - (cell.numberOfColumns - 1))/cell.numberOfColumns
