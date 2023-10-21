@@ -12,7 +12,7 @@ final class StatisticViewController: UIViewController {
     
     private let contentView = StatisticView()
     private let viewModel: StatisticViewModel
-    private var alertPresenter = AlertPresenter.shared
+    private var alertPresenter = Alert.shared
     private var bindings = Set<AnyCancellable>()
     
     init(_ viewModel: StatisticViewModel) {

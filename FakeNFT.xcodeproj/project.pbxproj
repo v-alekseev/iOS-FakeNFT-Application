@@ -43,7 +43,7 @@
 		F228EFA52AD7FD47001BA148 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA42AD7FD47001BA148 /* UserCardViewModel.swift */; };
 		F228EFA72AD9BB87001BA148 /* NetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA62AD9BB87001BA148 /* NetworkRequests.swift */; };
 		F228EFA92AD9BDED001BA148 /* FiltrationTypeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */; };
-		F228EFAD2ADA6D18001BA148 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFAC2ADA6D18001BA148 /* AlertPresenter.swift */; };
+		F228EFAD2ADA6D18001BA148 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFAC2ADA6D18001BA148 /* Alert.swift */; };
 		F26D6B6D2ADB190800B993CB /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D6B6C2ADB190800B993CB /* WebViewViewController.swift */; };
 		F280EECC2ADBD6BB004DFC1B /* UsersCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F280EECB2ADBD6BB004DFC1B /* UsersCollectionCell.swift */; };
 		F280EECE2ADBF14F004DFC1B /* NftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F280EECD2ADBF14F004DFC1B /* NftModel.swift */; };
@@ -113,7 +113,7 @@
 		F228EFA42AD7FD47001BA148 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
 		F228EFA62AD9BB87001BA148 /* NetworkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequests.swift; sourceTree = "<group>"; };
 		F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltrationTypeStorage.swift; sourceTree = "<group>"; };
-		F228EFAC2ADA6D18001BA148 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		F228EFAC2ADA6D18001BA148 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		F26D6B6C2ADB190800B993CB /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		F280EECB2ADBD6BB004DFC1B /* UsersCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionCell.swift; sourceTree = "<group>"; };
 		F280EECD2ADBF14F004DFC1B /* NftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftModel.swift; sourceTree = "<group>"; };
@@ -315,7 +315,7 @@
 				F280EEC92ADBD3AE004DFC1B /* UserCardView */,
 				F280EED32ADEA218004DFC1B /* WebViewView */,
 				F280EECA2ADBD3CC004DFC1B /* UsersCollectionView */,
-				F228EFAC2ADA6D18001BA148 /* AlertPresenter.swift */,
+				F228EFAC2ADA6D18001BA148 /* Alert.swift */,
 			);
 			path = Statistic;
 			sourceTree = "<group>";
@@ -570,7 +570,7 @@
 				D8307F102AD2BCD3006302F6 /* CartViewController.swift in Sources */,
 				F228EF9C2AD5D5D0001BA148 /* UsersCollectionViewController.swift in Sources */,
 				F228EF982AD5D522001BA148 /* StatisticDataProvider.swift in Sources */,
-				F228EFAD2ADA6D18001BA148 /* AlertPresenter.swift in Sources */,
+				F228EFAD2ADA6D18001BA148 /* Alert.swift in Sources */,
 				F280EED02ADDD323004DFC1B /* UserCardView.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				F228EFA72AD9BB87001BA148 /* NetworkRequests.swift in Sources */,

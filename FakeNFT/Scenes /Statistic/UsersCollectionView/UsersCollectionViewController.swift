@@ -12,7 +12,7 @@ final class UsersCollectionViewController: UIViewController {
     
     private let contentView = UsersCollectionView()
     private let viewModel: UsersCollectionViewModel
-    private var alertPresenter = AlertPresenter.shared
+    private var alertPresenter = Alert.shared
     private var bindings = Set<AnyCancellable>()
     
     init(_ viewModel: UsersCollectionViewModel) {

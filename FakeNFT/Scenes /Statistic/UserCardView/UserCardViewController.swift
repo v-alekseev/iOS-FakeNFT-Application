@@ -13,7 +13,7 @@ final class UserCardViewController: UIViewController {
     
     private let contentView = UserCardView()
     private let viewModel: UserCardViewModel
-    private var alertPresenter = AlertPresenter.shared
+    private var alertPresenter = Alert.shared
     private var bindings = Set<AnyCancellable>()
     private var actualUserData: UserModel
     private lazy var userAvatarStub = UIImage(resource: .userAvatarStub)

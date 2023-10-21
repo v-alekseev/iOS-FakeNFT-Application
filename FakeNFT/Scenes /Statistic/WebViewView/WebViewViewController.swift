@@ -10,7 +10,7 @@ import WebKit
 
 final class WebViewViewController: UIViewController {
     
-    private var alertPresenter = AlertPresenter.shared
+    private var alertPresenter = Alert.shared
     private var url: String
     private lazy var webView = createWebView()
     private lazy var progressBar = createProgressBar()
