@@ -68,8 +68,6 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
 
         imageNftView.addSubview(likeImageView)
         
-        footerView.backgroundColor = .green
-        
         NSLayoutConstraint.activate([
             
             imageNftView.topAnchor.constraint(equalTo: topAnchor, constant: 20),

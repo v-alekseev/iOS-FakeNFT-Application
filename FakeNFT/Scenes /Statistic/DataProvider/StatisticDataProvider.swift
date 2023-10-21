@@ -11,7 +11,6 @@ protocol StatisticDataProviderProtocol {
     func getUsersData( _ completion: @escaping (Result<[UserModel], Error>) -> Void)
     func getNftWithId(nftId: String, _ completion: @escaping (Result<NftModel, Error>) -> Void)
     func getProfileLikes( _ completion: @escaping (Result<ProfileModel, Error>) -> Void)
-    //   func getActualUserData(id: String, _ completion: @escaping (Result<UserModel, Error>) -> Void)
 }
 
 final class StatisticDataProvider: StatisticDataProviderProtocol {
@@ -65,21 +64,5 @@ final class StatisticDataProvider: StatisticDataProviderProtocol {
         }
         return
     }
-    
-    //    func getActualUserData(id: String, _ completion: @escaping (Result<UserModel, Error>) -> Void) {
-    //        let actualUserRequest = ActualUserRequest(userID: id)
-    //        networkClient.send(request: actualUserRequest, type: UserModel.self)  { [weak self] result in
-    //            guard self != nil else { return }
-    //            DispatchQueue.main.async {
-    //                switch result {
-    //                case let .success(data):
-    //                    completion(.success(data))
-    //                case let .failure(error):
-    //                    completion(.failure(error))
-    //                }
-    //            }
-    //        }
-    //        return
-    //    }
 }
 
