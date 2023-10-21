@@ -15,7 +15,6 @@ final class WebViewViewController: UIViewController {
     private lazy var webView = createWebView()
     private lazy var progressBar = createProgressBar()
     
-    
     init(_ url: String) {
         self.url = url
         super.init(nibName: nil, bundle: nil)
@@ -31,7 +30,7 @@ final class WebViewViewController: UIViewController {
         if let weburl = URL(string: url) {
             webView.load(URLRequest(url: weburl))
         } else {
-            alertPresenter.showAlert(self, alert: "Неверный адрес web-страницы")
+            alertPresenter.showAlert(self)
         }
     }
     

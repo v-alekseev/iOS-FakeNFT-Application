@@ -7,42 +7,42 @@
 # Statistic Flow Decomposition
 
 
-## Экран Statistics (est 10 hr; fact x).
+## Экран Statistics (est 10 hr; fact 9.6 hr).
 
 #### Верстка
-- создание кнопки сортировки (est: 15 min; fact: x min).
-- создание ячейки таблицы (est: 120 min ; fact: x min). 
-- создание таблицы (est: 60 min; fact: x min).
-- создание окна выбора типа фильтрации (est: 15 min; fact: x min).
+- создание кнопки сортировки (est: 15 min; fact: 15 min).
+- создание ячейки таблицы (est: 120 min ; fact: 150 min). 
+- создание таблицы (est: 60 min; fact: 60 min).
+- создание окна выбора типа фильтрации (est: 15 min; fact: 20 min).
 
-`Total:` est: 210 min; fact: x min.
+`Total:` est: 210 min; fact: 245 min.
 
 #### Логика
-- переход на экран User Cart (est: 15 min; fact: x min).
-- логика сетевого слоя для загрузки в таблицу аватарки, имени пользователя, кол-ва NFT (est: 180 min; fact: x min).
-- индикатор загрузки (est: 30 min; fact: x min).
-- сортировка (est: 60 min; fact: x min).
-- сохранить способ сортировки (est: 60 min; fact: x min).
+- переход на экран User Cart (est: 15 min; fact: 20 min).
+- логика сетевого слоя для загрузки в таблицу аватарки, имени пользователя, кол-ва NFT (est: 180 min; fact: 240 min).
+- индикатор загрузки (est: 30 min; fact: 30 min).
+- сортировка (est: 60 min; fact: 30 min).
+- сохранить способ сортировки (est: 60 min; fact: 15 min).
 
-`Total:` est: 345 min; fact: x min.
+`Total:` est: 345 min; fact: 335 min.
 
-## Экран User Card (est 5 hr; fact x).
+## Экран User Card (est 5 hr; fact 4.8 hr).
 
 #### Верстка
 
- - фото пользователя (est: 15 min; fact: x min).
- - имя пользователя (est: 15 min; fact: x min).
- - описание пользователя (est: 15 min; fact: x min).
- - кнопка "Перейти на сайт пользователя" (est: 15 min; fact: x min).
- - кнопка коллекция NFT (est: 15 min; fact: x min).
+ - фото пользователя (est: 15 min; fact: 15 min).
+ - имя пользователя (est: 15 min; fact: 15 min).
+ - описание пользователя (est: 15 min; fact: 15 min).
+ - кнопка "Перейти на сайт пользователя" (est: 15 min; fact: 15 min).
+ - кнопка коллекция NFT (est: 15 min; fact: 15 min).
 
-`Total:` est: 75 min; fact: x min).
+`Total:` est: 75 min; fact: 75 min).
 
 #### Логика
-- переход на сайт пользователя c созданием WebView (est: 180 min; fact: x min).
-- переход на экран Users Collection (est: 15 min; fact: x min).
+- переход на сайт пользователя c созданием WebView (est: 180 min; fact: 180 min).
+- переход на экран Users Collection (est: 15 min; fact: 30 min).
 
-`Total:` est: 195 min; fact: x min.
+`Total:` est: 195 min; fact: 210 min.
 
 
 ## Экран Users Collection (est 11 hr; fact x).
