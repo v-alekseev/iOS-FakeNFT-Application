@@ -31,7 +31,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
             return lbl
         }()
     
-    var cellWidth: CGFloat = 0
+    var imageWidth: CGFloat = 0
     
     private let NFTImage: UIImageView = {
         let img = UIImageView()
@@ -88,8 +88,8 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
             NFTImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             NFTImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             NFTImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            NFTImage.heightAnchor.constraint(equalToConstant: cellWidth),
-            NFTImage.widthAnchor.constraint(equalToConstant: cellWidth),
+            NFTImage.heightAnchor.constraint(equalToConstant: imageWidth),
+            NFTImage.widthAnchor.constraint(equalToConstant: imageWidth),
             
             ratingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             ratingView.topAnchor.constraint(equalTo: NFTImage.bottomAnchor, constant: 8),
@@ -105,7 +105,6 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
             
             basketImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             basketImage.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 4),
-            
         ])
     }
     

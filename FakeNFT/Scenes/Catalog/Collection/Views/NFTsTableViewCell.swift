@@ -25,13 +25,15 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         self.collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        collection.register(NFTCell.self)
+        collection.allowsSelection = false
         collection.isScrollEnabled = false
         collection.dataSource = self
         collection.delegate = self
-        collection.register(NFTCell.self)
-        
         setupUI()
         contentView.layoutIfNeeded()
         print(collection.frame)
@@ -74,14 +76,13 @@ extension NFTsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCell = collection.dequeueReusableCell(indexPath: indexPath)
-        cell.cellWidth = floor((collection.frame.width - (numberOfColumns - 1)) / numberOfColumns)
-        print("pre comfigurecell")
+        cell.imageWidth = floor((collection.frame.width - (numberOfColumns - 1)) / numberOfColumns)
+        print("pre configurecell")
         guard let dataSource = dataSource,
               let NFT = dataSource.nft(at: indexPath) 
         else { return cell }
-        
         cell.configureCell(isLiked: dataSource.isNFTLiked(at: indexPath), isOrdered: dataSource.isNFTOrdered(at: indexPath), NFT:NFT)
-        print("post comfigurecell")
+        print("post configurecell")
         return cell
     }
 }
