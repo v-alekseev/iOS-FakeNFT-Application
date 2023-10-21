@@ -84,8 +84,8 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
             nftNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             nftNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: cartButton.leadingAnchor),
             
-            cartButton.heightAnchor.constraint(equalToConstant: 40),
-            cartButton.widthAnchor.constraint(equalToConstant: 40),
+            cartButton.heightAnchor.constraint(equalToConstant: Constants.button_size),
+            cartButton.widthAnchor.constraint(equalToConstant: Constants.button_size),
             cartButton.bottomAnchor.constraint(equalTo: bottomAnchor),
             cartButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             
@@ -95,8 +95,8 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
             
             likeImageView.topAnchor.constraint(equalTo: imageNftView.topAnchor),
             likeImageView.trailingAnchor.constraint(equalTo: imageNftView.trailingAnchor),
-            likeImageView.heightAnchor.constraint(equalToConstant: 40),
-            likeImageView.widthAnchor.constraint(equalToConstant: 40)
+            likeImageView.heightAnchor.constraint(equalToConstant: Constants.button_size),
+            likeImageView.widthAnchor.constraint(equalToConstant: Constants.button_size)
             
         ])
     }
@@ -155,5 +155,6 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
 extension UsersCollectionCell {
     private enum Constants {
         static let offset_8: CGFloat = 8
+        static let button_size: CGFloat = 40
     }
 }

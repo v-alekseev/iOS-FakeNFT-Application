@@ -366,9 +366,9 @@
 			isa = PBXGroup;
 			children = (
 				F280EED42ADEC07A004DFC1B /* StatisticView.swift */,
+				F228EF942AD5D49C001BA148 /* StatisticCell.swift */,
 				F280EEDA2ADEC989004DFC1B /* StatisticViewController.swift */,
 				F228EF922AD5D462001BA148 /* StatisticViewModel.swift */,
-				F228EF942AD5D49C001BA148 /* StatisticCell.swift */,
 			);
 			path = StatisticView;
 			sourceTree = "<group>";
@@ -387,9 +387,9 @@
 			isa = PBXGroup;
 			children = (
 				F2AFCC092AE05F6D009B4B06 /* UsersCollectionView.swift */,
+				F280EECB2ADBD6BB004DFC1B /* UsersCollectionCell.swift */,
 				F228EF9B2AD5D5D0001BA148 /* UsersCollectionViewController.swift */,
 				F2AFCC0B2AE05F87009B4B06 /* UsersCollectionViewModel.swift */,
-				F280EECB2ADBD6BB004DFC1B /* UsersCollectionCell.swift */,
 			);
 			path = UsersCollectionView;
 			sourceTree = "<group>";
