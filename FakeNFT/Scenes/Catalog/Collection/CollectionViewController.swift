@@ -44,6 +44,7 @@ final class CollectionViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CollectionHeaderTableViewCell.self)
+        tableView.register(NFTsTableViewCell.self)
     }
     
     // MARK: - Rendering
@@ -127,8 +128,8 @@ final class CollectionViewController: UIViewController {
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfSections section: Int) -> Int {
-        return 1
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -149,7 +150,9 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             let cell: NFTsTableViewCell = tableView.dequeueReusableCell()
+            print("dataSource wanna be setted")
             if let dataSource = viewModel as? NFTDataSourceProtocol {
+                print("dataSource setted")
                 cell.setDataSource(with: dataSource)
             }
             return cell

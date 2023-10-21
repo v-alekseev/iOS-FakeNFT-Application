@@ -10,6 +10,14 @@ import UIKit
 final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - Elements
     private var collection: UICollectionView
+    private let titleLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "sf32443"
+        lbl.textAlignment = .left
+        lbl.font = .bodyBold
+        lbl.textColor = .ypBlackWithDarkMode
+        return lbl
+    }()
     private var dataSource: NFTDataSourceProtocol?
     let numberOfColumns: CGFloat = 3
     var selectedIndexPath: IndexPath? = nil
@@ -22,6 +30,8 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         collection.isScrollEnabled = false
         collection.dataSource = self
         collection.delegate = self
+        collection.register(NFTCell.self)
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -31,10 +41,29 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     func setDataSource(with source: NFTDataSourceProtocol) {
         self.dataSource = source
     }
+    
+    private func setupUI() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(collection)
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            titleLabel.heightAnchor.constraint(equalToConstant: 20),
+            
+            collection.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            collection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            collection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            collection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+        ])
+    }
 }
 
 extension NFTsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(dataSource?.numberOfNFTs() ?? 0)
         return dataSource?.numberOfNFTs() ?? 0
     }
     
