@@ -114,7 +114,6 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     
     private func refreshNFTs() {
         for id in model.nfts {
-            print("отправляю задачу на сборку NFT с id: \(id)")
             self.incrementLoading()
             let operation = BlockOperation { [weak self] in
                 self?.dataSource.fetchMyNFT(with: id) { [weak self] result in

@@ -12,7 +12,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     private let sortTypeKey = "selectedSortType"
     private var collections: [CollectionModel]
     private var author: AuthorModel?
-    private var NFTs: [NFTModel] = [] 
+    private var NFTs: [NFTModel] = []
     private let nftAccessSemaphore = DispatchSemaphore(value: 1)
     private var currentSortType: SortType?
     private let dataProvider: CatalogDataProviderProtocol
@@ -133,9 +133,6 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
         if index < self.NFTs.count {
             return self.NFTs[index]
         } else {
-            print("Index out of range")
-            print("Index: \(index)")
-            print("NFTs count: \(self.NFTs.count)")
             return nil
         }
     }

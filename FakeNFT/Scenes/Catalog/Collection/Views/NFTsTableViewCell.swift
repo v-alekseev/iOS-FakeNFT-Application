@@ -10,17 +10,15 @@ import UIKit
 final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - Elements
     private var collection: UICollectionView
+    
+    // MARK: - Variables
     private var dataSource: NFTDataSourceProtocol?
     static let numberOfColumns: CGFloat = 3
     var selectedIndexPath: IndexPath? = nil
     private var collectionHeightConstraint: NSLayoutConstraint?
-    var estimatedHeight: CGFloat = 0 //{
-//        didSet {
-//                collectionHeightConstraint?.constant = estimatedHeight
-//                layoutIfNeeded()
-//            }
-//    }
+    var estimatedHeight: CGFloat = 0
     var estimatedCellWidth: CGFloat = 0
+    
     // MARK: - INIT
     init(
         style: UITableViewCell.CellStyle,
@@ -70,8 +68,6 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
 
 extension NFTsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Я таблица — узнаю количетсво ячеек во мне")
-        print(dataSource?.numberOfNFTs() ?? 0)
         return dataSource?.numberOfNFTs() ?? 0
     }
     
