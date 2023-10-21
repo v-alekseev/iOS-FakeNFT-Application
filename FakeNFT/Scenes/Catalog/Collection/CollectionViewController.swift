@@ -165,12 +165,14 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        switch indexPath.section {
-//        case 0:
-//            return 374
-//        default:
-//            return 56 + 6 + (tableView.bounds.width - 32 - (3 - 1))/3
-//        }
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 374
+        default:
+            let rowsCount = ceil(CGFloat(viewModel.giveMeHeaderComponent().collection.nfts.count)/NFTsTableViewCell.numberOfColumns)
+            let estimatedHeightValue = (56 + 6 + (tableView.bounds.width - 32 - (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns) * rowsCount
+            return estimatedHeightValue
+        }
+    }
 }
