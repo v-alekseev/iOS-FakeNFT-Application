@@ -169,7 +169,7 @@ final class CollectionViewModel: CollectionViewModelProtocol {
                 resultState = .loading(inProgress: inProgress + 1)
             }
         default:
-            resultState = .loading(inProgress: 0)
+            resultState = .loading(inProgress: 1)
         }
     }
     

@@ -12,13 +12,8 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     private let sortTypeKey = "selectedSortType"
     private var collections: [CollectionModel]
     private var author: AuthorModel?
-    private var NFTs: [NFTModel] = [] {
-        didSet {
-            print("добавлено NFT")
-            print("количество NFT в провайдере данных")
-            print(NFTs.count)
-        }
-    }
+    private var NFTs: [NFTModel] = [] 
+    private let nftAccessSemaphore = DispatchSemaphore(value: 1)
     private var currentSortType: SortType?
     private let dataProvider: CatalogDataProviderProtocol
     
@@ -118,13 +113,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let nft):
-                print("добавлено NFT")
-                print("количество NFT в провайдере данных")
-                print(self.NFTs.count)
                 self.NFTs.append(nft)
-                sleep(1)
-                print("количество NFT в провайдере данных")
-                print(self.NFTs.count)
             case .failure(let error):
                 print(error)
             }
