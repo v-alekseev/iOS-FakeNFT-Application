@@ -17,7 +17,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var priceLabel = createPriceLabel()
     private lazy var likeImageView = createLikeImageView()
     
-    private lazy var imageNftStub = UIImage(named: "nftStub")
+    private lazy var imageNftStub = UIImage(resource: .nftStub)
     
     private var task: URLSessionDataTask?
     
@@ -49,9 +49,9 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         
         nftNameLabel.text = nftData.name
         priceLabel.text = String(format: "%.2f", nftData.price) + " ETH"
-        let isLikedImage = isLiked ? UIImage(named: "isLiked") : UIImage(named: "isNotLiked")
+        let isLikedImage = isLiked ? UIImage(resource: .isLiked) : UIImage(resource: .isNotLiked)
         likeImageView.image = isLikedImage
-        let buttonImage = isInCart ? UIImage(named: "deleteFromCart") : UIImage(named: "addFromCart")
+        let buttonImage = isInCart ? UIImage(resource: .deleteFromCart) : UIImage(resource: .addToCart)
         cartButton.setImage(buttonImage, for: .normal)
     }
     

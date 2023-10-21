@@ -29,7 +29,7 @@ final class StatisticViewController: UIViewController {
         
         view = contentView
         
-        let filterButton = UIBarButtonItem(image: UIImage(named: "filterButton"),
+        let filterButton = UIBarButtonItem(image: UIImage(resource: .filterButton),
                                            style: .plain,
                                            target: self,
                                            action: #selector(tapOnFilter))

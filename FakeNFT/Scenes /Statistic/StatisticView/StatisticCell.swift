@@ -17,7 +17,7 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     private lazy var nameLabel = createNameLabel()
     private lazy var nftCountLabel = createNftCountLabel()
     private lazy var userRatingLabel = createUserRatingLabel()
-    private lazy var userAvatarStub = UIImage(named: "userAvatarStub")
+    private lazy var userAvatarStub = UIImage(resource: .userAvatarStub)
     
     private var task: URLSessionDataTask?
     
