@@ -45,19 +45,20 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     
     private let ratingView = RatingView()
     
-    private let likeImage: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.contentMode = .scaleAspectFill
-
-        return img
+    private let likeButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.contentMode = .scaleAspectFill
+        btn.addTarget(NFTCell.self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        return btn
     }()
     
-    let basketImage: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.contentMode = .scaleAspectFill
-        return img
+    private let basketButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.contentMode = .scaleAspectFill
+        btn.addTarget(self, action: #selector(basketButtonTapped), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var animatedGradient: AnimatedGradientView = {
@@ -84,8 +85,8 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         contentView.addSubview(NFTImage)
         contentView.addSubview(animatedGradient)
         contentView.addSubview(ratingView)
-        contentView.addSubview(likeImage)
-        contentView.addSubview(basketImage)
+        contentView.addSubview(likeButton)
+        contentView.addSubview(basketButton)
         contentView.backgroundColor = .clear
         NSLayoutConstraint.activate([
             NFTImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -104,21 +105,29 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
             ratingView.topAnchor.constraint(equalTo: NFTImage.bottomAnchor, constant: 8),
             ratingView.heightAnchor.constraint(equalToConstant: 12),
             
-            likeImage.trailingAnchor.constraint(equalTo: NFTImage.trailingAnchor, constant: -10),
-            likeImage.topAnchor.constraint(equalTo: NFTImage.topAnchor, constant: 11),
+            likeButton.trailingAnchor.constraint(equalTo: NFTImage.trailingAnchor, constant: -10),
+            likeButton.topAnchor.constraint(equalTo: NFTImage.topAnchor, constant: 11),
             
             NFTNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            NFTNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: basketImage.leadingAnchor, constant: 0),
+            NFTNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: basketButton.leadingAnchor, constant: 0),
             NFTNameLabel.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 5),
             
             NFTCostLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            NFTCostLabel.trailingAnchor.constraint(lessThanOrEqualTo: basketImage.leadingAnchor, constant: 0),
+            NFTCostLabel.trailingAnchor.constraint(lessThanOrEqualTo: basketButton.leadingAnchor, constant: 0),
             NFTCostLabel.topAnchor.constraint(equalTo: NFTNameLabel.bottomAnchor, constant: 4),
             
-            basketImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            basketImage.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 4),
+            basketButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            basketButton.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 4),
         ])
         animatedGradient.isHidden = true
+    }
+    
+    @objc private func likeButtonTapped() {
+        // TODO: Добавить функционал в виде комплишена
+    }
+    
+    @objc private func basketButtonTapped() {
+        // TODO: Добавить функционал в виде комплишена
     }
     
     func configureCell(isLiked: Bool, isOrdered: Bool, NFT: NFTModel) {
@@ -144,8 +153,8 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         NFTNameLabel.text = NFT.name
         NFTCostLabel.text = "\(NFT.price) ETH"
         ratingView.setRating(rank: Int(NFT.rating))
-        basketImage.image = isOrdered ? UIImage(named: "InBasket") : UIImage(named: "NotInBasket")
-        likeImage.image = isLiked ? UIImage(named: "LikeActive") : UIImage(named: "LikeInactive")
+        basketButton.setImage(isOrdered ? UIImage(named: "InBasket") : UIImage(named: "NotInBasket"), for: .normal)
+        likeButton.setImage(isLiked ? UIImage(named: "LikeActive") : UIImage(named: "LikeInactive"), for: .normal)
 
     }
     
