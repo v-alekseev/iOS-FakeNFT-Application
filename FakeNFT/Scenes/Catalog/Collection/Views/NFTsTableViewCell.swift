@@ -79,14 +79,11 @@ extension NFTsTableViewCell: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCell = collection.dequeueReusableCell(indexPath: indexPath)
         cell.imageWidth = estimatedCellWidth
-        print("pre configurecell for indexpath \(indexPath)")
         guard let dataSource = dataSource,
               let NFT = dataSource.nft(at: indexPath) 
         else { 
-            print("ухожу из цикла по гарду")
             return cell }
         cell.configureCell(isLiked: dataSource.isNFTLiked(at: indexPath), isOrdered: dataSource.isNFTOrdered(at: indexPath), NFT:NFT)
-        print("post configurecell at indexpath \(indexPath)")
         return cell
     }
 }

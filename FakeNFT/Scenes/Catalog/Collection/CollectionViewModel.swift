@@ -215,7 +215,6 @@ extension CollectionViewModel: StorageDelegate {
 
 extension CollectionViewModel: NFTDataSourceProtocol {
     func numberOfNFTs() -> Int {
-        print("Возвращаю количество NFT = \(model.nfts.count)")
         return model.nfts.count
     }
     
