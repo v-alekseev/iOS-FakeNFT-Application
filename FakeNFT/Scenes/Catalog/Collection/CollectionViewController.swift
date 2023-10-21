@@ -151,9 +151,16 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         default:
             let rowsCount = ceil(CGFloat(viewModel.giveMeHeaderComponent().collection.nfts.count)/NFTsTableViewCell.numberOfColumns)
-            let estimatedHeightValue = (56 + 6 + (tableView.bounds.width - 32 - (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns) * rowsCount
+            let estimatedWidth = floor((tableView.bounds.width - 32 - 9 * (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns)
+            let estimatedHeightValue = 24 + (8 + floor(56 + 6 + (tableView.bounds.width - 32 - 9 * (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns)) * rowsCount
 //            print("estimated height value = \()")
-            let cell = NFTsTableViewCell(style: .default, reuseIdentifier: "NFTsCell", estimatedHeight: estimatedHeightValue)
+            
+            let cell = NFTsTableViewCell(
+                style: .default,
+                reuseIdentifier: "NFTsCell",
+                estimatedHeight: estimatedHeightValue,
+                estimatedCellWidth: estimatedWidth
+            )
 //            let cell: NFTsTableViewCell = tableView.dequeueReusableCell()
 //            cell.estimatedHeight = 56 + 6 + (tableView.bounds.width - 32 - (cell.numberOfColumns - 1))/cell.numberOfColumns
             print("dataSource wanna be setted")
@@ -168,10 +175,10 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 374
+            return  UITableView.automaticDimension
         default:
             let rowsCount = ceil(CGFloat(viewModel.giveMeHeaderComponent().collection.nfts.count)/NFTsTableViewCell.numberOfColumns)
-            let estimatedHeightValue = (56 + 6 + (tableView.bounds.width - 32 - (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns) * rowsCount
+            let estimatedHeightValue = 24 + (8 + (56 + 6 + (tableView.bounds.width - 32 - (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns)) * rowsCount
             return estimatedHeightValue
         }
     }

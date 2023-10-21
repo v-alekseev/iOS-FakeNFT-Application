@@ -10,14 +10,6 @@ import UIKit
 final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - Elements
     private var collection: UICollectionView
-    private let titleLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.text = "Служебный заголовок потом удалю"
-        lbl.textAlignment = .left
-        lbl.font = .bodyBold
-        lbl.textColor = .ypBlackWithDarkMode
-        return lbl
-    }()
     private var dataSource: NFTDataSourceProtocol?
     static let numberOfColumns: CGFloat = 3
     var selectedIndexPath: IndexPath? = nil
@@ -28,14 +20,16 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
 //                layoutIfNeeded()
 //            }
 //    }
-
+    var estimatedCellWidth: CGFloat = 0
     // MARK: - INIT
     init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?,
-        estimatedHeight: CGFloat
+        estimatedHeight: CGFloat,
+        estimatedCellWidth: CGFloat
     ) {
         self.estimatedHeight = estimatedHeight
+        self.estimatedCellWidth = estimatedCellWidth
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -61,18 +55,12 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     private func setupUI() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         collection.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(titleLabel)
         contentView.addSubview(collection)
         print(estimatedHeight)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            collection.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            collection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             collection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             collection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             collection.heightAnchor.constraint(equalToConstant: estimatedHeight)
@@ -91,7 +79,7 @@ extension NFTsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCell = collection.dequeueReusableCell(indexPath: indexPath)
-        cell.imageWidth = floor((collection.frame.width - (NFTsTableViewCell.numberOfColumns - 1)) / NFTsTableViewCell.numberOfColumns)
+        cell.imageWidth = estimatedCellWidth
         print("pre configurecell")
         guard let dataSource = dataSource,
               let NFT = dataSource.nft(at: indexPath) 
@@ -104,8 +92,8 @@ extension NFTsTableViewCell: UICollectionViewDataSource {
 
 extension NFTsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - (NFTsTableViewCell.numberOfColumns - 1)) / NFTsTableViewCell.numberOfColumns
-        return CGSize(width: width, height: width)
+        let width = floor((collectionView.frame.width - 9 * (NFTsTableViewCell.numberOfColumns - 1)) / NFTsTableViewCell.numberOfColumns)
+        return CGSize(width: width, height: width + 56 + 6)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -113,11 +101,11 @@ extension NFTsTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 9
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

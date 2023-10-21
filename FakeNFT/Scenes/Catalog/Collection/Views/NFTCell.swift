@@ -73,23 +73,28 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func setupView() {
         contentView.addSubview(NFTNameLabel)
         contentView.addSubview(NFTCostLabel)
         contentView.addSubview(NFTImage)
+        contentView.addSubview(animatedGradient)
         contentView.addSubview(ratingView)
         contentView.addSubview(likeImage)
         contentView.addSubview(basketImage)
         
         contentView.backgroundColor = .clear
-
         NSLayoutConstraint.activate([
             NFTImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             NFTImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             NFTImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            NFTImage.heightAnchor.constraint(equalToConstant: imageWidth),
-            NFTImage.widthAnchor.constraint(equalToConstant: imageWidth),
+            NFTImage.widthAnchor.constraint(equalToConstant: contentView.frame.width),
+            NFTImage.heightAnchor.constraint(equalToConstant: contentView.frame.width),
+            
+            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            animatedGradient.widthAnchor.constraint(equalToConstant: contentView.frame.width),
+            animatedGradient.heightAnchor.constraint(equalToConstant: contentView.frame.width),
             
             ratingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             ratingView.topAnchor.constraint(equalTo: NFTImage.bottomAnchor, constant: 8),
