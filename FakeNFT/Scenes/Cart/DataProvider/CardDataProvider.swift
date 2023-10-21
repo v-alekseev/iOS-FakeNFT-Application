@@ -54,6 +54,7 @@ final class CardDataProvider: CardDataProviderProtocol {
         didSet {
             // если колличество загруженных nft равняется колличеству nftid, значит все запросы отработали и можно перегрузить отображать корзину
             if orderIDs.count == order.count {
+                print(order)
                 NotificationCenter.default.post(name: orderChanged, object: nil )
             }
         }
