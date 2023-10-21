@@ -40,9 +40,12 @@ extension NFTsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: NFTCollectionViewCell = collection.dequeueReusableCell(indexPath: indexPath)
+        let cell: NFTCell = collection.dequeueReusableCell(indexPath: indexPath)
         cell.cellWidth = floor((collection.frame.width - (numberOfColumns - 1)) / numberOfColumns)
-        cell.backgroundColor = .red
+        guard let dataSource = dataSource,
+              let NFT = dataSource.nft(at: indexPath) 
+        else { return cell }
+        cell.configureCell(isLiked: dataSource.isNFTLiked(at: indexPath), isOrdered: dataSource.isNFTOrdered(at: indexPath), NFT:NFT)
         return cell
     }
 }

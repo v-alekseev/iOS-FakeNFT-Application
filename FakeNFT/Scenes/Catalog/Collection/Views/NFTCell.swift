@@ -9,7 +9,7 @@ import UIKit
 
 final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     
-    let NFTNameLabel: UILabel = {
+    private let NFTNameLabel: UILabel = {
             let lbl = UILabel()
             lbl.textAlignment = .left
             lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +20,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
             return lbl
         }()
     
-    let NFTCostLabel: UILabel = {
+    private let NFTCostLabel: UILabel = {
             let lbl = UILabel()
             lbl.textAlignment = .left
             lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     
     var cellWidth: CGFloat = 0
     
-    let NFTImage: UIImageView = {
+    private let NFTImage: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
         img.contentMode = .scaleAspectFill
@@ -42,9 +42,9 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         return img
     }()
     
-    let ratingView = RatingView()
+    private let ratingView = RatingView()
     
-    let likeImage: UIImageView = {
+    private let likeImage: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
         img.contentMode = .scaleAspectFill
@@ -88,7 +88,8 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
             NFTImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             NFTImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             NFTImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            NFTImage.heightAnchor.constraint(equalToConstant: 108),
+            NFTImage.heightAnchor.constraint(equalToConstant: cellWidth),
+            NFTImage.widthAnchor.constraint(equalToConstant: cellWidth),
             
             ratingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             ratingView.topAnchor.constraint(equalTo: NFTImage.bottomAnchor, constant: 8),
