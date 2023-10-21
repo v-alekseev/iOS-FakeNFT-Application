@@ -56,7 +56,9 @@ final class StatisticViewController: UIViewController {
         contentView.$selectedRow
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] selectedRow in
-                self?.viewModel.rowForOpenUserCard = selectedRow
+                if let selectedRow {
+                    self?.viewModel.rowForOpenUserCard = selectedRow
+                }
             })
             .store(in: &bindings)
         

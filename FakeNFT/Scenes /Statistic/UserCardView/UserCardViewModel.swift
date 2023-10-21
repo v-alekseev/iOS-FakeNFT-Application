@@ -16,7 +16,7 @@ final class UserCardViewModel {
     @Published var isLoading = false
     @Published var loadError = false
     
-    var profileLikes: [String]
+    var profileLikes: [String] = []
     private let dataProvider: StatisticDataProviderProtocol?
     
     var didTapCollectionButton = false {
@@ -36,7 +36,6 @@ final class UserCardViewModel {
     init(dataProvider: StatisticDataProviderProtocol, userData: UserModel) {
         self.dataProvider = dataProvider
         actualUserData = userData
-        profileLikes = []
         loadProfileLikes()
     }
     

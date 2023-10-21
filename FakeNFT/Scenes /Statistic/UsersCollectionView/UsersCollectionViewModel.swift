@@ -10,23 +10,20 @@ import Combine
 
 final class UsersCollectionViewModel {
     
-    @Published var nfts: [NftModel]
+    @Published var nfts: [NftModel] = []
     @Published var isLoading = false
     @Published var loadError = false
     @Published var showStub = false
     
-    var nftsIdForDisplayingLikes: [String]
+    var nftsIdForDisplayingLikes: [String] = []
     private let dataProvider: StatisticDataProviderProtocol?
     private var actualUserData: UserModel
     private var profileLikes: [String]
     
     init(dataProvider: StatisticDataProviderProtocol, actualUserData: UserModel, profileLikes: [String]) {
-        
         self.dataProvider = dataProvider
-        self.nfts = []
-        self.nftsIdForDisplayingLikes = []
-        self.profileLikes = profileLikes
         self.actualUserData = actualUserData
+        self.profileLikes = profileLikes
         loadNftsData()
     }
     

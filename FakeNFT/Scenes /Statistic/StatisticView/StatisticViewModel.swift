@@ -10,7 +10,7 @@ import Combine
 
 final class StatisticViewModel {
     
-    @Published var usersData: [UserModel]
+    @Published var usersData: [UserModel] = []
     @Published var isLoading = false
     @Published var actualUserData: UserModel?
     @Published var loadError = false
@@ -18,16 +18,14 @@ final class StatisticViewModel {
     private let dataProvider: StatisticDataProviderProtocol?
     private let filtrationType = FiltrationTypeStorage()
     
-    var rowForOpenUserCard: Int? = nil {
+    var rowForOpenUserCard: Int = 0 {
         didSet {
-            guard let rowForOpenUserCard else { return }
             actualUserData = usersData[rowForOpenUserCard]
         }
     }
     
     init(dataProvider: StatisticDataProviderProtocol) {
         self.dataProvider = dataProvider
-        self.usersData = []
         loadUsersData()
     }
     
