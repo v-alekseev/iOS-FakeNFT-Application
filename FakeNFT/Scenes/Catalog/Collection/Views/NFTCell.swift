@@ -100,6 +100,9 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
             ratingView.topAnchor.constraint(equalTo: NFTImage.bottomAnchor, constant: 8),
             ratingView.heightAnchor.constraint(equalToConstant: 12),
             
+            likeImage.trailingAnchor.constraint(equalTo: NFTImage.trailingAnchor, constant: -10),
+            likeImage.topAnchor.constraint(equalTo: NFTImage.topAnchor, constant: 11),
+            
             NFTNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             NFTNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: basketImage.leadingAnchor, constant: 0),
             NFTNameLabel.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 5),
@@ -111,6 +114,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
             basketImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             basketImage.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 4),
         ])
+        animatedGradient.isHidden = true
     }
     
     func configureCell(isLiked: Bool, isOrdered: Bool, NFT: NFTModel) {
