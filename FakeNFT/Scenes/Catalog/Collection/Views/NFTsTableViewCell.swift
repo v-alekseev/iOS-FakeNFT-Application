@@ -12,7 +12,7 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     private var collection: UICollectionView
     private let titleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "sf32443"
+        lbl.text = "Служебный заголовок потом удалю"
         lbl.textAlignment = .left
         lbl.font = .bodyBold
         lbl.textColor = .ypBlackWithDarkMode
