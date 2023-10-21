@@ -22,7 +22,7 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     let numberOfColumns: CGFloat = 3
     var selectedIndexPath: IndexPath? = nil
     private var collectionHeightConstraint: NSLayoutConstraint?
-//    var estimatedHeight: CGFloat = 0 {
+    var estimatedHeight: CGFloat = 0 //{
 //        didSet {
 //                collectionHeightConstraint?.constant = estimatedHeight
 //                layoutIfNeeded()
@@ -30,7 +30,12 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
 //    }
 
     // MARK: - INIT
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    init(
+        style: UITableViewCell.CellStyle,
+        reuseIdentifier: String?,
+        estimatedHeight: CGFloat
+    ) {
+        self.estimatedHeight = estimatedHeight
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -70,7 +75,7 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
             collection.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             collection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             collection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            collection.heightAnchor.constraint(equalToConstant: 1000)
+            collection.heightAnchor.constraint(equalToConstant: estimatedHeight)
         ])
 //        collectionHeightConstraint = collection.heightAnchor.constraint(equalToConstant: estimatedHeight)
 //            collectionHeightConstraint?.isActive = true

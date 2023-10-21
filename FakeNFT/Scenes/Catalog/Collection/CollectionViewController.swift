@@ -44,7 +44,7 @@ final class CollectionViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CollectionHeaderTableViewCell.self)
-        tableView.register(NFTsTableViewCell.self)
+        tableView.register(NFTsTableViewCell.self, forCellReuseIdentifier: "NFTsCell")
     }
     
     // MARK: - Rendering
@@ -149,8 +149,9 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(with: data.collection, author: author, imageSize: imageSize)
             return cell
         default:
-            
-            let cell: NFTsTableViewCell = tableView.dequeueReusableCell()
+            let estimatedHeightValue = 56 + 6 + (tableView.bounds.width - 32 - (3 - 1))/3
+            let cell = NFTsTableViewCell(style: .default, reuseIdentifier: "NFTsCell", estimatedHeight: estimatedHeightValue)
+//            let cell: NFTsTableViewCell = tableView.dequeueReusableCell()
 //            cell.estimatedHeight = 56 + 6 + (tableView.bounds.width - 32 - (cell.numberOfColumns - 1))/cell.numberOfColumns
             print("dataSource wanna be setted")
             if let dataSource = viewModel as? NFTDataSourceProtocol {
