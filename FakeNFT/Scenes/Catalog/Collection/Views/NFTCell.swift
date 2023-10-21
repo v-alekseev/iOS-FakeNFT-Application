@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     
@@ -64,6 +65,8 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         return gr
     }()
     
+    private let placeholderImage = UIImage(named: "NFTPlaceholder")
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -118,6 +121,25 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     func configureCell(isLiked: Bool, isOrdered: Bool, NFT: NFTModel) {
+        animatedGradient.isHidden = false
+        animatedGradient.startAnimating()
+        let processor = RoundCornerImageProcessor(cornerRadius: 12)
+        let options: KingfisherOptionsInfo = [
+            .backgroundDecode,
+            .onFailureImage(placeholderImage?.kf.image(withBlendMode: .normal, backgroundColor: .ypBlackWithDarkMode)),
+            .processor(processor)
+        ]
+        
+        NFTImage.kf.setImage(
+            with: URL(string: NFT.images[0]),
+            placeholder: placeholderImage,
+            options: options,
+            completionHandler: { [weak self] _ in
+                guard let self = self else { return }
+                self.animatedGradient.stopAnimating()
+                self.animatedGradient.isHidden = true
+            })
+        
         NFTNameLabel.text = NFT.name
         NFTCostLabel.text = "\(NFT.price) ETH"
         ratingView.setRating(rank: Int(NFT.rating))
@@ -126,7 +148,6 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         if (isLiked) {
             likeImage.tintColor = .ypLightGreyWithDarkMode
         }
-        NFTImage.image = UIImage(named: "NFTPlaceholder")
     }
     
 }
