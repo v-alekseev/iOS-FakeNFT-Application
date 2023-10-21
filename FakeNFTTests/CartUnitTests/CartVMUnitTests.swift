@@ -10,9 +10,6 @@ import Foundation
 import XCTest
 
 final class CartVMUnitTests: XCTestCase {
-
-// 2. Тесты ViewModel  с моками DataModel
-    // CartDeleteViewModel
     
     let cdp2 = MockCartDataProvider(getOrderResult: true)
 
@@ -38,11 +35,9 @@ final class CartVMUnitTests: XCTestCase {
     
     func testCartVMgetOrder() {
         //given
-        
-        //when
         let vm = CartViewModel(dataProvider:  cdp2)
         vm.delegate = self
-        //then
+        //when
         vm.getOrder()
     }
     
@@ -50,20 +45,23 @@ final class CartVMUnitTests: XCTestCase {
 
 extension CartVMUnitTests: CartViewModelDelegate {
     func didUpdateCart() {
+        //then
         XCTAssertTrue(true)
         XCTAssertTrue(cdp2.order.count == 2)
-        
     }
     
     func showAlert(message: String) {
+        //then
         XCTAssertTrue(false)
     }
     
     func hideCartEvent(hide: Bool) {
+        //then
         XCTAssertTrue(hide == false)
     }
     
     func willUpdateCart() {
+        //then
         XCTAssertTrue(true)
     }
     

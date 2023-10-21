@@ -65,9 +65,12 @@
 		D8B976722AE28AB8007CA5D2 /* PayViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976712AE28AB8007CA5D2 /* PayViewController+UICollectionViewDelegate.swift */; };
 		D8B976742AE2A0C6007CA5D2 /* UIButton+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976732AE2A0C6007CA5D2 /* UIButton+extension.swift */; };
 		D8B976762AE2A0F2007CA5D2 /* UILabel+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976752AE2A0F2007CA5D2 /* UILabel+extension.swift */; };
-		D8B9767A2AE305FB007CA5D2 /* RatingComponet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976792AE305FB007CA5D2 /* RatingComponet.swift */; };
+		D8B9767A2AE305FB007CA5D2 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976792AE305FB007CA5D2 /* RatingView.swift */; };
 		D8B9767C2AE3AA7C007CA5D2 /* CartDeleteVMUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9767B2AE3AA7C007CA5D2 /* CartDeleteVMUnitTests.swift */; };
 		D8B9767E2AE3ACAD007CA5D2 /* CartVMUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9767D2AE3ACAD007CA5D2 /* CartVMUnitTests.swift */; };
+		D8B976802AE3D8BB007CA5D2 /* MockCartDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9767F2AE3D8BB007CA5D2 /* MockCartDataProvider.swift */; };
+		D8B976822AE3D942007CA5D2 /* CardDataProviderUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976812AE3D942007CA5D2 /* CardDataProviderUnitTests.swift */; };
+		D8B976842AE3F51C007CA5D2 /* MockNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B976832AE3F51C007CA5D2 /* MockNetworkClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,9 +154,12 @@
 		D8B976712AE28AB8007CA5D2 /* PayViewController+UICollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PayViewController+UICollectionViewDelegate.swift"; sourceTree = "<group>"; };
 		D8B976732AE2A0C6007CA5D2 /* UIButton+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+extension.swift"; sourceTree = "<group>"; };
 		D8B976752AE2A0F2007CA5D2 /* UILabel+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extension.swift"; sourceTree = "<group>"; };
-		D8B976792AE305FB007CA5D2 /* RatingComponet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingComponet.swift; sourceTree = "<group>"; };
+		D8B976792AE305FB007CA5D2 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		D8B9767B2AE3AA7C007CA5D2 /* CartDeleteVMUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDeleteVMUnitTests.swift; sourceTree = "<group>"; };
 		D8B9767D2AE3ACAD007CA5D2 /* CartVMUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVMUnitTests.swift; sourceTree = "<group>"; };
+		D8B9767F2AE3D8BB007CA5D2 /* MockCartDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCartDataProvider.swift; sourceTree = "<group>"; };
+		D8B976812AE3D942007CA5D2 /* CardDataProviderUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataProviderUnitTests.swift; sourceTree = "<group>"; };
+		D8B976832AE3F51C007CA5D2 /* MockNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,8 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				3F6806AD29CBBAF200B4F915 /* ExampleUnitTests.swift */,
-				D8B9767B2AE3AA7C007CA5D2 /* CartDeleteVMUnitTests.swift */,
-				D8B9767D2AE3ACAD007CA5D2 /* CartVMUnitTests.swift */,
+				D8B976852AE3F54A007CA5D2 /* CartUnitTests */,
 			);
 			path = FakeNFTTests;
 			sourceTree = "<group>";
@@ -273,7 +278,7 @@
 		3F6806CE29CBBD1B00B4F915 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				D8B976792AE305FB007CA5D2 /* RatingComponet.swift */,
+				D8B976792AE305FB007CA5D2 /* RatingView.swift */,
 				3F6806CF29CBBDB100B4F915 /* NetworkClient */,
 				3F6806D629CBC50A00B4F915 /* CellsReusingUtils.swift */,
 				3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */,
@@ -458,6 +463,26 @@
 				D8B976672AE2641B007CA5D2 /* PayResultViewController.swift */,
 			);
 			path = PayResultScreen;
+			sourceTree = "<group>";
+		};
+		D8B976852AE3F54A007CA5D2 /* CartUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				D8B976862AE3F590007CA5D2 /* MockObjects */,
+				D8B9767B2AE3AA7C007CA5D2 /* CartDeleteVMUnitTests.swift */,
+				D8B9767D2AE3ACAD007CA5D2 /* CartVMUnitTests.swift */,
+				D8B976812AE3D942007CA5D2 /* CardDataProviderUnitTests.swift */,
+			);
+			path = CartUnitTests;
+			sourceTree = "<group>";
+		};
+		D8B976862AE3F590007CA5D2 /* MockObjects */ = {
+			isa = PBXGroup;
+			children = (
+				D8B9767F2AE3D8BB007CA5D2 /* MockCartDataProvider.swift */,
+				D8B976832AE3F51C007CA5D2 /* MockNetworkClient.swift */,
+			);
+			path = MockObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -657,7 +682,8 @@
 				7B5E254C2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift in Sources */,
 				D8B976702AE28A94007CA5D2 /* PayViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
-				D8B9767A2AE305FB007CA5D2 /* RatingComponet.swift in Sources */,
+				D8B9767A2AE305FB007CA5D2 /* RatingView.swift in Sources */,
+				D8B9767A2AE305FB007CA5D2 /* RatingView.swift in Sources */,
 				AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */,
 				D86C21B22AD82C38000AD25C /* CartViewController.swift in Sources */,
 				D86C21BA2AD82C38000AD25C /* NftModel.swift in Sources */,
@@ -683,7 +709,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8B9767E2AE3ACAD007CA5D2 /* CartVMUnitTests.swift in Sources */,
+				D8B976842AE3F51C007CA5D2 /* MockNetworkClient.swift in Sources */,
 				3F6806AE29CBBAF200B4F915 /* ExampleUnitTests.swift in Sources */,
+				D8B976802AE3D8BB007CA5D2 /* MockCartDataProvider.swift in Sources */,
+				D8B976822AE3D942007CA5D2 /* CardDataProviderUnitTests.swift in Sources */,
 				D8B9767C2AE3AA7C007CA5D2 /* CartDeleteVMUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

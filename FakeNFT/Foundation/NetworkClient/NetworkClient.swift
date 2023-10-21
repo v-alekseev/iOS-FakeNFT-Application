@@ -47,6 +47,8 @@ struct DefaultNetworkClient: NetworkClient {
             }
 
             if let data = data {
+                let string1 = String(data: data, encoding: String.Encoding.utf8) ?? "Data could not be printed"
+                print(string1)
                 onResponse(.success(data))
                 return
             } else if let error = error {
