@@ -57,7 +57,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.contentMode = .scaleAspectFill
-        btn.addTarget(self, action: #selector(basketButtonTapped), for: .touchUpInside)
+        btn.addTarget(NFTCell.self, action: #selector(basketButtonTapped), for: .touchUpInside)
         return btn
     }()
     

@@ -74,6 +74,11 @@ final class CollectionViewController: UIViewController {
         case .backButtonTapped:
             viewModel.clearLinks()
             navigationController?.popViewController(animated: true)
+        case .authorLinkDidTapped(let url):
+            let webView = WebViewViewController(
+                viewModel: WebViewViewModel(),
+                url: url)
+            navigationController?.pushViewController(webView, animated: true)
         default:
             break
         }
@@ -125,6 +130,10 @@ final class CollectionViewController: UIViewController {
     @objc private func handleBackButton() {
         viewModel.handleInteractionType(.pop)
     }
+    
+    private func handleAuthorLinkTap() {
+        viewModel.handleInteractionType(.authorLinkDidTapped)
+    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -147,7 +156,7 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             guard let author = data.author else {
                 return cell
             }
-            cell.configureCell(with: data.collection, author: author, imageSize: imageSize)
+            cell.configureCell(with: data.collection, author: author, linkDelegate: self, imageSize: imageSize)
             return cell
         default:
             
@@ -177,5 +186,25 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             let estimatedHeightValue = 24 + (8 + (56 + 6 + (tableView.bounds.width - 32 - (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns)) * rowsCount
             return estimatedHeightValue
         }
+    }
+}
+
+
+extension CollectionViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if interaction == .invokeDefaultAction {
+            if isValidURL(viewModel.giveMeHeaderComponent().author?.website ?? "") {
+                handleAuthorLinkTap()
+                return false
+            }
+        }
+        return true
+    }
+    
+    private func isValidURL(_ urlString: String) -> Bool {
+        if let url = URL(string: urlString) {
+            return UIApplication.shared.canOpenURL(url)
+        }
+        return false
     }
 }

@@ -10,6 +10,6 @@ import Foundation
 enum CollectionInteraction {
     case authorLinkDidTapped
     case basketDidTapped(at: IndexPath)
-    case likeDidTapped(at: IndexPath)
+    case likeDidTapped
     case pop
 }

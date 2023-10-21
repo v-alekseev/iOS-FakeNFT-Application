@@ -182,7 +182,16 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     }
     
     func handleInteractionType(_ type: CollectionInteraction) {
-        self.navigationState = .backButtonTapped
+        switch type {
+        case .authorLinkDidTapped:
+            guard let author = self.dataSource.giveMeCurrentAuthor(),
+                  let url = URL(string: author.website) else { return }
+            self.navigationState = .authorLinkDidTapped(url: url)
+        case .pop:
+            self.navigationState = .backButtonTapped
+        default:
+            break
+        }
     }
     
     func giveMeHeaderComponent() -> (collection: CollectionModel, author: AuthorModel?) {
@@ -252,3 +261,5 @@ extension CollectionViewModel: NFTDataSourceProtocol {
         }
     }
 }
+
+

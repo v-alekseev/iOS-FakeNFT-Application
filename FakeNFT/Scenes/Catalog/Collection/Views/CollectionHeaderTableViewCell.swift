@@ -32,7 +32,7 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
         textView.textColor = .ypBlackWithDarkMode
         textView.isScrollEnabled = false
         textView.isEditable = false
-        textView.isSelectable = false
+        textView.isSelectable = true
         textView.backgroundColor = .clear
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
@@ -116,7 +116,12 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     // MARK: - Configure Methods
-    func configureCell(with collection: CollectionModel, author: AuthorModel, imageSize: CGSize) {
+    func configureCell(
+        with collection: CollectionModel,
+        author: AuthorModel,
+        linkDelegate: UITextViewDelegate,
+        imageSize: CGSize
+    ) {
         animatedGradient.isHidden = false
         animatedGradient.startAnimating()
         let processor = RoundCornerImageProcessor(cornerRadius: 12)
@@ -167,6 +172,7 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
             .foregroundColor: UIColor.blue,
             .font: UIFont.caption1
         ]
+        descriptionTextView.delegate = linkDelegate
     }
     
     // MARK: - Support
@@ -180,9 +186,7 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        let margins = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-//        contentView.frame = contentView.frame.inset(by: margins)
         contentView.backgroundColor = .clear
     }
-    
 }
+
