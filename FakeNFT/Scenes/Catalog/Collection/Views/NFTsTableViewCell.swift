@@ -96,11 +96,9 @@ extension NFTsTableViewCell: UICollectionViewDataSource {
                 return cell }
             cell.configureCell(isLiked: dataSource.isNFTLiked(at: indexPath), isOrdered: dataSource.isNFTOrdered(at: indexPath), NFT:NFT)
             cell.setBasketCompletion {
-                print("произошло взаимодействие с корзиной")
                 dataSource.interactWithBasket(itemId: NFT.id)
             }
             cell.setLikeCompletion {
-                print("произошло взаимодействие с лайком")
                 dataSource.interactWithLike(itemId: NFT.id)
             }
             return cell

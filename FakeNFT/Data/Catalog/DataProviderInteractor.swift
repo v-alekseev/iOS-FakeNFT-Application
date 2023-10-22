@@ -39,8 +39,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
                 }
                 completion(result)
                 
-            case .failure(let error):
-                print(error)
+            case .failure:
                 completion(result)
             }
         }
@@ -78,8 +77,8 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
                         self.sortCollectionsByNFTQuantity(inOrder: order)
                     }
                 }
-            case .failure(let error):
-                print(error)
+            case .failure:
+                break
             }
             completion(result)
         }
@@ -92,8 +91,8 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
             switch result {
             case .success(let author):
                 self.author = author
-            case .failure(let error):
-                print(error)
+            case .failure:
+                break
             }
             completion(result)
         }
@@ -114,8 +113,8 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
             switch result {
             case .success(let nft):
                 self.NFTs.append(nft)
-            case .failure(let error):
-                print(error)
+            case .failure:
+                break
             }
             completion(result)
         }
@@ -189,7 +188,6 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     private func applySortType(_ type: SortType) {
         currentSortType = type
         saveSortType(type)
-        print(type)
     }
     
     private func savedSortType() -> SortType {

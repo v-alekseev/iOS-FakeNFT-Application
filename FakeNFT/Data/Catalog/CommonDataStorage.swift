@@ -32,7 +32,6 @@ final class CommonDataStorage: CommonDataProtocol {
     private var dataProvider: CatalogDataProviderProtocol
     
     private init(with dataProvider: CatalogDataProviderProtocol = CatalogDataProvider()) {
-        print("start init")
         self.dataProvider = dataProvider
         reloadCommonData()
     }
@@ -88,8 +87,8 @@ final class CommonDataStorage: CommonDataProtocol {
             switch result {
             case .success(let likes):
                 self.currentLikes = likes
-            case .failure(let error):
-                print(error)
+            case .failure:
+                break
             }
         }
     }
@@ -100,22 +99,18 @@ final class CommonDataStorage: CommonDataProtocol {
             switch result {
             case .success(let orders):
                 self.currentOrder = orders
-            case .failure(let error):
-                print(error)
+            case .failure:
+                break
             }
         }
     }
     
     private func markReady() {
         self.isDataLoaded = true
-        print("data ready")
-        print(currentLikes ?? "nil")
-        print(currentOrder ?? "nil")
         delegate?.notifyAboutLoadingState(isLoading: true)
     }
     
     private func markUnready() {
-        print("data unready")
         self.delegate?.notifyAboutLoadingState(isLoading: false)
         self.currentOrder = nil
         self.currentLikes = nil
@@ -131,8 +126,8 @@ final class CommonDataStorage: CommonDataProtocol {
                 switch result {
                 case .success(let likes):
                     self?.currentLikes = likes
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    break
                 }
                 completion(result)
             }
@@ -142,8 +137,8 @@ final class CommonDataStorage: CommonDataProtocol {
                 switch result {
                 case .success(let likes):
                     self?.currentLikes = likes
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    break
                 }
                 completion(result)
             }
@@ -158,8 +153,8 @@ final class CommonDataStorage: CommonDataProtocol {
                 switch result {
                 case .success(let orders):
                     self?.currentOrder = orders
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    break
                 }
                 completion(result)
             }
@@ -169,8 +164,8 @@ final class CommonDataStorage: CommonDataProtocol {
                 switch result {
                 case .success(let orders):
                     self?.currentOrder = orders
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    break
                 }
                 completion(result)
             }

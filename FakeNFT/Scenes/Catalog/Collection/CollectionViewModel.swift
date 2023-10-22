@@ -39,7 +39,6 @@ final class CollectionViewModel: CollectionViewModelProtocol {
     var navigationClosure: (CollectionNavigationState) -> Void = {_ in }
     private (set) var navigationState: CollectionNavigationState = .base {
         didSet {
-            print(navigationState)
             navigationClosure(navigationState)
         }
     }
@@ -230,12 +229,10 @@ extension CollectionViewModel: StorageDelegate {
 
 extension CollectionViewModel: NFTDataSourceProtocol {
     func interactWithLike(itemId: String) {
-        print("Вьюмодель вызывает общее хранилище лайков \(itemId)")
         commonStorage?.interactWithLike(with: itemId) {[weak self] result in
             switch result {
             case .success:
                 let index = self?.model.nfts.firstIndex(of: itemId) ?? 0
-                print("пришел ответ с успехом. Индекс \(index)")
                 DispatchQueue.main.async {
                     self?.navigationState = .likeDidTapped(at: IndexPath(row: index, section: 0))
                 }
@@ -246,12 +243,10 @@ extension CollectionViewModel: NFTDataSourceProtocol {
     }
     
     func interactWithBasket(itemId: String) {
-        print("Вьюмодель вызывает общее хранилище корзин \(itemId)")
         commonStorage?.interactWithBasket(with: itemId) {[weak self] result in
             switch result {
             case .success:
                 let index = self?.model.nfts.firstIndex(of: itemId) ?? 0
-                print("пришел ответ с успехом. Индекс \(index)")
                 DispatchQueue.main.async {
                     self?.navigationState = .basketDidTapped(at: IndexPath(row: index, section: 0))
                 }
@@ -270,10 +265,6 @@ extension CollectionViewModel: NFTDataSourceProtocol {
     func nft(at indexPath: IndexPath) -> NFTModel? {
         let row = indexPath.row
         if (row > self.numberOfNFTs() - 1) {
-            print("я вьюмодель")
-            print("Возвращаю nil")
-            print("row = \(row)")
-            print("numberOfNFTs = \(self.numberOfNFTs())")
             return nil
         } else {
             return dataSource.giveMeNFTAt(index: row)

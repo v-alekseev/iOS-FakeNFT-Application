@@ -45,7 +45,6 @@ final class CollectionsViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
         view.backgroundColor = .ypWhiteWithDarkMode
-        print("CatalogViewController viewDidLoad")
         
     }
     
@@ -77,7 +76,6 @@ final class CollectionsViewController: UIViewController {
     // MARK: - Objc Methods
     @objc
     private func filterButtonTapped() {
-        print("filterButtonTapped")
         showSortSelector()
     }
     

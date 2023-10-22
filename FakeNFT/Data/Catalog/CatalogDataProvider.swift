@@ -120,7 +120,6 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
     ) {
         cancelCurrentTask()
         let request = endpoint.asNetworkRequest(dto:dto)
-        print(request)
         currentTask = client.send(request: request, type: T.ResponseType.self) { result in
             switch result {
             case .success(let data):
