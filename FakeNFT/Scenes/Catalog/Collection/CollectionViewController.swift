@@ -80,6 +80,7 @@ final class CollectionViewController: UIViewController {
             let webView = WebViewViewController(
                 viewModel: WebViewViewModel(),
                 url: url)
+            webView.navigationItem.leftBarButtonItem = backButton
             navigationController?.pushViewController(webView, animated: true)
         case .basketDidTapped(let indexPath):
             controllableCell?.reloadRows(at: indexPath)
