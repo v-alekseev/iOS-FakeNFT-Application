@@ -16,27 +16,6 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
         self.client = client
     }
     
-//    func fetchMeLikes() -> ProfileLikesModel? {
-//        let dispatchGroup = DispatchGroup()
-//        let getLikesRequest = DefaultNetworkRequest(
-//            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/profile/1")!,
-//            httpMethod: .get
-//        )
-//        var model: ProfileLikesModel? = nil
-//        dispatchGroup.enter()
-//        currentTask = self.client.send(request: getLikesRequest, type: ProfileLikesModel.self) { result in
-//            switch result {
-//            case .success(let data):
-//                model = data
-//            case .failure:
-//                model = nil
-//            }
-//            dispatchGroup.leave()
-//        }
-//        dispatchGroup.wait()
-//        return model
-//    }
-    
     func fetchMeLikes(completion: @escaping (Result<ProfileLikesModel, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async{
             let getLikesRequest = DefaultNetworkRequest(
@@ -60,25 +39,6 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
             }
         }
     }
-    
-//    func setLikes(likes: [String]) {
-//        let dispatchGroup = DispatchGroup()
-//        let postLikesRequest = DefaultNetworkRequest(
-//            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/profile/1")!,
-//            httpMethod: .put,
-//            dto: ProfileLikesModel(likes: likes)
-//        )
-//        dispatchGroup.enter()
-//        currentTask = self.client.send(request: postLikesRequest, type: ProfileLikesModel.self) { result in
-//            switch result {
-//            case .success(let data):
-//                print(data)
-//            case .failure: break
-//            }
-//            dispatchGroup.leave()
-//        }
-//        dispatchGroup.wait()
-//    }
     
     func setLikes(likes: [String], completion: @escaping (Result<ProfileLikesModel, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async{
@@ -130,72 +90,6 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
             completion(result)
         }
     }
-    
-    func giveMeCollection(withID id: String) -> CollectionModel? {
-        let dispatchGroup = DispatchGroup()
-        let getCollectionRequest = DefaultNetworkRequest(
-            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/collections/\(id)")!,
-            httpMethod: .get
-        )
-        var model: CollectionModel? = nil
-        dispatchGroup.enter()
-        currentTask = self.client.send(request: getCollectionRequest, type: CollectionModel.self) { result in
-            switch result {
-            case .success(let data):
-                model = data
-            case .failure:
-                model = nil
-            }
-            dispatchGroup.leave()
-        }
-        dispatchGroup.wait()
-        return model
-    }
-    
-    func giveMeAllNFTs() -> [NFTModel] {
-        let dispatchGroup = DispatchGroup()
-        let getNFTsRequest = DefaultNetworkRequest(
-            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/nft")!,
-            httpMethod: .get
-        )
-        var model: [NFTModel] = []
-        dispatchGroup.enter()
-        currentTask = self.client.send(request: getNFTsRequest, type: [NFTModel].self) { result in
-            switch result {
-            case .success(let data):
-                print("КАВАБАНГА")
-                model = data
-            case .failure (let error):
-                print(error.localizedDescription)
-                print(error)
-                model = []
-            }
-            dispatchGroup.leave()
-        }
-        dispatchGroup.wait()
-        return model
-    }
-    
-//    func giveMeNft(withID id: String) -> NFTModel? {
-//        let dispatchGroup = DispatchGroup()
-//        let getNFTRequest = DefaultNetworkRequest(
-//            endpoint: URL(string: "\(mockAPIEndpoint)/api/v1/nft/\(id)")!,
-//            httpMethod: .get
-//        )
-//        var model: NFTModel? = nil
-//        dispatchGroup.enter()
-//        currentTask = self.client.send(request: getNFTRequest, type: NFTModel.self) { result in
-//            switch result {
-//            case .success(let data):
-//                model = data
-//            case .failure:
-//                model = nil
-//            }
-//            dispatchGroup.leave()
-//        }
-//        dispatchGroup.wait()
-//        return model
-//    }
     
     func fetchMeNft(withID id: String, completion: @escaping (Result<NFTModel, Error>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {

@@ -51,29 +51,6 @@ final class CatalogDataRepositoryTests: XCTestCase {
         XCTAssertNotNil(result)
         XCTAssertEqual(result.first?.name, "Test")
     }
-    
-    // MARK: - Single collection
-    func testGiveMeCollectionReturnsCollection() {
-        
-        // Given
-        let mockCollection = CollectionModel(
-            createdAt: "Date",
-            name: "Test",
-            cover: "CoverURL",
-            nfts: ["1", "2"],
-            description: "TestDescription",
-            id: "1",
-            author: "Boss")
-        let data = try! JSONEncoder().encode(mockCollection)
-        mockClient.mockData = data
-
-        // When
-        let resultCollection = sut.giveMeCollection(withID: "1")
-        
-        // Then
-        XCTAssertNotNil(resultCollection)
-        XCTAssertEqual(resultCollection?.name, "Test")
-    }
 
     override func tearDown() {
         sut = nil
