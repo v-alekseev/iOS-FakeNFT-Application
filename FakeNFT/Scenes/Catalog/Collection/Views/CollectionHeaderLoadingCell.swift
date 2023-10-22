@@ -11,9 +11,9 @@ final class CollectionHeaderLoadingCell: UITableViewCell, ReuseIdentifying {
     
     private lazy var titleGradient = AnimatedGradientView(frame: self.bounds, cornerRadius: 12)
     
-    private lazy var titleImageGradient = AnimatedGradientView(frame: self.bounds, cornerRadius: 12)
+    private lazy var titleImageGradient = AnimatedGradientView(frame: self.bounds, cornerRadius: 12, onlyLowerCorners: true)
     
-    private lazy var descriptionGradient = AnimatedGradientView(frame: self.bounds, cornerRadius: 12, onlyLowerCorners: true)
+    private lazy var descriptionGradient = AnimatedGradientView(frame: self.bounds, cornerRadius: 12)
     
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -53,11 +53,14 @@ final class CollectionHeaderLoadingCell: UITableViewCell, ReuseIdentifying {
             
             titleGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             titleGradient.topAnchor.constraint(equalTo: titleImageGradient.bottomAnchor, constant: 16),
+            titleGradient.heightAnchor.constraint(equalToConstant: 30),
+            titleGradient.widthAnchor.constraint(equalToConstant: 100),
             
             descriptionGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             descriptionGradient.topAnchor.constraint(equalTo: titleGradient.bottomAnchor, constant: 8),
-            descriptionGradient.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
+            descriptionGradient.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
+            descriptionGradient.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
