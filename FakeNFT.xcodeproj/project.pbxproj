@@ -62,6 +62,7 @@
 		AF7F8F402ADFF70500C84AFD /* CollectionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7F8F3F2ADFF70500C84AFD /* CollectionHeaderTableViewCell.swift */; };
 		AF8B21EB2AE51B22007A91F0 /* CollectionHeaderLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8B21EA2AE51B22007A91F0 /* CollectionHeaderLoadingCell.swift */; };
 		AF8B21EF2AE51EF4007A91F0 /* NFTLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8B21EE2AE51EF4007A91F0 /* NFTLoadingCell.swift */; };
+		AF8B21F12AE525BC007A91F0 /* CellKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8B21F02AE525BC007A91F0 /* CellKind.swift */; };
 		AF9A240A2AD5C04F00C73AEC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A24092AD5C04F00C73AEC /* Constants.swift */; };
 		AF9A240E2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A240D2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift */; };
 		AF9A24132AD5CA5400C73AEC /* DataProviderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9A24122AD5CA5400C73AEC /* DataProviderInteractor.swift */; };
@@ -175,6 +176,7 @@
 		AF7F8F3F2ADFF70500C84AFD /* CollectionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		AF8B21EA2AE51B22007A91F0 /* CollectionHeaderLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderLoadingCell.swift; sourceTree = "<group>"; };
 		AF8B21EE2AE51EF4007A91F0 /* NFTLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTLoadingCell.swift; sourceTree = "<group>"; };
+		AF8B21F02AE525BC007A91F0 /* CellKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellKind.swift; sourceTree = "<group>"; };
 		AF9A24092AD5C04F00C73AEC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AF9A240D2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogDataProviderProtocol.swift; sourceTree = "<group>"; };
 		AF9A24122AD5CA5400C73AEC /* DataProviderInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderInteractor.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				AFD645522ADDD21700D48BC0 /* CollectionNavigationState.swift */,
 				AF7F8F3C2ADFF66100C84AFD /* CollectionInteraction.swift */,
 				AFA320B32AE0304B0025C54E /* CollectionResultState.swift */,
+				AF8B21F02AE525BC007A91F0 /* CellKind.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -841,6 +844,7 @@
 				AF1A63DA2AD81863000F8A4E /* CartViewController.swift in Sources */,
 				D8B9767A2AE305FB007CA5D2 /* RatingView.swift in Sources */,
 				AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */,
+				AF8B21F12AE525BC007A91F0 /* CellKind.swift in Sources */,
 				AF1A63DB2AD81863000F8A4E /* StatisticViewController.swift in Sources */,
 				7B5E25482ADBE83E000BC664 /* WebViewViewController.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,

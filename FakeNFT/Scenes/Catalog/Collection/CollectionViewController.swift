@@ -45,6 +45,7 @@ final class CollectionViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CollectionHeaderTableViewCell.self)
+        tableView.register(CollectionHeaderLoadingCell.self)
         tableView.register(NFTsTableViewCell.self, forCellReuseIdentifier: "NFTsCell")
     }
     
@@ -55,7 +56,7 @@ final class CollectionViewController: UIViewController {
             ProgressHUD.dismiss()
             break
         case .loading:
-            tableView.isHidden = true
+//            tableView.isHidden = true
             ProgressHUD.show()
         case .error:
             ProgressHUD.dismiss()
@@ -63,7 +64,7 @@ final class CollectionViewController: UIViewController {
             break
         case .showCollection:
             ProgressHUD.dismiss()
-            tableView.isHidden = false
+//            tableView.isHidden = false
             tableView.reloadData()
             break
         }
@@ -148,18 +149,24 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
+        let isReady = viewModel.areDataReady()
         switch section {
         case 0:
-            let cell: CollectionHeaderTableViewCell = tableView.dequeueReusableCell()
-            let data = viewModel.giveMeHeaderComponent()
-            let imageSize = CGSize(width: tableView.bounds.width, height: 310)
-            guard let author = data.author else {
+            if (isReady) {
+                let cell: CollectionHeaderTableViewCell = tableView.dequeueReusableCell()
+                let data = viewModel.giveMeHeaderComponent()
+                let imageSize = CGSize(width: tableView.bounds.width, height: 310)
+                guard let author = data.author else {
+                    return cell
+                }
+                cell.configureCell(with: data.collection, author: author, linkDelegate: self, imageSize: imageSize)
+                return cell
+            } else {
+                let cell: CollectionHeaderLoadingCell = tableView.dequeueReusableCell()
                 return cell
             }
-            cell.configureCell(with: data.collection, author: author, linkDelegate: self, imageSize: imageSize)
-            return cell
-        default:
             
+        default:
             let rowsCount = ceil(CGFloat(viewModel.giveMeHeaderComponent().collection.nfts.count)/NFTsTableViewCell.numberOfColumns)
             let estimatedWidth = floor((tableView.bounds.width - 32 - 9 * (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns)
             let estimatedHeightValue = 24 + (8 + floor(56 + 6 + (tableView.bounds.width - 32 - 9 * (NFTsTableViewCell.numberOfColumns - 1))/NFTsTableViewCell.numberOfColumns)) * rowsCount
@@ -168,7 +175,7 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
                 style: .default,
                 reuseIdentifier: "NFTsCell",
                 estimatedHeight: estimatedHeightValue,
-                estimatedCellWidth: estimatedWidth
+                estimatedCellWidth: estimatedWidth, kindOfCell: isReady ? .showing : .loading
             )
             if let dataSource = viewModel as? NFTDataSourceProtocol {
                 cell.setDataSource(with: dataSource)

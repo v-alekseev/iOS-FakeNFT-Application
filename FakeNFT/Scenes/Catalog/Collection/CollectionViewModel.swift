@@ -213,6 +213,15 @@ final class CollectionViewModel: CollectionViewModelProtocol {
             controller.renderState(state: state)
         }
     }
+    
+    func areDataReady() -> Bool {
+        switch resultState {
+        case .showCollection:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 extension CollectionViewModel: StorageDelegate {

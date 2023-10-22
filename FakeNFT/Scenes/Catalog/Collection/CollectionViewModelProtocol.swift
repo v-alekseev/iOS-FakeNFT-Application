@@ -13,6 +13,7 @@ protocol CollectionViewModelProtocol {
     func bind(to controller: CollectionViewController)
     func refresh(withCommonData: Bool)
     func clearLinks()
+    func areDataReady() -> Bool
 }
 
 extension CollectionViewModelProtocol {

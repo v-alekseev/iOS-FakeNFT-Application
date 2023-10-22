@@ -18,13 +18,15 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     private var collectionHeightConstraint: NSLayoutConstraint?
     var estimatedHeight: CGFloat = 0
     var estimatedCellWidth: CGFloat = 0
+    private var cellsKind: CellKind
     
     // MARK: - INIT
     init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?,
         estimatedHeight: CGFloat,
-        estimatedCellWidth: CGFloat
+        estimatedCellWidth: CGFloat,
+        kindOfCell: CellKind
     ) {
         self.estimatedHeight = estimatedHeight
         self.estimatedCellWidth = estimatedCellWidth
@@ -32,8 +34,10 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         self.collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        self.cellsKind = kindOfCell
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         collection.register(NFTCell.self)
+        collection.register(NFTLoadingCell.self)
         collection.allowsSelection = false
         collection.isScrollEnabled = false
         collection.dataSource = self
@@ -73,14 +77,22 @@ extension NFTsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: NFTCell = collection.dequeueReusableCell(indexPath: indexPath)
-        cell.imageWidth = estimatedCellWidth
-        guard let dataSource = dataSource,
-              let NFT = dataSource.nft(at: indexPath) 
-        else { 
-            return cell }
-        cell.configureCell(isLiked: dataSource.isNFTLiked(at: indexPath), isOrdered: dataSource.isNFTOrdered(at: indexPath), NFT:NFT)
-        return cell
+        
+        switch self.cellsKind {
+        case .loading:
+            let cell: NFTLoadingCell = collection.dequeueReusableCell(indexPath: indexPath)
+            cell.imageWidth = estimatedCellWidth
+            return cell
+        case .showing:
+            let cell: NFTCell = collection.dequeueReusableCell(indexPath: indexPath)
+            cell.imageWidth = estimatedCellWidth
+            guard let dataSource = dataSource,
+                  let NFT = dataSource.nft(at: indexPath)
+            else {
+                return cell }
+            cell.configureCell(isLiked: dataSource.isNFTLiked(at: indexPath), isOrdered: dataSource.isNFTOrdered(at: indexPath), NFT:NFT)
+            return cell
+        }
     }
 }
 
