@@ -60,8 +60,6 @@ final class PayResultViewController: UIViewController {
             toCatalogButton.heightAnchor.constraint(equalToConstant: 60),
             toCatalogButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
         ])
-        
-        
     }
 }
 

@@ -63,8 +63,8 @@ internal enum L10n {
     }
   }
   internal enum Filter {
-    /// По имени
-    internal static let byName = L10n.tr("Localizable", "filter.byName", fallback: "По имени")
+    /// По названию
+    internal static let byName = L10n.tr("Localizable", "filter.byName", fallback: "По названию")
     /// По цене
     internal static let byPrice = L10n.tr("Localizable", "filter.byPrice", fallback: "По цене")
     /// По рейтингу

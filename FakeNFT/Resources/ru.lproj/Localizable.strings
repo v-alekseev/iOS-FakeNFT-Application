@@ -33,7 +33,7 @@
 "alert.button" = "Понятно";
 
 "filter.caption" = "Сортировка";
-"filter.byName" = "По имени";
+"filter.byName" = "По названию";
 "filter.byPrice" = "По цене";
 "filter.byRating" = "По рейтингу";
 "filter.close" = "Закрыть";

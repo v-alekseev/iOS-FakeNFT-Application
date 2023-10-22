@@ -30,8 +30,8 @@ final class CartDeleteViewController: UIViewController {
     }()
     
     private lazy var qestionLabel = UILabel(font: UIFont.caption2, text: L10n.Cart.DeleteConfirmScreen.confiremText)
-    private lazy var returnButton = UIButton(title: L10n.Cart.DeleteConfirmScreen.returnButtonTitle, cornerRadius: 12)
-    private lazy var deleteButton = UIButton(title: L10n.Cart.DeleteConfirmScreen.deleteButtonTitle, cornerRadius: 12, titleColor: .ypRed)
+    private lazy var returnButton = UIButton(title: L10n.Cart.DeleteConfirmScreen.returnButtonTitle, cornerRadius: 12, font: .bodyRegular)
+    private lazy var deleteButton = UIButton(title: L10n.Cart.DeleteConfirmScreen.deleteButtonTitle, cornerRadius: 12, titleColor: .ypRed, font: .bodyRegular)
 
     // MARK:  - UIViewController(*)
     //
