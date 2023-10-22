@@ -49,7 +49,6 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.contentMode = .scaleAspectFill
-        btn.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -57,7 +56,6 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.contentMode = .scaleAspectFill
-        btn.addTarget(self, action: #selector(basketButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -75,7 +73,8 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        basketButton.addTarget(self, action: #selector(basketButtonTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
