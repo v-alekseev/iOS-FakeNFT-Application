@@ -230,11 +230,37 @@ extension CollectionViewModel: StorageDelegate {
 
 extension CollectionViewModel: NFTDataSourceProtocol {
     func interactWithLike(itemId: String) {
-        return
+        print("Вьюмодель вызывает общее хранилище лайков \(itemId)")
+        commonStorage?.interactWithLike(with: itemId) {[weak self] result in
+            switch result {
+            case .success:
+                let index = self?.model.nfts.firstIndex(of: itemId) ?? 0
+                print("пришел ответ с успехом. Индекс \(index)")
+                DispatchQueue.main.async {
+                    self?.navigationState = .likeDidTapped(at: IndexPath(row: index, section: 0))
+                }
+            case .failure(let error):
+                self?.resultState = .error(error: error)
+            }
+        }
     }
     
     func interactWithBasket(itemId: String) {
-        return
+        print("Вьюмодель вызывает общее хранилище корзин \(itemId)")
+        commonStorage?.interactWithBasket(with: itemId) {[weak self] result in
+            switch result {
+            case .success:
+                let index = self?.model.nfts.firstIndex(of: itemId) ?? 0
+                print("пришел ответ с успехом. Индекс \(index)")
+                DispatchQueue.main.async {
+                    self?.navigationState = .basketDidTapped(at: IndexPath(row: index, section: 0))
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.resultState = .error(error: error)
+                }
+            }
+        }
     }
     
     func numberOfNFTs() -> Int {

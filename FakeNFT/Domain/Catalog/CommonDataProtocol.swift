@@ -14,8 +14,8 @@ protocol CommonDataProtocol {
     func isNFTOrderd(id: String) -> Bool
     func setDelegate(delegate: StorageDelegate)
     func clearDelegate()
-    func interactWithBasket(with NFTid: String, completion: @escaping (Result <ProfileLikesModel, Error>) -> Void)
-    func interackWithLike(with NFTid: String, completion: @escaping () -> Void)
+    func interactWithLike(with NFTid: String, completion: @escaping (Result <ProfileLikesModel, Error>) -> Void)
+    func interactWithBasket(with NFTid: String, completion: @escaping (Result<OrderModel, Error>) -> Void)
 }
 
 extension CommonDataProtocol {

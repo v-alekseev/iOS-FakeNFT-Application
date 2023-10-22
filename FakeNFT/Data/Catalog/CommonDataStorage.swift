@@ -11,6 +11,8 @@ final class CommonDataStorage: CommonDataProtocol {
     
     static var shared: CommonDataStorage? = nil
     
+    
+    // MARK: - Private properties
     private var isDataLoaded: Bool = false {
         didSet {
             delegate?.notifyAboutLoadingState(isLoading:isDataLoaded)
@@ -35,6 +37,7 @@ final class CommonDataStorage: CommonDataProtocol {
         reloadCommonData()
     }
     
+    // MARK: - Initialize
     static func initialize(with dataProvider: CatalogDataProviderProtocol = CatalogDataProvider()) {
         guard shared == nil else { return }
         shared = CommonDataStorage(with: dataProvider)
@@ -44,6 +47,7 @@ final class CommonDataStorage: CommonDataProtocol {
         return isDataLoaded
     }
     
+    // MARK: - RELOAD
     func reloadCommonData(asap: Bool) {
         queue.cancelAllOperations()
         switch asap {
@@ -118,7 +122,8 @@ final class CommonDataStorage: CommonDataProtocol {
         self.isDataLoaded = false
     }
     
-    func interactWithBasket(with NFTid: String, completion: @escaping (Result<ProfileLikesModel, Error>) -> Void) {
+    // MARK: - Interact
+    func interactWithLike(with NFTid: String, completion: @escaping (Result<ProfileLikesModel, Error>) -> Void) {
         guard var likes = currentLikes else { return }
         if (likes.likes.contains(NFTid)) {
             likes.likes.removeAll(where: {$0 == NFTid})
@@ -145,7 +150,7 @@ final class CommonDataStorage: CommonDataProtocol {
         }
     }
     
-    func interackWithLike(with NFTid: String, completion: @escaping () -> Void) {
+    func interactWithBasket(with NFTid: String, completion: @escaping (Result<OrderModel, Error>) -> Void) {
         guard var orders = currentOrder else { return }
         if (orders.nfts.contains(NFTid)) {
             orders.nfts.removeAll(where: {$0 == NFTid})
@@ -156,7 +161,7 @@ final class CommonDataStorage: CommonDataProtocol {
                 case .failure(let error):
                     print(error)
                 }
-                completion()
+                completion(result)
             }
         } else {
             orders.nfts.append(NFTid)
@@ -167,7 +172,7 @@ final class CommonDataStorage: CommonDataProtocol {
                 case .failure(let error):
                     print(error)
                 }
-                completion()
+                completion(result)
             }
         }
     }

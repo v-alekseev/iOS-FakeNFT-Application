@@ -10,6 +10,7 @@ import ProgressHUD
 
 final class CollectionViewController: UIViewController {
     private var viewModel: CollectionViewModelProtocol
+    private var controllableCell: NFTsTableViewCell?
     private var backButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.image = (UIImage(named: "BackwardIcon"))
@@ -80,6 +81,10 @@ final class CollectionViewController: UIViewController {
                 viewModel: WebViewViewModel(),
                 url: url)
             navigationController?.pushViewController(webView, animated: true)
+        case .basketDidTapped(let indexPath):
+            controllableCell?.reloadRows(at: indexPath)
+        case .likeDidTapped(let indexPath):
+            controllableCell?.reloadRows(at: indexPath)
         default:
             break
         }
@@ -180,6 +185,7 @@ extension CollectionViewController: UITableViewDelegate, UITableViewDataSource {
             if let dataSource = viewModel as? NFTDataSourceProtocol {
                 cell.setDataSource(with: dataSource)
             }
+            self.controllableCell = cell
             return cell
         }
     }
