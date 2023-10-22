@@ -70,7 +70,9 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     func reloadRows(at: IndexPath) {
-        collection.reloadItems(at: [at])
+        UIView.performWithoutAnimation {
+            collection.reloadItems(at: [at])
+        }
     }
 }
 
