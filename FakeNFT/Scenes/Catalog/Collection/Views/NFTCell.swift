@@ -167,5 +167,4 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     func setLikeCompletion(completion: @escaping () -> Void) {
         likeCompletion = completion
     }
-    
 }

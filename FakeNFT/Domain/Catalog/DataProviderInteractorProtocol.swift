@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol DataProviderInteractorProtocol {
     func giveMeAllCollections(isSorted: Bool) -> [CollectionModel]
     func howManyCollections() -> Int

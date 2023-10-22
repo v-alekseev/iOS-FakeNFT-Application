@@ -45,7 +45,6 @@ final class CollectionsViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
         view.backgroundColor = .ypWhiteWithDarkMode
-        
     }
     
     // MARK: - Setup Methods
@@ -57,7 +56,7 @@ final class CollectionsViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+        ])
     }
     
     private func setupButtons() {

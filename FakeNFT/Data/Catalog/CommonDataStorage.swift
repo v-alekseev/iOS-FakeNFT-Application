@@ -11,7 +11,6 @@ final class CommonDataStorage: CommonDataProtocol {
     
     static var shared: CommonDataStorage? = nil
     
-    
     // MARK: - Private properties
     private var isDataLoaded: Bool = false {
         didSet {
@@ -171,5 +170,4 @@ final class CommonDataStorage: CommonDataProtocol {
             }
         }
     }
-    
 }

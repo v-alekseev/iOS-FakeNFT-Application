@@ -16,7 +16,6 @@ final class NFTLoadingCell: UICollectionViewCell, ReuseIdentifying {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -40,8 +39,6 @@ final class NFTLoadingCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     private func startAnimation() {
-
         imageGradient.startAnimating()
-
     }
 }
