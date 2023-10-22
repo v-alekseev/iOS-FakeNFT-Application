@@ -5,7 +5,7 @@
 <br /> Эпик: Каталог
 
 # Catalog Flow Decomposition
-## Экран Catalogue (est 36 h.; fact x h.).
+## Экран Catalogue (est 36 h.; fact 55 h.).
 
 ### Module 1:
 
@@ -38,12 +38,12 @@
 ### Module 3:
 
 #### Вёрстка:
-- **Вёрстка страницы коллекции каталога (est 10h, fact x h)**
-- **Реализация логики добавления в корзину (est 4 h fact x h)**
-- **UNIT-тесты (est 4 h, fact x h)**
+- **Вёрстка страницы коллекции каталога (est 10h, fact 20 h)**
+- **Реализация логики добавления в корзину и лайка (est 4 h fact 8 h)**
+- **UNIT-тесты (est 4 h, fact 0 h)**
 
 ##### Issues:
 - [вёрстка](https://github.com/artwist-polyakov/iOS-FakeNFT-StarterProject-Public/issues/7)
 
-**Total**: est 18 h. , fact x h.
+**Total**: est 18 h. , fact 28 h.
 
