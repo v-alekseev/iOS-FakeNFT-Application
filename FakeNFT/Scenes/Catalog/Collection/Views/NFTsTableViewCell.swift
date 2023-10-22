@@ -45,7 +45,6 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         collection.delegate = self
         setupUI()
         contentView.layoutIfNeeded()
-        print(collection.frame)
     }
     
     required init?(coder: NSCoder) {

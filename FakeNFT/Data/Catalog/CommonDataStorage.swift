@@ -119,4 +119,8 @@ final class CommonDataStorage: CommonDataProtocol {
         self.currentLikes = nil
         self.isDataLoaded = false
     }
+    
+    func updateOrder(with order: OrderModel) {
+        return
+    }
 }

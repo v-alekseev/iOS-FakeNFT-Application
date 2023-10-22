@@ -9,8 +9,6 @@ import Foundation
 
 final class CollectionViewModel: CollectionViewModelProtocol {
 
-    
-    
     private let operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
@@ -231,6 +229,14 @@ extension CollectionViewModel: StorageDelegate {
 }
 
 extension CollectionViewModel: NFTDataSourceProtocol {
+    func interactWithLike(itemId: String) {
+        return
+    }
+    
+    func interactWithBasket(itemId: String) {
+        return
+    }
+    
     func numberOfNFTs() -> Int {
         return model.nfts.count
     }
@@ -269,6 +275,8 @@ extension CollectionViewModel: NFTDataSourceProtocol {
             return store.isNFTOrderd(id: id)
         }
     }
+    
+    
 }
 
 

@@ -69,6 +69,9 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     
     private let placeholderImage = UIImage(named: "NFTPlaceholder")
     
+    private var basketCompletion: (() -> Void) = {}
+    private var likeCompletion: (() -> Void) = {}
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -123,11 +126,11 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     @objc private func likeButtonTapped() {
-        // TODO: Добавить функционал в виде комплишена
+        likeCompletion()
     }
     
     @objc private func basketButtonTapped() {
-        // TODO: Добавить функционал в виде комплишена
+        basketCompletion()
     }
     
     func configureCell(isLiked: Bool, isOrdered: Bool, NFT: NFTModel) {
@@ -155,7 +158,14 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         ratingView.setRating(rank: Int(NFT.rating))
         basketButton.setImage(isOrdered ? UIImage(named: "InBasket") : UIImage(named: "NotInBasket"), for: .normal)
         likeButton.setImage(isLiked ? UIImage(named: "LikeActive") : UIImage(named: "LikeInactive"), for: .normal)
-
+    }
+    
+    func setBasketCompletion(completion: @escaping () -> Void) {
+        basketCompletion = completion
+    }
+    
+    func setLikeCompletion(completion: @escaping () -> Void) {
+        likeCompletion = completion
     }
     
 }

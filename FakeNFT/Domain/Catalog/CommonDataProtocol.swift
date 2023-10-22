@@ -14,6 +14,7 @@ protocol CommonDataProtocol {
     func isNFTOrderd(id: String) -> Bool
     func setDelegate(delegate: StorageDelegate)
     func clearDelegate()
+    func updateOrder(with order: OrderModel)
 }
 
 extension CommonDataProtocol {

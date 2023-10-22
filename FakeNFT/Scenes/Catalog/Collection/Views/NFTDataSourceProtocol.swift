@@ -12,4 +12,6 @@ protocol NFTDataSourceProtocol {
     func nft(at indexPath: IndexPath) -> NFTModel?
     func isNFTLiked(at indexPath: IndexPath) -> Bool
     func isNFTOrdered(at indexPath: IndexPath) -> Bool
+    func interactWithLike(itemId: String)
+    func interactWithBasket(itemId: String)
 }
