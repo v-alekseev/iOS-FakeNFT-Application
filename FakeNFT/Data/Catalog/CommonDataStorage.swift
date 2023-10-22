@@ -9,8 +9,6 @@ import Foundation
 
 final class CommonDataStorage: CommonDataProtocol {
     
-    
-    
     static var shared: CommonDataStorage? = nil
     
     private var isDataLoaded: Bool = false {
@@ -120,7 +118,58 @@ final class CommonDataStorage: CommonDataProtocol {
         self.isDataLoaded = false
     }
     
-    func updateOrder(with order: OrderModel) {
-        return
+    func interactWithBasket(with NFTid: String, completion: @escaping (Result<ProfileLikesModel, Error>) -> Void) {
+        guard var likes = currentLikes else { return }
+        if (likes.likes.contains(NFTid)) {
+            likes.likes.removeAll(where: {$0 == NFTid})
+            dataProvider.setLikes(likes: likes.likes) {[weak self] result in
+                switch result {
+                case .success(let likes):
+                    self?.currentLikes = likes
+                case .failure(let error):
+                    print(error)
+                }
+                completion(result)
+            }
+        } else {
+            likes.likes.append(NFTid)
+            dataProvider.setLikes(likes: likes.likes) {[weak self] result in
+                switch result {
+                case .success(let likes):
+                    self?.currentLikes = likes
+                case .failure(let error):
+                    print(error)
+                }
+                completion(result)
+            }
+        }
     }
+    
+    func interackWithLike(with NFTid: String, completion: @escaping () -> Void) {
+        guard var orders = currentOrder else { return }
+        if (orders.nfts.contains(NFTid)) {
+            orders.nfts.removeAll(where: {$0 == NFTid})
+            dataProvider.setOrders(orders: orders) {[weak self] result in
+                switch result {
+                case .success(let orders):
+                    self?.currentOrder = orders
+                case .failure(let error):
+                    print(error)
+                }
+                completion()
+            }
+        } else {
+            orders.nfts.append(NFTid)
+            dataProvider.setOrders(orders: orders) {[weak self] result in
+                switch result {
+                case .success(let orders):
+                    self?.currentOrder = orders
+                case .failure(let error):
+                    print(error)
+                }
+                completion()
+            }
+        }
+    }
+    
 }

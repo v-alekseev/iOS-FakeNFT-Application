@@ -10,7 +10,8 @@ import Foundation
 protocol CatalogDataProviderProtocol {
     func fetchMeLikes(completion: @escaping (Result<ProfileLikesModel, Error>) -> Void)
     func fetchMeOrders(completion: @escaping (Result<OrderModel, Error>) -> Void)
-    func setLikes(likes: [String])
+    func setLikes(likes: [String], completion: @escaping (Result<ProfileLikesModel, Error>) -> Void)
+    func setOrders(orders: OrderModel, completion: @escaping (Result<OrderModel, Error>) -> Void)
     func fetchMeAllCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void)
     func giveMeCollection(withID id: String) -> CollectionModel?
     func giveMeAllNFTs() -> [NFTModel]
