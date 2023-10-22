@@ -101,20 +101,29 @@ final class StatisticViewController: UIViewController {
                 self?.navigationController?.pushViewController(userCardViewController, animated: true)
             })
             .store(in: &bindings)
+        
+        viewModel.$needShowFilterMenu
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] needShowFilterMenu in
+                if needShowFilterMenu {
+                    let controller = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
+                    controller.addAction(.init(title: "По имени", style: .default) { _ in
+                        self?.viewModel.provideNameFilter()
+                    })
+                    controller.addAction(.init(title: "По рейтингу", style: .default) {_ in
+                        self?.viewModel.provideRatingFilter()
+                    })
+                    controller.addAction(.init(title: "Закрыть", style: .cancel))
+                    self?.present(controller, animated: true)
+                    self?.viewModel.needShowFilterMenu = false
+                }
+            })
+            .store(in: &bindings)
     }
     
     @objc
     private func tapOnFilter() {
-        let controller = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
-        controller.addAction(.init(title: "По имени", style: .default) { [unowned viewModel] _ in
-            viewModel.provideNameFilter()
-        })
-        controller.addAction(.init(title: "По рейтингу", style: .default) { [unowned viewModel] _ in
-            viewModel.provideRatingFilter()
-        })
-        controller.addAction(.init(title: "Закрыть", style: .cancel))
-        present(controller, animated: true)
+        viewModel.didTapFilterButton()
     }
-    
 }
 

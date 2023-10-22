@@ -14,6 +14,7 @@ final class StatisticViewModel {
     @Published var isLoading = false
     @Published var actualUserData: UserModel?
     @Published var loadError = false
+    @Published var needShowFilterMenu = false
     
     private let dataProvider: StatisticDataProviderProtocol?
     private let filtrationType = FiltrationTypeStorage()
@@ -49,6 +50,10 @@ final class StatisticViewModel {
                 self.isLoading = false
             }
         }
+    }
+    
+    func didTapFilterButton() {
+        needShowFilterMenu = true
     }
     
     func provideNameFilter() {
