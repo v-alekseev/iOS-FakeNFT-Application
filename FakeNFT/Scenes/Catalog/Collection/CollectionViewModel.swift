@@ -292,8 +292,6 @@ extension CollectionViewModel: NFTDataSourceProtocol {
             return store.isNFTOrderd(id: id)
         }
     }
-    
-    
 }
 
 
