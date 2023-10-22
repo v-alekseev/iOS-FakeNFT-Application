@@ -104,31 +104,7 @@ final class CatalogDataProvider: CatalogDataProviderProtocol {
             }
         }
     }
-    
-    func giveMeData<T: Endpoint>(
-        using endpoint: T,
-        completion: @escaping (Result<T.ResponseType, Error>) -> Void
-    ) {
-        fetchData(using: endpoint, completion: completion)
-    }
-    
 
-    private func fetchData<T: Endpoint>(
-        using endpoint: T,
-        dto: T.ResponseType? = nil,
-        completion: @escaping (Result<T.ResponseType, Error>) -> Void
-    ) {
-        cancelCurrentTask()
-        let request = endpoint.asNetworkRequest(dto:dto)
-        currentTask = client.send(request: request, type: T.ResponseType.self) { result in
-            switch result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
     
     func cancelCurrentTask() {
         currentTask?.cancel()
