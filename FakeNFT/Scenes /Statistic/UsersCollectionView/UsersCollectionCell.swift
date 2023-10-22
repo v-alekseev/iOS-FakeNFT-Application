@@ -62,7 +62,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         [nftNameLabel, priceLabel, cartButton].forEach {
-            addSubview($0)
+            footerView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
