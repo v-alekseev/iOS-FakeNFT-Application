@@ -16,6 +16,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var cartButton = createCartButton()
     private lazy var priceLabel = createPriceLabel()
     private lazy var likeImageView = createLikeImageView()
+    private lazy var ratingView = RatingView()
     
     private lazy var imageNftStub = UIImage(resource: .nftStub)
     
@@ -48,6 +49,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         }
         
         nftNameLabel.text = nftData.name
+        ratingView.setRating(rank: nftData.rating)
         priceLabel.text = String(format: "%.2f", nftData.price) + " ETH"
         let isLikedImage = isLiked ? UIImage(resource: .isLiked) : UIImage(resource: .isNotLiked)
         likeImageView.image = isLikedImage
@@ -61,11 +63,11 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        [nftNameLabel, priceLabel, cartButton].forEach {
+        [nftNameLabel, priceLabel, cartButton, ratingView].forEach {
             footerView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
+        
         imageNftView.addSubview(likeImageView)
         
         NSLayoutConstraint.activate([
@@ -96,7 +98,11 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
             likeImageView.topAnchor.constraint(equalTo: imageNftView.topAnchor),
             likeImageView.trailingAnchor.constraint(equalTo: imageNftView.trailingAnchor),
             likeImageView.heightAnchor.constraint(equalToConstant: Constants.button_size),
-            likeImageView.widthAnchor.constraint(equalToConstant: Constants.button_size)
+            likeImageView.widthAnchor.constraint(equalToConstant: Constants.button_size),
+            
+            ratingView.topAnchor.constraint(equalTo: footerView.topAnchor),
+            ratingView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            ratingView.heightAnchor.constraint(equalToConstant: Constants.constant_12),
             
         ])
     }
@@ -105,7 +111,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         let imageNftView = UIImageView()
         imageNftView.contentMode = .scaleAspectFill
         imageNftView.layer.masksToBounds = true
-        imageNftView.layer.cornerRadius = 12
+        imageNftView.layer.cornerRadius = Constants.constant_12
         imageNftView.image = imageNftStub
         return imageNftView
     }
@@ -155,6 +161,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
 extension UsersCollectionCell {
     private enum Constants {
         static let offset_8: CGFloat = 8
+        static let constant_12: CGFloat = 12
         static let button_size: CGFloat = 40
     }
 }
