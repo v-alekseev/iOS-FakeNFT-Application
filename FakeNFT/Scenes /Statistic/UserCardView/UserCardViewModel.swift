@@ -14,7 +14,7 @@ final class UserCardViewModel {
     @Published var needShowCollectionScreen = false
     @Published var needShowWebsite = false
     @Published var isLoading = false
-    @Published var loadError = false
+    @Published var loadError: String?
     
     var profileLikes: [String] = []
     private let dataProvider: StatisticDataProviderProtocol?
@@ -41,7 +41,7 @@ final class UserCardViewModel {
     
     func loadProfileLikes() {
         isLoading = true
-        loadError = false
+        loadError = nil
         profileLikes = []
         dataProvider?.getProfileLikes() { [weak self] result in
             guard let self else { return }
@@ -49,8 +49,8 @@ final class UserCardViewModel {
                 switch result {
                 case let .success(data):
                     self.profileLikes = data.likes
-                case .failure(_):
-                    self.loadError = true
+                case .failure(let error):
+                    self.loadError = "\(error)"
                 }
                 self.isLoading = false
             }

@@ -12,7 +12,7 @@ final class UsersCollectionViewModel {
     
     @Published var nfts: [NftModel] = []
     @Published var isLoading = false
-    @Published var loadError = false
+    @Published var loadError: String?
     @Published var showStub = false
     
     var nftsIdForDisplayingLikes: [String] = []
@@ -35,7 +35,7 @@ final class UsersCollectionViewModel {
         actualUserData.nfts.forEach({ nft in
             dispatchGroup.enter()
             isLoading = true
-            loadError = false
+            loadError = nil
             dataProvider?.getNftWithId(nftId: nft) { [weak self] result in
                 guard let self else { return }
                 DispatchQueue.main.async {
@@ -45,8 +45,8 @@ final class UsersCollectionViewModel {
                         if self.profileLikes.contains(data.id) {
                             self.nftsIdForDisplayingLikes.append(data.id)
                         }
-                    case .failure(_):
-                        self.loadError = true
+                    case .failure(let error):
+                        self.loadError = "\(error)"
                     }
                     dispatchGroup.leave()
                 }

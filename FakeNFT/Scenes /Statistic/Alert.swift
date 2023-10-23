@@ -11,10 +11,10 @@ final class Alert {
     
     static let shared = Alert()
     
-    func showAlert(_ alertController: UIViewController?, handler: ((UIAlertAction) -> Void)? = nil) {
+    func showAlert(_ alertController: UIViewController?, message: String? = "", handler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(
             title: "Не удалось получить данные",
-            message: nil,
+            message: message,
             preferredStyle: .alert)
         alert.addAction(.init(title: "Отмена", style: .cancel))
         alert.addAction(.init(title: "Повторить", style: .default, handler: handler))

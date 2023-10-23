@@ -13,7 +13,7 @@ final class StatisticViewModel {
     @Published var usersData: [UserModel] = []
     @Published var isLoading = false
     @Published var actualUserData: UserModel?
-    @Published var loadError = false
+    @Published var loadError: String?
     @Published var needShowFilterMenu = false
     
     private let dataProvider: StatisticDataProviderProtocol?
@@ -32,7 +32,7 @@ final class StatisticViewModel {
     
     func loadUsersData() {
         isLoading = true
-        loadError = false
+        loadError = nil
         dataProvider?.getUsersData() { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
@@ -44,8 +44,8 @@ final class StatisticViewModel {
                     } else {
                         self.provideRatingFilter()
                     }
-                case .failure(_):
-                    self.loadError = true
+                case .failure(let error):
+                    self.loadError = "\(error)"
                 }
                 self.isLoading = false
             }

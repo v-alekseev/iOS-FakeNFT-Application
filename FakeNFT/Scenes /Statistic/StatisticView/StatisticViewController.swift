@@ -80,8 +80,8 @@ final class StatisticViewController: UIViewController {
         viewModel.$loadError
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] loadError in
-                if loadError {
-                    self?.alertPresenter.showAlert(self) {_ in
+                if let loadError {
+                    self?.alertPresenter.showAlert(self, message: loadError) {_ in
                         self?.viewModel.loadUsersData()
                     }
                 }
