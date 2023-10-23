@@ -74,7 +74,18 @@ final class StatisticViewController: UIViewController {
             .store(in: &bindings)
         
         viewModel.$isLoading
-            .assign(to: \.isLoading, on: contentView)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] isLoading in
+                if isLoading {
+                    if let refreshing = self?.contentView.tableView.refreshControl?.isRefreshing,
+                       !refreshing {
+                        self?.contentView.loadIndicator.startAnimating()
+                    }
+                } else {
+                    self?.contentView.loadIndicator.stopAnimating()
+                    self?.contentView.tableView.refreshControl?.endRefreshing()
+                }
+            })
             .store(in: &bindings)
         
         viewModel.$loadError

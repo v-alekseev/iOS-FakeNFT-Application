@@ -40,12 +40,7 @@ final class UsersCollectionViewController: UIViewController {
         navigationItem.titleView?.tintColor = .ypBlackWithDarkMode
         navigationItem.title = "Коллекция NFT"
         
-        bindViewToViewModel()
         bindViewModelToView()
-        
-    }
-    
-    func bindViewToViewModel() {
         
     }
     
@@ -63,11 +58,17 @@ final class UsersCollectionViewController: UIViewController {
             .store(in: &bindings)
         
         viewModel.$isLoading
-            .assign(to: \.isLoading, on: contentView)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] isLoading in
+                isLoading ? self?.contentView.loadIndicator.startAnimating() : self?.contentView.loadIndicator.stopAnimating()
+            })
             .store(in: &bindings)
         
         viewModel.$showStub
-            .assign(to: \.showStub, on: contentView)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] showStub in
+                self?.contentView.stubLabel.isHidden = !showStub
+            })
             .store(in: &bindings)
         
         viewModel.$loadError

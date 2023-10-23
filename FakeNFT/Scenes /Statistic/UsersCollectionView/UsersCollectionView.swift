@@ -13,19 +13,19 @@ final class UsersCollectionView: UIView {
     var nfts: [NftModel] = []
     var nftsIdForDisplayingLikes: [String] = []
     
-    var isLoading: Bool = false {
-        didSet { if isLoading {
-            loadIndicator.startAnimating()
-        } else {
-            loadIndicator.stopAnimating()}
-        }
-    }
+    lazy var loadIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     
-    var showStub: Bool = false {
-        didSet {
-            stubLabel.isHidden = !showStub
-        }
-    }
+    lazy var stubLabel: UILabel = {
+        let label = UILabel()
+        label.font = .bodyBold
+        label.textColor = .ypBlackWithDarkMode
+        label.text = "У пользователя ещё нет NFT"
+        return label
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -34,20 +34,6 @@ final class UsersCollectionView: UIView {
         collectionView.dataSource = self
         collectionView.delegate = self
         return collectionView
-    }()
-    
-    private lazy var loadIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView()
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
-    
-    private lazy var stubLabel: UILabel = {
-        let label = UILabel()
-        label.font = .bodyBold
-        label.textColor = .ypBlackWithDarkMode
-        label.text = "У пользователя ещё нет NFT"
-        return label
     }()
     
     init() {

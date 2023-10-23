@@ -56,7 +56,10 @@ final class UserCardViewController: UIViewController {
     func bindViewToViewModel() {
         
         viewModel.$isLoading
-            .assign(to: \.isLoading, on: contentView)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] isLoading in
+                isLoading ? self?.contentView.loadIndicator.startAnimating() : self?.contentView.loadIndicator.stopAnimating()
+            })
             .store(in: &bindings)
         
         viewModel.$loadError

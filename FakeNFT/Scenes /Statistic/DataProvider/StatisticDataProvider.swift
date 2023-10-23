@@ -10,7 +10,7 @@ import Foundation
 protocol StatisticDataProviderProtocol {
     func getUsersData( _ completion: @escaping (Result<[UserModel], Error>) -> Void)
     func getNftWithId(nftId: String, _ completion: @escaping (Result<NftModel, Error>) -> Void)
-    func getProfileLikes( _ completion: @escaping (Result<ProfileModel, Error>) -> Void)
+    func getProfileLikes( _ completion: @escaping (Result<ProfileLikesModel, Error>) -> Void)
 }
 
 final class StatisticDataProvider: StatisticDataProviderProtocol {
@@ -49,9 +49,9 @@ final class StatisticDataProvider: StatisticDataProviderProtocol {
         return
     }
     
-    func getProfileLikes( _ completion: @escaping (Result<ProfileModel, Error>) -> Void) {
+    func getProfileLikes( _ completion: @escaping (Result<ProfileLikesModel, Error>) -> Void) {
         let profileRequest = ProfileRequest()
-        networkClient.send(request: profileRequest, type: ProfileModel.self) { [weak self] result in
+        networkClient.send(request: profileRequest, type: ProfileLikesModel.self) { [weak self] result in
             guard self != nil else { return }
             DispatchQueue.main.async {
                 switch result {

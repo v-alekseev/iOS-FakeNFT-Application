@@ -12,10 +12,6 @@ final class UserCardView: UIView {
     @Published var didTapCollectionButton = false
     @Published var didTapWebsiteButton = false
     
-    var isLoading: Bool = false {
-        didSet { isLoading ? loadIndicator.startAnimating() : loadIndicator.stopAnimating() }
-    }
-    
     lazy var avatarView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -46,6 +42,12 @@ final class UserCardView: UIView {
         return label
     }()
     
+    lazy var loadIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     private lazy var collectionButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(systemName: "chevron.forward"), for: .normal)
@@ -66,12 +68,6 @@ final class UserCardView: UIView {
         button.setTitle("Перейти на сайт пользователя", for: .normal)
         button.addTarget(self, action: #selector(tapWebsiteButton), for: .touchUpInside)
         return button
-    }()
-    
-    private lazy var loadIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView()
-        indicator.hidesWhenStopped = true
-        return indicator
     }()
     
     init() {

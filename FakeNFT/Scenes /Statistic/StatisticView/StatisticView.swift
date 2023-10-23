@@ -14,19 +14,8 @@ final class StatisticView: UIView {
     @Published var selectedRow: Int?
     
     var usersData: [UserModel] = []
-    var isLoading: Bool = false {
-        didSet { if isLoading {
-            if let refreshing = tableView.refreshControl?.isRefreshing,
-               !refreshing {
-                loadIndicator.startAnimating()
-            }
-        } else {
-            loadIndicator.stopAnimating()
-            tableView.refreshControl?.endRefreshing()
-        } }
-    }
     
-    private lazy var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.register(StatisticCell.self)
@@ -38,7 +27,7 @@ final class StatisticView: UIView {
         return tableView
     }()
     
-    private lazy var loadIndicator: UIActivityIndicatorView = {
+    lazy var loadIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
         return indicator
@@ -107,6 +96,5 @@ extension StatisticView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRow = indexPath.row
     }
-    
 }
 
