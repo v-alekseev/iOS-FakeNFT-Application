@@ -26,8 +26,23 @@ final class StatisticView: UIView {
         } }
     }
     
-    private lazy var tableView = createTableView()
-    private lazy var loadIndicator = createActivityIndicator()
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .clear
+        tableView.register(StatisticCell.self)
+        tableView.separatorStyle = .none
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
+        return tableView
+    }()
+    
+    private lazy var loadIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     
     init() {
         super.init(frame: .zero)
@@ -63,28 +78,9 @@ final class StatisticView: UIView {
         ])
     }
     
-    private func createTableView() -> UITableView {
-        let tableView = UITableView()
-        tableView.backgroundColor = .clear
-        tableView.register(StatisticCell.self)
-        tableView.separatorStyle = .none
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
-        return tableView
-    }
-    
-    private func createActivityIndicator() -> UIActivityIndicatorView {
-        let indicator = UIActivityIndicatorView()
-        indicator.hidesWhenStopped = true
-        return indicator
-    }
-    
     @objc func refreshTable() {
         needRefreshTable = true
     }
-    
 }
 
 extension StatisticView: UITableViewDataSource {

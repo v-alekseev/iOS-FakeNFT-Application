@@ -10,23 +10,57 @@ import Kingfisher
 
 final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
-    private lazy var imageNftView = createImageNftView()
-    private lazy var footerView = createFooterView()
-    private lazy var nftNameLabel = createNftNameLabel()
-    private lazy var cartButton = createCartButton()
-    private lazy var priceLabel = createPriceLabel()
-    private lazy var likeImageView = createLikeImageView()
+    private lazy var imageNftView: UIImageView = {
+        let imageNftView = UIImageView()
+        imageNftView.contentMode = .scaleAspectFill
+        imageNftView.layer.masksToBounds = true
+        imageNftView.layer.cornerRadius = Constants.constant_12
+        imageNftView.image = imageNftStub
+        return imageNftView
+    }()
+    
+    private lazy var footerView: UIView = {
+        let footerView = UIView()
+        return footerView
+    }()
+    
+    private lazy var nftNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .bodyBold
+        label.textColor = .ypBlackWithDarkMode
+        return label
+    }()
+    
+    private lazy var cartButton: UIButton = {
+        let cartButton = UIButton.systemButton(with: UIImage(),
+                                               target: self,
+                                               action: #selector(tapCartButton))
+        cartButton.tintColor = .ypBlackWithDarkMode
+        return cartButton
+    }()
+    
+    private lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.font = .medium10
+        label.textColor = .ypBlackWithDarkMode
+        return label
+    }()
+    
+    private lazy var likeImageView: UIImageView = {
+        let likeImageView = UIImageView()
+        likeImageView.translatesAutoresizingMaskIntoConstraints = false
+        likeImageView.contentMode = .scaleAspectFill
+        return likeImageView
+    }()
+    
     private lazy var ratingView = RatingView()
-    
     private lazy var imageNftStub = UIImage(resource: .nftStub)
-    
     private var task: URLSessionDataTask?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupView()
-        
     }
     
     override func prepareForReuse() {
@@ -71,7 +105,6 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         imageNftView.addSubview(likeImageView)
         
         NSLayoutConstraint.activate([
-            
             imageNftView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             imageNftView.heightAnchor.constraint(equalToConstant: 108),
             imageNftView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -103,51 +136,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
             ratingView.topAnchor.constraint(equalTo: footerView.topAnchor),
             ratingView.leadingAnchor.constraint(equalTo: leadingAnchor),
             ratingView.heightAnchor.constraint(equalToConstant: Constants.constant_12),
-            
         ])
-    }
-    
-    private func createImageNftView() -> UIImageView {
-        let imageNftView = UIImageView()
-        imageNftView.contentMode = .scaleAspectFill
-        imageNftView.layer.masksToBounds = true
-        imageNftView.layer.cornerRadius = Constants.constant_12
-        imageNftView.image = imageNftStub
-        return imageNftView
-    }
-    
-    private func createLikeImageView() -> UIImageView {
-        let likeImageView = UIImageView()
-        likeImageView.translatesAutoresizingMaskIntoConstraints = false
-        likeImageView.contentMode = .scaleAspectFill
-        return likeImageView
-    }
-    
-    private func createFooterView() -> UIView {
-        let footerView = UIView()
-        return footerView
-    }
-    
-    private func createNftNameLabel() -> UILabel {
-        let label = UILabel()
-        label.font = .bodyBold
-        label.textColor = .ypBlackWithDarkMode
-        return label
-    }
-    
-    private func createCartButton() -> UIButton {
-        let cartButton = UIButton.systemButton(with: UIImage(),
-                                               target: self,
-                                               action: #selector(tapCartButton))
-        cartButton.tintColor = .ypBlackWithDarkMode
-        return cartButton
-    }
-    
-    private func createPriceLabel() -> UILabel {
-        let label = UILabel()
-        label.font = .medium10
-        label.textColor = .ypBlackWithDarkMode
-        return label
     }
     
     @objc
@@ -155,7 +144,6 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         //TODO
         print(#function)
     }
-    
 }
 
 extension UsersCollectionCell {

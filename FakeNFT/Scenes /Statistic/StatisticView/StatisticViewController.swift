@@ -28,7 +28,6 @@ final class StatisticViewController: UIViewController {
         super.viewDidLoad()
         
         view = contentView
-        
         let filterButton = UIBarButtonItem(image: UIImage(resource: .filterButton),
                                            style: .plain,
                                            target: self,

@@ -27,9 +27,28 @@ final class UsersCollectionView: UIView {
         }
     }
     
-    private lazy var collectionView = createCollecionView()
-    private lazy var loadIndicator = createActivityIndicator()
-    private lazy var stubLabel = createStubLabel()
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .clear
+        collectionView.register(UsersCollectionCell.self)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    private lazy var loadIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    private lazy var stubLabel: UILabel = {
+        let label = UILabel()
+        label.font = .bodyBold
+        label.textColor = .ypBlackWithDarkMode
+        label.text = "У пользователя ещё нет NFT"
+        return label
+    }()
     
     init() {
         super.init(frame: .zero)
@@ -68,30 +87,6 @@ final class UsersCollectionView: UIView {
             stubLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
         ])
     }
-    
-    private func createCollecionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .clear
-        collectionView.register(UsersCollectionCell.self)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        return collectionView
-    }
-    
-    private func createStubLabel() -> UILabel {
-        let label = UILabel()
-        label.font = .bodyBold
-        label.textColor = .ypBlackWithDarkMode
-        label.text = "У пользователя ещё нет NFT"
-        return label
-    }
-    
-    private func createActivityIndicator() -> UIActivityIndicatorView {
-        let indicator = UIActivityIndicatorView()
-        indicator.hidesWhenStopped = true
-        return indicator
-    }
-    
 }
 
 extension UsersCollectionView: UICollectionViewDataSource {

@@ -106,7 +106,6 @@ final class UserCardViewController: UIViewController {
                 }
             })
             .store(in: &bindings)
-        
     }
     
     @objc

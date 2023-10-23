@@ -12,8 +12,21 @@ final class WebViewViewController: UIViewController {
     
     private var alertPresenter = Alert.shared
     private var url: String
-    private lazy var webView = createWebView()
-    private lazy var progressBar = createProgressBar()
+    
+    private lazy var webView: WKWebView = {
+        let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        return webView
+    }()
+    
+    private lazy var progressBar: UIProgressView = {
+        let progressBar = UIProgressView(progressViewStyle: .default)
+        progressBar.translatesAutoresizingMaskIntoConstraints = false
+        progressBar.backgroundColor = .ypLightGreyWithDarkMode
+        progressBar.tintColor = .ypBlackWithDarkMode
+        progressBar.setProgress(0, animated: true)
+        return progressBar
+    }()
     
     init(_ url: String) {
         self.url = url
@@ -76,7 +89,6 @@ final class WebViewViewController: UIViewController {
         view.addSubview(progressBar)
         
         NSLayoutConstraint.activate([
-            
             webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -86,28 +98,11 @@ final class WebViewViewController: UIViewController {
             progressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             progressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             progressBar.heightAnchor.constraint(equalToConstant: 2)
-            
         ])
-    }
-    
-    private func createWebView() -> WKWebView {
-        let webView = WKWebView()
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        return webView
-    }
-    
-    private func createProgressBar() -> UIProgressView {
-        let progressBar = UIProgressView(progressViewStyle: .default)
-        progressBar.translatesAutoresizingMaskIntoConstraints = false
-        progressBar.backgroundColor = .ypLightGreyWithDarkMode
-        progressBar.tintColor = .ypBlackWithDarkMode
-        progressBar.setProgress(0, animated: true)
-        return progressBar
     }
     
     @objc
     private func tapBackButton() {
         navigationController?.popViewController(animated: true)
     }
-    
 }

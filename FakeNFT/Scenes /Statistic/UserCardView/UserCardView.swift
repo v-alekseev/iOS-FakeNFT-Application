@@ -16,14 +16,63 @@ final class UserCardView: UIView {
             didSet { isLoading ? loadIndicator.startAnimating() : loadIndicator.stopAnimating() }
         }
     
-    lazy var avatarView = createAvatarView()
-    lazy var nameLabel = createNameLabel()
-    lazy var descriptionLabel = createDescriptionLabel()
-    lazy var nftsCountLabel = createNftsCountLabel()
+    lazy var avatarView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 35
+        return imageView
+    }()
     
-    private lazy var collectionButton = createCollectionButton()
-    private lazy var websiteButton = createWebsiteButton()
-    private lazy var loadIndicator = createActivityIndicator()
+    lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .headline3
+        label.textColor = .ypBlackWithDarkMode
+        return label
+    }()
+    
+    lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .caption2
+        label.textColor = .ypBlackWithDarkMode
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var nftsCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = .bodyBold
+        label.textColor = .ypBlackWithDarkMode
+        return label
+    }()
+    
+    private lazy var collectionButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.init(systemName: "chevron.forward"), for: .normal)
+        button.tintColor = .ypBlackWithDarkMode
+        button.addTarget(self, action: #selector(didTapShowCollection), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var websiteButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = .caption1
+        button.backgroundColor = .ypWhiteWithDarkMode
+        button.setTitleColor(.ypBlackWithDarkMode, for: .normal)
+        button.layer.cornerRadius = 16
+        button.layer.masksToBounds = true
+        button.layer.borderWidth = 1
+        button.layer.borderColor = button.currentTitleColor.cgColor
+        button.setTitle("Перейти на сайт пользователя", for: .normal)
+        button.addTarget(self, action: #selector(tapWebsiteButton), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var loadIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     
     init() {
         super.init(frame: .zero)
@@ -75,64 +124,6 @@ final class UserCardView: UIView {
             loadIndicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
             loadIndicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
         ])
-    }
-
-    private func createCollectionButton() -> UIButton {
-        let button = UIButton()
-        button.setImage(.init(systemName: "chevron.forward"), for: .normal)
-        button.tintColor = .ypBlackWithDarkMode
-        button.addTarget(self, action: #selector(didTapShowCollection), for: .touchUpInside)
-        return button
-    }
-    
-    private func createAvatarView() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 35
-        return imageView
-    }
-    
-    private func createNameLabel() -> UILabel {
-        let label = UILabel()
-        label.font = .headline3
-        label.textColor = .ypBlackWithDarkMode
-        return label
-    }
-    
-    private func createDescriptionLabel() -> UILabel {
-        let label = UILabel()
-        label.font = .caption2
-        label.textColor = .ypBlackWithDarkMode
-        label.numberOfLines = 0
-        return label
-    }
-    
-    private func createWebsiteButton() -> UIButton {
-        let button = UIButton()
-        button.titleLabel?.font = .caption1
-        button.backgroundColor = .ypWhiteWithDarkMode
-        button.setTitleColor(.ypBlackWithDarkMode, for: .normal)
-        button.layer.cornerRadius = 16
-        button.layer.masksToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = button.currentTitleColor.cgColor
-        button.setTitle("Перейти на сайт пользователя", for: .normal)
-        button.addTarget(self, action: #selector(tapWebsiteButton), for: .touchUpInside)
-        return button
-    }
-    
-    private func createNftsCountLabel() -> UILabel {
-        let label = UILabel()
-        label.font = .bodyBold
-        label.textColor = .ypBlackWithDarkMode
-        return label
-    }
-    
-    private func createActivityIndicator() -> UIActivityIndicatorView {
-        let indicator = UIActivityIndicatorView()
-        indicator.hidesWhenStopped = true
-        return indicator
     }
     
     @objc

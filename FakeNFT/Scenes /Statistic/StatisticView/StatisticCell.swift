@@ -12,11 +12,44 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
     
     private let urlSession = URLSession.shared
     
-    private lazy var roundRect = createRoundRect()
-    private lazy var avatarView = createAvatarView()
-    private lazy var nameLabel = createNameLabel()
-    private lazy var nftCountLabel = createNftCountLabel()
-    private lazy var userRatingLabel = createUserRatingLabel()
+    private lazy var roundRect: UIView = {
+        let roundRect = UIView()
+        roundRect.layer.masksToBounds = true
+        roundRect.layer.cornerRadius = 16
+        roundRect.backgroundColor = .ypLightGreyWithDarkMode
+        return roundRect
+    }()
+    
+    private lazy var avatarView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 14
+        imageView.image = userAvatarStub
+        return imageView
+    }()
+    
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .headline3
+        label.textColor = .ypBlackWithDarkMode
+        return label
+    }()
+
+    private lazy var nftCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = .headline3
+        label.textColor = .ypBlackWithDarkMode
+        return label
+    }()
+    
+    private lazy var userRatingLabel: UILabel = {
+        let label = UILabel()
+        label.font = .caption1
+        label.textColor = .ypBlackWithDarkMode
+        return label
+    }()
+    
     private lazy var userAvatarStub = UIImage(resource: .userAvatarStub)
     
     private var task: URLSessionDataTask?
@@ -56,7 +89,6 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
         }
         
         NSLayoutConstraint.activate([
-            
             roundRect.topAnchor.constraint(equalTo: topAnchor, constant: Constants.offset_4),
             roundRect.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.offset_4),
             roundRect.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_51),
@@ -78,46 +110,7 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
             userRatingLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             userRatingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_16),
             userRatingLabel.trailingAnchor.constraint(lessThanOrEqualTo: roundRect.leadingAnchor)
-            
         ])
-    }
-    
-    private func createRoundRect() -> UIView {
-        let roundRect = UIView()
-        roundRect.layer.masksToBounds = true
-        roundRect.layer.cornerRadius = 16
-        roundRect.backgroundColor = .ypLightGreyWithDarkMode
-        return roundRect
-    }
-    
-    private func createAvatarView() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 14
-        imageView.image = userAvatarStub
-        return imageView
-    }
-    
-    private func createNameLabel() -> UILabel {
-        let label = UILabel()
-        label.font = .headline3
-        label.textColor = .ypBlackWithDarkMode
-        return label
-    }
-    
-    private func createNftCountLabel() -> UILabel {
-        let label = UILabel()
-        label.font = .headline3
-        label.textColor = .ypBlackWithDarkMode
-        return label
-    }
-    
-    private func createUserRatingLabel() -> UILabel {
-        let label = UILabel()
-        label.font = .caption1
-        label.textColor = .ypBlackWithDarkMode
-        return label
     }
 }
 
