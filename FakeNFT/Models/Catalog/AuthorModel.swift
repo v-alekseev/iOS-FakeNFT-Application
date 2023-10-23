@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct AuthorModel: Codable {
     let name: String
     let avatar: String
