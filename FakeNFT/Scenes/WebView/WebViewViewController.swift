@@ -26,7 +26,7 @@ final class WebViewViewController: UIViewController {
     
     private lazy var backButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
-        button.image = (UIImage(named: "BackwardIcon"))
+        button.image = UIImage(resource: .backwardIcon)
         button.style = .plain
         button.tintColor = .ypBlackWithDarkMode
         button.target = self

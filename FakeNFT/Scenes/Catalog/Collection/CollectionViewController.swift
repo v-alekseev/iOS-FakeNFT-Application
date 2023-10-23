@@ -13,7 +13,7 @@ final class CollectionViewController: UIViewController {
     private var controllableCell: NFTsTableViewCell?
     private var backButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
-        button.image = (UIImage(named: "BackwardIcon"))
+        button.image = (UIImage(resource: .backwardIcon))
         button.style = .plain
         button.tintColor = .ypBlackWithDarkMode
         return button

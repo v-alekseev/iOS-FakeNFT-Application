@@ -65,7 +65,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         return gr
     }()
     
-    private let placeholderImage = UIImage(named: "NFTPlaceholder")
+    private let placeholderImage = UIImage(resource: .nftPlaceholder)
     
     private var basketCompletion: (() -> Void) = {}
     private var likeCompletion: (() -> Void) = {}
@@ -138,7 +138,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         let processor = RoundCornerImageProcessor(cornerRadius: 12)
         let options: KingfisherOptionsInfo = [
             .backgroundDecode,
-            .onFailureImage(placeholderImage?.kf.image(withBlendMode: .normal, backgroundColor: .ypBlackWithDarkMode)),
+            .onFailureImage(placeholderImage.kf.image(withBlendMode: .normal, backgroundColor: .ypBlackWithDarkMode)),
             .processor(processor)
         ]
         
@@ -155,8 +155,8 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         NFTNameLabel.text = NFT.name
         NFTCostLabel.text = "\(NFT.price) ETH"
         ratingView.setRating(rank: Int(NFT.rating))
-        basketButton.setImage(isOrdered ? UIImage(named: "InBasket") : UIImage(named: "NotInBasket"), for: .normal)
-        likeButton.setImage(isLiked ? UIImage(named: "LikeActive") : UIImage(named: "LikeInactive"), for: .normal)
+        basketButton.setImage(isOrdered ? UIImage(resource: .inBasket) : UIImage(resource: .notInBasket), for: .normal)
+        likeButton.setImage(isLiked ? UIImage(resource: .likeActive) : UIImage(resource: .likeInactive), for: .normal)
     }
     
     func setBasketCompletion(completion: @escaping () -> Void) {

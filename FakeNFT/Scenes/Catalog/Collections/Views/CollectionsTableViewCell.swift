@@ -27,7 +27,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         return imageView
     }()
     
-    private let placeholderImage = UIImage(named: "CatPlaceholder")
+    private let placeholderImage = UIImage(resource: .catPlaceholder)
     
     private lazy var animatedGradient: AnimatedGradientView = {
         return AnimatedGradientView(frame: self.bounds, cornerRadius: 12)
@@ -90,7 +90,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         let processor = RoundCornerImageProcessor(cornerRadius: 12)
         let options: KingfisherOptionsInfo = [
             .backgroundDecode,
-            .onFailureImage(placeholderImage?.kf.image(withBlendMode: .normal, backgroundColor: .ypBlackWithDarkMode)),
+            .onFailureImage(placeholderImage.kf.image(withBlendMode: .normal, backgroundColor: .ypBlackWithDarkMode)),
             .processor(processor)
         ]
         imageCollection.kf.setImage(
