@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-final class WebViewViewController: UIViewController {
+class WebViewViewController: UIViewController {
     
     private var viewModel: WebViewViewModelProtocol?
     
@@ -9,7 +9,7 @@ final class WebViewViewController: UIViewController {
     
     private var url: URL?
     
-    private lazy var webView: WKWebView = {
+    internal lazy var webView: WKWebView = {
         let webView = WKWebView()
         webView.backgroundColor = .ypWhiteWithDarkMode
         
