@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-final class WebViewViewController: UIViewController {
+class WebViewViewController: UIViewController {
     
     private var viewModel: WebViewViewModelProtocol?
     
@@ -9,7 +9,7 @@ final class WebViewViewController: UIViewController {
     
     private var url: URL?
     
-    private lazy var webView: WKWebView = {
+    internal lazy var webView: WKWebView = {
         let webView = WKWebView()
         webView.backgroundColor = .ypWhiteWithDarkMode
         
@@ -24,23 +24,10 @@ final class WebViewViewController: UIViewController {
         return progressView
     }()
     
-    private lazy var backButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.image = UIImage(resource: .backwardIcon)
-        button.style = .plain
-        button.tintColor = .ypBlackWithDarkMode
-        button.target = self
-        button.action = #selector(backButtonTapped)
-        return button
-    }()
-    
-    init(viewModel: WebViewViewModelProtocol?, url: URL?, customBackButtonBehaviour: Bool = false) {
+    init(viewModel: WebViewViewModelProtocol?, url: URL?) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
         self.url = url
-        if (customBackButtonBehaviour) {
-            navigationItem.leftBarButtonItem = backButton
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -92,14 +79,6 @@ final class WebViewViewController: UIViewController {
         let request = URLRequest(url: url)
         
         webView.load(request)
-    }
-    
-    @objc private func backButtonTapped() {
-        if webView.canGoBack {
-            webView.goBack()
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
     }
 }
 

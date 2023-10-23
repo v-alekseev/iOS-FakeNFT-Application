@@ -77,10 +77,7 @@ final class CollectionViewController: UIViewController {
             viewModel.clearLinks()
             navigationController?.popViewController(animated: true)
         case .authorLinkDidTapped(let url):
-            let webView = WebViewViewController(
-                viewModel: WebViewViewModel(),
-                url: url,
-                customBackButtonBehaviour: true)
+            let webView = CustomWebView(viewModel: WebViewViewModel(), url: url)
             navigationController?.pushViewController(webView, animated: true)
         case .basketDidTapped(let indexPath):
             controllableCell?.reloadRows(at: indexPath)
