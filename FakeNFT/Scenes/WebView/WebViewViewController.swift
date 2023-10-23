@@ -24,10 +24,23 @@ final class WebViewViewController: UIViewController {
         return progressView
     }()
     
-    init(viewModel: WebViewViewModelProtocol?, url: URL?) {
+    private lazy var backButton: UIBarButtonItem = {
+        let button = UIBarButtonItem()
+        button.image = (UIImage(named: "BackwardIcon"))
+        button.style = .plain
+        button.tintColor = .ypBlackWithDarkMode
+        button.target = self
+        button.action = #selector(backButtonTapped)
+        return button
+    }()
+    
+    init(viewModel: WebViewViewModelProtocol?, url: URL?, customBackButtonBehaviour: Bool = false) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
         self.url = url
+        if (customBackButtonBehaviour) {
+            navigationItem.leftBarButtonItem = backButton
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -79,6 +92,14 @@ final class WebViewViewController: UIViewController {
         let request = URLRequest(url: url)
         
         webView.load(request)
+    }
+    
+    @objc private func backButtonTapped() {
+        if webView.canGoBack {
+            webView.goBack()
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 
