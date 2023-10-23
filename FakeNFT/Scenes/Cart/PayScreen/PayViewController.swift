@@ -55,6 +55,10 @@ final class PayViewController: UIViewController {
         
         viewModel?.getCurrensies()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = L10n.Cart.PayScreen.screenHeader
+    }
 
     // MARK: - Action Methods
     //
@@ -64,9 +68,8 @@ final class PayViewController: UIViewController {
             // Показ пользовательского соглашения
             let termsOfUseViewModel = WebViewViewModel()
             let termsOfUseVC = WebViewViewController(viewModel: termsOfUseViewModel, url: URL(string: termOfUseUrl))
-            termsOfUseVC.modalPresentationStyle = .formSheet
-            
-            self.present(termsOfUseVC, animated: true)
+            navigationItem.title = ""
+            navigationController?.pushViewController(termsOfUseVC, animated: true)
         }
     }
     
@@ -91,7 +94,7 @@ final class PayViewController: UIViewController {
     //
     func setupUIElements() {
         guard let navBar = navigationController?.navigationBar  else { return }
-        navigationItem.title = L10n.Cart.PayScreen.screenHeader
+
         navBar.tintColor = .ypBlackWithDarkMode
         navBar.titleTextAttributes =  [ .font: UIFont.bodyBold]
         
