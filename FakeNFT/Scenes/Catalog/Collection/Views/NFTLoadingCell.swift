@@ -29,10 +29,10 @@ final class NFTLoadingCell: UICollectionViewCell, ReuseIdentifying {
         contentView.addSubview(imageGradient)
         contentView.backgroundColor = .clear
         NSLayoutConstraint.activate([
-            imageGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            imageGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            imageGradient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            imageGradient.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            imageGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageGradient.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageGradient.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
         ])
         startAnimation()

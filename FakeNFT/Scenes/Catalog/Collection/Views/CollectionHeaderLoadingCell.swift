@@ -45,21 +45,21 @@ final class CollectionHeaderLoadingCell: UITableViewCell, ReuseIdentifying {
     
     private func constraintUI() {
         NSLayoutConstraint.activate([
-            titleImageGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            titleImageGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            titleImageGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            titleImageGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 
-            titleImageGradient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            titleImageGradient.heightAnchor.constraint(equalToConstant: 310),
+            titleImageGradient.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleImageGradient.heightAnchor.constraint(equalToConstant: Constants.height_310),
             
-            titleGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            titleGradient.topAnchor.constraint(equalTo: titleImageGradient.bottomAnchor, constant: 16),
-            titleGradient.heightAnchor.constraint(equalToConstant: 30),
+            titleGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.offset_16),
+            titleGradient.topAnchor.constraint(equalTo: titleImageGradient.bottomAnchor, constant: Constants.offset_16),
+            titleGradient.heightAnchor.constraint(equalToConstant: 36),
             titleGradient.widthAnchor.constraint(equalToConstant: 100),
             
             descriptionGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            descriptionGradient.topAnchor.constraint(equalTo: titleGradient.bottomAnchor, constant: 8),
-            descriptionGradient.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
+            descriptionGradient.topAnchor.constraint(equalTo: titleGradient.bottomAnchor, constant: 16),
+            descriptionGradient.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             descriptionGradient.heightAnchor.constraint(equalToConstant: 60)
         ])
     }

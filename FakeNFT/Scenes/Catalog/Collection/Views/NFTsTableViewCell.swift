@@ -62,9 +62,9 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
         contentView.backgroundColor = .ypWhiteWithDarkMode
         collection.backgroundColor = .clear
         NSLayoutConstraint.activate([
-            collection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            collection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            collection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            collection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.offset_16),
+            collection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.offset_16),
+            collection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.minus_offset_16),
             collection.heightAnchor.constraint(equalToConstant: estimatedHeight)
         ])
     }

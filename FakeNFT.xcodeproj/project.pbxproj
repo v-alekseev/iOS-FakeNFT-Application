@@ -63,6 +63,9 @@
 		AFA320B22AE022050025C54E /* AuthorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA320B12AE022050025C54E /* AuthorModel.swift */; };
 		AFA320B42AE0304B0025C54E /* CollectionResultState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA320B32AE0304B0025C54E /* CollectionResultState.swift */; };
 		AFA7CEEF2ADF24B700685E14 /* DataProviderInteractorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA7CEEE2ADF24B700685E14 /* DataProviderInteractorProtocol.swift */; };
+		AFA9715E2AE676BA002B0FB7 /* extension+UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9715D2AE676BA002B0FB7 /* extension+UITableViewCell.swift */; };
+		AFA971602AE67C57002B0FB7 /* extension+UICollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9715F2AE67C57002B0FB7 /* extension+UICollectionViewCell.swift */; };
+		AFA971622AE67DB8002B0FB7 /* extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA971612AE67DB8002B0FB7 /* extension+UIViewController.swift */; };
 		AFD6454D2ADC741B00D48BC0 /* AnimatedGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6454C2ADC741B00D48BC0 /* AnimatedGradientView.swift */; };
 		AFD6454F2ADDCEF600D48BC0 /* CollectionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD6454E2ADDCEF600D48BC0 /* CollectionViewModelProtocol.swift */; };
 		AFD645512ADDCF0B00D48BC0 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD645502ADDCF0B00D48BC0 /* CollectionViewModel.swift */; };
@@ -170,6 +173,9 @@
 		AFA320B12AE022050025C54E /* AuthorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorModel.swift; sourceTree = "<group>"; };
 		AFA320B32AE0304B0025C54E /* CollectionResultState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionResultState.swift; sourceTree = "<group>"; };
 		AFA7CEEE2ADF24B700685E14 /* DataProviderInteractorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderInteractorProtocol.swift; sourceTree = "<group>"; };
+		AFA9715D2AE676BA002B0FB7 /* extension+UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+UITableViewCell.swift"; sourceTree = "<group>"; };
+		AFA9715F2AE67C57002B0FB7 /* extension+UICollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+UICollectionViewCell.swift"; sourceTree = "<group>"; };
+		AFA971612AE67DB8002B0FB7 /* extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+UIViewController.swift"; sourceTree = "<group>"; };
 		AFD6454C2ADC741B00D48BC0 /* AnimatedGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientView.swift; sourceTree = "<group>"; };
 		AFD6454E2ADDCEF600D48BC0 /* CollectionViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModelProtocol.swift; sourceTree = "<group>"; };
 		AFD645502ADDCF0B00D48BC0 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
@@ -319,7 +325,6 @@
 			children = (
 				AF6BEC652ADAEA2D00708F6E /* Alert */,
 				AF3948D92AD1B382003A7B70 /* Catalog */,
-				3F6806D829CC979D00B4F915 /* Network */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,6 +340,9 @@
 				AFE71FFD2AE2C5A70077BFFC /* extension+OperationQueue.swift */,
 				7B5E254D2ADBEBEC000BC664 /* Observable.swift */,
 				7B5E254F2ADBEEFA000BC664 /* UIView+Extension.swift */,
+				AFA9715D2AE676BA002B0FB7 /* extension+UITableViewCell.swift */,
+				AFA9715F2AE67C57002B0FB7 /* extension+UICollectionViewCell.swift */,
+				AFA971612AE67DB8002B0FB7 /* extension+UIViewController.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -348,13 +356,6 @@
 				AF3948FF2AD1DA06003A7B70 /* DefaultNetworkRequest.swift */,
 			);
 			path = NetworkClient;
-			sourceTree = "<group>";
-		};
-		3F6806D829CC979D00B4F915 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		3FC8C38F29D245250081F015 /* Requests */ = {
@@ -477,6 +478,7 @@
 		AF7F8F3B2ADFF62100C84AFD /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				AFE720032AE2E31A0077BFFC /* NFTDataSourceProtocol.swift */,
 				AFD645522ADDD21700D48BC0 /* CollectionNavigationState.swift */,
 				AF7F8F3C2ADFF66100C84AFD /* CollectionInteraction.swift */,
 				AFA320B32AE0304B0025C54E /* CollectionResultState.swift */,
@@ -490,7 +492,6 @@
 			children = (
 				AF7F8F3F2ADFF70500C84AFD /* CollectionHeaderTableViewCell.swift */,
 				AFE71FFF2AE2D87C0077BFFC /* NFTsTableViewCell.swift */,
-				AFE720032AE2E31A0077BFFC /* NFTDataSourceProtocol.swift */,
 				AFE720052AE2ED690077BFFC /* NFTCell.swift */,
 				AF8B21EA2AE51B22007A91F0 /* CollectionHeaderLoadingCell.swift */,
 				AF8B21EE2AE51EF4007A91F0 /* NFTLoadingCell.swift */,
@@ -764,6 +765,7 @@
 				AF6BEC692ADAEA7800708F6E /* AlertPresenter.swift in Sources */,
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				AFE71FFE2AE2C5A70077BFFC /* extension+OperationQueue.swift in Sources */,
+				AFA971602AE67C57002B0FB7 /* extension+UICollectionViewCell.swift in Sources */,
 				AF7F8F3D2ADFF66100C84AFD /* CollectionInteraction.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				AF8B21EB2AE51B22007A91F0 /* CollectionHeaderLoadingCell.swift in Sources */,
@@ -781,12 +783,14 @@
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				AF9A24152AD5CB4D00C73AEC /* SortCases.swift in Sources */,
 				7B5E254E2ADBEBEC000BC664 /* Observable.swift in Sources */,
+				AFA971622AE67DB8002B0FB7 /* extension+UIViewController.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				AF6BEC672ADAEA5100708F6E /* AlertModel.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
 				7B5E254C2ADBEAA5000BC664 /* WebViewViewModelProtocol.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				AFF11A0C2ADAB14100315704 /* CollectionNavigationAction.swift in Sources */,
+				AFA9715E2AE676BA002B0FB7 /* extension+UITableViewCell.swift in Sources */,
 				AFE720042AE2E31A0077BFFC /* NFTDataSourceProtocol.swift in Sources */,
 				AF3948E42AD1B4ED003A7B70 /* CatalogDataProvider.swift in Sources */,
 				AFD6454D2ADC741B00D48BC0 /* AnimatedGradientView.swift in Sources */,

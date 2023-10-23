@@ -98,7 +98,7 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
             descriptionTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            descriptionTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
+            descriptionTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     

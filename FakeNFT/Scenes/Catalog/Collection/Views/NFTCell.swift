@@ -91,35 +91,35 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         contentView.addSubview(basketButton)
         contentView.backgroundColor = .clear
         NSLayoutConstraint.activate([
-            NFTImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            NFTImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            NFTImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            NFTImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            NFTImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            NFTImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             NFTImage.widthAnchor.constraint(equalToConstant: contentView.frame.width),
             NFTImage.heightAnchor.constraint(equalToConstant: contentView.frame.width),
             
-            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor),
             animatedGradient.widthAnchor.constraint(equalToConstant: contentView.frame.width),
             animatedGradient.heightAnchor.constraint(equalToConstant: contentView.frame.width),
             
-            ratingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            ratingView.topAnchor.constraint(equalTo: NFTImage.bottomAnchor, constant: 8),
-            ratingView.heightAnchor.constraint(equalToConstant: 12),
+            ratingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            ratingView.topAnchor.constraint(equalTo: NFTImage.bottomAnchor, constant: Constants.offset_8),
+            ratingView.heightAnchor.constraint(equalToConstant: Constants.offset_8),
             
-            likeButton.trailingAnchor.constraint(equalTo: NFTImage.trailingAnchor, constant: -10),
-            likeButton.topAnchor.constraint(equalTo: NFTImage.topAnchor, constant: 11),
+            likeButton.trailingAnchor.constraint(equalTo: NFTImage.trailingAnchor, constant: Constants.minus_offset_10),
+            likeButton.topAnchor.constraint(equalTo: NFTImage.topAnchor, constant: Constants.offset_11),
             
-            NFTNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            NFTNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: basketButton.leadingAnchor, constant: 0),
-            NFTNameLabel.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 5),
+            NFTNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            NFTNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: basketButton.leadingAnchor),
+            NFTNameLabel.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: Constants.offset_5),
             
-            NFTCostLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            NFTCostLabel.trailingAnchor.constraint(lessThanOrEqualTo: basketButton.leadingAnchor, constant: 0),
-            NFTCostLabel.topAnchor.constraint(equalTo: NFTNameLabel.bottomAnchor, constant: 4),
+            NFTCostLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            NFTCostLabel.trailingAnchor.constraint(lessThanOrEqualTo: basketButton.leadingAnchor),
+            NFTCostLabel.topAnchor.constraint(equalTo: NFTNameLabel.bottomAnchor, constant: Constants.offset_4),
             
-            basketButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            basketButton.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 4),
+            basketButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            basketButton.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: Constants.offset_4),
         ])
         animatedGradient.isHidden = true
     }

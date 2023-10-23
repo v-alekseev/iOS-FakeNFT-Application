@@ -66,20 +66,20 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
     
     private func constraintUI() {
         NSLayoutConstraint.activate([
-            imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.offset_16),
+            imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.minus_offset_16),
 
-            imageCollection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            imageCollection.heightAnchor.constraint(equalToConstant: 140),
+            imageCollection.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageCollection.heightAnchor.constraint(equalToConstant: Constants.height_140),
             
-            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.offset_16),
+            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.minus_offset_16),
 
-            animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            animatedGradient.heightAnchor.constraint(equalToConstant: 140),
+            animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor),
+            animatedGradient.heightAnchor.constraint(equalToConstant: Constants.height_140),
             
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: imageCollection.bottomAnchor, constant: 4),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.offset_16),
+            titleLabel.topAnchor.constraint(equalTo: imageCollection.bottomAnchor, constant: Constants.offset_4),
         ])
     }
     
