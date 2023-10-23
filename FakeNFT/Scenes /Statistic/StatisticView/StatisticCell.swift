@@ -35,7 +35,7 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
         label.textColor = .ypBlackWithDarkMode
         return label
     }()
-
+    
     private lazy var nftCountLabel: UILabel = {
         let label = UILabel()
         label.font = .headline3
@@ -89,26 +89,26 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
         }
         
         NSLayoutConstraint.activate([
-            roundRect.topAnchor.constraint(equalTo: topAnchor, constant: Constants.offset_4),
-            roundRect.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.offset_4),
-            roundRect.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_51),
-            roundRect.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset_16),
+            roundRect.topAnchor.constraint(equalTo: topAnchor, constant: Constants.offset4),
+            roundRect.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.offset4),
+            roundRect.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset51),
+            roundRect.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset16),
             
             avatarView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            avatarView.leadingAnchor.constraint(equalTo: roundRect.leadingAnchor, constant: Constants.offset_16),
-            avatarView.heightAnchor.constraint(equalToConstant: Constants.offset_28),
-            avatarView.widthAnchor.constraint(equalToConstant: Constants.offset_28),
+            avatarView.leadingAnchor.constraint(equalTo: roundRect.leadingAnchor, constant: Constants.offset16),
+            avatarView.heightAnchor.constraint(equalToConstant: Constants.offset28),
+            avatarView.widthAnchor.constraint(equalToConstant: Constants.offset28),
             
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: Constants.offset_8),
-            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: roundRect.trailingAnchor, constant: -Constants.offset_70),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: Constants.offset8),
+            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: roundRect.trailingAnchor, constant: -Constants.offset70),
             
             nftCountLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            nftCountLabel.trailingAnchor.constraint(equalTo: roundRect.trailingAnchor, constant: -Constants.offset_16),
+            nftCountLabel.trailingAnchor.constraint(equalTo: roundRect.trailingAnchor, constant: -Constants.offset16),
             nftCountLabel.leadingAnchor.constraint(greaterThanOrEqualTo: nameLabel.trailingAnchor),
             
             userRatingLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            userRatingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_16),
+            userRatingLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset16),
             userRatingLabel.trailingAnchor.constraint(lessThanOrEqualTo: roundRect.leadingAnchor)
         ])
     }
@@ -116,12 +116,12 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
 
 extension StatisticCell {
     private enum Constants {
-        static let offset_4: CGFloat = 4
-        static let offset_8: CGFloat = 8
-        static let offset_16: CGFloat = 16
-        static let offset_28: CGFloat = 28
-        static let offset_51: CGFloat = 51
-        static let offset_70: CGFloat = 70
+        static let offset4: CGFloat = 4
+        static let offset8: CGFloat = 8
+        static let offset16: CGFloat = 16
+        static let offset28: CGFloat = 28
+        static let offset51: CGFloat = 51
+        static let offset70: CGFloat = 70
     }
 }
 

@@ -110,7 +110,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
             imageNftView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageNftView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            footerView.topAnchor.constraint(equalTo: imageNftView.bottomAnchor, constant: Constants.offset_8),
+            footerView.topAnchor.constraint(equalTo: imageNftView.bottomAnchor, constant: Constants.offset8),
             footerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             footerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             footerView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -148,7 +148,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
 
 extension UsersCollectionCell {
     private enum Constants {
-        static let offset_8: CGFloat = 8
+        static let offset8: CGFloat = 8
         static let constant_12: CGFloat = 12
         static let button_size: CGFloat = 40
     }

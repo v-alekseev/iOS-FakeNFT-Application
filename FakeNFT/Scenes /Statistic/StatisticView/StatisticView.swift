@@ -78,7 +78,7 @@ final class StatisticView: UIView {
         ])
     }
     
-    @objc func refreshTable() {
+    @objc private func refreshTable() {
         needRefreshTable = true
     }
 }

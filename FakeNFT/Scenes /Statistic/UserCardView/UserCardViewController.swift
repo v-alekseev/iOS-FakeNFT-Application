@@ -45,9 +45,9 @@ final class UserCardViewController: UIViewController {
         contentView.nftsCountLabel.text = ("Коллекция NFT (\(actualUserData.nfts.count))")
         contentView.avatarView.kf.indicatorType = .activity
         contentView.avatarView.kf.setImage(with: URL(string: actualUserData.avatar),
-                                                 placeholder: userAvatarStub,
-                                                 options: [.transition(.fade(1)),
-                                                           .forceRefresh])
+                                           placeholder: userAvatarStub,
+                                           options: [.transition(.fade(1)),
+                                                     .forceRefresh])
         
         bindViewToViewModel()
         bindViewModelToView()
@@ -109,7 +109,7 @@ final class UserCardViewController: UIViewController {
     }
     
     @objc
-    func tapBackButton() {
+    private func tapBackButton() {
         tabBarController?.tabBar.isHidden = false
         navigationController?.popViewController(animated: true)
     }

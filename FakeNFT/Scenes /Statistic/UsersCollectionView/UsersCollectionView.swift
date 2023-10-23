@@ -52,7 +52,7 @@ final class UsersCollectionView: UIView {
     
     init() {
         super.init(frame: .zero)
-
+        
         setUpViews()
         setUpConstraints()
     }

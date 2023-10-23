@@ -13,8 +13,8 @@ final class UserCardView: UIView {
     @Published var didTapWebsiteButton = false
     
     var isLoading: Bool = false {
-            didSet { isLoading ? loadIndicator.startAnimating() : loadIndicator.stopAnimating() }
-        }
+        didSet { isLoading ? loadIndicator.startAnimating() : loadIndicator.stopAnimating() }
+    }
     
     lazy var avatarView: UIImageView = {
         let imageView = UIImageView()
@@ -76,7 +76,7 @@ final class UserCardView: UIView {
     
     init() {
         super.init(frame: .zero)
-
+        
         setUpViews()
         setUpConstraints()
     }
@@ -96,30 +96,30 @@ final class UserCardView: UIView {
     
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            avatarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Constants.offset_20),
-            avatarView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_16),
-            avatarView.heightAnchor.constraint(equalToConstant: Constants.offset_70),
-            avatarView.widthAnchor.constraint(equalToConstant: Constants.offset_70),
+            avatarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Constants.offset20),
+            avatarView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset16),
+            avatarView.heightAnchor.constraint(equalToConstant: Constants.offset70),
+            avatarView.widthAnchor.constraint(equalToConstant: Constants.offset70),
             
             nameLabel.centerYAnchor.constraint(equalTo: avatarView.centerYAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: Constants.offset_16),
-            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset_16),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: Constants.offset16),
+            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset16),
             
-            descriptionLabel.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: Constants.offset_20),
-            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset_16),
+            descriptionLabel.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: Constants.offset20),
+            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset16),
             
-            websiteButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.offset_28),
-            websiteButton.heightAnchor.constraint(equalToConstant: Constants.offset_40),
-            websiteButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_16),
-            websiteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset_16),
+            websiteButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.offset28),
+            websiteButton.heightAnchor.constraint(equalToConstant: Constants.offset40),
+            websiteButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset16),
+            websiteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset16),
             
-            nftsCountLabel.topAnchor.constraint(equalTo: websiteButton.bottomAnchor, constant: Constants.offset_56),
-            nftsCountLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset_16),
-            nftsCountLabel.trailingAnchor.constraint(lessThanOrEqualTo: collectionButton.leadingAnchor, constant: Constants.offset_16),
+            nftsCountLabel.topAnchor.constraint(equalTo: websiteButton.bottomAnchor, constant: Constants.offset56),
+            nftsCountLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset16),
+            nftsCountLabel.trailingAnchor.constraint(lessThanOrEqualTo: collectionButton.leadingAnchor, constant: Constants.offset16),
             
             collectionButton.centerYAnchor.constraint(equalTo: nftsCountLabel.centerYAnchor),
-            collectionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset_20),
+            collectionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset20),
             
             loadIndicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
             loadIndicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
@@ -139,11 +139,11 @@ final class UserCardView: UIView {
 
 extension UserCardView {
     private enum Constants {
-        static let offset_16: CGFloat = 16
-        static let offset_20: CGFloat = 20
-        static let offset_28: CGFloat = 28
-        static let offset_40: CGFloat = 40
-        static let offset_56: CGFloat = 56
-        static let offset_70: CGFloat = 70
+        static let offset16: CGFloat = 16
+        static let offset20: CGFloat = 20
+        static let offset28: CGFloat = 28
+        static let offset40: CGFloat = 40
+        static let offset56: CGFloat = 56
+        static let offset70: CGFloat = 70
     }
 }
