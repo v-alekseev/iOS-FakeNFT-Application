@@ -19,6 +19,5 @@ extension UITableViewCell {
         static let offset_8: CGFloat = 8
         static let height_140: CGFloat = 140
         static let offset_4: CGFloat = 4
-
     }
 }
