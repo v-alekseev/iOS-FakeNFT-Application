@@ -84,7 +84,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         
         nftNameLabel.text = nftData.name
         ratingView.setRating(rank: nftData.rating)
-        priceLabel.text = String(format: "%.2f", nftData.price) + " ETH"
+        priceLabel.text = nftData.price.formatPrice() + " ETH"
         let isLikedImage = isLiked ? UIImage(resource: .isLiked) : UIImage(resource: .isNotLiked)
         likeImageView.image = isLikedImage
         let buttonImage = isInCart ? UIImage(resource: .deleteFromCart) : UIImage(resource: .addToCart)
@@ -153,3 +153,15 @@ extension UsersCollectionCell {
         static let button_size: CGFloat = 40
     }
 }
+
+extension Double {
+    func formatPrice() -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = .current
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        return formatter.string(from: NSNumber(value: self)) ?? "0"
+    }
+}
+
