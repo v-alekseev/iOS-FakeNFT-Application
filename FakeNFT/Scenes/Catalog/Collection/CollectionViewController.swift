@@ -109,23 +109,23 @@ final class CollectionViewController: UIViewController {
     
     private func setupUI() {
         navigationItem.leftBarButtonItem = backButton
-        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0.0
-        var statusBarHeight: CGFloat {
-            if #available(iOS 13.0, *) {
-                let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-                return window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-            } else {
-                return UIApplication.shared.statusBarFrame.height
-            }
-        }
+//        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0.0
+//        var statusBarHeight: CGFloat {
+//            if #available(iOS 13.0, *) {
+//                let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+//                return window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+//            } else {
+//                return UIApplication.shared.statusBarFrame.height
+//            }
+//        }
+        tableView.contentInsetAdjustmentBehavior = .never
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(
-                equalTo: view.topAnchor,
-                constant: -navigationBarHeight - statusBarHeight),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor)
+        
         ])
         tableView.estimatedRowHeight = 374
         tableView.rowHeight = UITableView.automaticDimension
