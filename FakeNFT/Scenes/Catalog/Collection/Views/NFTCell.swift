@@ -154,18 +154,16 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
         
         NFTNameLabel.text = NFT.name
         
-        
         let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-            numberFormatter.minimumFractionDigits = 2
-            numberFormatter.maximumFractionDigits = 2
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
 
-            if let formattedPrice = numberFormatter.string(from: NSNumber(value: NFT.price)) {
-                NFTCostLabel.text = "\(formattedPrice) ETH"
-            } else {
-                NFTCostLabel.text = "\(NFT.price) ETH"
-            }
-        
+        if let formattedPrice = numberFormatter.string(from: NSNumber(value: NFT.price)) {
+            NFTCostLabel.text = "\(formattedPrice) ETH"
+        } else {
+            NFTCostLabel.text = "\(NFT.price) ETH"
+        }
         
         ratingView.setRating(rank: Int(NFT.rating))
         basketButton.setImage(isOrdered ? UIImage(resource: .inBasket) : UIImage(resource: .notInBasket), for: .normal)
