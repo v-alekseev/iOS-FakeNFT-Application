@@ -11,7 +11,8 @@ protocol StatisticDataProviderProtocol {
     func getUsersData( _ completion: @escaping (Result<[UserModel], Error>) -> Void)
     func getNftWithId(nftId: String, _ completion: @escaping (Result<NftModel, Error>) -> Void)
     func getLikesId( _ completion: @escaping (Result<ProfileLikesModel, Error>) -> Void)
-    func getCartId( _ completion: @escaping (Result<CartIdNfts, Error>) -> Void)
+    func getIdNftsInCard( _ completion: @escaping (Result<CartIdNfts, Error>) -> Void)
+    func cartUpdate(newCartIDs: [String],  _ completion: @escaping (Result<CartIdNfts, Error>) -> Void)
 }
 
 final class StatisticDataProvider: StatisticDataProviderProtocol {
@@ -66,11 +67,27 @@ final class StatisticDataProvider: StatisticDataProviderProtocol {
         return
     }
     
-    func getCartId( _ completion: @escaping (Result<CartIdNfts, Error>) -> Void) {
+    func getIdNftsInCard( _ completion: @escaping (Result<CartIdNfts, Error>) -> Void) {
         let cartRequest = CartRequest()
         networkClient.send(request: cartRequest, type: CartIdNfts.self) { [weak self] result in
             guard self != nil else { return }
             DispatchQueue.main.async {
+                switch result {
+                case let .success(data):
+                    completion(.success(data))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        return
+    }
+    
+    func cartUpdate(newCartIDs: [String], _ completion: @escaping (Result<CartIdNfts, Error>) -> Void) {
+        let ntfsRequest = СartUpdateRequest(cartIDs: newCartIDs)
+        networkClient.send(request: ntfsRequest , type: CartIdNfts.self)  { result in
+            DispatchQueue.main.async { [weak self] in
+                guard self != nil else { return }
                 switch result {
                 case let .success(data):
                     completion(.success(data))

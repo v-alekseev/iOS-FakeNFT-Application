@@ -63,10 +63,21 @@ final class UsersCollectionViewModel {
         }
     }
     
-    func loadCartId() {
+    func removeNftsWithIdFromCart (id: String) {
+        let newNftsInCartId = nftsInCartId.filter(){$0 != id}
+        cartUpdate(newNftsInCartId)
+    }
+    
+    func addNftsWithIdToCart (id: String) {
+        var newNftsInCartId = nftsInCartId
+        newNftsInCartId.append(id)
+        cartUpdate(newNftsInCartId)
+    }
+    
+    private func loadCartId() {
         isLoading = true
         loadError = nil
-        dataProvider?.getCartId() { [weak self] result in
+        dataProvider?.getIdNftsInCard() { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
@@ -81,5 +92,21 @@ final class UsersCollectionViewModel {
         }
     }
     
-    
+    private func cartUpdate (_ newNftsInCartId: [String]) {
+        isLoading = true
+        loadError = nil
+        dataProvider?.cartUpdate(newCartIDs: newNftsInCartId) { [weak self] result in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(data):
+                    self.nftsInCartId = data.nfts
+                case .failure(let error):
+                    let errorString = self.handlingErrorService.handlingHTTPStatusCodeError(error: error)
+                    self.loadError = errorString
+                }
+                self.isLoading = false
+            }
+        }
+    }
 }

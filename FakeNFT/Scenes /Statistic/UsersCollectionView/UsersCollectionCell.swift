@@ -141,8 +141,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     @objc
     private func tapCartButton() {
-        //TODO
-        print(#function)
+
     }
 }
 
