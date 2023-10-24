@@ -17,6 +17,7 @@ final class UsersCollectionViewModel {
     
     var nftsIdForDisplayingLikes: [String] = []
     private let dataProvider: StatisticDataProviderProtocol?
+    private var handlingErrorService = HandlingErrorService.shared
     private var actualUserData: UserModel
     private var profileLikes: [String]
     
@@ -46,7 +47,8 @@ final class UsersCollectionViewModel {
                             self.nftsIdForDisplayingLikes.append(data.id)
                         }
                     case .failure(let error):
-                        self.loadError = "\(error)"
+                        let errorString = self.handlingErrorService.handlingHTTPStatusCodeError(error: error)
+                        self.loadError = errorString
                     }
                     dispatchGroup.leave()
                 }

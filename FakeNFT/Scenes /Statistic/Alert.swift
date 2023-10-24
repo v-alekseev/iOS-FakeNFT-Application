@@ -13,7 +13,7 @@ final class Alert {
     
     func showAlert(_ alertController: UIViewController?, message: String? = "", handler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(
-            title: "Не удалось получить данные",
+            title: "Ошибка",
             message: message,
             preferredStyle: .alert)
         alert.addAction(.init(title: "Отмена", style: .cancel))

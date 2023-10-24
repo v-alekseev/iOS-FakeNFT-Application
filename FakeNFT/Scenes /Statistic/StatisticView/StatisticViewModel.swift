@@ -17,6 +17,7 @@ final class StatisticViewModel {
     @Published var needShowFilterMenu = false
     
     private let dataProvider: StatisticDataProviderProtocol?
+    private var handlingErrorService = HandlingErrorService.shared
     private let filtrationType = FiltrationTypeStorage()
     
     var rowForOpenUserCard: Int = 0 {
@@ -45,7 +46,8 @@ final class StatisticViewModel {
                         self.provideRatingFilter()
                     }
                 case .failure(let error):
-                    self.loadError = "\(error)"
+                    let errorString = self.handlingErrorService.handlingHTTPStatusCodeError(error: error)
+                    self.loadError = errorString
                 }
                 self.isLoading = false
             }
