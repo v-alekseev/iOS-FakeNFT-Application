@@ -84,7 +84,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         
         nftNameLabel.text = nftData.name
         ratingView.setRating(rank: nftData.rating)
-        priceLabel.text = nftData.price.formatPrice() + " ETH"
+        priceLabel.text = "\(nftData.price.formatPrice()) ETH"
         let isLikedImage = isLiked ? UIImage(resource: .isLiked) : UIImage(resource: .isNotLiked)
         likeImageView.image = isLikedImage
         let buttonImage = isInCart ? UIImage(resource: .deleteFromCart) : UIImage(resource: .addToCart)

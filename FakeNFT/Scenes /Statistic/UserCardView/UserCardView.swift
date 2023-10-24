@@ -35,25 +35,10 @@ final class UserCardView: UIView {
         return label
     }()
     
-    lazy var nftsCountLabel: UILabel = {
-        let label = UILabel()
-        label.font = .bodyBold
-        label.textColor = .ypBlackWithDarkMode
-        return label
-    }()
-    
     lazy var loadIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
         return indicator
-    }()
-    
-    private lazy var collectionButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.init(systemName: "chevron.forward"), for: .normal)
-        button.tintColor = .ypBlackWithDarkMode
-        button.addTarget(self, action: #selector(didTapShowCollection), for: .touchUpInside)
-        return button
     }()
     
     private lazy var websiteButton: UIButton = {
@@ -70,6 +55,24 @@ final class UserCardView: UIView {
         return button
     }()
     
+    private lazy var forwardButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "chevron.forward"), for: .normal)
+        button.contentHorizontalAlignment = .right
+        button.tintColor = .ypBlackWithDarkMode
+        button.setTitleColor(.ypBlackWithDarkMode, for: .normal)
+        button.addTarget(self, action: #selector(didTapShowCollection), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var nftsCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = .bodyBold
+        label.textColor = .ypBlackWithDarkMode
+        label.textAlignment = .left
+        return label
+    }()
+    
     init() {
         super.init(frame: .zero)
         
@@ -83,7 +86,7 @@ final class UserCardView: UIView {
     
     private func setUpViews() {
         backgroundColor = .ypWhiteWithDarkMode
-        [avatarView, nameLabel, collectionButton, descriptionLabel, websiteButton, nftsCountLabel, loadIndicator]
+        [avatarView, nameLabel, descriptionLabel, websiteButton, forwardButton, nftsCountLabel, loadIndicator]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -110,12 +113,14 @@ final class UserCardView: UIView {
             websiteButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset16),
             websiteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset16),
             
-            nftsCountLabel.topAnchor.constraint(equalTo: websiteButton.bottomAnchor, constant: Constants.offset56),
-            nftsCountLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset16),
-            nftsCountLabel.trailingAnchor.constraint(lessThanOrEqualTo: collectionButton.leadingAnchor, constant: Constants.offset16),
+            forwardButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.offset16),
+            forwardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset16),
+            forwardButton.topAnchor.constraint(equalTo: websiteButton.bottomAnchor, constant: Constants.offset40),
+            forwardButton.heightAnchor.constraint(equalToConstant: Constants.offset54),
             
-            collectionButton.centerYAnchor.constraint(equalTo: nftsCountLabel.centerYAnchor),
-            collectionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.offset20),
+            nftsCountLabel.centerYAnchor.constraint(equalTo: forwardButton.centerYAnchor),
+            nftsCountLabel.leadingAnchor.constraint(equalTo: forwardButton.leadingAnchor),
+            nftsCountLabel.trailingAnchor.constraint(equalTo: forwardButton.trailingAnchor, constant: -Constants.offset28),
             
             loadIndicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
             loadIndicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
@@ -139,6 +144,7 @@ extension UserCardView {
         static let offset20: CGFloat = 20
         static let offset28: CGFloat = 28
         static let offset40: CGFloat = 40
+        static let offset54: CGFloat = 54
         static let offset56: CGFloat = 56
         static let offset70: CGFloat = 70
     }
