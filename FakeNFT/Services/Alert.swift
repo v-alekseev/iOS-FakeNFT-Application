@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 final class Alert {
-    static func alertInformation(viewController: UIViewController, text: String, hadler: ((UIAlertAction) -> Void)? = nil ) {
+    static func alertInformation(viewController: UIViewController, text: String, title: String? = nil, hadler: ((UIAlertAction) -> Void)? = nil ) {
         let  headerString = L10n.Alert.header
         let  buttonString = L10n.Alert.button
         
-        let alert = UIAlertController(title: headerString, message: text, preferredStyle: .alert)
+        let alert = UIAlertController(title: title ?? headerString, message: text, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: buttonString, style: .default, handler: hadler))
         viewController.present(alert, animated: true)
     }

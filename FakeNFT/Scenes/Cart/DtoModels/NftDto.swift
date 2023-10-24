@@ -16,4 +16,15 @@ struct NftDto: Codable {
     var price : Double
     var author : String
     var id : String
+    
+    init(createdAt: String, name: String, images: [String], rating: Int, description: String, price: Double, author: String, id: String) {
+        self.createdAt = createdAt
+        self.name = name
+        self.images = images
+        self.rating = rating
+        self.description = description
+        self.price = price
+        self.author = author
+        self.id = id
+    }
 }

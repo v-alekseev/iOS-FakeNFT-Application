@@ -30,10 +30,41 @@ internal enum L10n {
     internal static let paymentButtonTitle = L10n.tr("Localizable", "cart.payment_button_title", fallback: "К оплате")
     /// Цена
     internal static let priceLabelName = L10n.tr("Localizable", "cart.price_label_name", fallback: "Цена")
+    internal enum DeleteConfirmScreen {
+      /// Вы уверены, что хотите удалить объект из корзины?
+      internal static let confiremText = L10n.tr("Localizable", "cart.DeleteConfirmScreen.confiremText", fallback: "Вы уверены, что хотите удалить объект из корзины?")
+      /// Удалить
+      internal static let deleteButtonTitle = L10n.tr("Localizable", "cart.DeleteConfirmScreen.deleteButtonTitle", fallback: "Удалить")
+      /// Вернуться
+      internal static let returnButtonTitle = L10n.tr("Localizable", "cart.DeleteConfirmScreen.returnButtonTitle", fallback: "Вернуться")
+    }
+    internal enum PayScreen {
+      /// Выберите способ оплаты
+      internal static let screenHeader = L10n.tr("Localizable", "cart.PayScreen.screenHeader", fallback: "Выберите способ оплаты")
+      /// Совершая покупку, вы соглашаетесь с условиями
+      internal static let termOfUseFirstString = L10n.tr("Localizable", "cart.PayScreen.termOfUseFirstString", fallback: "Совершая покупку, вы соглашаетесь с условиями")
+      /// Пользовательского соглашения
+      internal static let termOfUseSecondString = L10n.tr("Localizable", "cart.PayScreen.termOfUseSecondString", fallback: "Пользовательского соглашения")
+    }
+    internal enum CartScreen {
+      /// Корзина пуста
+      internal static let emptyCartMessage = L10n.tr("Localizable", "cart.cartScreen.emptyCartMessage", fallback: "Корзина пуста")
+    }
+    internal enum PayResultScreen {
+      /// Вернуться в каталог
+      internal static let buttonText = L10n.tr("Localizable", "cart.payResultScreen.buttonText", fallback: "Вернуться в каталог")
+      /// Попробуйте ещё раз!
+      internal static let errorAlertMessage = L10n.tr("Localizable", "cart.payResultScreen.errorAlertMessage", fallback: "Попробуйте ещё раз!")
+      /// Упс! Что-то пошло не так :(
+      internal static let errorAlertTitle = L10n.tr("Localizable", "cart.payResultScreen.errorAlertTitle", fallback: "Упс! Что-то пошло не так :(")
+      /// Успех! Оплата прошла,
+      /// поздравляем с покупкой!
+      internal static let succsesPaymentText = L10n.tr("Localizable", "cart.payResultScreen.succsesPaymentText", fallback: "Успех! Оплата прошла,\nпоздравляем с покупкой!")
+    }
   }
   internal enum Filter {
-    /// По имени
-    internal static let byName = L10n.tr("Localizable", "filter.byName", fallback: "По имени")
+    /// По названию
+    internal static let byName = L10n.tr("Localizable", "filter.byName", fallback: "По названию")
     /// По цене
     internal static let byPrice = L10n.tr("Localizable", "filter.byPrice", fallback: "По цене")
     /// По рейтингу

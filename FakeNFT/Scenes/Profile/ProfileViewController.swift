@@ -24,8 +24,6 @@ final class ProfileViewController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         setupUI()
         view.backgroundColor = .white
         print("ProfileViewController viewDidLoad")

@@ -9,6 +9,19 @@ import Foundation
 
 struct Filters {
     typealias FilterClosure =  (NftModel, NftModel) -> Bool
+    // filterBy нужен только для того, что бы в UserData сохранять Closure
+    enum filterBy: Int {
+        case id
+        case name
+        case price
+        case rating
+    }
+    
+    static let filter: [filterBy:FilterClosure] = [.id: filterDefault,
+                                            .name: filterByName,
+                                            .price: filterByPrice,
+                                            .rating: filterByRating
+    ]
     
     static var filterDefault: FilterClosure = {a , b in
         return a.id < b.id

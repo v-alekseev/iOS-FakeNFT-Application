@@ -13,14 +13,31 @@
 "cart.price_label_name" = "Цена";
 "cart.payment_button_title" = "К оплате";
 "cart.getOrderError" = "К сожалению, не получилось загрузить данные. Попробуйте еще раз попозже.";
+"cart.cartScreen.emptyCartMessage"  = "Корзина пуста";
+
+"cart.payResultScreen.succsesPaymentText" = "Успех! Оплата прошла,\nпоздравляем с покупкой!";
+"cart.payResultScreen.buttonText" = "Вернуться в каталог";
+"cart.payResultScreen.errorAlertTitle" = "Упс! Что-то пошло не так :(";
+"cart.payResultScreen.errorAlertMessage" = "Попробуйте ещё раз!";
+
+"cart.PayScreen.screenHeader" = "Выберите способ оплаты";
+"cart.PayScreen.termOfUseFirstString" = "Совершая покупку, вы соглашаетесь с условиями";
+"cart.PayScreen.termOfUseSecondString" = "Пользовательского соглашения";
+
+"cart.DeleteConfirmScreen.confiremText" =  "Вы уверены, что хотите удалить объект из корзины?";
+"cart.DeleteConfirmScreen.returnButtonTitle" = "Вернуться";
+"cart.DeleteConfirmScreen.deleteButtonTitle" = "Удалить";
+
 
 "alert.header" = "Сообщение для вас!";
 "alert.button" = "Понятно";
 
 "filter.caption" = "Сортировка";
-"filter.byName" = "По имени";
+"filter.byName" = "По названию";
 "filter.byPrice" = "По цене";
 "filter.byRating" = "По рейтингу";
 "filter.close" = "Закрыть";
+
+
 
 

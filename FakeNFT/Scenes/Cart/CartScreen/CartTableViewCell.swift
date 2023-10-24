@@ -35,47 +35,16 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         return image
     }()
     
-    private lazy var nameLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.bodyBold
-        return label
-    }()
+    private lazy var nameLabel = UILabel(font: .bodyBold)
+    private lazy var ratingView = RatingView()
     
-    private lazy var stackView: UIStackView  = {
-        var sView = UIStackView()
-        sView.axis  = NSLayoutConstraint.Axis.horizontal
-        sView.distribution  = UIStackView.Distribution.equalSpacing
-        sView.alignment = UIStackView.Alignment.leading
-        sView.spacing = 2
-        sView.translatesAutoresizingMaskIntoConstraints = false
-        return sView
-    }()
-    
-    private lazy var starImage: UIImageView = {
-        var image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    private lazy var priceNameLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.caption2
-        label.text = L10n.Cart.priceLabelName
-        return label
-    }()
-    
-    private lazy var priceLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.bodyBold
-        return label
-    }()
+    private lazy var priceNameLabel = UILabel(font: .caption2, text: L10n.Cart.priceLabelName)
+    private lazy var priceLabel = UILabel(font: .bodyBold)
     
     private lazy var trashButton: UIButton = {
         var button = UIButton()
-        button.setImage(UIImage(resource: .cartRemove), for: .normal)
+        button.tintColor = .ypBlackWithDarkMode
+        button.setImage(UIImage(resource: .cartRemove).withRenderingMode(.alwaysTemplate), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(deleteButtonTap), for: .touchUpInside)
         return button
@@ -85,6 +54,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        contentView.backgroundColor = .ypWhiteWithDarkMode
         setupUI()
         setup(imageUrl: URL(string: ""), name: "-", rank: 0, price: "0 ETH", id: "0")
     }
@@ -95,20 +65,10 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         nameLabel.text = name
         priceLabel.text = price
         nftID = id
-        
-        var computedRank = rank
-        if rank < 1 ||  rank > 5  {
-            computedRank = 0
-        }
-        
-        // сначала показываються заглушки. поэтому надо обязательно очистить stackView от старых subview
-        for view in stackView.subviews {
-            stackView.removeArrangedSubview(view)
-        }
-        // а теперь уже запольнить новыми звездами
-        for index in 1...5 {
-            stackView.addArrangedSubview(createStarView(index <= computedRank ? .star : .starGray))
-        }
+
+    
+        ratingView.setRating(rank: rank)
+
     }
     
     func setup(nfs: NftModel) {
@@ -121,7 +81,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         let image = nftImage.image ?? placeholderImage
         delegate?.didDeleteButtonPressed(id: nftID, image: image)
     }
-    
+
     private func setupUI() {
         self.contentView.addSubview(canvasView)
         NSLayoutConstraint.activate([
@@ -145,18 +105,17 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
             nameLabel.topAnchor.constraint(equalTo: canvasView.topAnchor, constant: 8),
         ])
         
-        self.contentView.addSubview(stackView)
+        self.contentView.addSubview(ratingView)
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 12),
-            stackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4)
+            ratingView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            ratingView.heightAnchor.constraint(equalToConstant: 12),
+            ratingView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4)
         ])
-        
         
         self.contentView.addSubview(priceNameLabel)
         NSLayoutConstraint.activate([
             priceNameLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            priceNameLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 12),
+            priceNameLabel.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 12),
         ])
         
         self.contentView.addSubview(priceLabel)
@@ -173,11 +132,7 @@ final class CartTableViewCell: UITableViewCell, ReuseIdentifying {
         
     }
     
-    private func createStarView(_ star: ImageResource) -> UIImageView {
-        let image = UIImageView()
-        image.image = UIImage(resource: star)
-        return image
-    }
+
     
     required init?(coder: NSCoder) {
         fatalError("error")

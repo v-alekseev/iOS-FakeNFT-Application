@@ -11,7 +11,7 @@ extension CartViewController: CartTableViewCellDelegate {
     func didDeleteButtonPressed(id: String, image: UIImage) {
         // переход на экран удаления из корзины
         
-        let deleteViewModel = CartDeleteViewModel(nftImage: image, nftIDforDelete: id, dataProvider: CardDataProvider.shared)
+        let deleteViewModel = CartDeleteViewModel(nftImage: image, nftIDforDelete: id)
         
         let deleteVC = CartDeleteViewController()
         deleteVC.viewModel = deleteViewModel
