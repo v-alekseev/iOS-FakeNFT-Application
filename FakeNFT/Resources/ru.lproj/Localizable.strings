@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   FakeNFT
 
@@ -17,3 +17,7 @@
 "alert.error.description" = "Что-то пошло не так.";
 "alert.error.retry" = "Перезагрузить";
 "catalog.collection.authorString" = "Автор коллекции";
+"tabbar.catalog" = "Каталог";
+"tabbar.profile" = "Профиль";
+"tabbar.basket" = "Корзина";
+"tabbar.stats" = "Статистика";
