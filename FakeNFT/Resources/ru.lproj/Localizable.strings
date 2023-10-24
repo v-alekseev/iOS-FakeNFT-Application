@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   FakeNFT
 
@@ -38,6 +38,15 @@
 "filter.byRating" = "По рейтингу";
 "filter.close" = "Закрыть";
 
-
-
-
+"catalog.sort.byName" = "По названию";
+"catalog.sort.byNFTQuantity" = "По количеству NFT";
+"catalog.sort" = "Сортировка";
+"catalog.sort.close" = "Закрыть";
+"alert.error.title" = "Ошибка";
+"alert.error.description" = "Что-то пошло не так.";
+"alert.error.retry" = "Перезагрузить";
+"catalog.collection.authorString" = "Автор коллекции";
+"tabbar.catalog" = "Каталог";
+"tabbar.profile" = "Профиль";
+"tabbar.basket" = "Корзина";
+"tabbar.stats" = "Статистика";

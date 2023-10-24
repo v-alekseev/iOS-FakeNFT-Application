@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   FakeNFT
 
@@ -36,3 +36,17 @@
 "filter.byPrice" = "By price";
 "filter.byRating" = "By rating";
 "filter.close" = "Close";
+
+"catalog.sort.byName" = "By name";
+"catalog.sort.byNFTQuantity" = "By NFT quantity";
+"catalog.sort" = "Sort";
+"catalog.sort.close" = "Close";
+"alert.error.title" = "Error";
+"alert.error.description" = "Something went wrong.";
+"alert.error.retry" = "Reload";
+"catalog.collection.authorString" = "Author";
+"tabbar.catalog" = "Cetalog";
+"tabbar.profile" = "Profile";
+"tabbar.basket" = "Basket";
+"tabbar.stats" = "Stats";
+
