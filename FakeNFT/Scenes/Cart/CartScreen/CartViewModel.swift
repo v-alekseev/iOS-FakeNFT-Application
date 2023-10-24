@@ -20,7 +20,7 @@ protocol CartViewModelProtocol {
     var order: [NftModel]  {get}
     var totalPrice: Double {get}
     
-    func filterCart(_ filter: @escaping Filters.FilterClosure)
+    func filterCart(_ filter: Filters.filterBy)
     func getOrder()
 }
 
@@ -57,8 +57,18 @@ final class CartViewModel: CartViewModelProtocol {
         }
     }
     
-    private var currentFilter: Filters.FilterClosure = Filters.filterDefault
-    
+    private var storage: UserDefaults = .standard
+    private let userDateFilterKey = "current_filter"
+    private var currentFilter: Filters.filterBy {
+        get {
+            let filterID = storage.integer(forKey: userDateFilterKey) // переписываем чтение
+            return  Filters.filterBy(rawValue: filterID) ?? .id // .id - default sort
+        }
+        set {
+            storage.setValue(newValue.rawValue, forKey: userDateFilterKey)
+        }
+    }
+      
     // MARK: - init
     //
 
@@ -76,14 +86,14 @@ final class CartViewModel: CartViewModelProtocol {
         guard let cartDataProvider = cartDataProvider  else {return}
         
         let orderUnsorted = cartDataProvider.order.compactMap{NftModel(nft: $0)}
-        order = orderUnsorted.sorted(by: currentFilter)
+        order = orderUnsorted.sorted(by: Filters.filter[currentFilter] ?? Filters.filterDefault )
     }
     
     // MARK: - Public functions
     //
-    func filterCart(_ filter: @escaping Filters.FilterClosure) {
+    func filterCart(_ filter: Filters.filterBy) {
         currentFilter = filter
-        order = order.sorted(by: currentFilter)
+        order = order.sorted(by: Filters.filter[currentFilter] ?? Filters.filterDefault )
     }
     
     func getOrder() {

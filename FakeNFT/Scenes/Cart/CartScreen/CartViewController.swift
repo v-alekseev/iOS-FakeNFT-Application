@@ -91,17 +91,17 @@ final class CartViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: L10n.Filter.byPrice, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
-            self.viewModel?.filterCart(Filters.filterByPrice)
+            self.viewModel?.filterCart(.price)
         }))
         
         alert.addAction(UIAlertAction(title: L10n.Filter.byRating, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
-            self.viewModel?.filterCart(Filters.filterByRating)
+            self.viewModel?.filterCart(.rating)
         }))
         
         alert.addAction(UIAlertAction(title: L10n.Filter.byName, style: .default , handler:{ [weak self] (UIAlertAction) in
             guard let self = self else { return }
-            self.viewModel?.filterCart(Filters.filterByName)
+            self.viewModel?.filterCart(.name)
         }))
         
         alert.addAction(UIAlertAction(title: L10n.Filter.close, style: .cancel, handler:{(UIAlertAction) in
