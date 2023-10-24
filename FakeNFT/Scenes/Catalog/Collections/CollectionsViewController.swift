@@ -45,8 +45,6 @@ final class CollectionsViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
         view.backgroundColor = .ypWhiteWithDarkMode
-        print("CatalogViewController viewDidLoad")
-        
     }
     
     // MARK: - Setup Methods
@@ -54,11 +52,11 @@ final class CollectionsViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterBarButtonItem
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.offset_20),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+        ])
     }
     
     private func setupButtons() {
@@ -77,7 +75,6 @@ final class CollectionsViewController: UIViewController {
     // MARK: - Objc Methods
     @objc
     private func filterButtonTapped() {
-        print("filterButtonTapped")
         showSortSelector()
     }
     
@@ -90,7 +87,6 @@ final class CollectionsViewController: UIViewController {
     private func bind () {
         viewModel.bind(to: self)
     }
-    
     
     private func showSortSelector() {
         let alertController = UIAlertController(title: nil, message: L10n.Catalog.sort, preferredStyle: .actionSheet)
@@ -122,7 +118,7 @@ final class CollectionsViewController: UIViewController {
         case .sortSelection:
             showSortSelector()
         case .collectionDetails(let collection):
-            navigationController?.pushViewController(SingleCollectionViewController(collection: collection), animated: true)
+            navigationController?.pushViewController(CollectionViewController(collection: collection, viewModel: viewModel.giveMeCollectionViewModel(for: collection)), animated: true)
         case .sort:
             break
         case .pullToRefresh:
@@ -154,7 +150,7 @@ final class CollectionsViewController: UIViewController {
         let alertPresenter = AlertPresenter()
         let alertModel = AlertModel(title: L10n.Alert.Error.title, message: L10n.Alert.Error.description, primaryButtonText: L10n.Alert.Error.retry) { [weak self] in
             guard let self = self else { return }
-            self.tableView.reloadData()
+            self.viewModel.refresh()
         }
         alertPresenter.show(in: self, model: alertModel)
     }

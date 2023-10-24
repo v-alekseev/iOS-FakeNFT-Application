@@ -11,6 +11,9 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     
     private let sortTypeKey = "selectedSortType"
     private var collections: [CollectionModel]
+    private var author: AuthorModel?
+    private var NFTs: [NFTModel] = []
+    private let nftAccessSemaphore = DispatchSemaphore(value: 1)
     private var currentSortType: SortType?
     private let dataProvider: CatalogDataProviderProtocol
     
@@ -23,7 +26,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
         self.collections = []
         
         currentSortType = savedSortType()
-        self.dataProvider.giveMeAllCollections() { [weak self] result in
+        self.dataProvider.fetchMeAllCollections() { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let collections):
@@ -36,11 +39,9 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
                 }
                 completion(result)
                 
-            case .failure(let error):
-                print(error)
+            case .failure:
                 completion(result)
             }
-            
         }
     }
     
@@ -63,7 +64,7 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     
     // MARK: - Reload
     func reloadCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void = {_ in }) {
-        self.dataProvider.giveMeAllCollections() { [weak self] result in
+        self.dataProvider.fetchMeAllCollections() { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let collections):
@@ -76,10 +77,62 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
                         self.sortCollectionsByNFTQuantity(inOrder: order)
                     }
                 }
-            case .failure(let error):
-                print(error)
+            case .failure:
+                break
             }
             completion(result)
+        }
+    }
+    
+    // MARK: - Authors
+    func fetchMyAuthor(with id: String, completion: @escaping (Result<AuthorModel, Error>) -> Void = {_ in })  {
+        self.dataProvider.fetchMyAuthor(with: id) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let author):
+                self.author = author
+            case .failure:
+                break
+            }
+            completion(result)
+        }
+    }
+    
+    func clearAuthor() {
+        self.author = nil
+    }
+    
+    func giveMeCurrentAuthor() -> AuthorModel? {
+        return self.author
+    }
+    
+    // MARK: - NFTs
+    func fetchMyNFT(with id: String, completion: @escaping (Result<NFTModel, Error>) -> Void = {_ in }) {
+        self.dataProvider.fetchMeNft(withID: id) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let nft):
+                self.NFTs.append(nft)
+            case .failure:
+                break
+            }
+            completion(result)
+        }
+    }
+    
+    func clearNFTs() {
+        self.NFTs = []
+    }
+    
+    func giveMeNFTsQuantity() -> Int {
+        return self.NFTs.count
+    }
+    
+    func giveMeNFTAt(index: Int) -> NFTModel? {
+        if index < self.NFTs.count {
+            return self.NFTs[index]
+        } else {
+            return nil
         }
     }
     
@@ -135,7 +188,6 @@ final class DataProviderInteractor: DataProviderInteractorProtocol {
     private func applySortType(_ type: SortType) {
         currentSortType = type
         saveSortType(type)
-        print(type)
     }
     
     private func savedSortType() -> SortType {

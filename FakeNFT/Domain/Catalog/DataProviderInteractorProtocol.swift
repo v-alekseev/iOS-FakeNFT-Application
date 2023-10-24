@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol DataProviderInteractorProtocol {
     func giveMeAllCollections(isSorted: Bool) -> [CollectionModel]
     func howManyCollections() -> Int
@@ -13,6 +14,13 @@ protocol DataProviderInteractorProtocol {
     func reloadCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void)
     func sortCollectionsByName(inOrder: SortCases)
     func sortCollectionsByNFTQuantity(inOrder: SortCases)
+    func clearAuthor()
+    func fetchMyAuthor(with id: String, completion: @escaping (Result<AuthorModel, Error>) -> Void)
+    func clearNFTs()
+    func fetchMyNFT(with id: String, completion: @escaping (Result<NFTModel, Error>) -> Void)
+    func giveMeCurrentAuthor() -> AuthorModel?
+    func giveMeNFTsQuantity() -> Int
+    func giveMeNFTAt(index: Int) -> NFTModel?
 }
 
 extension DataProviderInteractorProtocol {

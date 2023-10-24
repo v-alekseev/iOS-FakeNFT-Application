@@ -10,6 +10,25 @@ import Foundation
 import XCTest
 
 class MockCollectionsViewModel: CollectionsViewModelProtocol {
+    func giveMeCollectionViewModel(for model: FakeNFT.CollectionModel) -> FakeNFT.CollectionViewModelProtocol {
+        return CollectionViewModel(
+            dataSource: DataProviderInteractor(
+                dataProvider: CatalogDataProvider(
+                    client: MockNetworkClient()
+                )
+            ),
+            model: CollectionModel(
+                createdAt: "1",
+                name: "2",
+                cover: "3",
+                nfts: ["4"],
+                description: "5",
+                id: "6",
+                author: "7"
+            )
+        )
+    }
+    
     
     enum MockError: Error {
         case someError

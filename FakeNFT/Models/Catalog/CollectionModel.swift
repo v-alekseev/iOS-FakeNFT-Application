@@ -14,4 +14,5 @@ struct CollectionModel: Codable {
     let nfts: [String]
     let description: String
     let id: String
+    let author: String
 }

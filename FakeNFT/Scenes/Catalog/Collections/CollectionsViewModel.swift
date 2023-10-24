@@ -106,4 +106,14 @@ final class CollectionsViewModel: CollectionsViewModelProtocol {
             controller.renderState(state: state)
         }
     }
+    
+    func giveMeCollectionViewModel(for model: CollectionModel) -> CollectionViewModelProtocol {
+        if dataSource != nil {
+            return CollectionViewModel(dataSource: dataSource!, model: model)
+        } else {
+            let ds = DataProviderInteractor(dataProvider: CatalogDataProvider()) { _ in }
+            return CollectionViewModel(dataSource: ds, model: model)
+        }
+    }
+
 }

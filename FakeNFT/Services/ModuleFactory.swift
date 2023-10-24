@@ -41,9 +41,18 @@ struct ModuleFactory {
     static func createCartViewController() -> UIViewController {
         return CartViewController()
     }
+    
     static func createCatalogViewController() -> UIViewController {
-        return UINavigationController (rootViewController: CollectionsViewController())
+        let viewController = CollectionsViewController()
+        let navController = UINavigationController(rootViewController: viewController)
+
+        navController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navController.navigationBar.shadowImage = UIImage()
+        navController.navigationBar.isTranslucent = true
+
+        return navController
     }
+    
     static func createProfileViewController() -> UIViewController {
         return ProfileViewController()
     }

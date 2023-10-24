@@ -15,6 +15,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         let label = UILabel()
         label.font = UIFont.bodyBold
         label.textColor = .ypBlackWithDarkMode
+        label.numberOfLines = 1
         return label
     }()
     
@@ -26,7 +27,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         return imageView
     }()
     
-    private let placeholderImage = UIImage(named: "CatPlaceholder")
+    private let placeholderImage = UIImage(resource: .catPlaceholder)
     
     private lazy var animatedGradient: AnimatedGradientView = {
         return AnimatedGradientView(frame: self.bounds, cornerRadius: 12)
@@ -46,14 +47,14 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
     
     // MARK: - Setup Methods
     private func setupCell() {
-        hyerarchyUI()
-        constraintUI()
+        addSubviews()
+        setupConstraints()
         self.selectionStyle = .none
         self.backgroundColor = .clear
         animatedGradient.isHidden = true
     }
     
-    private func hyerarchyUI() {
+    private func addSubviews() {
         contentView.addSubview(imageCollection)
         contentView.addSubview(titleLabel)
         contentView.addSubview(animatedGradient)
@@ -63,22 +64,22 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         animatedGradient.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func constraintUI() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.offset_16),
+            imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.minus_offset_16),
 
-            imageCollection.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            imageCollection.heightAnchor.constraint(equalToConstant: 140),
+            imageCollection.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageCollection.heightAnchor.constraint(equalToConstant: Constants.height_140),
             
-            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            animatedGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.offset_16),
+            animatedGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.minus_offset_16),
 
-            animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            animatedGradient.heightAnchor.constraint(equalToConstant: 140),
+            animatedGradient.topAnchor.constraint(equalTo: contentView.topAnchor),
+            animatedGradient.heightAnchor.constraint(equalToConstant: Constants.height_140),
             
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: imageCollection.bottomAnchor, constant: 4),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.offset_16),
+            titleLabel.topAnchor.constraint(equalTo: imageCollection.bottomAnchor, constant: Constants.offset_4),
         ])
     }
     
@@ -89,13 +90,14 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         let processor = RoundCornerImageProcessor(cornerRadius: 12)
         let options: KingfisherOptionsInfo = [
             .backgroundDecode,
-            .onFailureImage(placeholderImage?.kf.image(withBlendMode: .normal, backgroundColor: .ypBlackWithDarkMode)),
+            .onFailureImage(placeholderImage.kf.image(withBlendMode: .normal, backgroundColor: .ypBlackWithDarkMode)),
             .processor(processor)
         ]
         imageCollection.kf.setImage(
             with: URL(string: collection.cover),
             placeholder: placeholderImage,
-            options: options, completionHandler: { [weak self] _ in
+            options: options, 
+            completionHandler: { [weak self] _ in
                 guard let self = self else { return }
                 self.animatedGradient.stopAnimating()
                 self.animatedGradient.isHidden = true
