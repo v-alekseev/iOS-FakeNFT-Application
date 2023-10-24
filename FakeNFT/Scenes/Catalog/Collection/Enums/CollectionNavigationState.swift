@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum CollectionNavigationState {
     case base
     case authorLinkDidTapped(url: URL)
