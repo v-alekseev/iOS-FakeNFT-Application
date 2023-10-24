@@ -44,7 +44,7 @@ final class UserCardViewModel {
         isLoading = true
         loadError = nil
         profileLikes = []
-        dataProvider?.getProfileLikes() { [weak self] result in
+        dataProvider?.getLikesId() { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
                 switch result {

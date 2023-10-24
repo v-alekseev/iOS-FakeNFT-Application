@@ -12,6 +12,7 @@ final class UsersCollectionView: UIView {
     
     var nfts: [NftModel] = []
     var nftsIdForDisplayingLikes: [String] = []
+    var nftsInCartId: [String] = []
     
     lazy var loadIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -87,7 +88,8 @@ extension UsersCollectionView: UICollectionViewDataSource {
             for: indexPath) as? UsersCollectionCell
         let nftData = nfts[indexPath.row]
         let isLiked = nftsIdForDisplayingLikes.contains(nftData.id)
-        cell?.provide(nftData: nftData, isLiked: isLiked, isInCart: true)
+        let isInCart = nftsInCartId.contains(nftData.id)
+        cell?.provide(nftData: nftData, isLiked: isLiked, isInCart: isInCart)
         return cell ?? UsersCollectionCell()
     }
 }

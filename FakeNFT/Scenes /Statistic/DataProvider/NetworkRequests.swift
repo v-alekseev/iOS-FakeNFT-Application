@@ -26,3 +26,17 @@ struct ProfileRequest: NetworkRequest {
     var endpoint: URL? = URL(string: "\(constantURLPart)profile/1")
 }
 
+struct CartRequest: NetworkRequest {
+    var endpoint: URL? = URL(string: "\(constantURLPart)orders/1")
+}
+
+//struct СartUpdateRequest: NetworkRequest {
+//    var endpoint: URL? = URL(string: "\(constantURLPart)orders/1")
+//    var httpMethod: HttpMethod { .put }
+//    
+////    var dto: Encodable?
+////    init(cartIDs: [String]) {
+////        self.dto = UpdateCartDto(nfts: cartIDs)
+////    }
+//}
+

@@ -11,6 +11,7 @@ import Combine
 final class UsersCollectionViewModel {
     
     @Published var nfts: [NftModel] = []
+    @Published var nftsInCartId: [String] = []
     @Published var isLoading = false
     @Published var loadError: String?
     @Published var showStub = false
@@ -58,6 +59,27 @@ final class UsersCollectionViewModel {
             self.isLoading = false
             self.nfts = self.nfts.sorted(by: {$0.name < $1.name})
             self.showStub = self.nfts.isEmpty ? true : false
+            self.loadCartId()
         }
     }
+    
+    func loadCartId() {
+        isLoading = true
+        loadError = nil
+        dataProvider?.getCartId() { [weak self] result in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(data):
+                    self.nftsInCartId = data.nfts
+                case .failure(let error):
+                    let errorString = self.handlingErrorService.handlingHTTPStatusCodeError(error: error)
+                    self.loadError = errorString
+                }
+                self.isLoading = false
+            }
+        }
+    }
+    
+    
 }

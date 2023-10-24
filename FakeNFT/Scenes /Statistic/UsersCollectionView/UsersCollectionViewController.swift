@@ -57,6 +57,16 @@ final class UsersCollectionViewController: UIViewController {
             })
             .store(in: &bindings)
         
+        viewModel.$nftsInCartId
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] nftsInCartId in
+                if let nftsInCartId = self?.viewModel.nftsInCartId {
+                    self?.contentView.nftsInCartId = nftsInCartId
+                }
+                self?.contentView.reloadCollection()
+            })
+            .store(in: &bindings)
+        
         viewModel.$isLoading
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] isLoading in
