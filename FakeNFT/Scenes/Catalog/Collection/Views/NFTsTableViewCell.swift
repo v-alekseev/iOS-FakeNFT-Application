@@ -12,10 +12,10 @@ final class NFTsTableViewCell: UITableViewCell, ReuseIdentifying {
     private var collection: UICollectionView
     
     // MARK: - Variables
-    var imageWidth: CGFloat = 0
+    private var imageWidth: CGFloat = 0
     private var dataSource: NFTDataSourceProtocol?
     static let numberOfColumns: CGFloat = 3
-    var selectedIndexPath: IndexPath? = nil
+    private var selectedIndexPath: IndexPath? = nil
     private var collectionHeightConstraint: NSLayoutConstraint?
     var estimatedHeight: CGFloat = 0
     var estimatedCellWidth: CGFloat = 0
