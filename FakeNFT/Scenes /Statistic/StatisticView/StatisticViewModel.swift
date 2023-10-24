@@ -10,22 +10,29 @@ import Combine
 
 final class StatisticViewModel {
     
-    @Published var usersData: [UserModel]
-    @Published var dataLoad: Bool
-    @Published var possibleError: Error?
+    @Published var usersData: [UserModel] = []
+    @Published var isLoading = false
+    @Published var actualUserData: UserModel?
+    @Published var loadError: String?
+    @Published var needShowFilterMenu = false
     
     private let dataProvider: StatisticDataProviderProtocol?
     private let filtrationType = FiltrationTypeStorage()
     
-    init(dataProvider: StatisticDataProviderProtocol) {
-        self.dataProvider = dataProvider
-        self.usersData = []
-        dataLoad = true
-        loadUserData()
+    var rowForOpenUserCard: Int = 0 {
+        didSet {
+            actualUserData = usersData[rowForOpenUserCard]
+        }
     }
     
-    func loadUserData() {
-        possibleError = nil
+    init(dataProvider: StatisticDataProviderProtocol) {
+        self.dataProvider = dataProvider
+        loadUsersData()
+    }
+    
+    func loadUsersData() {
+        isLoading = true
+        loadError = nil
         dataProvider?.getUsersData() { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
@@ -37,12 +44,16 @@ final class StatisticViewModel {
                     } else {
                         self.provideRatingFilter()
                     }
-                case let .failure(error):
-                    self.possibleError = error
+                case .failure(let error):
+                    self.loadError = "\(error)"
                 }
-                self.dataLoad = false
+                self.isLoading = false
             }
         }
+    }
+    
+    func didTapFilterButton() {
+        needShowFilterMenu = true
     }
     
     func provideNameFilter() {
