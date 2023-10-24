@@ -138,7 +138,7 @@ final class CollectionHeaderTableViewCell: UITableViewCell, ReuseIdentifying {
                 self.animatedGradient.stopAnimating()
                 self.animatedGradient.isHidden = true
             })
-        titleLabel.text = "\(collection.name))"
+        titleLabel.text = "\(collection.name)"
         let linkText = "\(L10n.Catalog.Collection.authorString): \(author.name)"
         let linkSize = author.name.count
         
