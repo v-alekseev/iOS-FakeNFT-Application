@@ -47,14 +47,14 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
     
     // MARK: - Setup Methods
     private func setupCell() {
-        hyerarchyUI()
-        constraintUI()
+        addSubviews()
+        setupConstraints()
         self.selectionStyle = .none
         self.backgroundColor = .clear
         animatedGradient.isHidden = true
     }
     
-    private func hyerarchyUI() {
+    private func addSubviews() {
         contentView.addSubview(imageCollection)
         contentView.addSubview(titleLabel)
         contentView.addSubview(animatedGradient)
@@ -64,7 +64,7 @@ final class CollectionsTableViewCell: UITableViewCell, ReuseIdentifying {
         animatedGradient.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func constraintUI() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             imageCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.offset_16),
             imageCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.minus_offset_16),

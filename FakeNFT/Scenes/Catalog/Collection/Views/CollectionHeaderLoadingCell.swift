@@ -26,14 +26,14 @@ final class CollectionHeaderLoadingCell: UITableViewCell, ReuseIdentifying {
     }
     
     private func setupCell() {
-        hyerarchyUI()
-        constraintUI()
+        addSubviews()
+        setupConstraints()
         self.selectionStyle = .none
         self.backgroundColor = .clear
         startAnimation()
     }
     
-    private func hyerarchyUI() {
+    private func addSubviews() {
         contentView.addSubview(titleImageGradient)
         contentView.addSubview(titleGradient)
         contentView.addSubview(descriptionGradient)
@@ -43,7 +43,7 @@ final class CollectionHeaderLoadingCell: UITableViewCell, ReuseIdentifying {
         descriptionGradient.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func constraintUI() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             titleImageGradient.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleImageGradient.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
