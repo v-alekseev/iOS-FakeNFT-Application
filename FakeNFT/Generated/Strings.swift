@@ -17,6 +17,16 @@ internal enum L10n {
     ///   Created by Vitaly on 06.10.2023.
     internal static let title = L10n.tr("Localizable", "application.title", fallback: "Фейк NFT")
   }
+  internal enum Tabbar {
+    /// Корзина
+    internal static let basket = L10n.tr("Localizable", "tabbar.basket", fallback: "Корзина")
+    /// Каталог
+    internal static let catalog = L10n.tr("Localizable", "tabbar.catalog", fallback: "Каталог")
+    /// Профиль
+    internal static let profile = L10n.tr("Localizable", "tabbar.profile", fallback: "Профиль")
+    /// Статистика
+    internal static let stats = L10n.tr("Localizable", "tabbar.stats", fallback: "Статистика")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

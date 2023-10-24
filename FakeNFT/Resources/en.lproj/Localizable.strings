@@ -9,3 +9,7 @@
 
 
 "application.title" = "Fake NFT";
+"tabbar.catalog" = "Cetalog";
+"tabbar.profile" = "Profile";
+"tabbar.basket" = "Basket";
+"tabbar.stats" = "Stats";
