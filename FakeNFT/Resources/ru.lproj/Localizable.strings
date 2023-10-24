@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   FakeNFT
 
@@ -9,3 +9,7 @@
 
 
 "application.title" = "Фейк NFT";
+"tabbar.catalog" = "Каталог";
+"tabbar.profile" = "Профиль";
+"tabbar.basket" = "Корзина";
+"tabbar.stats" = "Статистика";
