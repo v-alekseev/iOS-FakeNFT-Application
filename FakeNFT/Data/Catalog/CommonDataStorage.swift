@@ -119,55 +119,29 @@ final class CommonDataStorage: CommonDataProtocol {
     // MARK: - Interact
     func interactWithLike(with NFTid: String, completion: @escaping (Result<ProfileLikesModel, Error>) -> Void) {
         guard var likes = currentLikes else { return }
-        if (likes.likes.contains(NFTid)) {
-            likes.likes.removeAll(where: {$0 == NFTid})
-            dataProvider.setLikes(likes: likes.likes) {[weak self] result in
-                switch result {
-                case .success(let likes):
-                    self?.currentLikes = likes
-                case .failure:
-                    break
-                }
-                completion(result)
+        likes.likes.contains(NFTid) ? likes.likes.removeAll(where: {$0 == NFTid}) : likes.likes.append(NFTid)
+        dataProvider.setLikes(likes: likes.likes) {[weak self] result in
+            switch result {
+            case .success(let likes):
+                self?.currentLikes = likes
+            case .failure:
+                break
             }
-        } else {
-            likes.likes.append(NFTid)
-            dataProvider.setLikes(likes: likes.likes) {[weak self] result in
-                switch result {
-                case .success(let likes):
-                    self?.currentLikes = likes
-                case .failure:
-                    break
-                }
-                completion(result)
-            }
+            completion(result)
         }
     }
     
     func interactWithBasket(with NFTid: String, completion: @escaping (Result<OrderModel, Error>) -> Void) {
         guard var orders = currentOrder else { return }
-        if (orders.nfts.contains(NFTid)) {
-            orders.nfts.removeAll(where: {$0 == NFTid})
-            dataProvider.setOrders(orders: orders) {[weak self] result in
-                switch result {
-                case .success(let orders):
-                    self?.currentOrder = orders
-                case .failure:
-                    break
-                }
-                completion(result)
+        orders.nfts.contains(NFTid) ? orders.nfts.removeAll(where: {$0 == NFTid}) : orders.nfts.append(NFTid)
+        dataProvider.setOrders(orders: orders) {[weak self] result in
+            switch result {
+            case .success(let orders):
+                self?.currentOrder = orders
+            case .failure:
+                break
             }
-        } else {
-            orders.nfts.append(NFTid)
-            dataProvider.setOrders(orders: orders) {[weak self] result in
-                switch result {
-                case .success(let orders):
-                    self?.currentOrder = orders
-                case .failure:
-                    break
-                }
-                completion(result)
-            }
+            completion(result)
         }
     }
 }
