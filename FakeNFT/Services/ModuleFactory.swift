@@ -39,7 +39,9 @@ struct ModuleFactory {
     }
     
     static func createCartViewController() -> UIViewController {
-        return CartViewController()
+        let vc = CartViewController()
+        let navigationVC = UINavigationController(rootViewController: vc)
+        return navigationVC
     }
     
     static func createCatalogViewController() -> UIViewController {

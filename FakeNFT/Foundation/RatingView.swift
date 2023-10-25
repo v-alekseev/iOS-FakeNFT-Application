@@ -40,9 +40,14 @@ final class RatingView: UIStackView {
     }
     
     func setRating(rank: Int) {
+        var computedRank = rank
+        if rank < 1 ||  rank > maxRating  {
+            computedRank = 0
+        }
+        
         clear()
         for index in 1...maxRating {
-            self.addArrangedSubview(createStarView(index <= rank ? .star : .starGray))
+            self.addArrangedSubview(createStarView(index <= computedRank ? .star : .starGray))
         }
     }
     
