@@ -29,7 +29,6 @@ final class UsersCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         view = contentView
-        
         let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                             style: .plain,
                                             target: self,
@@ -51,7 +50,9 @@ final class UsersCollectionViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] data in
                 if let data {
-                    self?.viewModel.changeCartState(nftId: data.nftId, isInCart: data.isInCart)
+                    self?.viewModel.changeCartState(nftId: data.nftId,
+                                                    isInCart: data.isInCart,
+                                                    indexPath: data.indexPath)
                 }
             })
             .store(in: &bindings)
@@ -75,7 +76,13 @@ final class UsersCollectionViewController: UIViewController {
             .sink(receiveValue: {[weak self] nftsInCartId in
                 if let nftsInCartId = self?.viewModel.nftsInCartId {
                     self?.contentView.nftsInCartId = nftsInCartId
-                    self?.contentView.reloadCollection()
+                    let indexPath = self?.viewModel.indexPathForReload
+                    if let indexPath {
+                        self?.contentView.reloadCell(indexPath: indexPath)
+                        self?.viewModel.indexPathForReload = nil
+                    } else {
+                        self?.contentView.reloadCollection()
+                    }
                 }
             })
             .store(in: &bindings)

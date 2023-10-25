@@ -10,7 +10,7 @@ import Combine
 
 final class UsersCollectionView: UIView {
     
-    @Published var dataForUpdateCartState: (nftId: String, isInCart: Bool)? = nil
+    @Published var dataForUpdateCartState: (nftId: String, isInCart: Bool, indexPath: IndexPath)? = nil
     
     var nfts: [NftModel] = []
     var nftsIdForDisplayingLikes: [String] = []
@@ -54,6 +54,10 @@ final class UsersCollectionView: UIView {
         collectionView.reloadData()
     }
     
+    func reloadCell(indexPath: IndexPath) {
+        collectionView.reloadItems(at: [indexPath])
+    }
+    
     private func setUpViews() {
         backgroundColor = .ypWhiteWithDarkMode
         [collectionView, loadIndicator, stubLabel].forEach {
@@ -94,7 +98,7 @@ extension UsersCollectionView: UICollectionViewDataSource {
         let isInCart = nftsInCartId.contains(nftData.id)
         cell?.isInCart = isInCart
         cell?.setCartCompletion {
-            self.dataForUpdateCartState = (nftData.id, isInCart)
+            self.dataForUpdateCartState = (nftData.id, isInCart, indexPath)
         }
         return cell ?? UsersCollectionCell()
     }

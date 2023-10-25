@@ -17,6 +17,7 @@ final class UsersCollectionViewModel {
     @Published var showStub = false
     
     var nftsIdForDisplayingLikes: [String] = []
+    var indexPathForReload: IndexPath? = nil
     private let dataProvider: StatisticDataProviderProtocol?
     private var handlingErrorService = HandlingErrorService.shared
     private var actualUserData: UserModel
@@ -63,13 +64,14 @@ final class UsersCollectionViewModel {
         }
     }
     
-    func changeCartState (nftId: String, isInCart: Bool) {
+    func changeCartState (nftId: String, isInCart: Bool, indexPath: IndexPath) {
         if isInCart {
             removeNftsWithIdFromCart(id: nftId)
         }
         else {
             addNftsWithIdToCart(id: nftId)
         }
+        indexPathForReload = indexPath
     }
     
     func removeNftsWithIdFromCart (id: String) {

@@ -10,8 +10,6 @@ import Kingfisher
 
 final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
-    var cellNftData: NftModel?
-    
     var isInCart: Bool = false {
         didSet {
             let buttonImage = isInCart ? UIImage(resource: .deleteFromCart) : UIImage(resource: .addToCart)
@@ -19,7 +17,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         }
     }
     
-    private var cartCompletion: (() -> Void) = {}
+    private var cartCompletion: (() -> ()) = {}
     
     private lazy var imageNftView: UIImageView = {
         let imageNftView = UIImageView()
@@ -70,7 +68,6 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupView()
     }
     
@@ -92,7 +89,6 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
                                      options: [.transition(.fade(1)),
                                                .forceRefresh])
         }
-        cellNftData = nftData
         nftNameLabel.text = nftData.name
         ratingView.setRating(rank: nftData.rating)
         priceLabel.text = "\(nftData.price.formatPrice()) ETH"
