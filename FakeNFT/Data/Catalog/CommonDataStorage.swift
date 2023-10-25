@@ -10,6 +10,8 @@ import Foundation
 final class CommonDataStorage: CommonDataProtocol {
     
     static var shared: CommonDataStorage? = nil
+    private let cartDataProvider = CardDataProvider.shared
+
     
     // MARK: - Private properties
     private var isDataLoaded: Bool = false {
@@ -33,6 +35,19 @@ final class CommonDataStorage: CommonDataProtocol {
     private init(with dataProvider: CatalogDataProviderProtocol = CatalogDataProvider()) {
         self.dataProvider = dataProvider
         reloadCommonData()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didCartChaged),
+            name: self.cartDataProvider.orderChanged,
+            object: nil
+        )
+
+    }
+    
+    @objc
+    private func didCartChaged() {
+        currentOrder?.nfts = cartDataProvider.orderIDs
+        delegate?.notifiAboutOrdersCnahges(order: currentOrder!)
     }
     
     // MARK: - Initialize

@@ -222,6 +222,14 @@ final class CollectionViewModel: CollectionViewModelProtocol {
 }
 
 extension CollectionViewModel: StorageDelegate {
+    func notifiAboutOrdersCnahges(order: OrderModel) {
+        for (index, id) in self.model.nfts.enumerated() {
+            if order.nfts.contains(id) {
+                self.navigationState = .basketDidTapped(at: IndexPath(row: index, section: 0))
+            }
+        }
+    }
+    
     func notifyAboutLoadingState(isLoading: Bool) {
         self.isBackgroundDataLoaded = isLoading
     }
