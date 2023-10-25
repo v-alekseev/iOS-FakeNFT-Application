@@ -30,8 +30,36 @@ final class PayViewController: UIViewController {
         return view
     }()
     
-    private lazy var termsOfUseFirstLineLabel = UILabel(font: UIFont.caption2, text: L10n.Cart.PayScreen.termOfUseFirstString)
-    private lazy var termsOfUseSecondLineLabel = UILabel(font: UIFont.caption2, text: L10n.Cart.PayScreen.termOfUseSecondString,textColor: .ypBlue)
+    private lazy var termsOfUseLabel: UITextView = {
+        let textView = UITextView()
+        let url = URL(string: termOfUseUrl)?.absoluteString ?? ""
+        
+        let attributedString = NSMutableAttributedString(string: L10n.Cart.PayScreen.termOfUseFirstString + " " + L10n.Cart.PayScreen.termOfUseSecondString)
+        
+
+        let startPosition = L10n.Cart.PayScreen.termOfUseFirstString.count + 1
+        let lenOfLink = L10n.Cart.PayScreen.termOfUseSecondString.count
+        // Set the 'click here' substring to be the link
+        attributedString.setAttributes([.font: UIFont.caption2], range: NSMakeRange(0, attributedString.length))
+        attributedString.setAttributes([.link: url], range: NSMakeRange(startPosition, lenOfLink))
+
+        textView.backgroundColor = .clear
+        textView.attributedText = attributedString
+        textView.isUserInteractionEnabled = true
+        textView.isEditable = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Set how links should appear: blue and underlined
+        textView.linkTextAttributes = [
+            .foregroundColor: UIColor.ypBlue,
+            .font: UIFont.caption2
+        ]
+        
+        textView.delegate = self
+        
+        return textView
+    }()
+    
     private lazy var paymentButton = UIButton(title: L10n.Cart.paymentButtonTitle, cornerRadius: 16)
     
     lazy var currencyCollectionView = {
@@ -62,16 +90,6 @@ final class PayViewController: UIViewController {
 
     // MARK: - Action Methods
     //
-    @objc
-    func handleTap(sender: UITapGestureRecognizer) {
-        if sender.state == .ended {
-            // Показ пользовательского соглашения
-            let termsOfUseViewModel = WebViewViewModel()
-            let termsOfUseVC = WebViewViewController(viewModel: termsOfUseViewModel, url: URL(string: termOfUseUrl))
-            navigationItem.title = ""
-            navigationController?.pushViewController(termsOfUseVC, animated: true)
-        }
-    }
     
     /// Функция обрабатывает нажатие на кнопку оплаты
     @objc
@@ -103,10 +121,6 @@ final class PayViewController: UIViewController {
         currencyCollectionView.delegate = self
         currencyCollectionView.dataSource = self
         currencyCollectionView.register(PayCollectionViewCell.self)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        termsOfUseSecondLineLabel.addGestureRecognizer(tapGesture)
-        termsOfUseSecondLineLabel.isUserInteractionEnabled = true
     }
     
     private func setupUIElementsConstraints() {
@@ -123,19 +137,15 @@ final class PayViewController: UIViewController {
             paymentButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -12),
             paymentButton.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 20),
             paymentButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -50),
-            paymentButton.heightAnchor.constraint(equalToConstant: 60),
+            paymentButton.heightAnchor.constraint(equalToConstant: 60)
         ])
         
-        bottomView.addSubview(termsOfUseFirstLineLabel)
+        bottomView.addSubview(termsOfUseLabel)
         NSLayoutConstraint.activate([
-            termsOfUseFirstLineLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 16),
-            termsOfUseFirstLineLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 16)
-        ])
-        
-        bottomView.addSubview(termsOfUseSecondLineLabel)
-        NSLayoutConstraint.activate([
-            termsOfUseSecondLineLabel.leadingAnchor.constraint(equalTo: termsOfUseFirstLineLabel.leadingAnchor),
-            termsOfUseSecondLineLabel.topAnchor.constraint(equalTo: termsOfUseFirstLineLabel.bottomAnchor, constant: 4)
+            termsOfUseLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 16),
+            termsOfUseLabel.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -16),
+            termsOfUseLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 16),
+            termsOfUseLabel.heightAnchor.constraint(equalToConstant: 44)
         ])
         
         view.addSubview(currencyCollectionView)
@@ -145,6 +155,18 @@ final class PayViewController: UIViewController {
             currencyCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             currencyCollectionView.bottomAnchor.constraint(equalTo: bottomView.topAnchor)
         ])
+    }
+}
+
+extension PayViewController: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        // Показ пользовательского соглашения
+        let termsOfUseViewModel = WebViewViewModel()
+        let termsOfUseVC = WebViewViewController(viewModel: termsOfUseViewModel, url: URL)
+        navigationItem.title = ""
+        navigationController?.pushViewController(termsOfUseVC, animated: true)
+        return false // true - если открываем в системном браузере
     }
 }
 

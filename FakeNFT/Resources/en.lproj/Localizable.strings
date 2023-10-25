@@ -45,7 +45,7 @@
 "alert.error.description" = "Something went wrong.";
 "alert.error.retry" = "Reload";
 "catalog.collection.authorString" = "Author";
-"tabbar.catalog" = "Cetalog";
+"tabbar.catalog" = "Catalog";
 "tabbar.profile" = "Profile";
 "tabbar.basket" = "Basket";
 "tabbar.stats" = "Stats";
