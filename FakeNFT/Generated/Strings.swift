@@ -15,7 +15,6 @@ internal enum L10n {
     internal static let button = L10n.tr("Localizable", "alert.button", fallback: "Понятно")
     /// Сообщение для вас!
     internal static let header = L10n.tr("Localizable", "alert.header", fallback: "Сообщение для вас!")
-
     internal enum Error {
       /// Что-то пошло не так.
       internal static let description = L10n.tr("Localizable", "alert.error.description", fallback: "Что-то пошло не так.")
@@ -24,7 +23,6 @@ internal enum L10n {
       /// Ошибка
       internal static let title = L10n.tr("Localizable", "alert.error.title", fallback: "Ошибка")
     }
-
   }
   internal enum Application {
     /// Localizable.strings
@@ -33,7 +31,6 @@ internal enum L10n {
     ///   Created by Vitaly on 06.10.2023.
     internal static let title = L10n.tr("Localizable", "application.title", fallback: "Фейк NFT")
   }
-
   internal enum Cart {
     /// К сожалению, не получилось загрузить данные. Попробуйте еще раз попозже.
     internal static let getOrderError = L10n.tr("Localizable", "cart.getOrderError", fallback: "К сожалению, не получилось загрузить данные. Попробуйте еще раз попозже.")
@@ -73,6 +70,22 @@ internal enum L10n {
       internal static let succsesPaymentText = L10n.tr("Localizable", "cart.payResultScreen.succsesPaymentText", fallback: "Успех! Оплата прошла,\nпоздравляем с покупкой!")
     }
   }
+  internal enum Catalog {
+    /// Сортировка
+    internal static let sort = L10n.tr("Localizable", "catalog.sort", fallback: "Сортировка")
+    internal enum Collection {
+      /// Автор коллекции
+      internal static let authorString = L10n.tr("Localizable", "catalog.collection.authorString", fallback: "Автор коллекции")
+    }
+    internal enum Sort {
+      /// По названию
+      internal static let byName = L10n.tr("Localizable", "catalog.sort.byName", fallback: "По названию")
+      /// По количеству NFT
+      internal static let byNFTQuantity = L10n.tr("Localizable", "catalog.sort.byNFTQuantity", fallback: "По количеству NFT")
+      /// Закрыть
+      internal static let close = L10n.tr("Localizable", "catalog.sort.close", fallback: "Закрыть")
+    }
+  }
   internal enum Filter {
     /// По названию
     internal static let byName = L10n.tr("Localizable", "filter.byName", fallback: "По названию")
@@ -84,23 +97,7 @@ internal enum L10n {
     internal static let caption = L10n.tr("Localizable", "filter.caption", fallback: "Сортировка")
     /// Закрыть
     internal static let close = L10n.tr("Localizable", "filter.close", fallback: "Закрыть")
-
-    internal enum Catalog {
-        /// Сортировка
-        internal static let sort = L10n.tr("Localizable", "catalog.sort", fallback: "Сортировка")
-        internal enum Collection {
-            /// Автор коллекции
-            internal static let authorString = L10n.tr("Localizable", "catalog.collection.authorString", fallback: "Автор коллекции")
-        }
-        internal enum Sort {
-            /// По названию
-            internal static let byName = L10n.tr("Localizable", "catalog.sort.byName", fallback: "По названию")
-            /// По количеству NFT
-            internal static let byNFTQuantity = L10n.tr("Localizable", "catalog.sort.byNFTQuantity", fallback: "По количеству NFT")
-            /// Закрыть
-            internal static let close = L10n.tr("Localizable", "catalog.sort.close", fallback: "Закрыть")
-        }
-    }
+  }
   internal enum Tabbar {
     /// Корзина
     internal static let basket = L10n.tr("Localizable", "tabbar.basket", fallback: "Корзина")
