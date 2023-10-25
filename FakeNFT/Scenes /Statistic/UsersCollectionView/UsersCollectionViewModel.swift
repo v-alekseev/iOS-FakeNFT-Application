@@ -63,6 +63,15 @@ final class UsersCollectionViewModel {
         }
     }
     
+    func changeCartState (nftId: String, isInCart: Bool) {
+        if isInCart {
+            removeNftsWithIdFromCart(id: nftId)
+        }
+        else {
+            addNftsWithIdToCart(id: nftId)
+        }
+    }
+    
     func removeNftsWithIdFromCart (id: String) {
         let newNftsInCartId = nftsInCartId.filter(){$0 != id}
         cartUpdate(newNftsInCartId)

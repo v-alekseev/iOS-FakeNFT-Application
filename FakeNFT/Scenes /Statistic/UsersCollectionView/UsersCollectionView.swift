@@ -10,6 +10,8 @@ import Combine
 
 final class UsersCollectionView: UIView {
     
+    @Published var dataForUpdateCartState: (nftId: String, isInCart: Bool)? = nil
+    
     var nfts: [NftModel] = []
     var nftsIdForDisplayingLikes: [String] = []
     var nftsInCartId: [String] = []
@@ -89,7 +91,11 @@ extension UsersCollectionView: UICollectionViewDataSource {
         let nftData = nfts[indexPath.row]
         let isLiked = nftsIdForDisplayingLikes.contains(nftData.id)
         cell?.provide(nftData: nftData, isLiked: isLiked)
-        cell?.isInCart = nftsInCartId.contains(nftData.id)
+        let isInCart = nftsInCartId.contains(nftData.id)
+        cell?.isInCart = isInCart
+        cell?.setCartCompletion {
+            self.dataForUpdateCartState = (nftData.id, isInCart)
+        }
         return cell ?? UsersCollectionCell()
     }
 }

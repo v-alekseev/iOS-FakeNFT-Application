@@ -40,8 +40,21 @@ final class UsersCollectionViewController: UIViewController {
         navigationItem.titleView?.tintColor = .ypBlackWithDarkMode
         navigationItem.title = "Коллекция NFT"
         
+        bindViewToViewModel()
         bindViewModelToView()
         
+    }
+    
+    func bindViewToViewModel() {
+        
+        contentView.$dataForUpdateCartState
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] data in
+                if let data {
+                    self?.viewModel.changeCartState(nftId: data.nftId, isInCart: data.isInCart)
+                }
+            })
+            .store(in: &bindings)
     }
     
     func bindViewModelToView() {
@@ -62,8 +75,8 @@ final class UsersCollectionViewController: UIViewController {
             .sink(receiveValue: {[weak self] nftsInCartId in
                 if let nftsInCartId = self?.viewModel.nftsInCartId {
                     self?.contentView.nftsInCartId = nftsInCartId
+                    self?.contentView.reloadCollection()
                 }
-                self?.contentView.reloadCollection()
             })
             .store(in: &bindings)
         
