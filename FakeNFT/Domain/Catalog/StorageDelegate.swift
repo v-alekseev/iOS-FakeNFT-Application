@@ -9,4 +9,5 @@ import Foundation
 
 protocol StorageDelegate {
     func notifyAboutLoadingState(isLoading: Bool)
+    func notifiAboutOrdersCnahges(order: OrderModel)
 }
