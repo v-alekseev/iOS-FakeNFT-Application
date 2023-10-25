@@ -96,8 +96,6 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         priceLabel.text = "\(nftData.price.formatPrice()) ETH"
         let isLikedImage = isLiked ? UIImage(resource: .isLiked) : UIImage(resource: .isNotLiked)
         likeImageView.image = isLikedImage
-        let buttonImage = isInCart ? UIImage(resource: .deleteFromCart) : UIImage(resource: .addToCart)
-        cartButton.setImage(buttonImage, for: .normal)
     }
     
     func setCartCompletion(completion: @escaping () -> Void) {
