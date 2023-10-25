@@ -88,8 +88,8 @@ extension UsersCollectionView: UICollectionViewDataSource {
             for: indexPath) as? UsersCollectionCell
         let nftData = nfts[indexPath.row]
         let isLiked = nftsIdForDisplayingLikes.contains(nftData.id)
-        let isInCart = nftsInCartId.contains(nftData.id)
-        cell?.provide(nftData: nftData, isLiked: isLiked, isInCart: isInCart)
+        cell?.provide(nftData: nftData, isLiked: isLiked)
+        cell?.isInCart = nftsInCartId.contains(nftData.id)
         return cell ?? UsersCollectionCell()
     }
 }
