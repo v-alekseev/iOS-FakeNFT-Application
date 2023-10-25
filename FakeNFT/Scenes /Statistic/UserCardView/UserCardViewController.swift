@@ -55,24 +55,6 @@ final class UserCardViewController: UIViewController {
     
     func bindViewToViewModel() {
         
-        viewModel.$isLoading
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] isLoading in
-                isLoading ? self?.contentView.loadIndicator.startAnimating() : self?.contentView.loadIndicator.stopAnimating()
-            })
-            .store(in: &bindings)
-        
-        viewModel.$loadError
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] loadError in
-                if let loadError {
-                    self?.alertPresenter.showAlert(self, message: loadError) {_ in
-                        self?.viewModel.loadProfileLikes()
-                    }
-                }
-            })
-            .store(in: &bindings)
-        
         contentView.$didTapCollectionButton
             .assign(to: \.didTapCollectionButton, on: viewModel)
             .store(in: &bindings)
@@ -106,6 +88,24 @@ final class UserCardViewController: UIViewController {
                 if needShowWebsite {
                     let webViewViewController = WebViewViewController(self?.actualUserData.website ?? "")
                     self?.navigationController?.pushViewController(webViewViewController, animated: true)
+                }
+            })
+            .store(in: &bindings)
+        
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] isLoading in
+                isLoading ? self?.contentView.loadIndicator.startAnimating() : self?.contentView.loadIndicator.stopAnimating()
+            })
+            .store(in: &bindings)
+        
+        viewModel.$loadError
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] loadError in
+                if let loadError {
+                    self?.alertPresenter.showAlert(self, message: loadError) {_ in
+                        self?.viewModel.loadProfileLikes()
+                    }
                 }
             })
             .store(in: &bindings)
