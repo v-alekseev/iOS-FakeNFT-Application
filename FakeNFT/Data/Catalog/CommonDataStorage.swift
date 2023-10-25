@@ -45,8 +45,17 @@ final class CommonDataStorage: CommonDataProtocol {
     
     @objc
     private func didCartChaged() {
+        var update1: [String] = []
+        var update2: [String] = []
+        if let currentNfts = currentOrder?.nfts {
+            update1 = cartDataProvider.orderIDs.filter {!currentNfts.contains($0)}
+            update2 = currentNfts.filter {!cartDataProvider.orderIDs.contains($0)}
+        }
         currentOrder?.nfts = cartDataProvider.orderIDs
-        delegate?.notifiAboutOrdersCnahges(order: currentOrder!)
+        guard let currentOrder = currentOrder else { return }
+        var dataToUpdate = currentOrder
+        dataToUpdate.nfts = update1 + update2
+        delegate?.notifiAboutOrdersCnahges(order: dataToUpdate)
     }
     
     // MARK: - Initialize
