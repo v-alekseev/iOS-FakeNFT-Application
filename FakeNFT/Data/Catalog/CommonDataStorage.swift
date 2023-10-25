@@ -41,7 +41,6 @@ final class CommonDataStorage: CommonDataProtocol {
             name: self.cartDataProvider.orderChanged,
             object: nil
         )
-
     }
     
     @objc
