@@ -78,6 +78,11 @@ final class CartViewModel: CartViewModelProtocol {
                                                selector: #selector(didCartChaged(_:)),
                                                name: self.cartDataProvider?.orderChanged,
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didCartCleared(_:)),
+                                               name: self.cartDataProvider?.orderCleared,
+                                               object: nil)
     }
     
     // MARK: - Actions
@@ -88,6 +93,14 @@ final class CartViewModel: CartViewModelProtocol {
         let orderUnsorted = cartDataProvider.order.compactMap{NftModel(nft: $0)}
         order = orderUnsorted.sorted(by: Filters.filter[currentFilter] ?? Filters.filterDefault )
     }
+    
+    // MARK: - Actions
+    //
+    @objc private func didCartCleared(_ notification: Notification) {
+        // пока сообщение не используется
+        print("[didCartCleared]")
+    }
+    
     
     // MARK: - Public functions
     //

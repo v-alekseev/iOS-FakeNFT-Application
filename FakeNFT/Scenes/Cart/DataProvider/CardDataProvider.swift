@@ -10,51 +10,69 @@ import Foundation
 protocol CardDataProviderProtocol {
     var order: [NftDto] { get }
     var orderChanged: NSNotification.Name { get }
+    var orderCleared: Notification.Name { get }
     
     func getOrder(_ completion: @escaping (Result<String, Error>) -> Void)
     func getNFT(id: String, _ completion: @escaping (Result<NftDto, Error>) -> Void)
     func removeItemFromCart(idForRemove: String,  _ completion: @escaping (Result<[String], Error>) -> Void)
+    func removeAllItemFromCart( _ completion: @escaping (Result<Int, Error>) -> Void)
 }
-
-struct OrderRequest: NetworkRequest {
-    var endpoint: URL? = URL(string: "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/orders/1")
-}
-
-
-struct NFSRequest: NetworkRequest {
-    let nfsID: String
-    var endpoint: URL? = nil
-    init(nfsID: String) {
-        self.nfsID = nfsID
-        self.endpoint =  URL(string: "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/nft/\(nfsID)")
-    }
-}
-
-struct СartUpdateRequest: NetworkRequest {
-    var httpMethod: HttpMethod { .put }
-    var dto: Encodable?
-    var endpoint: URL? = URL(string: "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/orders/1")
-    
-    init(cartIDs: [String]) {
-        self.dto = UpdateCartDto(nfts: cartIDs)
-    }
-}
-
 
 final class CardDataProvider: CardDataProviderProtocol {
     
     static var shared = CardDataProvider()
+    static private let baseURL = "https://651ff0cc906e276284c3c1bc.mockapi.io/api/v1/"
+    
+    struct NFSRequest: NetworkRequest {
+        let nfsID: String
+        var endpoint: URL? = nil
+        init(nfsID: String) {
+            self.nfsID = nfsID
+            self.endpoint =  URL(string: baseURL + "nft/\(nfsID)")
+        }
+    }
+
+    struct OrderRequest: NetworkRequest {
+        var endpoint: URL? = URL(string: baseURL +  "orders/1")
+    }
+    
+    struct СartUpdateRequest: NetworkRequest {
+        var httpMethod: HttpMethod { .put }
+        var dto: Encodable?
+        var endpoint: URL? = URL(string: baseURL + "orders/1")
+        
+        init(cartIDs: [String]) {
+            self.dto = UpdateCartDto(nfts: cartIDs)
+        }
+    }
+
+    struct СartClearRequest: NetworkRequest {
+        var httpMethod: HttpMethod { .put }
+        var dto: Encodable?
+        var endpoint: URL? = URL(string: baseURL + "orders/1")
+        
+        init() {
+            self.dto = UpdateCartDto(nfts: [])
+        }
+    }
+    
+   
     
     var networkClient: NetworkClient?
     
     let orderChanged = Notification.Name("CartUpdated")
+    let orderCleared = Notification.Name("CartCleared")
     
     private (set) var orderIDs: [String] = []
     private (set) var order: [NftDto] = [] {
         didSet {
             // если колличество загруженных nft равняется колличеству nftid, значит все запросы отработали и можно перегрузить отображать корзину
+            // TODO: переделать на DispatchGroup и избавиться от этого условия
             if orderIDs.count == order.count {
                 NotificationCenter.default.post(name: orderChanged, object: nil )
+                if(order.count == 0) {
+                    NotificationCenter.default.post(name: orderCleared, object: nil )
+                }
             }
         }
     }
@@ -128,6 +146,25 @@ final class CardDataProvider: CardDataProviderProtocol {
                     order.removeAll(where: {$0.id == idForRemove})
                     
                     completion(.success(data.nfts))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        return
+    }
+    
+    /// очистка корзины
+    func removeAllItemFromCart( _ completion: @escaping (Result<Int, Error>) -> Void) {
+        let ntfsRequest = СartClearRequest()
+        networkClient?.send(request: ntfsRequest , type: UpdateCartDto.self)  { result in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch result {
+                case let .success(data):
+                    orderIDs.removeAll()
+                    order.removeAll()
+                    completion(.success(data.nfts.count))
                 case let .failure(error):
                     completion(.failure(error))
                 }

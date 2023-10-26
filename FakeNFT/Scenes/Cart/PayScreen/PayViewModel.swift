@@ -29,6 +29,7 @@ final class PayViewModel: PayViewModelProtocol {
     
     weak var delegate: PayViewModelDelegate?
     private (set) var payDataProvider: PayDataProviderProtocol?
+    private (set) var cartDataProvider: CardDataProviderProtocol?
     private (set) var currencies: [Currency] = []
     
     var selectedCurrency: Currency? {
@@ -39,8 +40,9 @@ final class PayViewModel: PayViewModelProtocol {
         }
     }
     
-    init(dataProvider: PayDataProviderProtocol? = PayDataProvider()) {
-        self.payDataProvider = dataProvider
+    init(payDataProvider: PayDataProviderProtocol? = PayDataProvider(), cartDataProvider: CardDataProviderProtocol? = CardDataProvider.shared) {
+        self.payDataProvider = payDataProvider
+        self.cartDataProvider = cartDataProvider
     }
     
     func getCurrensies() {
@@ -64,9 +66,25 @@ final class PayViewModel: PayViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case let .success(data):
+                if(data.success) {
+                    clearCart()
+                }
                 delegate?.didPayment(result: data.success)
             case .failure(_):
                 delegate?.didPayment(result: false)
+            }
+        }
+    }
+    
+    func clearCart() {
+        cartDataProvider?.removeAllItemFromCart() { result in
+            switch result {
+            case let .success(data):
+                print("[clearCart] success. Count items in cart = \(data)")
+                break
+            case .failure(_):
+                print("[clearCart] failed")
+                break
             }
         }
     }
