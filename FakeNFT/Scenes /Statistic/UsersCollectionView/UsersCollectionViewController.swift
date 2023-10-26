@@ -37,8 +37,7 @@ final class UsersCollectionViewController: UIViewController {
         navigationItem.leftBarButtonItem  = leftBarButton
         
         navigationItem.titleView?.tintColor = .ypBlackWithDarkMode
-        navigationItem.title = "Коллекция NFT"
-        
+        navigationItem.title = L10n.nftCollection
         bindViewToViewModel()
         bindViewModelToView()
         

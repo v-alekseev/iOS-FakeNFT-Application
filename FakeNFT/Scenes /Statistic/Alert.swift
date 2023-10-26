@@ -13,11 +13,11 @@ final class Alert {
     
     func showAlert(_ alertController: UIViewController?, message: String? = "", handler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(
-            title: "Ошибка",
+            title: L10n.Alert.error,
             message: message,
             preferredStyle: .alert)
-        alert.addAction(.init(title: "Отмена", style: .cancel))
-        alert.addAction(.init(title: "Повторить", style: .default, handler: handler))
+        alert.addAction(.init(title: L10n.Alert.cancel, style: .cancel))
+        alert.addAction(.init(title: L10n.Alert.repeat, style: .default, handler: handler))
         alertController?.present(alert, animated: true)
     }
 }

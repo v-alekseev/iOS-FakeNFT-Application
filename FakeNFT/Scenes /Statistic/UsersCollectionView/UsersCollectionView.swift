@@ -26,7 +26,7 @@ final class UsersCollectionView: UIView {
         let label = UILabel()
         label.font = .bodyBold
         label.textColor = .ypBlackWithDarkMode
-        label.text = "У пользователя ещё нет NFT"
+        label.text = L10n.UsersCollection.stub
         return label
     }()
     

@@ -50,7 +50,7 @@ final class UserCardView: UIView {
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1
         button.layer.borderColor = button.currentTitleColor.cgColor
-        button.setTitle("Перейти на сайт пользователя", for: .normal)
+        button.setTitle(L10n.UserCard.userWebSite, for: .normal)
         button.addTarget(self, action: #selector(tapWebsiteButton), for: .touchUpInside)
         return button
     }()

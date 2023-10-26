@@ -18,25 +18,25 @@ final class HandlingErrorService {
         case .httpStatusCode(let code):
             switch  code {
             case 404:
-                return "По запросу ничего не найдено"
+                return L10n.HandlingError.error404
             case 409:
-                return "Ошибка обновления ресурса"
+                return L10n.HandlingError.error409
             case 410:
-                return "Запрошенный ресурс больше недоступен"
+                return L10n.HandlingError.error410
             case 429:
-                return "Слишком много запросов"
+                return L10n.HandlingError.error429
             case 500...526:
-                return "Ошибка на стороне сервера"
+                return L10n.HandlingError.error500526
             default:
-                return "Не удалось получить данные"
+                return L10n.HandlingError.default
             }
             
         case .parsingError:
-            return "Не удалось конвертировать полученные данные"
+            return L10n.HandlingError.parsingError
         case .urlRequestError:
-            return  "Ошибка выполнения запроса"
+            return  L10n.HandlingError.urlRequestError
         case .urlSessionError:
-            return "Проверьте интернет-соединение"
+            return L10n.HandlingError.urlSessionError
         }
     }
 }

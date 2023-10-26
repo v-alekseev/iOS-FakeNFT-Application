@@ -42,7 +42,7 @@ final class UserCardViewController: UIViewController {
         
         contentView.nameLabel.text = actualUserData.name
         contentView.descriptionLabel.text = actualUserData.description
-        contentView.nftsCountLabel.text = ("Коллекция NFT (\(actualUserData.nfts.count))")
+        contentView.nftsCountLabel.text = ("\(L10n.nftCollection) (\(actualUserData.nfts.count))")
         contentView.avatarView.kf.indicatorType = .activity
         contentView.avatarView.kf.setImage(with: URL(string: actualUserData.avatar),
                                            placeholder: userAvatarStub,
