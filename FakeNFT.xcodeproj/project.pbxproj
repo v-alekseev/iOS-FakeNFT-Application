@@ -31,7 +31,6 @@
 		7B5E25502ADBEEFA000BC664 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E254F2ADBEEFA000BC664 /* UIView+Extension.swift */; };
 		AF1A63D82AD81863000F8A4E /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D12AD81863000F8A4E /* CollectionsViewController.swift */; };
 		AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D32AD81863000F8A4E /* ProfileViewController.swift */; };
-		AF1A63DB2AD81863000F8A4E /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63D72AD81863000F8A4E /* StatisticViewController.swift */; };
 		AF1A63E52AD96607000F8A4E /* CollectionsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63E42AD96607000F8A4E /* CollectionsViewModelProtocol.swift */; };
 		AF1A63E72AD96768000F8A4E /* CollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63E62AD96768000F8A4E /* CollectionsViewModel.swift */; };
 		AF1A63EA2AD99153000F8A4E /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1A63E92AD99153000F8A4E /* SortType.swift */; };
@@ -194,7 +193,6 @@
 		7B5E254F2ADBEEFA000BC664 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		AF1A63D12AD81863000F8A4E /* CollectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		AF1A63D32AD81863000F8A4E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		AF1A63D72AD81863000F8A4E /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		AF1A63E42AD96607000F8A4E /* CollectionsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModelProtocol.swift; sourceTree = "<group>"; };
 		AF1A63E62AD96768000F8A4E /* CollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModel.swift; sourceTree = "<group>"; };
 		AF1A63E92AD99153000F8A4E /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
@@ -537,7 +535,6 @@
 		AF1A63D62AD81863000F8A4E /* Statistic */ = {
 			isa = PBXGroup;
 			children = (
-				AF1A63D72AD81863000F8A4E /* StatisticViewController.swift */,
 				F228EF9D2AD5F694001BA148 /* StatDataModels */,
 				F228EF962AD5D505001BA148 /* StatDataProvider */,
 				F280EEC82ADBD398004DFC1B /* StatisticView */,
@@ -1089,7 +1086,6 @@
 				7B5E254E2ADBEBEC000BC664 /* Observable.swift in Sources */,
 				AFA971622AE67DB8002B0FB7 /* extension+UIViewController.swift in Sources */,
 				F26D6B6D2ADB190800B993CB /* WebController.swift in Sources */,
-				D8307F102AD2BCD3006302F6 /* CartViewController.swift in Sources */,
 				F228EF9C2AD5D5D0001BA148 /* UsersCollectionViewController.swift in Sources */,
 				F228EF982AD5D522001BA148 /* StatisticDataProvider.swift in Sources */,
 				F228EFAD2ADA6D18001BA148 /* AlertStatistic.swift in Sources */,
@@ -1112,9 +1108,7 @@
 				D86C21B42AD82C38000AD25C /* CartViewController+UITableViewDelegate.swift in Sources */,
 				D86C21B52AD82C38000AD25C /* CartViewModel.swift in Sources */,
 				D86C21BF2AD82CE7000AD25C /* Alert.swift in Sources */,
-				AF1A63DB2AD81863000F8A4E /* StatisticViewController.swift in Sources */,
 				D86C21B92AD82C38000AD25C /* CartDeleteViewController.swift in Sources */,
-				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				D8B9766E2AE28A6B007CA5D2 /* PayViewController+UICollectionViewDataSource.swift in Sources */,
 				AFF11A0C2ADAB14100315704 /* CollectionNavigationAction.swift in Sources */,
 				AFA9715E2AE676BA002B0FB7 /* extension+UITableViewCell.swift in Sources */,
@@ -1138,11 +1132,9 @@
 				AF8B21EF2AE51EF4007A91F0 /* NFTLoadingCell.swift in Sources */,
 				AF3949002AD1DA06003A7B70 /* DefaultNetworkRequest.swift in Sources */,
 				AF39490D2AD31B11003A7B70 /* ProfileLikesModel.swift in Sources */,
-				AF1A63DA2AD81863000F8A4E /* CartViewController.swift in Sources */,
 				D8B9767A2AE305FB007CA5D2 /* RatingView.swift in Sources */,
 				AF1A63D92AD81863000F8A4E /* ProfileViewController.swift in Sources */,
 				AF8B21F12AE525BC007A91F0 /* CellKind.swift in Sources */,
-				AF1A63DB2AD81863000F8A4E /* StatisticViewController.swift in Sources */,
 				7B5E25482ADBE83E000BC664 /* WebViewViewController.swift in Sources */,
 				D8B976652AE1B281007CA5D2 /* PayViewModel.swift in Sources */,
 				D8B976682AE2641B007CA5D2 /* PayResultViewController.swift in Sources */,
@@ -1152,14 +1144,12 @@
 				F24893512AE7BFD9009639DA /* HandlingErrorServiceStat.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				F223FE3B2AE30ADD00CC5CC8 /* StatLikesModel.swift in Sources */,
-				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				F2AFCC0C2AE05F87009B4B06 /* UsersCollectionViewModel.swift in Sources */,
 				F228EFA12AD5F731001BA148 /* StatUserModel.swift in Sources */,
 				F2AFCC0A2AE05F6D009B4B06 /* UsersCollectionView.swift in Sources */,
 				F228EFA52AD7FD47001BA148 /* UserCardViewModel.swift in Sources */,
 				F228EF9A2AD5D57A001BA148 /* UserCardViewController.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
-				D8307F162AD2CAB0006302F6 /* ProfileViewController.swift in Sources */,
 				F228EF932AD5D462001BA148 /* StatisticViewModel.swift in Sources */,
 				F24893552AE80701009639DA /* StatCartIdNfts.swift in Sources */,
 			);

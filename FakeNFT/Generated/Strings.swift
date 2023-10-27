@@ -10,11 +10,19 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  /// Коллекция NFT
+  internal static let nftCollection = L10n.tr("Localizable", "nftCollection", fallback: "Коллекция NFT")
   internal enum Alert {
     /// Понятно
     internal static let button = L10n.tr("Localizable", "alert.button", fallback: "Понятно")
+    /// Отмена
+    internal static let cancel = L10n.tr("Localizable", "alert.cancel", fallback: "Отмена")
+    /// Ошибка
+    internal static let error = L10n.tr("Localizable", "alert.error", fallback: "Ошибка")
     /// Сообщение для вас!
     internal static let header = L10n.tr("Localizable", "alert.header", fallback: "Сообщение для вас!")
+    /// Повторить
+    internal static let `repeat` = L10n.tr("Localizable", "alert.repeat", fallback: "Повторить")
     internal enum Error {
       /// Что-то пошло не так.
       internal static let description = L10n.tr("Localizable", "alert.error.description", fallback: "Что-то пошло не так.")
@@ -23,18 +31,12 @@ internal enum L10n {
       /// Ошибка
       internal static let title = L10n.tr("Localizable", "alert.error.title", fallback: "Ошибка")
     }
-  /// Коллекция NFT
-  internal static let nftCollection = L10n.tr("Localizable", "nftCollection", fallback: "Коллекция NFT")
-  internal enum Alert {
-    /// Отмена
-    internal static let cancel = L10n.tr("Localizable", "alert.cancel", fallback: "Отмена")
-    /// Ошибка
-    internal static let error = L10n.tr("Localizable", "alert.error", fallback: "Ошибка")
-    /// Повторить
-    internal static let `repeat` = L10n.tr("Localizable", "alert.repeat", fallback: "Повторить")
   }
   internal enum Application {
-    /// Фейк NFT
+    /// Localizable.strings
+    ///   FakeNFT
+    /// 
+    ///   Created by Vitaly on 06.10.2023.
     internal static let title = L10n.tr("Localizable", "application.title", fallback: "Фейк NFT")
   }
   internal enum Cart {
@@ -104,15 +106,6 @@ internal enum L10n {
     /// Закрыть
     internal static let close = L10n.tr("Localizable", "filter.close", fallback: "Закрыть")
   }
-  internal enum Tabbar {
-    /// Корзина
-    internal static let basket = L10n.tr("Localizable", "tabbar.basket", fallback: "Корзина")
-    /// Каталог
-    internal static let catalog = L10n.tr("Localizable", "tabbar.catalog", fallback: "Каталог")
-    /// Профиль
-    internal static let profile = L10n.tr("Localizable", "tabbar.profile", fallback: "Профиль")
-    /// Статистика
-    internal static let stats = L10n.tr("Localizable", "tabbar.stats", fallback: "Статистика")
   internal enum HandlingError {
     /// Не удалось получить данные
     internal static let `default` = L10n.tr("Localizable", "handlingError.default", fallback: "Не удалось получить данные")
@@ -142,6 +135,16 @@ internal enum L10n {
     internal static let caption = L10n.tr("Localizable", "statfilter.caption", fallback: "Сортировка")
     /// Закрыть
     internal static let close = L10n.tr("Localizable", "statfilter.close", fallback: "Закрыть")
+  }
+  internal enum Tabbar {
+    /// Корзина
+    internal static let basket = L10n.tr("Localizable", "tabbar.basket", fallback: "Корзина")
+    /// Каталог
+    internal static let catalog = L10n.tr("Localizable", "tabbar.catalog", fallback: "Каталог")
+    /// Профиль
+    internal static let profile = L10n.tr("Localizable", "tabbar.profile", fallback: "Профиль")
+    /// Статистика
+    internal static let stats = L10n.tr("Localizable", "tabbar.stats", fallback: "Статистика")
   }
   internal enum UserCard {
     /// Перейти на сайт пользователя
