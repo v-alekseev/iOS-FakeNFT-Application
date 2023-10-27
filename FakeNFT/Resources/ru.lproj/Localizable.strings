@@ -50,3 +50,26 @@
 "tabbar.profile" = "Профиль";
 "tabbar.basket" = "Корзина";
 "tabbar.stats" = "Статистика";
+
+
+"statfilter.caption" = "Сортировка";
+"statfilter.byName" = "По имени";
+"statfilter.byRating" = "По рейтингу";
+"statfilter.close" = "Закрыть";
+"userCard.userWebSite" = "Перейти на сайт пользователя";
+"usersCollection.stub" = "У пользователя ещё нет NFT";
+"nftCollection" = "Коллекция NFT";
+"alert.error" = "Ошибка";
+"alert.cancel" = "Отмена";
+"alert.repeat" = "Повторить";
+
+"handlingError.error404" = "По запросу ничего не найдено";
+"handlingError.error409" = "Ошибка обновления ресурса";
+"handlingError.error410" = "Запрошенный ресурс больше недоступен";
+"handlingError.error429" = "Слишком много запросов";
+"handlingError.error500_526" = "Ошибка на стороне сервера";
+"handlingError.default" = "Не удалось получить данные";
+"handlingError.parsingError" = "Не удалось конвертировать полученные данные";
+"handlingError.urlRequestError" = "Ошибка выполнения запроса";
+"handlingError.urlSessionError" = "Проверьте интернет-соединение";
+

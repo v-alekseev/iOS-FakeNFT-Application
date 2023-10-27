@@ -6,14 +6,13 @@
 //  Created by Vitaly on 08.10.2023.
 //
 
-import Foundation
 import UIKit
 
 final class ProfileViewController: UIViewController {
 
     // MARK: - Private Properties
     //
-    private var textLabel: UILabel = {
+    private lazy var textLabel: UILabel = {
         var label = UILabel()
         label.text = "Профайл"
         label.font =  UIFont.systemFont(ofSize: 32, weight: .bold)

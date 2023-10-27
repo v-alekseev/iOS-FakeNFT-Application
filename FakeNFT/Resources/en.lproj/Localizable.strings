@@ -50,3 +50,25 @@
 "tabbar.basket" = "Basket";
 "tabbar.stats" = "Stats";
 
+
+"statfilter.caption" = "Sort";
+"statfilter.byName" = "By name";
+"statfilter.byRating" = "By rating";
+"statfilter.close" = "Close";
+"userCard.userWebSite" = "User Website";
+"usersCollection.stub" = "The user does not have NFT yet";
+"nftCollection" = "NFT Collection";
+"alert.error" = "Error";
+"alert.cancel" = "Cancel";
+"alert.repeat" = "Repeat";
+
+"handlingError.error404" = "Nothing found on request";
+"handlingError.error409" = "Resource update error";
+"handlingError.error410" = "Requested resource is no longer available";
+"handlingError.error429" = "Too Many Requests";
+"handlingError.error500_526" = "Server Error ";
+"handlingError.default" = "Unable to retrieve data";
+"handlingError.parsingError" = "Unable to convert received data";
+"handlingError.urlRequestError" = "Request execution error";
+"handlingError.urlSessionError" = "Check your internet connection";
+
