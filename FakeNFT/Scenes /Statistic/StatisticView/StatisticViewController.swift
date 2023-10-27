@@ -116,14 +116,14 @@ final class StatisticViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] needShowFilterMenu in
                 if needShowFilterMenu {
-                    let controller = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
-                    controller.addAction(.init(title: "По имени", style: .default) { _ in
+                    let controller = UIAlertController(title: L10n.Filter.caption, message: nil, preferredStyle: .actionSheet)
+                    controller.addAction(.init(title: L10n.Filter.byName, style: .default) { _ in
                         self?.viewModel.provideNameFilter()
                     })
-                    controller.addAction(.init(title: "По рейтингу", style: .default) {_ in
+                    controller.addAction(.init(title: L10n.Filter.byRating, style: .default) {_ in
                         self?.viewModel.provideRatingFilter()
                     })
-                    controller.addAction(.init(title: "Закрыть", style: .cancel))
+                    controller.addAction(.init(title: L10n.Filter.close, style: .cancel))
                     self?.present(controller, animated: true)
                     self?.viewModel.needShowFilterMenu = false
                 }

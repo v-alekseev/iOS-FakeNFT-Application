@@ -18,6 +18,7 @@ final class UserCardViewModel {
     
     var profileLikes: [String] = []
     private let dataProvider: StatisticDataProviderProtocol?
+    private var handlingErrorService = HandlingErrorService.shared
     
     var didTapCollectionButton = false {
         didSet { if didTapCollectionButton {
@@ -43,14 +44,15 @@ final class UserCardViewModel {
         isLoading = true
         loadError = nil
         profileLikes = []
-        dataProvider?.getProfileLikes() { [weak self] result in
+        dataProvider?.getLikesId() { [weak self] result in
             guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
                     self.profileLikes = data.likes
                 case .failure(let error):
-                    self.loadError = "\(error)"
+                    let errorString = self.handlingErrorService.handlingHTTPStatusCodeError(error: error)
+                    self.loadError = errorString
                 }
                 self.isLoading = false
             }

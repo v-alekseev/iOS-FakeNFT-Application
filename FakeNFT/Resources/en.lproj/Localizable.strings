@@ -1,11 +1,24 @@
-/* 
-  Localizable.strings
-  FakeNFT
-
-  Created by Vitaly on 06.10.2023.
-  
-*/
-
-
 
 "application.title" = "Fake NFT";
+
+"filter.caption" = "Sort";
+"filter.byName" = "By name";
+"filter.byRating" = "By rating";
+"filter.close" = "Close";
+"userCard.userWebSite" = "User Website";
+"usersCollection.stub" = "The user does not have NFT yet";
+"nftCollection" = "NFT Collection";
+"alert.error" = "Error";
+"alert.cancel" = "Cancel";
+"alert.repeat" = "Repeat";
+
+"handlingError.error404" = "Nothing found on request";
+"handlingError.error409" = "Resource update error";
+"handlingError.error410" = "Requested resource is no longer available";
+"handlingError.error429" = "Too Many Requests";
+"handlingError.error500_526" = "Server Error ";
+"handlingError.default" = "Unable to retrieve data";
+"handlingError.parsingError" = "Unable to convert received data";
+"handlingError.urlRequestError" = "Request execution error";
+"handlingError.urlSessionError" = "Check your internet connection";
+

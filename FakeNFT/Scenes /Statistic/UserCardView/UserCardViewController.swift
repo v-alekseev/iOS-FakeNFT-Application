@@ -42,7 +42,7 @@ final class UserCardViewController: UIViewController {
         
         contentView.nameLabel.text = actualUserData.name
         contentView.descriptionLabel.text = actualUserData.description
-        contentView.nftsCountLabel.text = ("Коллекция NFT (\(actualUserData.nfts.count))")
+        contentView.nftsCountLabel.text = ("\(L10n.nftCollection) (\(actualUserData.nfts.count))")
         contentView.avatarView.kf.indicatorType = .activity
         contentView.avatarView.kf.setImage(with: URL(string: actualUserData.avatar),
                                            placeholder: userAvatarStub,
@@ -54,24 +54,6 @@ final class UserCardViewController: UIViewController {
     }
     
     func bindViewToViewModel() {
-        
-        viewModel.$isLoading
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] isLoading in
-                isLoading ? self?.contentView.loadIndicator.startAnimating() : self?.contentView.loadIndicator.stopAnimating()
-            })
-            .store(in: &bindings)
-        
-        viewModel.$loadError
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: {[weak self] loadError in
-                if let loadError {
-                    self?.alertPresenter.showAlert(self, message: loadError) {_ in
-                        self?.viewModel.loadProfileLikes()
-                    }
-                }
-            })
-            .store(in: &bindings)
         
         contentView.$didTapCollectionButton
             .assign(to: \.didTapCollectionButton, on: viewModel)
@@ -106,6 +88,24 @@ final class UserCardViewController: UIViewController {
                 if needShowWebsite {
                     let webViewViewController = WebViewViewController(self?.actualUserData.website ?? "")
                     self?.navigationController?.pushViewController(webViewViewController, animated: true)
+                }
+            })
+            .store(in: &bindings)
+        
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] isLoading in
+                isLoading ? self?.contentView.loadIndicator.startAnimating() : self?.contentView.loadIndicator.stopAnimating()
+            })
+            .store(in: &bindings)
+        
+        viewModel.$loadError
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] loadError in
+                if let loadError {
+                    self?.alertPresenter.showAlert(self, message: loadError) {_ in
+                        self?.viewModel.loadProfileLikes()
+                    }
                 }
             })
             .store(in: &bindings)

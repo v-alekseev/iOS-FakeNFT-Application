@@ -29,7 +29,6 @@ final class UsersCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         view = contentView
-        
         let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                             style: .plain,
                                             target: self,
@@ -38,10 +37,24 @@ final class UsersCollectionViewController: UIViewController {
         navigationItem.leftBarButtonItem  = leftBarButton
         
         navigationItem.titleView?.tintColor = .ypBlackWithDarkMode
-        navigationItem.title = "Коллекция NFT"
-        
+        navigationItem.title = L10n.nftCollection
+        bindViewToViewModel()
         bindViewModelToView()
         
+    }
+    
+    func bindViewToViewModel() {
+        
+        contentView.$dataForUpdateCartState
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] data in
+                if let data {
+                    self?.viewModel.changeCartState(nftId: data.nftId,
+                                                    isInCart: data.isInCart,
+                                                    indexPath: data.indexPath)
+                }
+            })
+            .store(in: &bindings)
     }
     
     func bindViewModelToView() {
@@ -54,6 +67,22 @@ final class UsersCollectionViewController: UIViewController {
                     self?.contentView.nftsIdForDisplayingLikes = nftsIdForDisplayingLikes
                 }
                 self?.contentView.reloadCollection()
+            })
+            .store(in: &bindings)
+        
+        viewModel.$nftsInCartId
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] nftsInCartId in
+                if let nftsInCartId = self?.viewModel.nftsInCartId {
+                    self?.contentView.nftsInCartId = nftsInCartId
+                    let indexPath = self?.viewModel.indexPathForReload
+                    if let indexPath {
+                        self?.contentView.changeCartButtonImage(indexPath: indexPath)
+                        self?.viewModel.indexPathForReload = nil
+                    } else {
+                        self?.contentView.reloadCollection()
+                    }
+                }
             })
             .store(in: &bindings)
         

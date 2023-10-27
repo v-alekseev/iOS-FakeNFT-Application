@@ -10,8 +10,11 @@ import Combine
 
 final class UsersCollectionView: UIView {
     
+    @Published var dataForUpdateCartState: (nftId: String, isInCart: Bool, indexPath: IndexPath)? = nil
+    
     var nfts: [NftModel] = []
     var nftsIdForDisplayingLikes: [String] = []
+    var nftsInCartId: [String] = []
     
     lazy var loadIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -23,7 +26,7 @@ final class UsersCollectionView: UIView {
         let label = UILabel()
         label.font = .bodyBold
         label.textColor = .ypBlackWithDarkMode
-        label.text = "У пользователя ещё нет NFT"
+        label.text = L10n.UsersCollection.stub
         return label
     }()
     
@@ -49,6 +52,12 @@ final class UsersCollectionView: UIView {
     
     func reloadCollection() {
         collectionView.reloadData()
+    }
+    
+    func changeCartButtonImage(indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? UsersCollectionCell {
+            cell.isInCart = !cell.isInCart
+        }
     }
     
     private func setUpViews() {
@@ -87,7 +96,13 @@ extension UsersCollectionView: UICollectionViewDataSource {
             for: indexPath) as? UsersCollectionCell
         let nftData = nfts[indexPath.row]
         let isLiked = nftsIdForDisplayingLikes.contains(nftData.id)
-        cell?.provide(nftData: nftData, isLiked: isLiked, isInCart: true)
+        cell?.provide(nftData: nftData, isLiked: isLiked)
+        let isInCart = nftsInCartId.contains(nftData.id)
+        cell?.isInCart = isInCart
+        cell?.setCartCompletion {  [weak self] in
+            guard let self else { return }
+            self.dataForUpdateCartState = (nftData.id, isInCart, indexPath)
+        }
         return cell ?? UsersCollectionCell()
     }
 }

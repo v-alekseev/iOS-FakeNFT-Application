@@ -10,6 +10,15 @@ import Kingfisher
 
 final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
+    var isInCart: Bool = false {
+        didSet {
+            let buttonImage = isInCart ? UIImage(resource: .deleteFromCart) : UIImage(resource: .addToCart)
+            cartButton.setImage(buttonImage, for: .normal)
+        }
+    }
+    
+    private var cartCompletion: (() -> ()) = {}
+    
     private lazy var imageNftView: UIImageView = {
         let imageNftView = UIImageView()
         imageNftView.contentMode = .scaleAspectFill
@@ -59,7 +68,6 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupView()
     }
     
@@ -72,7 +80,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func provide(nftData: NftModel, isLiked: Bool, isInCart: Bool) {
+    func provide(nftData: NftModel, isLiked: Bool) {
         if  let firstImage = nftData.images.first,
             let url = URL(string: firstImage) {
             imageNftView.kf.indicatorType = .activity
@@ -81,14 +89,15 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
                                      options: [.transition(.fade(1)),
                                                .forceRefresh])
         }
-        
         nftNameLabel.text = nftData.name
         ratingView.setRating(rank: nftData.rating)
-        priceLabel.text = nftData.price.formatPrice() + " ETH"
+        priceLabel.text = "\(nftData.price.formatPrice()) ETH"
         let isLikedImage = isLiked ? UIImage(resource: .isLiked) : UIImage(resource: .isNotLiked)
         likeImageView.image = isLikedImage
-        let buttonImage = isInCart ? UIImage(resource: .deleteFromCart) : UIImage(resource: .addToCart)
-        cartButton.setImage(buttonImage, for: .normal)
+    }
+    
+    func setCartCompletion(completion: @escaping () -> Void) {
+        cartCompletion = completion
     }
     
     private func setupView() {
@@ -141,8 +150,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     @objc
     private func tapCartButton() {
-        //TODO
-        print(#function)
+        cartCompletion()
     }
 }
 

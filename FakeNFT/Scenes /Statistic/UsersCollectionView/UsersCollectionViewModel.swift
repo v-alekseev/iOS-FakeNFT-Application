@@ -11,12 +11,15 @@ import Combine
 final class UsersCollectionViewModel {
     
     @Published var nfts: [NftModel] = []
+    @Published var nftsInCartId: [String] = []
     @Published var isLoading = false
     @Published var loadError: String?
     @Published var showStub = false
     
     var nftsIdForDisplayingLikes: [String] = []
+    var indexPathForReload: IndexPath? = nil
     private let dataProvider: StatisticDataProviderProtocol?
+    private var handlingErrorService = HandlingErrorService.shared
     private var actualUserData: UserModel
     private var profileLikes: [String]
     
@@ -46,7 +49,8 @@ final class UsersCollectionViewModel {
                             self.nftsIdForDisplayingLikes.append(data.id)
                         }
                     case .failure(let error):
-                        self.loadError = "\(error)"
+                        let errorString = self.handlingErrorService.handlingHTTPStatusCodeError(error: error)
+                        self.loadError = errorString
                     }
                     dispatchGroup.leave()
                 }
@@ -56,6 +60,64 @@ final class UsersCollectionViewModel {
             self.isLoading = false
             self.nfts = self.nfts.sorted(by: {$0.name < $1.name})
             self.showStub = self.nfts.isEmpty ? true : false
+            self.loadCartId()
+        }
+    }
+    
+    func changeCartState (nftId: String, isInCart: Bool, indexPath: IndexPath) {
+        if isInCart {
+            removeNftsWithIdFromCart(id: nftId)
+        }
+        else {
+            addNftsWithIdToCart(id: nftId)
+        }
+        indexPathForReload = indexPath
+    }
+    
+    func removeNftsWithIdFromCart (id: String) {
+        let newNftsInCartId = nftsInCartId.filter(){$0 != id}
+        cartUpdate(newNftsInCartId)
+    }
+    
+    func addNftsWithIdToCart (id: String) {
+        var newNftsInCartId = nftsInCartId
+        newNftsInCartId.append(id)
+        cartUpdate(newNftsInCartId)
+    }
+    
+    private func loadCartId() {
+        isLoading = true
+        loadError = nil
+        dataProvider?.getIdNftsInCard() { [weak self] result in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(data):
+                    self.nftsInCartId = data.nfts
+                case .failure(let error):
+                    let errorString = self.handlingErrorService.handlingHTTPStatusCodeError(error: error)
+                    self.loadError = errorString
+                }
+                self.isLoading = false
+            }
+        }
+    }
+    
+    private func cartUpdate (_ newNftsInCartId: [String]) {
+        isLoading = true
+        loadError = nil
+        dataProvider?.cartUpdate(newCartIDs: newNftsInCartId) { [weak self] result in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(data):
+                    self.nftsInCartId = data.nfts
+                case .failure(let error):
+                    let errorString = self.handlingErrorService.handlingHTTPStatusCodeError(error: error)
+                    self.loadError = errorString
+                }
+                self.isLoading = false
+            }
         }
     }
 }

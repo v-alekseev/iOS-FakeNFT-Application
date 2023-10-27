@@ -45,20 +45,20 @@
 `Total:` est: 195 min; fact: 210 min.
 
 
-## Экран Users Collection (est 11 hr; fact x).
+## Экран Users Collection (est 11 hr; fact 16.4 hr).
 
 #### Верстка
-- верстка навбара (est: 15 min; fact: x min).
-- верстка ячейчки UICollectionView с иконкой, сердечком, названием, рейтингом из 0-5 звезд, стоимостью NFT (в ETH), кнопкой добавления/удаления NFT из корзины.(est: 210 min; fact: x min).
-- создание  UICollectionView(est: 60 min; fact: x min).
+- верстка навбара (est: 15 min; fact: 15 min).
+- верстка ячейчки UICollectionView с иконкой, сердечком, названием, рейтингом из 0-5 звезд, стоимостью NFT (в ETH), кнопкой добавления/удаления NFT из корзины.(est: 210 min; fact: 210 min).
+- создание  UICollectionView(est: 60 min; fact: 60 min).
 
-`Total:` est: 285 min; fact: x min.
+`Total:` est: 285 min; fact: 285 min.
 
 #### Логика
 
-- логика сетевого слоя для загрузки данных для UICollectionView (est: 180 min; fact: x min).
-- логика сетевого слоя для удаления/добавления NFT из корзины (est: 180 min; fact: x min).
-- индикатор загрузки (est: 30 min; fact: x min).
+- логика сетевого слоя для загрузки данных для UICollectionView (est: 180 min; fact: 180 min).
+- логика сетевого слоя для удаления/добавления NFT из корзины (est: 180 min; fact: 300 min).
+- индикатор загрузки (est: 30 min; fact: 10 min).
 
 
-`Total:` est: 360 min; fact: x min.
+`Total:` est: 360 min; fact: 490 min.
