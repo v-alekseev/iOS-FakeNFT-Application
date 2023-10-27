@@ -77,7 +77,7 @@ final class UsersCollectionViewController: UIViewController {
                     self?.contentView.nftsInCartId = nftsInCartId
                     let indexPath = self?.viewModel.indexPathForReload
                     if let indexPath {
-                        self?.contentView.reloadCell(indexPath: indexPath)
+                        self?.contentView.changeCartButtonImage(indexPath: indexPath)
                         self?.viewModel.indexPathForReload = nil
                     } else {
                         self?.contentView.reloadCollection()

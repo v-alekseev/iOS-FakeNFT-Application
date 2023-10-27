@@ -54,8 +54,10 @@ final class UsersCollectionView: UIView {
         collectionView.reloadData()
     }
     
-    func reloadCell(indexPath: IndexPath) {
-        collectionView.reloadItems(at: [indexPath])
+    func changeCartButtonImage(indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? UsersCollectionCell {
+            cell.isInCart = !cell.isInCart
+        }
     }
     
     private func setUpViews() {
