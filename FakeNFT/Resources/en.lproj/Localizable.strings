@@ -1,10 +1,10 @@
 
 "application.title" = "Fake NFT";
 
-"filter.caption" = "Sort";
-"filter.byName" = "By name";
-"filter.byRating" = "By rating";
-"filter.close" = "Close";
+"statfilter.caption" = "Sort";
+"statfilter.byName" = "By name";
+"statfilter.byRating" = "By rating";
+"statfilter.close" = "Close";
 "userCard.userWebSite" = "User Website";
 "usersCollection.stub" = "The user does not have NFT yet";
 "nftCollection" = "NFT Collection";

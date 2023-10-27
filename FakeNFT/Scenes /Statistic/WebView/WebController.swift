@@ -1,5 +1,5 @@
 //
-//  WebViewViewController.swift
+//  WebController.swift
 //  FakeNFT
 //
 //  Created by Александр Пичугин on 14.10.2023.
@@ -8,9 +8,9 @@
 import UIKit
 import WebKit
 
-final class WebViewViewController: UIViewController {
+final class WebController: UIViewController {
     
-    private var alertPresenter = Alert.shared
+    private var alert = AlertStatistic.shared
     private var url: String
     
     private lazy var webView: WKWebView = {
@@ -43,7 +43,7 @@ final class WebViewViewController: UIViewController {
         if let weburl = URL(string: url) {
             webView.load(URLRequest(url: weburl))
         } else {
-            alertPresenter.showAlert(self)
+            alert.showAlert(self)
         }
     }
     

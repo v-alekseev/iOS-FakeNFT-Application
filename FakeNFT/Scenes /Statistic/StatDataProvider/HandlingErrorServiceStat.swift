@@ -1,5 +1,5 @@
 //
-//  HandlingErrorService.swift
+//  HandlingErrorServiceStat.swift
 //  FakeNFT
 //
 //  Created by Александр Пичугин on 24.10.2023.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class HandlingErrorService {
+final class HandlingErrorServiceStat {
     
-    static let shared = HandlingErrorService()
+    static let shared = HandlingErrorServiceStat()
     
     func handlingHTTPStatusCodeError(error: Error) -> String? {
         guard let error = error as? NetworkClientError else { return nil }

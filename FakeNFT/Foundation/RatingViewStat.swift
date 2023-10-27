@@ -19,7 +19,7 @@
 
 import UIKit
 
-final class RatingView: UIStackView {
+final class RatingViewStat: UIStackView {
     let maxRating: Int
     
     init(maxRating: Int = 5) {

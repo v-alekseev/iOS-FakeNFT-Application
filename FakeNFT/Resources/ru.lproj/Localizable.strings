@@ -1,10 +1,10 @@
 
 "application.title" = "Фейк NFT";
 
-"filter.caption" = "Сортировка";
-"filter.byName" = "По имени";
-"filter.byRating" = "По рейтингу";
-"filter.close" = "Закрыть";
+"statfilter.caption" = "Сортировка";
+"statfilter.byName" = "По имени";
+"statfilter.byRating" = "По рейтингу";
+"statfilter.close" = "Закрыть";
 "userCard.userWebSite" = "Перейти на сайт пользователя";
 "usersCollection.stub" = "У пользователя ещё нет NFT";
 "nftCollection" = "Коллекция NFT";

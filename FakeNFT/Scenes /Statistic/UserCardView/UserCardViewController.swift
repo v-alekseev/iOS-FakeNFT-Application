@@ -13,7 +13,7 @@ final class UserCardViewController: UIViewController {
     
     private let contentView = UserCardView()
     private let viewModel: UserCardViewModel
-    private var alertPresenter = Alert.shared
+    private var alert = AlertStatistic.shared
     private var bindings = Set<AnyCancellable>()
     private var actualUserData: StatUserModel
     private lazy var userAvatarStub = UIImage(resource: .userAvatarStub)
@@ -86,7 +86,7 @@ final class UserCardViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] needShowWebsite in
                 if needShowWebsite {
-                    let webViewViewController = WebViewViewController(self?.actualUserData.website ?? "")
+                    let webViewViewController = WebController(self?.actualUserData.website ?? "")
                     self?.navigationController?.pushViewController(webViewViewController, animated: true)
                 }
             })
@@ -103,7 +103,7 @@ final class UserCardViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] loadError in
                 if let loadError {
-                    self?.alertPresenter.showAlert(self, message: loadError) {_ in
+                    self?.alert.showAlert(self, message: loadError) {_ in
                         self?.viewModel.loadProfileLikes()
                     }
                 }

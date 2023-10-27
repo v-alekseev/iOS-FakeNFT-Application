@@ -12,7 +12,7 @@ final class UsersCollectionViewController: UIViewController {
     
     private let contentView = UsersCollectionView()
     private let viewModel: UsersCollectionViewModel
-    private var alertPresenter = Alert.shared
+    private var alert = AlertStatistic.shared
     private var bindings = Set<AnyCancellable>()
     
     init(_ viewModel: UsersCollectionViewModel) {
@@ -104,7 +104,7 @@ final class UsersCollectionViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] loadError in
                 if let loadError {
-                    self?.alertPresenter.showAlert(self, message: loadError) {_ in
+                    self?.alert.showAlert(self, message: loadError) {_ in
                         self?.viewModel.loadNftsData()
                     }
                 }

@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class Alert {
+final class AlertStatistic {
     
-    static let shared = Alert()
+    static let shared = AlertStatistic()
     
     func showAlert(_ alertController: UIViewController?, message: String? = "", handler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(

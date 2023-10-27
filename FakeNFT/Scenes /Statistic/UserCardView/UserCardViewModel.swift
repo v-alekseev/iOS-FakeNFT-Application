@@ -18,7 +18,7 @@ final class UserCardViewModel {
     
     var profileLikes: [String] = []
     private let dataProvider: StatisticDataProviderProtocol?
-    private var handlingErrorService = HandlingErrorService.shared
+    private var handlingErrorService = HandlingErrorServiceStat.shared
     
     var didTapCollectionButton = false {
         didSet { if didTapCollectionButton {

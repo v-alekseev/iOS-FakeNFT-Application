@@ -43,11 +43,11 @@
 		F228EFA52AD7FD47001BA148 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA42AD7FD47001BA148 /* UserCardViewModel.swift */; };
 		F228EFA72AD9BB87001BA148 /* StatNetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA62AD9BB87001BA148 /* StatNetworkRequests.swift */; };
 		F228EFA92AD9BDED001BA148 /* FiltrationTypeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */; };
-		F228EFAD2ADA6D18001BA148 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFAC2ADA6D18001BA148 /* Alert.swift */; };
-		F248934F2AE5AFA2009639DA /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248934E2AE5AFA2009639DA /* RatingView.swift */; };
-		F24893512AE7BFD9009639DA /* HandlingErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24893502AE7BFD9009639DA /* HandlingErrorService.swift */; };
+		F228EFAD2ADA6D18001BA148 /* AlertStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFAC2ADA6D18001BA148 /* AlertStatistic.swift */; };
+		F248934F2AE5AFA2009639DA /* RatingViewStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248934E2AE5AFA2009639DA /* RatingViewStat.swift */; };
+		F24893512AE7BFD9009639DA /* HandlingErrorServiceStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24893502AE7BFD9009639DA /* HandlingErrorServiceStat.swift */; };
 		F24893552AE80701009639DA /* StatCartIdNfts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24893542AE80701009639DA /* StatCartIdNfts.swift */; };
-		F26D6B6D2ADB190800B993CB /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D6B6C2ADB190800B993CB /* WebViewViewController.swift */; };
+		F26D6B6D2ADB190800B993CB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D6B6C2ADB190800B993CB /* WebController.swift */; };
 		F280EECC2ADBD6BB004DFC1B /* UsersCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F280EECB2ADBD6BB004DFC1B /* UsersCollectionCell.swift */; };
 		F280EECE2ADBF14F004DFC1B /* StatNftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F280EECD2ADBF14F004DFC1B /* StatNftModel.swift */; };
 		F280EED02ADDD323004DFC1B /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F280EECF2ADDD323004DFC1B /* UserCardView.swift */; };
@@ -116,11 +116,11 @@
 		F228EFA42AD7FD47001BA148 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
 		F228EFA62AD9BB87001BA148 /* StatNetworkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatNetworkRequests.swift; sourceTree = "<group>"; };
 		F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltrationTypeStorage.swift; sourceTree = "<group>"; };
-		F228EFAC2ADA6D18001BA148 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		F248934E2AE5AFA2009639DA /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
-		F24893502AE7BFD9009639DA /* HandlingErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlingErrorService.swift; sourceTree = "<group>"; };
+		F228EFAC2ADA6D18001BA148 /* AlertStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStatistic.swift; sourceTree = "<group>"; };
+		F248934E2AE5AFA2009639DA /* RatingViewStat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewStat.swift; sourceTree = "<group>"; };
+		F24893502AE7BFD9009639DA /* HandlingErrorServiceStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlingErrorServiceStat.swift; sourceTree = "<group>"; };
 		F24893542AE80701009639DA /* StatCartIdNfts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCartIdNfts.swift; sourceTree = "<group>"; };
-		F26D6B6C2ADB190800B993CB /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		F26D6B6C2ADB190800B993CB /* WebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
 		F280EECB2ADBD6BB004DFC1B /* UsersCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionCell.swift; sourceTree = "<group>"; };
 		F280EECD2ADBF14F004DFC1B /* StatNftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatNftModel.swift; sourceTree = "<group>"; };
 		F280EECF2ADDD323004DFC1B /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 		3F6806CE29CBBD1B00B4F915 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				F248934E2AE5AFA2009639DA /* RatingView.swift */,
+				F248934E2AE5AFA2009639DA /* RatingViewStat.swift */,
 				3F6806CF29CBBDB100B4F915 /* NetworkClient */,
 				3F6806D629CBC50A00B4F915 /* CellsReusingUtils.swift */,
 				3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */,
@@ -320,9 +320,9 @@
 				F228EF962AD5D505001BA148 /* StatDataProvider */,
 				F280EEC82ADBD398004DFC1B /* StatisticView */,
 				F280EEC92ADBD3AE004DFC1B /* UserCardView */,
-				F280EED32ADEA218004DFC1B /* WebViewView */,
+				F280EED32ADEA218004DFC1B /* WebView */,
 				F280EECA2ADBD3CC004DFC1B /* UsersCollectionView */,
-				F228EFAC2ADA6D18001BA148 /* Alert.swift */,
+				F228EFAC2ADA6D18001BA148 /* AlertStatistic.swift */,
 			);
 			path = Statistic;
 			sourceTree = "<group>";
@@ -341,7 +341,7 @@
 				F228EFA62AD9BB87001BA148 /* StatNetworkRequests.swift */,
 				F228EF972AD5D522001BA148 /* StatisticDataProvider.swift */,
 				F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */,
-				F24893502AE7BFD9009639DA /* HandlingErrorService.swift */,
+				F24893502AE7BFD9009639DA /* HandlingErrorServiceStat.swift */,
 			);
 			path = StatDataProvider;
 			sourceTree = "<group>";
@@ -389,12 +389,12 @@
 			path = UsersCollectionView;
 			sourceTree = "<group>";
 		};
-		F280EED32ADEA218004DFC1B /* WebViewView */ = {
+		F280EED32ADEA218004DFC1B /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				F26D6B6C2ADB190800B993CB /* WebViewViewController.swift */,
+				F26D6B6C2ADB190800B993CB /* WebController.swift */,
 			);
-			path = WebViewView;
+			path = WebView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -565,7 +565,7 @@
 				D8307F132AD2C32F006302F6 /* CatalogViewController.swift in Sources */,
 				F228EFA92AD9BDED001BA148 /* FiltrationTypeStorage.swift in Sources */,
 				F280EECE2ADBF14F004DFC1B /* StatNftModel.swift in Sources */,
-				F248934F2AE5AFA2009639DA /* RatingView.swift in Sources */,
+				F248934F2AE5AFA2009639DA /* RatingViewStat.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
 				D8307F1B2AD2CE30006302F6 /* ModuleFactory.swift in Sources */,
 				F228EF952AD5D49C001BA148 /* StatisticCell.swift in Sources */,
@@ -575,19 +575,19 @@
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
-				F26D6B6D2ADB190800B993CB /* WebViewViewController.swift in Sources */,
+				F26D6B6D2ADB190800B993CB /* WebController.swift in Sources */,
 				D84751522AD0B84300CEA0A7 /* Strings.swift in Sources */,
 				D8307F102AD2BCD3006302F6 /* CartViewController.swift in Sources */,
 				F228EF9C2AD5D5D0001BA148 /* UsersCollectionViewController.swift in Sources */,
 				F228EF982AD5D522001BA148 /* StatisticDataProvider.swift in Sources */,
-				F228EFAD2ADA6D18001BA148 /* Alert.swift in Sources */,
+				F228EFAD2ADA6D18001BA148 /* AlertStatistic.swift in Sources */,
 				F280EED02ADDD323004DFC1B /* UserCardView.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				F228EFA72AD9BB87001BA148 /* StatNetworkRequests.swift in Sources */,
 				F280EED52ADEC07A004DFC1B /* StatisticView.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
-				F24893512AE7BFD9009639DA /* HandlingErrorService.swift in Sources */,
+				F24893512AE7BFD9009639DA /* HandlingErrorServiceStat.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				F223FE3B2AE30ADD00CC5CC8 /* StatLikesModel.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,

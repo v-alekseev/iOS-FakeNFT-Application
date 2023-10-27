@@ -12,7 +12,7 @@ final class StatisticViewController: UIViewController {
     
     private let contentView = StatisticView()
     private let viewModel: StatisticViewModel
-    private var alertPresenter = Alert.shared
+    private var alert = AlertStatistic.shared
     private var bindings = Set<AnyCancellable>()
     
     init(_ viewModel: StatisticViewModel) {
@@ -92,7 +92,7 @@ final class StatisticViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] loadError in
                 if let loadError {
-                    self?.alertPresenter.showAlert(self, message: loadError) {_ in
+                    self?.alert.showAlert(self, message: loadError) {_ in
                         self?.viewModel.loadUsersData()
                     }
                 }
@@ -116,14 +116,14 @@ final class StatisticViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: {[weak self] needShowFilterMenu in
                 if needShowFilterMenu {
-                    let controller = UIAlertController(title: L10n.Filter.caption, message: nil, preferredStyle: .actionSheet)
-                    controller.addAction(.init(title: L10n.Filter.byName, style: .default) { _ in
+                    let controller = UIAlertController(title: L10n.Statfilter.caption, message: nil, preferredStyle: .actionSheet)
+                    controller.addAction(.init(title: L10n.Statfilter.byName, style: .default) { _ in
                         self?.viewModel.provideNameFilter()
                     })
-                    controller.addAction(.init(title: L10n.Filter.byRating, style: .default) {_ in
+                    controller.addAction(.init(title: L10n.Statfilter.byRating, style: .default) {_ in
                         self?.viewModel.provideRatingFilter()
                     })
-                    controller.addAction(.init(title: L10n.Filter.close, style: .cancel))
+                    controller.addAction(.init(title: L10n.Statfilter.close, style: .cancel))
                     self?.present(controller, animated: true)
                     self?.viewModel.needShowFilterMenu = false
                 }

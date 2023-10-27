@@ -50,7 +50,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.font = .medium10
+        label.font = .currency
         label.textColor = .ypBlackWithDarkMode
         return label
     }()
@@ -62,7 +62,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         return likeImageView
     }()
     
-    private lazy var ratingView = RatingView()
+    private lazy var ratingView = RatingViewStat()
     private lazy var imageNftStub = UIImage(resource: .nftStub)
     private var task: URLSessionDataTask?
     

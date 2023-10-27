@@ -24,16 +24,6 @@ internal enum L10n {
     /// Фейк NFT
     internal static let title = L10n.tr("Localizable", "application.title", fallback: "Фейк NFT")
   }
-  internal enum Filter {
-    /// По имени
-    internal static let byName = L10n.tr("Localizable", "filter.byName", fallback: "По имени")
-    /// По рейтингу
-    internal static let byRating = L10n.tr("Localizable", "filter.byRating", fallback: "По рейтингу")
-    /// Сортировка
-    internal static let caption = L10n.tr("Localizable", "filter.caption", fallback: "Сортировка")
-    /// Закрыть
-    internal static let close = L10n.tr("Localizable", "filter.close", fallback: "Закрыть")
-  }
   internal enum HandlingError {
     /// Не удалось получить данные
     internal static let `default` = L10n.tr("Localizable", "handlingError.default", fallback: "Не удалось получить данные")
@@ -53,6 +43,16 @@ internal enum L10n {
     internal static let urlRequestError = L10n.tr("Localizable", "handlingError.urlRequestError", fallback: "Ошибка выполнения запроса")
     /// Проверьте интернет-соединение
     internal static let urlSessionError = L10n.tr("Localizable", "handlingError.urlSessionError", fallback: "Проверьте интернет-соединение")
+  }
+  internal enum Statfilter {
+    /// По имени
+    internal static let byName = L10n.tr("Localizable", "statfilter.byName", fallback: "По имени")
+    /// По рейтингу
+    internal static let byRating = L10n.tr("Localizable", "statfilter.byRating", fallback: "По рейтингу")
+    /// Сортировка
+    internal static let caption = L10n.tr("Localizable", "statfilter.caption", fallback: "Сортировка")
+    /// Закрыть
+    internal static let close = L10n.tr("Localizable", "statfilter.close", fallback: "Закрыть")
   }
   internal enum UserCard {
     /// Перейти на сайт пользователя

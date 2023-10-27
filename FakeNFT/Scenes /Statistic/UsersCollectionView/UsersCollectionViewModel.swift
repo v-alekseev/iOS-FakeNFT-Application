@@ -19,7 +19,7 @@ final class UsersCollectionViewModel {
     var nftsIdForDisplayingLikes: [String] = []
     var indexPathForReload: IndexPath? = nil
     private let dataProvider: StatisticDataProviderProtocol?
-    private var handlingErrorService = HandlingErrorService.shared
+    private var handlingErrorService = HandlingErrorServiceStat.shared
     private var actualUserData: StatUserModel
     private var profileLikes: [String]
     
