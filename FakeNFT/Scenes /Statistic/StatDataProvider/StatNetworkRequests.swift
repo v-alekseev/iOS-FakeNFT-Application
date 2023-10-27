@@ -1,5 +1,5 @@
 //
-//  NetworkRequests.swift
+//  StatNetworkRequests.swift
 //  FakeNFT
 //
 //  Created by Александр Пичугин on 13.10.2023.
@@ -35,7 +35,7 @@ struct СartUpdateRequest: NetworkRequest {
     var httpMethod: HttpMethod { .put }
     var dto: Encodable?
     init(cartIDs: [String]) {
-        self.dto = CartIdNfts(nfts: cartIDs)
+        self.dto = StatCartIdNfts(nfts: cartIDs)
     }
 }
 

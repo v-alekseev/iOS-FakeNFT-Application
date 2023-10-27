@@ -12,7 +12,7 @@ final class UsersCollectionView: UIView {
     
     @Published var dataForUpdateCartState: (nftId: String, isInCart: Bool, indexPath: IndexPath)? = nil
     
-    var nfts: [NftModel] = []
+    var nfts: [StatNftModel] = []
     var nftsIdForDisplayingLikes: [String] = []
     var nftsInCartId: [String] = []
     

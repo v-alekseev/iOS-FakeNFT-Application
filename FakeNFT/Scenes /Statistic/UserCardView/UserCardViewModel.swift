@@ -10,7 +10,7 @@ import Combine
 
 final class UserCardViewModel {
     
-    @Published var actualUserData: UserModel
+    @Published var actualUserData: StatUserModel
     @Published var needShowCollectionScreen = false
     @Published var needShowWebsite = false
     @Published var isLoading = false
@@ -34,7 +34,7 @@ final class UserCardViewModel {
         }
     }
     
-    init(dataProvider: StatisticDataProviderProtocol, userData: UserModel) {
+    init(dataProvider: StatisticDataProviderProtocol, userData: StatUserModel) {
         self.dataProvider = dataProvider
         actualUserData = userData
         loadProfileLikes()

@@ -13,7 +13,7 @@ final class StatisticView: UIView {
     @Published var needRefreshTable = false
     @Published var selectedRow: Int?
     
-    var usersData: [UserModel] = []
+    var usersData: [StatUserModel] = []
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()

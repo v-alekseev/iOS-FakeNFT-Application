@@ -69,7 +69,7 @@ final class StatisticCell: UITableViewCell, ReuseIdentifying {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func provide(userData: UserModel) {
+    func provide(userData: StatUserModel) {
         if let url = URL(string: userData.avatar) {
             avatarView.kf.indicatorType = .activity
             avatarView.kf.setImage(with: url, placeholder: userAvatarStub,

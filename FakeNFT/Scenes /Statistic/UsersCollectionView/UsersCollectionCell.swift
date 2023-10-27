@@ -80,7 +80,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func provide(nftData: NftModel, isLiked: Bool) {
+    func provide(nftData: StatNftModel, isLiked: Bool) {
         if  let firstImage = nftData.images.first,
             let url = URL(string: firstImage) {
             imageNftView.kf.indicatorType = .activity

@@ -1,5 +1,5 @@
 //
-//  ProfileModel.swift
+//  StatLikesModel.swift
 //  FakeNFT
 //
 //  Created by Александр Пичугин on 20.10.2023.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ProfileLikesModel: Codable {
+struct StatLikesModel: Codable {
     let likes: [String]
 }

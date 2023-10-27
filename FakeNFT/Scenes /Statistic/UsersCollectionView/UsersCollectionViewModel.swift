@@ -10,7 +10,7 @@ import Combine
 
 final class UsersCollectionViewModel {
     
-    @Published var nfts: [NftModel] = []
+    @Published var nfts: [StatNftModel] = []
     @Published var nftsInCartId: [String] = []
     @Published var isLoading = false
     @Published var loadError: String?
@@ -20,10 +20,10 @@ final class UsersCollectionViewModel {
     var indexPathForReload: IndexPath? = nil
     private let dataProvider: StatisticDataProviderProtocol?
     private var handlingErrorService = HandlingErrorService.shared
-    private var actualUserData: UserModel
+    private var actualUserData: StatUserModel
     private var profileLikes: [String]
     
-    init(dataProvider: StatisticDataProviderProtocol, actualUserData: UserModel, profileLikes: [String]) {
+    init(dataProvider: StatisticDataProviderProtocol, actualUserData: StatUserModel, profileLikes: [String]) {
         self.dataProvider = dataProvider
         self.actualUserData = actualUserData
         self.profileLikes = profileLikes

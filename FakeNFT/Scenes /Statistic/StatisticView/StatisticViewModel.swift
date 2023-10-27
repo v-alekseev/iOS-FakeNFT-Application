@@ -10,9 +10,9 @@ import Combine
 
 final class StatisticViewModel {
     
-    @Published var usersData: [UserModel] = []
+    @Published var usersData: [StatUserModel] = []
     @Published var isLoading = false
-    @Published var actualUserData: UserModel?
+    @Published var actualUserData: StatUserModel?
     @Published var loadError: String?
     @Published var needShowFilterMenu = false
     

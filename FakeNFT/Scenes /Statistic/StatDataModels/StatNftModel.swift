@@ -1,5 +1,5 @@
 //
-//  NftModel.swift
+//  StatNftModel.swift
 //  FakeNFT
 //
 //  Created by Александр Пичугин on 15.10.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NftModel: Codable {
+struct StatNftModel: Codable {
     let name: String
     let images: [String]
     let rating: Int
