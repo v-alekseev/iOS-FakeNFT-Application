@@ -97,7 +97,8 @@ extension UsersCollectionView: UICollectionViewDataSource {
         cell?.provide(nftData: nftData, isLiked: isLiked)
         let isInCart = nftsInCartId.contains(nftData.id)
         cell?.isInCart = isInCart
-        cell?.setCartCompletion {
+        cell?.setCartCompletion {  [weak self] in
+            guard let self else { return }
             self.dataForUpdateCartState = (nftData.id, isInCart, indexPath)
         }
         return cell ?? UsersCollectionCell()

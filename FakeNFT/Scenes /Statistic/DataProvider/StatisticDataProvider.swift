@@ -21,8 +21,7 @@ final class StatisticDataProvider: StatisticDataProviderProtocol {
     
     func getUsersData( _ completion: @escaping (Result<[UserModel], Error>) -> Void) {
         let usersRequest = UsersRequest()
-        networkClient.send(request: usersRequest, type: [UserModel].self) { [weak self] result in
-            guard self != nil else { return }
+        networkClient.send(request: usersRequest, type: [UserModel].self) { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
@@ -37,8 +36,7 @@ final class StatisticDataProvider: StatisticDataProviderProtocol {
     
     func getNftWithId(nftId: String, _ completion: @escaping (Result<NftModel, Error>) -> Void) {
         let usersRequest = NftWithIdRequest(nftID: nftId)
-        networkClient.send(request: usersRequest, type: NftModel.self) { [weak self] result in
-            guard self != nil else { return }
+        networkClient.send(request: usersRequest, type: NftModel.self) { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
@@ -53,8 +51,7 @@ final class StatisticDataProvider: StatisticDataProviderProtocol {
     
     func getLikesId( _ completion: @escaping (Result<ProfileLikesModel, Error>) -> Void) {
         let profileRequest = ProfileRequest()
-        networkClient.send(request: profileRequest, type: ProfileLikesModel.self) { [weak self] result in
-            guard self != nil else { return }
+        networkClient.send(request: profileRequest, type: ProfileLikesModel.self) { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
@@ -69,8 +66,7 @@ final class StatisticDataProvider: StatisticDataProviderProtocol {
     
     func getIdNftsInCard( _ completion: @escaping (Result<CartIdNfts, Error>) -> Void) {
         let cartRequest = CartRequest()
-        networkClient.send(request: cartRequest, type: CartIdNfts.self) { [weak self] result in
-            guard self != nil else { return }
+        networkClient.send(request: cartRequest, type: CartIdNfts.self) { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
@@ -86,8 +82,7 @@ final class StatisticDataProvider: StatisticDataProviderProtocol {
     func cartUpdate(newCartIDs: [String], _ completion: @escaping (Result<CartIdNfts, Error>) -> Void) {
         let ntfsRequest = СartUpdateRequest(cartIDs: newCartIDs)
         networkClient.send(request: ntfsRequest , type: CartIdNfts.self)  { result in
-            DispatchQueue.main.async { [weak self] in
-                guard self != nil else { return }
+            DispatchQueue.main.async {
                 switch result {
                 case let .success(data):
                     completion(.success(data))
