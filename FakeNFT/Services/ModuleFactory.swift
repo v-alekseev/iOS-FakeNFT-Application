@@ -14,10 +14,10 @@ struct ModuleFactory {
         
         // Если процедура создания VC сложная, то нужно под нее сделать отдельную фабрику
         
-        let cartVC = createViewController(vc: createCartViewController(),title:  "Корзина", image: UIImage(resource: .cart))
-        let catalogVC = createViewController(vc: createCatalogViewController(),title:  "Каталог", image: UIImage(resource: .catalog))
-        let profileVC = createViewController(vc: createProfileViewController(),title:  "Профиль", image: UIImage(resource: .profile))
-        let statisticVC = createViewController(vc: createStatisticViewController(),title:  "Статистика", image: UIImage(resource: .statistics))
+        let cartVC = createViewController(vc: createCartViewController(),title:  L10n.Tabbar.basket, image: UIImage(resource: .cart))
+        let catalogVC = createViewController(vc: createCatalogViewController(),title:  L10n.Tabbar.catalog, image: UIImage(resource: .catalog))
+        let profileVC = createViewController(vc: createProfileViewController(),title:  L10n.Tabbar.profile, image: UIImage(resource: .profile))
+        let statisticVC = createViewController(vc: createStatisticViewController(),title:  L10n.Tabbar.stats, image: UIImage(resource: .statistics))
         
         let tabBar = UITabBarController()
         tabBar.tabBar.unselectedItemTintColor = UIColor.ypBlackWithDarkMode
@@ -38,11 +38,22 @@ struct ModuleFactory {
     }
     
     static func createCartViewController() -> UIViewController {
-        return CartViewController()
+        let vc = CartViewController()
+        let navigationVC = UINavigationController(rootViewController: vc)
+        return navigationVC
     }
+    
     static func createCatalogViewController() -> UIViewController {
-        return CatalogViewController()
+        let viewController = CollectionsViewController()
+        let navController = UINavigationController(rootViewController: viewController)
+
+        navController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navController.navigationBar.shadowImage = UIImage()
+        navController.navigationBar.isTranslucent = true
+
+        return navController
     }
+    
     static func createProfileViewController() -> UIViewController {
         return ProfileViewController()
     }
