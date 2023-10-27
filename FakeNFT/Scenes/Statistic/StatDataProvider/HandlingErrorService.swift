@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class HandlingErrorServiceStat {
+final class HandlingErrorService {
     
-    static let shared = HandlingErrorServiceStat()
+    static let shared = HandlingErrorService()
     
     func handlingHTTPStatusCodeError(error: Error) -> String? {
         guard let error = error as? NetworkClientError else { return nil }

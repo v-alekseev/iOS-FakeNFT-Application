@@ -129,8 +129,7 @@
 		F228EFA72AD9BB87001BA148 /* StatNetworkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA62AD9BB87001BA148 /* StatNetworkRequests.swift */; };
 		F228EFA92AD9BDED001BA148 /* FiltrationTypeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */; };
 		F228EFAD2ADA6D18001BA148 /* AlertStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228EFAC2ADA6D18001BA148 /* AlertStatistic.swift */; };
-		F248934F2AE5AFA2009639DA /* RatingViewStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248934E2AE5AFA2009639DA /* RatingViewStat.swift */; };
-		F24893512AE7BFD9009639DA /* HandlingErrorServiceStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24893502AE7BFD9009639DA /* HandlingErrorServiceStat.swift */; };
+		F24893512AE7BFD9009639DA /* HandlingErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24893502AE7BFD9009639DA /* HandlingErrorService.swift */; };
 		F24893552AE80701009639DA /* StatCartIdNfts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24893542AE80701009639DA /* StatCartIdNfts.swift */; };
 		F26D6B6D2ADB190800B993CB /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D6B6C2ADB190800B993CB /* WebController.swift */; };
 		F280EECC2ADBD6BB004DFC1B /* UsersCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F280EECB2ADBD6BB004DFC1B /* UsersCollectionCell.swift */; };
@@ -295,8 +294,7 @@
 		F228EFA62AD9BB87001BA148 /* StatNetworkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatNetworkRequests.swift; sourceTree = "<group>"; };
 		F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltrationTypeStorage.swift; sourceTree = "<group>"; };
 		F228EFAC2ADA6D18001BA148 /* AlertStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStatistic.swift; sourceTree = "<group>"; };
-		F248934E2AE5AFA2009639DA /* RatingViewStat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewStat.swift; sourceTree = "<group>"; };
-		F24893502AE7BFD9009639DA /* HandlingErrorServiceStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlingErrorServiceStat.swift; sourceTree = "<group>"; };
+		F24893502AE7BFD9009639DA /* HandlingErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlingErrorService.swift; sourceTree = "<group>"; };
 		F24893542AE80701009639DA /* StatCartIdNfts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCartIdNfts.swift; sourceTree = "<group>"; };
 		F26D6B6C2ADB190800B993CB /* WebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
 		F280EECB2ADBD6BB004DFC1B /* UsersCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionCell.swift; sourceTree = "<group>"; };
@@ -441,7 +439,6 @@
 			isa = PBXGroup;
 			children = (
 				D8B976792AE305FB007CA5D2 /* RatingView.swift */,
-				F248934E2AE5AFA2009639DA /* RatingViewStat.swift */,
 				3F6806CF29CBBDB100B4F915 /* NetworkClient */,
 				3F6806D629CBC50A00B4F915 /* CellsReusingUtils.swift */,
 				3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */,
@@ -781,7 +778,7 @@
 				F228EFA62AD9BB87001BA148 /* StatNetworkRequests.swift */,
 				F228EF972AD5D522001BA148 /* StatisticDataProvider.swift */,
 				F228EFA82AD9BDED001BA148 /* FiltrationTypeStorage.swift */,
-				F24893502AE7BFD9009639DA /* HandlingErrorServiceStat.swift */,
+				F24893502AE7BFD9009639DA /* HandlingErrorService.swift */,
 			);
 			path = StatDataProvider;
 			sourceTree = "<group>";
@@ -1046,7 +1043,6 @@
 				7B5E254A2ADBE8F6000BC664 /* WebViewViewModel.swift in Sources */,
 				F228EFA92AD9BDED001BA148 /* FiltrationTypeStorage.swift in Sources */,
 				F280EECE2ADBF14F004DFC1B /* StatNftModel.swift in Sources */,
-				F248934F2AE5AFA2009639DA /* RatingViewStat.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* Colors.swift in Sources */,
 				AF9A240E2AD5C41B00C73AEC /* CatalogDataProviderProtocol.swift in Sources */,
 				AFA320B42AE0304B0025C54E /* CollectionResultState.swift in Sources */,
@@ -1141,7 +1137,7 @@
 				D8B9765F2AE06BEE007CA5D2 /* PayCollectionViewCell.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				D86C21BC2AD82C38000AD25C /* NftDto.swift in Sources */,
-				F24893512AE7BFD9009639DA /* HandlingErrorServiceStat.swift in Sources */,
+				F24893512AE7BFD9009639DA /* HandlingErrorService.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				F223FE3B2AE30ADD00CC5CC8 /* StatLikesModel.swift in Sources */,
 				F2AFCC0C2AE05F87009B4B06 /* UsersCollectionViewModel.swift in Sources */,

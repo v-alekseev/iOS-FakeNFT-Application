@@ -62,7 +62,7 @@ final class UsersCollectionCell: UICollectionViewCell, ReuseIdentifying {
         return likeImageView
     }()
     
-    private lazy var ratingView = RatingViewStat()
+    private lazy var ratingView = RatingView()
     private lazy var imageNftStub = UIImage(resource: .nftStub)
     private var task: URLSessionDataTask?
     

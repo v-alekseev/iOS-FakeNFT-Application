@@ -17,7 +17,7 @@ final class StatisticViewModel {
     @Published var needShowFilterMenu = false
     
     private let dataProvider: StatisticDataProviderProtocol?
-    private var handlingErrorService = HandlingErrorServiceStat.shared
+    private var handlingErrorService = HandlingErrorService.shared
     private let filtrationType = FiltrationTypeStorage()
     
     var rowForOpenUserCard: Int = 0 {
