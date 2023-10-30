@@ -2,9 +2,9 @@ import UIKit
 
 protocol MyNFTViewModelProtocol: AnyObject {
 
-    var nftCardsObservable: Observable<NFTCards?> { get }
-    var usersObservable: Observable<Users?> { get }
-    var profileObservable: Observable<Profile?> { get }
+    var nftCardsObservable: ProfileObservable<NFTCards?> { get }
+    var usersObservable: ProfileObservable<Users?> { get }
+    var profileObservable: ProfileObservable<Profile?> { get }
 
     func fetchNtfCards(nftIds: [String])
     func sortNFTCollection(option: SortingOption)

@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-final class Observable<Value> {
+final class ProfileObservable<Value> {
     private var onChange: ((Value) -> Void)?
     
     var wrappedValue: Value {
@@ -10,7 +10,7 @@ final class Observable<Value> {
         }
     }
     
-    var projectedValue: Observable<Value> {
+    var projectedValue: ProfileObservable<Value> {
         return self
     }
     

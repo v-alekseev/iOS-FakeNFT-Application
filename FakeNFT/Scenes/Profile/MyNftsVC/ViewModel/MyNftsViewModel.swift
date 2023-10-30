@@ -6,27 +6,27 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
     private var dataProvider: ProfileDataProviderProtocol?
 
     // MARK: - Observable Values:
-    var nftCardsObservable: Observable<NFTCards?> {
+    var nftCardsObservable: ProfileObservable<NFTCards?> {
         $nftCards
     }
 
-    var usersObservable: Observable<Users?> {
+    var usersObservable: ProfileObservable<Users?> {
         $users
     }
     
-    var profileObservable: Observable<Profile?> {
+    var profileObservable: ProfileObservable<Profile?> {
         $profile
     }
     
     var showErrorAlert: ((String) -> Void)?
     
-    @Observable
+    @ProfileObservable
     private(set) var profile: Profile?
 
-    @Observable
+    @ProfileObservable
     private(set) var nftCards: NFTCards?
 
-    @Observable
+    @ProfileObservable
     private(set) var users: Users?
     
     private var currentSortOption: SortingOption? {
@@ -57,7 +57,7 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
                     self.sortNFTCollection(option: currentSortOption)
                 }
             case .failure(let failure):
-                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                let errorString = ProfileHandlingErrorService().handlingHTTPStatusCodeError(error: failure)
                 self.showErrorAlert?(errorString ?? "")
             }
         }
@@ -104,7 +104,7 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
             case .success(let profile):
                 self.profile = profile
             case .failure(let failure):
-                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                let errorString = ProfileHandlingErrorService().handlingHTTPStatusCodeError(error: failure)
                 self.showErrorAlert?(errorString ?? "")
             }
         })
@@ -119,7 +119,7 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
             case .success(let users):
                 self.users = users
             case .failure(let failure):
-                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                let errorString = ProfileHandlingErrorService().handlingHTTPStatusCodeError(error: failure)
                 self.showErrorAlert?(errorString ?? "")
             }
         }
@@ -132,7 +132,7 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
             case .success(let profile):
                 self.profile = profile
             case .failure(let failure):
-                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                let errorString = ProfileHandlingErrorService().handlingHTTPStatusCodeError(error: failure)
                 self.showErrorAlert?(errorString ?? "")
             }
         }

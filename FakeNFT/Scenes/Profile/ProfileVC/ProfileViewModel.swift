@@ -4,11 +4,11 @@ final class ProfileViewModel: ProfileViewModelProtocol {
 
     private var dataProvider: ProfileDataProviderProtocol?
 
-    var profileObservable: Observable<Profile?> {
+    var profileObservable: ProfileObservable<Profile?> {
         $profile
     }
 
-    @Observable
+    @ProfileObservable
     private(set) var profile: Profile?
     var showErrorAlert: ((String) -> Void)?
 
@@ -24,7 +24,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
             case .success(let profile):
                 self.profile = profile
             case .failure(let failure):
-                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                let errorString = ProfileHandlingErrorService().handlingHTTPStatusCodeError(error: failure)
                 self.showErrorAlert?(errorString ?? "")
             }
         })
@@ -37,7 +37,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
             case .success(let profile):
                 self.profile = profile
             case .failure(let failure):
-                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                let errorString = ProfileHandlingErrorService().handlingHTTPStatusCodeError(error: failure)
                 self.showErrorAlert?(errorString ?? "")
             }
         })

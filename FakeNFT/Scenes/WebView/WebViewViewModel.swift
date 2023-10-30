@@ -2,16 +2,16 @@ import UIKit
 
 final class WebViewViewModel: WebViewViewModelProtocol {
     
-    var currentProgressObserver: Observable<Float> {
+    var currentProgressObserver: ProfileObservable<Float> {
         $currentProgress
     }
-    var isReadyToHideProgressViewObservable: Observable<Bool> {
+    var isReadyToHideProgressViewObservable: ProfileObservable<Bool> {
         $isReadyToHideProgressView
     }
     
-    @Observable
+    @ProfileObservable
     private(set) var currentProgress: Float = 0.0
-    @Observable
+    @ProfileObservable
     private(set) var isReadyToHideProgressView = false
     
     func setupProgres(newValue: Double) {

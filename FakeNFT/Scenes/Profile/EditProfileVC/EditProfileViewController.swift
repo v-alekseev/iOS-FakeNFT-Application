@@ -227,7 +227,7 @@ private extension EditProfileViewController {
             case .success(let imageResult):
                 self.editAvatarButton.setImage(imageResult.image, for: .normal)
             case .failure(let error):
-                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                let errorString = ProfileHandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.showNotificationBanner(with: errorString ?? "")
             }
         }

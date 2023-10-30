@@ -1,6 +1,6 @@
 import Foundation
 
-final class HandlingErrorService {
+final class ProfileHandlingErrorService {
     func handlingHTTPStatusCodeError(error: Error) -> String? {
         guard let error = error as? NetworkClientError else { return nil }
         
