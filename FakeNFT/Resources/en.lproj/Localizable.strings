@@ -1,11 +1,3 @@
-/* 
-  Localizable.strings
-  FakeNFT
-
-  Created by Vitaly on 06.10.2023.
-  
-*/
-
 // MARK: - General
 "general.OK" = "OK";
 "general.cancel" = "Cancel";
@@ -40,3 +32,65 @@
 "sorting.byPrice" = "By price";
 "sorting.byNFTCount" = "By quantity";
 "sorting.byRating" = "By rating";
+
+"cart.price_label_name" = "Price";
+"cart.payment_button_title" = "Pay";
+"cart.getOrderError" = "Unfortunately, the data could not be loaded. Please try again later.";
+"cart.cartScreen.emptyCartMessage"  = "Cart is empty";
+
+"cart.payResultScreen.succsesPaymentText" = "Success! The payment has been completed,\ncongratulations on your purchase!";
+"cart.payResultScreen.buttonText" = "Return to catalog";
+"cart.payResultScreen.errorAlertTitle" = "Oops! Something went wrong :(";
+"cart.payResultScreen.errorAlertMessage" = "Try again!";
+
+"cart.PayScreen.screenHeader" = "Select a Payment Method";
+"cart.PayScreen.termOfUseFirstString" = "By making a purchase, you agree to the terms and conditions";
+"cart.PayScreen.termOfUseSecondString" ="User Agreement";
+
+"cart.DeleteConfirmScreen.confiremText" =  "Are you sure you want to remove the item from the cart?";
+"cart.DeleteConfirmScreen.returnButtonTitle" = "Return";
+"cart.DeleteConfirmScreen.deleteButtonTitle" = "Delete";
+
+"alert.header" = "Message for you!";
+"alert.button" = "Ok";
+
+"filter.caption" = "Sort";
+"filter.byName" = "By Name";
+"filter.byPrice" = "By price";
+"filter.byRating" = "By rating";
+"filter.close" = "Close";
+
+"catalog.sort.byName" = "By name";
+"catalog.sort.byNFTQuantity" = "By NFT quantity";
+"catalog.sort" = "Sort";
+"catalog.sort.close" = "Close";
+"alert.error.title" = "Error";
+"alert.error.description" = "Something went wrong.";
+"alert.error.retry" = "Reload";
+"catalog.collection.authorString" = "Author";
+"tabbar.catalog" = "Catalog";
+"tabbar.profile" = "Profile";
+"tabbar.basket" = "Basket";
+"tabbar.stats" = "Stats";
+
+
+"statfilter.caption" = "Sort";
+"statfilter.byName" = "By name";
+"statfilter.byRating" = "By rating";
+"statfilter.close" = "Close";
+"userCard.userWebSite" = "User Website";
+"usersCollection.stub" = "The user does not have NFT yet";
+"nftCollection" = "NFT Collection";
+"alert.error" = "Error";
+"alert.cancel" = "Cancel";
+"alert.repeat" = "Repeat";
+
+"handlingError.error404" = "Nothing found on request";
+"handlingError.error409" = "Resource update error";
+"handlingError.error410" = "Requested resource is no longer available";
+"handlingError.error429" = "Too Many Requests";
+"handlingError.error500_526" = "Server Error ";
+"handlingError.default" = "Unable to retrieve data";
+"handlingError.parsingError" = "Unable to convert received data";
+"handlingError.urlRequestError" = "Request execution error";
+"handlingError.urlSessionError" = "Check your internet connection";

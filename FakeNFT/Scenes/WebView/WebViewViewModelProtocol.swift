@@ -1,7 +1,7 @@
 import Foundation
 
 protocol WebViewViewModelProtocol: AnyObject {
-    var currentProgressObserver: ProfileObservable<Float> { get }
-    var isReadyToHideProgressViewObservable: ProfileObservable<Bool> { get }
+    var currentProgressObserver: Observable<Float> { get }
+    var isReadyToHideProgressViewObservable: Observable<Bool> { get }
     func setupProgres(newValue: Double)
 }

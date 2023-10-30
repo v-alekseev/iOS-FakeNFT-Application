@@ -1,10 +1,3 @@
-/* 
-  Localizable.strings
-  FakeNFT
-
-  Created by Vitaly on 06.10.2023.
-  
-*/
 // MARK: - General
 "general.OK" = "OK";
 "general.cancel" = "Отменить";
@@ -39,3 +32,67 @@
 "sorting.byPrice" = "По цене";
 "sorting.byNFTCount" = "По количеству NFT";
 "sorting.byRating" = "По рейтингу";
+
+
+"cart.price_label_name" = "Цена";
+"cart.payment_button_title" = "К оплате";
+"cart.getOrderError" = "К сожалению, не получилось загрузить данные. Попробуйте еще раз попозже.";
+"cart.cartScreen.emptyCartMessage"  = "Корзина пуста";
+
+"cart.payResultScreen.succsesPaymentText" = "Успех! Оплата прошла,\nпоздравляем с покупкой!";
+"cart.payResultScreen.buttonText" = "Вернуться в каталог";
+"cart.payResultScreen.errorAlertTitle" = "Упс! Что-то пошло не так :(";
+"cart.payResultScreen.errorAlertMessage" = "Попробуйте ещё раз!";
+
+"cart.PayScreen.screenHeader" = "Выберите способ оплаты";
+"cart.PayScreen.termOfUseFirstString" = "Совершая покупку, вы соглашаетесь с условиями";
+"cart.PayScreen.termOfUseSecondString" = "Пользовательского соглашения";
+
+"cart.DeleteConfirmScreen.confiremText" =  "Вы уверены, что хотите удалить объект из корзины?";
+"cart.DeleteConfirmScreen.returnButtonTitle" = "Вернуться";
+"cart.DeleteConfirmScreen.deleteButtonTitle" = "Удалить";
+
+
+"alert.header" = "Сообщение для вас!";
+"alert.button" = "Понятно";
+
+"filter.caption" = "Сортировка";
+"filter.byName" = "По названию";
+"filter.byPrice" = "По цене";
+"filter.byRating" = "По рейтингу";
+"filter.close" = "Закрыть";
+
+"catalog.sort.byName" = "По названию";
+"catalog.sort.byNFTQuantity" = "По количеству NFT";
+"catalog.sort" = "Сортировка";
+"catalog.sort.close" = "Закрыть";
+"alert.error.title" = "Ошибка";
+"alert.error.description" = "Что-то пошло не так.";
+"alert.error.retry" = "Перезагрузить";
+"catalog.collection.authorString" = "Автор коллекции";
+"tabbar.catalog" = "Каталог";
+"tabbar.profile" = "Профиль";
+"tabbar.basket" = "Корзина";
+"tabbar.stats" = "Статистика";
+
+
+"statfilter.caption" = "Сортировка";
+"statfilter.byName" = "По имени";
+"statfilter.byRating" = "По рейтингу";
+"statfilter.close" = "Закрыть";
+"userCard.userWebSite" = "Перейти на сайт пользователя";
+"usersCollection.stub" = "У пользователя ещё нет NFT";
+"nftCollection" = "Коллекция NFT";
+"alert.error" = "Ошибка";
+"alert.cancel" = "Отмена";
+"alert.repeat" = "Повторить";
+
+"handlingError.error404" = "По запросу ничего не найдено";
+"handlingError.error409" = "Ошибка обновления ресурса";
+"handlingError.error410" = "Запрошенный ресурс больше недоступен";
+"handlingError.error429" = "Слишком много запросов";
+"handlingError.error500_526" = "Ошибка на стороне сервера";
+"handlingError.default" = "Не удалось получить данные";
+"handlingError.parsingError" = "Не удалось конвертировать полученные данные";
+"handlingError.urlRequestError" = "Ошибка выполнения запроса";
+"handlingError.urlSessionError" = "Проверьте интернет-соединение";
