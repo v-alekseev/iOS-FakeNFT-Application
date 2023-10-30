@@ -136,4 +136,3 @@ final class StatisticViewController: UIViewController {
         viewModel.didTapFilterButton()
     }
 }
-

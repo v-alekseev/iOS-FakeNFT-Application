@@ -55,8 +55,10 @@ struct ModuleFactory {
     }
     
     static func createProfileViewController() -> UIViewController {
-        return ProfileViewController()
+        let profileViewModel = ProfileViewModel(dataProvider: ProfileDataProvider())
+        return YPNavigationController(rootViewController: ProfileViewController(viewModel: profileViewModel))
     }
+
     static func createStatisticViewController() -> UIViewController {
         let dataProvider = StatisticDataProvider()
         let viewModel = StatisticViewModel(dataProvider: dataProvider)
