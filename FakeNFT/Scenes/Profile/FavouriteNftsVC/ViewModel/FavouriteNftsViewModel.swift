@@ -1,7 +1,7 @@
 import UIKit
+import NotificationBannerSwift
 
-final class MyNFTViewModel: MyNFTViewModelProtocol {
-
+final class FavouriteNftsViewModel: FavouriteNftsViewModelProtocol {
     // MARK: - Private Dependencies:
     private var dataProvider: ProfileDataProviderProtocol?
 
@@ -18,79 +18,40 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
         $profile
     }
     
-    var showErrorAlert: ((String) -> Void)?
-    
     @Observable
     private(set) var profile: Profile?
+    
+    var showErrorAlert: ((String) -> Void)?
 
     @Observable
     private(set) var nftCards: NFTCards?
 
     @Observable
     private(set) var users: Users?
-    
-    private var currentSortOption: SortingOption? {
-        didSet {
-            guard let currentSortOption else { return }
-            sortStorage.saveSorting(currentSortOption)
-        }
-    }
-    private let sortStorage: MyNftSortStorageProtocol
 
     // MARK: - Lifecycle:
     init(dataProvider: ProfileDataProviderProtocol?) {
         self.dataProvider = dataProvider
-        sortStorage = MyNftSortStorage()
-        currentSortOption = sortStorage.fetchSorting()
         fetchUsers()
         fetchProfile()
     }
 
     // MARK: - Public Methods:
-    func fetchNtfCards(nftIds: [String]) {
-        dataProvider?.fetchUsersNFT(userId: nil, nftsId: nftIds) { [weak self] result in
+    func fetchNtfCards(likes: [String]) {
+        dataProvider?.fetchUsersNFT(userId: nil, nftsId: likes) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let nftCards):
                 self.nftCards = nftCards
-                if let currentSortOption = self.currentSortOption {
-                    self.sortNFTCollection(option: currentSortOption)
-                }
             case .failure(let failure):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
                 self.showErrorAlert?(errorString ?? "")
             }
         }
     }
-
-    func sortNFTCollection(option: SortingOption) {
-        guard let nftCards else { return }
-
-        var cards = [ProfileNFTCard]()
-
-        switch option {
-        case .byPrice:
-            cards = nftCards.sorted(by: { $0.price > $1.price })
-        case .byRating:
-            cards = nftCards.sorted { nft1, nft2 in
-                nft1.rating > nft2.rating
-            }
-        case .byName:
-            cards = nftCards.sorted { nft1, nft2 in
-                nft1.name < nft2.name
-            }
-        case .close:
-            cards = nftCards
-        default:
-            break
-        }
-
-        self.nftCards = cards
-        currentSortOption = option
-    }
     
     func changeProfile(likesIds: [String]) {
-        guard let profile else { return }
+        guard let profile = profile else { return }
         let newProfile = Profile(name: profile.name,
                                  avatar: profile.avatar,
                                  description: profile.description,
@@ -98,6 +59,7 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
                                  nfts: profile.nfts,
                                  likes: likesIds,
                                  id: profile.id)
+        
         dataProvider?.changeProfile(profile: newProfile, completion: { [weak self] result in
             guard let self else { return }
             switch result {
@@ -126,7 +88,7 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
     }
     
     private func fetchProfile() {
-        dataProvider?.fetchProfile { [weak self] result in
+        dataProvider?.fetchProfile(completion: { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let profile):
@@ -135,6 +97,7 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
                 self.showErrorAlert?(errorString ?? "")
             }
-        }
+        })
     }
 }
+
