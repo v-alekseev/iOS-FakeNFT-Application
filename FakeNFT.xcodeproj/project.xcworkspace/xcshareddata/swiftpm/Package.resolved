@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/cbpowell/MarqueeLabel",
       "state" : {
-        "revision" : "e68799fc4a58540a4f38f8eff539d7c46dd6aaaf",
-        "version" : "4.3.2"
+        "revision" : "ae3cf7c647dd7f67f1946658285f5f0ce2476caf",
+        "version" : "4.4.0"
       }
     },
     {

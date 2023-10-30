@@ -105,7 +105,7 @@ final class NFTCell: UICollectionViewCell, ReuseIdentifying {
             
             ratingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             ratingView.topAnchor.constraint(equalTo: NFTImage.bottomAnchor, constant: Constants.offset_8),
-            ratingView.heightAnchor.constraint(equalToConstant: Constants.offset_8),
+            ratingView.heightAnchor.constraint(equalToConstant: Constants.offset_12),
             
             likeButton.trailingAnchor.constraint(equalTo: NFTImage.trailingAnchor, constant: Constants.minus_offset_10),
             likeButton.topAnchor.constraint(equalTo: NFTImage.topAnchor, constant: Constants.offset_11),
