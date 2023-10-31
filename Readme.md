@@ -3,7 +3,7 @@
 # Ссылки
 ## Ссылки на демонстрацию эпиков
 - [Демонстрация эпика Корзина](https://www.loom.com/share/cea611beadf2495b8d2ee65818b58dd1)
-- 
+- [Демонстрация эпика Каталог](https://share.cleanshot.com/GFgQ1QR2Lhmj38BYtT9S)
 -
 -
 
