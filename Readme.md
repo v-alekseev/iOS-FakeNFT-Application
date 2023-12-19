@@ -35,5 +35,4 @@
 
 # Видео с демонстрацией работы разделов приложения
 - [Раздел Корзина](https://www.loom.com/share/cea611beadf2495b8d2ee65818b58dd1)
-- [Раздел Каталог](https://share.cleanshot.com/GFgQ1QR2Lhmj38BYtT9S)
 - [Раздел Профиль](https://www.loom.com/share/35b98ee263a24fffaae3fd841d5ded36?sid=2c25fbb6-6bb2-4b7d-aca0-afaa8192fb96)
