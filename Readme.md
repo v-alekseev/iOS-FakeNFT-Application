@@ -19,7 +19,7 @@
 ## Стек
 - Архитектура MVVM.
 - Вёрстка кодом с Auto Layout. Дизайн в Figma.
-- UITableView, UIScrollView, UITabBarController, UINavigationController.
+- UITableView, UICollectionView, UIScrollView, UITabBarController, UINavigationController.
 - Работа с сетью через URLSession.
 - Многопоточность; предотвращение race condition (DispatchQueue, блокировка UI).
 - Используется Kingfisher. Добавлена через SPM.
