@@ -1,6 +1,7 @@
 # Fake NFT Application
 ## Описание приложения
 Приложение помогает пользователям просматривать и покупать NFT (Non-Fungible Token) картинки. Функционал покупки иммитируется с помощью мокового сервера https://651ff0cc906e276284c3c1bc.mockapi.io. Приложение написано на Swift. Архитектура MVVM. [Дизайн ](https://www.figma.com/file/k1LcgXHGTHIeiCv4XuPbND/FakeNFT-(YP)?type=design&node-id=597-48015&mode=design) в Figma.
+Документация по API [тут](https://github.com/Yandex-Practicum/iOS-FakeNFT-StarterProject-Public/blob/main/API.html).
 
 Основные функции приложения:
 - просмотр коллекций NFT;
