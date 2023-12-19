@@ -20,6 +20,9 @@
 - [Aleksandr](https://github.com/kosmonur)
 - [TMWF](https://github.com/TMWF)
 
+# Скриншоты
+<img width="200" alt="Cart" src="https://github.com/v-alekseev/iOS-FakeNFT-Application/blob/main/FakeNFT/Assets.xcassets/Screenshots/Cart.imageset/2023-12-19_16-20-35.png"> <img width="200" alt="Payment" src="https://github.com/v-alekseev/iOS-FakeNFT-Application/blob/main/FakeNFT/Assets.xcassets/Screenshots/Payment.imageset/2023-12-19_16-21-30.png">
+
 # Видео с демонстрацией работы разделов приложения
 - [Раздел Корзина](https://www.loom.com/share/cea611beadf2495b8d2ee65818b58dd1)
 - [Раздел Каталог](https://share.cleanshot.com/GFgQ1QR2Lhmj38BYtT9S)
