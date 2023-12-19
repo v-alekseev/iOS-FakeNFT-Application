@@ -16,13 +16,13 @@
 - сообщение о сетевых ошибках
   
 ## Стек
-- Архитектура MVVM
-- вёрстка кодом с Auto Layout. Дизайн в Figma.
+- Архитектура MVVM.
+- Вёрстка кодом с Auto Layout. Дизайн в Figma.
 - UITableView, UIScrollView, UITabBarController, UINavigationController.
-- Работа с сетью через URLSession
-- многопоточность; предотвращение race condition (DispatchQueue, блокировка UI)
+- Работа с сетью через URLSession.
+- Многопоточность; предотвращение race condition (DispatchQueue, блокировка UI).
 - Используется Kingfisher. Добавлена через SPM.
-- UI-тесты и Unit-тесты
+- UI-тесты и Unit-тесты.
 
 ## Команда разработки и  [Доска проекта](https://github.com/users/artwist-polyakov/projects/1/views/1)
 - [Vitaly Alekseev](https://github.com/v-alekseev)
